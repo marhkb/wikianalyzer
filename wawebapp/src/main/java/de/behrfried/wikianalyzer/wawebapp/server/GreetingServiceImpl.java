@@ -3,46 +3,58 @@ package de.behrfried.wikianalyzer.wawebapp.server;
 import de.behrfried.wikianalyzer.wawebapp.client.GreetingService;
 import de.behrfried.wikianalyzer.wawebapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import de.behrfried.wikianalyzer.simplemath.*;
 
 /**
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements
-    GreetingService {
+		GreetingService {
 
-  public String greetServer(String input) throws IllegalArgumentException {
-    // Verify that the input is valid.
-    if (!FieldVerifier.isValidName(input)) {
-      // If the input is not valid, throw an IllegalArgumentException back to
-      // the client.
-      throw new IllegalArgumentException(
-          "Name must be at least 4 characters long");
-    }
+	public String greetServer(String input) throws IllegalArgumentException {
 
-    String serverInfo = getServletContext().getServerInfo();
-    String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+		try {
+			int n = Integer.parseInt(input);
+			return "You passed an Integer " + input + "<br>Its fac is" + SimpleMath.fak(n);
+		} catch(Exception e) {
+			
+		}
+		
+		// Verify that the input is valid.
+		if (!FieldVerifier.isValidName(input)) {
+			// If the input is not valid, throw an IllegalArgumentException back
+			// to
+			// the client.
+			throw new IllegalArgumentException(
+					"Name must be at least 4 characters long");
+		}
 
-    // Escape data from the client to avoid cross-site script vulnerabilities.
-    input = escapeHtml(input);
-    userAgent = escapeHtml(userAgent);
+		String serverInfo = getServletContext().getServerInfo();
+		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
 
-    return "Hello, " + input + "!<br><br>I am running " + serverInfo
-        + ".<br><br>It looks like you are using:<br>" + userAgent;
-  }
+		// Escape data from the client to avoid cross-site script
+		// vulnerabilities.
+		input = escapeHtml(input);
+		userAgent = escapeHtml(userAgent);
 
-  /**
-   * Escape an html string. Escaping data received from the client helps to
-   * prevent cross-site script vulnerabilities.
-   *
-   * @param html the html string to escape
-   * @return the escaped string
-   */
-  private String escapeHtml(String html) {
-    if (html == null) {
-      return null;
-    }
-    return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
-        ">", "&gt;");
-  }
+		return "Hello, " + input + "!<br><br>I am running " + serverInfo
+				+ ".<br><br>It looks like you are using:<br>" + userAgent;
+	}
+
+	/**
+	 * Escape an html string. Escaping data received from the client helps to
+	 * prevent cross-site script vulnerabilities.
+	 * 
+	 * @param html
+	 *            the html string to escape
+	 * @return the escaped string
+	 */
+	private String escapeHtml(String html) {
+		if (html == null) {
+			return null;
+		}
+		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;");
+	}
 }
