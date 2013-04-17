@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='de.behrfried.wikianalyzer.wawebapp.Wawebapp' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/Wawebapp/greet" class="de.behrfried.wikianalyzer.wawebapp.server.GreetingServiceImpl" />
+
+</module>
