@@ -43,7 +43,7 @@ public class Wawebapp implements EntryPoint {
   public void onModuleLoad() {
     final Button sendButton = new Button( "Send" );
     final TextBox nameField = new TextBox();
-    nameField.setText( "name_field" );
+    nameField.setText( "text" );
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
