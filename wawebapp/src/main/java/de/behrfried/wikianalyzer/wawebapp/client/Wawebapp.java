@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -41,9 +40,9 @@ public class Wawebapp implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    final Button sendButton = new Button( "Send" );
+    final Button sendButton = new Button(this.messages.sendButton());
     final TextBox nameField = new TextBox();
-    nameField.setText( "text" );
+    nameField.setText(this.messages.nameField());
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
