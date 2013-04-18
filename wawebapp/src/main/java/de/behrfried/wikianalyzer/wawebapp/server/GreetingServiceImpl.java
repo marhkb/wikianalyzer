@@ -15,8 +15,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 	public String greetServer(String input) throws IllegalArgumentException {
 
 		try {
-			int n = Integer.parseInt(input);
-			return "You passed an Integer " + input + "<br>Its fac is " + SimpleMath.fak(n) +  "and fibo is " + SimpleMath.fibo(n);
+			int x = Integer.parseInt(input);
+			return "You passed an Integer " + input + "<br>Its fac is " + SimpleMath.fak(x) +  "and fibo is " + SimpleMath.fibo(x);
 		} catch(Exception e) {
 			
 		}
