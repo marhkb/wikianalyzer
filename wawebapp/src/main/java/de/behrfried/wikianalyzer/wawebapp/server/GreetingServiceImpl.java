@@ -16,7 +16,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 		try {
 			int n = Integer.parseInt(input);
-			return "You passed an Integer " + input + "<br>Its fac is" + SimpleMath.fak(n);
+			return "You passed an Integer " + input + "<br>Its fac is " + SimpleMath.fak(n) +  "and fibo is " + SimpleMath.fibo(n);
 		} catch(Exception e) {
 			
 		}
