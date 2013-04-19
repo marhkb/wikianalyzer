@@ -1,5 +1,6 @@
 package de.behrfried.wikianalyzer.wawebapp.server;
 
+import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 import de.behrfried.wikianalyzer.wawebapp.client.GreetingService;
 import de.behrfried.wikianalyzer.wawebapp.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -13,33 +14,18 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
 	public String greetServer(String input) throws IllegalArgumentException {
-
+		MediaWikiBot b = null;
 		try {
-			int x = Integer.parseInt(input);
-			return "You passed an Integer " + input + "<br>Its fac is " + SimpleMath.fak(x) +  "and fibo is " + SimpleMath.fibo(x);
-		} catch(Exception e) {
-			
+		b = new MediaWikiBot("http://de.wikipedia.org/w/");
+		b.login("Behrfried", "!alien123");
+		String result = b.readData(input).getText();
+		if(result.length() > 500) {
+			result = result.substring(0, 500);
 		}
-		
-		// Verify that the input is valid.
-		if (!FieldVerifier.isValidName(input)) {
-			// If the input is not valid, throw an IllegalArgumentException back
-			// to
-			// the client.
-			throw new IllegalArgumentException(
-					"Name must be at least 4 characters long");
+		return result;
+		} catch (Exception e) {
+			return e.getMessage();
 		}
-
-		String serverInfo = getServletContext().getServerInfo();
-		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-		
-		// Escape data from the client to avoid cross-site script
-		// vulnerabilities.
-		input = escapeHtml(input);
-		userAgent = escapeHtml(userAgent);
-
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
 
 	/**
