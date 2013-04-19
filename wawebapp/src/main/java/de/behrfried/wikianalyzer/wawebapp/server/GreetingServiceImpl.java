@@ -1,10 +1,15 @@
 package de.behrfried.wikianalyzer.wawebapp.server;
 
+import java.net.MalformedURLException;
+
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
-import de.behrfried.wikianalyzer.wawebapp.client.GreetingService;
-import de.behrfried.wikianalyzer.wawebapp.shared.FieldVerifier;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import de.behrfried.wikianalyzer.simplemath.*;
+
+import de.behrfried.wikianalyzer.wawebapp.client.GreetingService;
 
 /**
  * The server side implementation of the RPC service.
@@ -13,16 +18,27 @@ import de.behrfried.wikianalyzer.simplemath.*;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
+	private static String ADDRESS = "http://de.wikipedia.org/w/";
+	private static String USER = "Behrfried";
+	private static String PSSWD = "!alien123";
+	private static MediaWikiBot BOT;
+	
+	static {
+		try {
+			BOT = new MediaWikiBot(ADDRESS);
+		} catch (MalformedURLException e) {
+			System.exit(-1);
+		}
+	}
+	
 	public String greetServer(String input) throws IllegalArgumentException {
 		MediaWikiBot b = null;
 		try {
-		b = new MediaWikiBot("http://de.wikipedia.org/w/");
-		b.login("Behrfried", "!alien123");
-		String result = b.readData(input).getText();
-		if(result.length() > 500) {
-			result = result.substring(0, 500);
-		}
-		return result;
+			if(!BOT.isLoggedIn()) {
+				BOT.login(USER, PSSWD);
+			}
+			return Jsoup.parse(BOT.getPage(ADDRESS + "index.php?title=" + input))
+					.getElementsByTag("body").toString();
 		} catch (Exception e) {
 			return e.getMessage();
 		}
