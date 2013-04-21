@@ -1,6 +1,5 @@
 package de.behrfried.wikianalyzer.wawebapp.client;
 
-import de.behrfried.wikianalyzer.wawebapp.shared.FieldVerifier;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -23,18 +22,6 @@ public class GwtTestWawebapp extends GWTTestCase {
    */
   public String getModuleName() {
     return "de.behrfried.wikianalyzer.wawebapp.WawebappJUnit";
-  }
-
-  /**
-   * Tests the FieldVerifier.
-   */
-  public void testFieldVerifier() {
-    assertFalse(FieldVerifier.isValidName(null));
-    assertFalse(FieldVerifier.isValidName(""));
-    assertFalse(FieldVerifier.isValidName("a"));
-    assertFalse(FieldVerifier.isValidName("ab"));
-    assertFalse(FieldVerifier.isValidName("abc"));
-    assertTrue(FieldVerifier.isValidName("abcd"));
   }
 
   /**

@@ -7,15 +7,20 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DockLayoutPanel.Direction;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-
-import de.behrfried.wikianalyzer.wawebapp.shared.FieldVerifier;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -31,33 +36,49 @@ public class Wawebapp implements EntryPoint {
 
 	private final Messages messages = GWT.create(Messages.class);
 
+	private VerticalPanel vp;
+	private HorizontalPanel hp;
+	
+	private TextBox nameField;
+	private Button sendButton;
+	private HTMLPanel html;
+
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button(this.messages.sendButton());
-		final TextBox nameField = new TextBox();
-		nameField.setText(this.messages.nameField());
 
-		final HorizontalPanel hp = new HorizontalPanel();
-		hp.setBorderWidth(2);
-		hp.setVisible(false);
+		this.vp = new VerticalPanel();
+		this.vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
 
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
+		this.hp = new HorizontalPanel();
 
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("contentContainer").add(hp);
+		this.nameField = new TextBox();
+		this.nameField.setText("Hamster");
+		this.nameField.setFocus(true);
 
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
+		this.sendButton = new Button(this.messages.sendButton());
+		
+		this.html = new HTMLPanel("");
+		this.html.setVisible(false);
+
+		this.hp.add(this.nameField);
+		this.hp.add(this.sendButton);
+
+		this.vp.add(this.hp);
+		RootPanel.get().add(this.vp);
+
+		// History
+		History.addValueChangeHandler(new ValueChangeHandler<String>() {
+			public void onValueChange(ValueChangeEvent<String> event) {
+				final String historyToken = event.getValue();
+				sendNameToServer(historyToken);
+			}
+		});
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
+
 			/**
 			 * Fired when the user clicks on the sendButton.
 			 */
@@ -80,38 +101,39 @@ public class Wawebapp implements EntryPoint {
 			 */
 			private void sendNameToServer() {
 				sendButton.setEnabled(false);
-				// First, we validate the input.
-				String textToServer = nameField.getText();
-				if (!FieldVerifier.isValidName(textToServer)) {
-					return;
-				}
-
-				greetingService.greetServer(textToServer,
-						new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								if(hp.getWidgetCount() > 0) {
-									hp.remove(0);
-								}
-								sendButton.setEnabled(true);
-							}
-
-							public void onSuccess(String result) {
-								if(hp.getWidgetCount() > 0) {
-									hp.remove(0);
-								}
-								final HTMLPanel html = new HTMLPanel(result);
-								hp.add(html);
-								hp.setVisible(true);
-								sendButton.setEnabled(true);
-										
-							}
-						});
+				History.newItem(nameField.getText());
 			}
 		}
 
 		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
+		final MyHandler handler = new MyHandler();
 		sendButton.addClickHandler(handler);
 		nameField.addKeyUpHandler(handler);
+
+		if (History.getToken().length() != 0) {
+			this.sendNameToServer(History.getToken());
+		}
+	}
+
+	public final void sendNameToServer(final String name) {
+		this.nameField.setText(name);
+		greetingService.greetServer(name, new AsyncCallback<String>() {
+
+			public void onFailure(Throwable caught) {
+				if (html.isVisible()) {
+					html.removeFromParent();
+				}
+				sendButton.setEnabled(true);
+			}
+
+			public void onSuccess(String result) {
+				if (html.isVisible()) {
+					html.removeFromParent();
+				}
+				html = new HTMLPanel(result);
+				vp.add(html);
+				sendButton.setEnabled(true);
+			}
+		});
 	}
 }

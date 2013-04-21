@@ -40,6 +40,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 			return Jsoup.parse(BOT.getPage(ADDRESS + "index.php?title=" + input))
 					.getElementsByTag("body").toString();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return e.getMessage();
 		}
 	}

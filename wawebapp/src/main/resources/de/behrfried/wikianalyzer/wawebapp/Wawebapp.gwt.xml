@@ -24,10 +24,10 @@
 	<set-property-fallback name="locale" value="en" />
 
 	<!-- Specify the app entry point class. -->
-	<entry-point class='de.behrfried.wikianalyzer.wawebapp.client.Wawebapp' />
+	<entry-point
+		class='de.behrfried.wikianalyzer.wawebapp.client.Wawebapp' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
 	<source path='shared' />
-
 </module>
