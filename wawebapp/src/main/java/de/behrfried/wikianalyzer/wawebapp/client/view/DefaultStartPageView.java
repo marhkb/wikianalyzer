@@ -16,9 +16,20 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+/**
+ * Default implementation of {@link StartPageView}
+ * @author marcus
+ *
+ */
 public class DefaultStartPageView implements StartPageView  {
 
-    public DefaultStartPageView() {
+    public void init() {
+	// TODO Auto-generated method stub
+	
+    }
+
+    public void dispose() {
+	// TODO Auto-generated method stub
 	
     }
 }

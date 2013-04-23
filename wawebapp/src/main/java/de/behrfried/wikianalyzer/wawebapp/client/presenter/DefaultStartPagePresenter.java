@@ -18,14 +18,34 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.inject.Inject;
 
+import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
 
+/**
+ * 
+ * @author marcus
+ *
+ */
 public class DefaultStartPagePresenter implements StartPagePresenter {
 
-    private StartPageView view;
+    private final StartPageView view;
+    private final MainServiceAsync mainService;
     
     @Inject
-    public DefaultStartPagePresenter(final StartPageView view) {
+    public DefaultStartPagePresenter(final StartPageView view, MainServiceAsync mainService) {
 	this.view = view;
+	this.mainService = mainService;
+    }
+
+    public void init() {
+	this.view.init();
+	
+	//TODO add handlers
+    }
+
+    public void dispose() {
+	this.view.dispose();
+	
+	//TODO remove handlers
     }
 }

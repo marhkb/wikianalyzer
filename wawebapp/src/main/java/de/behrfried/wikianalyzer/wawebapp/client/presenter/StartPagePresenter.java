@@ -16,6 +16,11 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-public interface StartPagePresenter {
+/**
+ * 
+ * @author marcus
+ *
+ */
+public interface StartPagePresenter extends Presenter {
 
 }

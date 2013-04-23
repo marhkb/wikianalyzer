@@ -16,11 +16,22 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import com.google.gwt.user.client.ui.RootPanel;
+
 /**
- * Interface for {@link StartPageView}
+ * Base interface for all View Classes
  * @author marcus
  *
  */
-public interface StartPageView extends View {
-
+public interface View {
+    
+    /**
+     * Initializes the all widgets and puts them to the {@link RootPanel}.
+     */
+    public void init();
+    
+    /**
+     * Removes all the {@link View}'s widgets from the {@link RootPanel}.
+     */
+    public void dispose();
 }
