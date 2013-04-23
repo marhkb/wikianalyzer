@@ -38,118 +38,19 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.StartPagePresenter;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Wawebapp implements EntryPoint {
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting
-	 * service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
-
-	private final Messages messages = GWT.create(Messages.class);
-
-	private VerticalPanel vp;
-	private HorizontalPanel hp;
-	
-	private TextBox nameField;
-	private Button sendButton;
-	private HTMLPanel html;
-
+    	private StartPagePresenter presenter;
+    
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-
-		this.vp = new VerticalPanel();
-		this.vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-
-		this.hp = new HorizontalPanel();
-
-		this.nameField = new TextBox();
-		this.nameField.setText("Hamster");
-		this.nameField.setFocus(true);
-
-		this.sendButton = new Button(this.messages.sendButton());
-		
-		this.html = new HTMLPanel("");
-		this.html.setVisible(false);
-
-		this.hp.add(this.nameField);
-		this.hp.add(this.sendButton);
-
-		this.vp.add(this.hp);
-		RootPanel.get().add(this.vp);
-
-		// History
-		History.addValueChangeHandler(new ValueChangeHandler<String>() {
-			public void onValueChange(ValueChangeEvent<String> event) {
-				final String historyToken = event.getValue();
-				sendNameToServer(historyToken);
-			}
-		});
-
-		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
-
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
-			public void onClick(ClickEvent event) {
-				sendNameToServer();
-			}
-
-			/**
-			 * Fired when the user types in the nameField.
-			 */
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
-				}
-			}
-
-			/**
-			 * Send the name from the nameField to the server and wait for a
-			 * response.
-			 */
-			private void sendNameToServer() {
-				sendButton.setEnabled(false);
-				History.newItem(nameField.getText());
-			}
-		}
-
-		// Add a handler to send the name to the server
-		final MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
-
-		if (History.getToken().length() != 0) {
-			this.sendNameToServer(History.getToken());
-		}
-	}
-
-	public final void sendNameToServer(final String name) {
-		this.nameField.setText(name);
-		greetingService.greetServer(name, new AsyncCallback<String>() {
-
-			public void onFailure(Throwable caught) {
-				if (html.isVisible()) {
-					html.removeFromParent();
-				}
-				sendButton.setEnabled(true);
-			}
-
-			public void onSuccess(String result) {
-				if (html.isVisible()) {
-					html.removeFromParent();
-				}
-				html = new HTMLPanel(result);
-				vp.add(html);
-				sendButton.setEnabled(true);
-			}
-		});
+	    this.presenter = null;
 	}
 }
