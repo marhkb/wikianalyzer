@@ -15,6 +15,7 @@
 package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.shared.GWT;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -25,6 +26,7 @@ public class Wawebapp implements EntryPoint {
      * This is the entry point method.
      */
     public void onModuleLoad() {
-	Factory.getPresenterFactory().getStartPagePresenter();
+	WaGinjector inj = GWT.create(WaGinjector.class);
+	inj.getStartPagePresenter();
     }
 }
