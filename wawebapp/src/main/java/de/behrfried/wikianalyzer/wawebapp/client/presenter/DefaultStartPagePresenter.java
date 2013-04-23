@@ -6,7 +6,7 @@ public class DefaultStartPagePresenter implements StartPagePresenter {
 
     private StartPageView view;
     
-    public DefaultStartPagePresenter() {
-	
+    public DefaultStartPagePresenter(final StartPageView view) {
+	this.view = view;
     }
 }
