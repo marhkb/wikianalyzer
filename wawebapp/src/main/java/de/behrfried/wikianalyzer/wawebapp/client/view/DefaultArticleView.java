@@ -26,6 +26,8 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 
+import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+
 public class DefaultArticleView implements ArticleView {	
 	/**
 	 * the parent element of the {@link DefaultArticleView} where the widgets
@@ -41,12 +43,20 @@ public class DefaultArticleView implements ArticleView {
 	private HLayout searchLayout;
 	private Button searchButton;
 	private Tab articleTab;
+	
+	private final Messages messages;
+
+	@Inject
+	public DefaultArticleView(TabContainerView parentView, Messages messages) {
+		this.parentView = parentView;
+		this.messages = messages;
+	}
 
 	public void init() {
 		this.waLabel = new Label();
 		
 		this.searchBox = new ComboBoxItem();
-		this.searchButton = new Button("Search");
+		this.searchButton = new Button(this.messages.searchButton());
 		
 		this.formContainer = new DynamicForm();
 		this.formContainer.setWidth(100);
@@ -63,11 +73,6 @@ public class DefaultArticleView implements ArticleView {
 				
 		this.parentView.getMainTabContainer().addTab(this.articleTab);
 
-	}
-
-	@Inject
-	public DefaultArticleView(TabContainerView parentView) {
-		this.parentView = parentView;
 	}
 
 	/**

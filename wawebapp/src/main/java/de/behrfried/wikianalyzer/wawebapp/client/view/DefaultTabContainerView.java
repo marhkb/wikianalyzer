@@ -25,25 +25,25 @@ import com.smartgwt.client.widgets.tab.TabSet;
  * 
  */
 public class DefaultTabContainerView implements TabContainerView {
-    private TabSet mainTabContainer;
-    
-    @Inject
-    public DefaultTabContainerView() {
-    }
-    
-    public void init() {
-	this.mainTabContainer = new TabSet();
-	this.mainTabContainer.setWidth100();
-	this.mainTabContainer.setHeight100();
-	RootPanel.get().add(this.mainTabContainer);
-	
-    }
-    
-    public TabSet getMainTabContainer() {
-	return mainTabContainer;
-    }
-    
-    public void dispose() {
-	// TODO Auto-generated method stub
-    }
+	private TabSet mainTabContainer;
+
+	@Inject
+	public DefaultTabContainerView() {
+	}
+
+	public void init() {
+		this.mainTabContainer = new TabSet();
+		this.mainTabContainer.setWidth("99%");
+		this.mainTabContainer.setHeight("97.8%");
+		RootPanel.get().add(this.mainTabContainer);
+
+	}
+
+	public TabSet getMainTabContainer() {
+		return mainTabContainer;
+	}
+
+	public void dispose() {
+		// TODO Auto-generated method stub
+	}
 }

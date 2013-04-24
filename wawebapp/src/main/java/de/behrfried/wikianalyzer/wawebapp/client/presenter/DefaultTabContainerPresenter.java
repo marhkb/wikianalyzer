@@ -18,37 +18,44 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.inject.Inject;
 
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.TabContainerView;
 
 /**
- * Default implementation of {@link UserPresenter}.
+ * Default implementation for {@link TabContainerPresenter}.
  * 
  * @author marcus
  * 
  */
-public class DefaultUserPresenter implements UserPresenter {
+public class DefaultTabContainerPresenter implements TabContainerPresenter {
 
 	/**
-	 * the {@link DefaultUserPresenter}'s {@link UserView}
+	 * the {@link DefaultTabContainerPresenter}'s {@link TabContainerView}
 	 */
-	private final UserView view;
+	private final TabContainerView view;
+
+	private final ArticlePresenter articlePresenter;
+	private final UserPresenter userPresenter;
 
 	/**
-	 * Creates a {@link DefaultUserPresenter}. All arguments are injected by
-	 * Gin.
+	 * Creates an instance of {@link DefaultTabContainerPresenter}. All
+	 * arguments are injected by Gin.
 	 * 
 	 * @param view
-	 *            the {@link DefaultUserPresenter}'s {@link UserView}
+	 *            the {@link DefaultTabContainerPresenter}'s
+	 *            {@link TabContainerView}
 	 * @throws IllegalArgumentException
 	 *             if view == null
 	 */
 	@Inject
-	public DefaultUserPresenter(final UserView view)
-			throws IllegalArgumentException {
+	public DefaultTabContainerPresenter(final TabContainerView view,
+			final ArticlePresenter articlePresenter,
+			final UserPresenter userPresenter) throws IllegalArgumentException {
 		if (view == null) {
 			throw new IllegalArgumentException("view == null");
 		}
 		this.view = view;
+		this.articlePresenter = articlePresenter;
+		this.userPresenter = userPresenter;
 	}
 
 	/**
@@ -56,15 +63,16 @@ public class DefaultUserPresenter implements UserPresenter {
 	 */
 	public void init() {
 		this.view.init();
-
+		this.articlePresenter.init();
+		this.userPresenter.init();
 	}
 
 	/**
 	 * @see Presenter
 	 */
 	public void dispose() {
-		// TODO Auto-generated method stub
+		this.view.dispose();
 
+		// TODO remove handlers
 	}
-
 }

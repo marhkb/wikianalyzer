@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.ArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultArticlePresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultTabContainerPresenterPresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultTabContainerPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.TabContainerPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.UserPresenter;
@@ -55,7 +55,7 @@ public class WaGinModule extends AbstractGinModule {
 	/*
 	 * secondly bind all presenters
 	 */
-	this.bind(TabContainerPresenter.class).to(DefaultTabContainerPresenterPresenter.class).in(Singleton.class);
+	this.bind(TabContainerPresenter.class).to(DefaultTabContainerPresenter.class).in(Singleton.class);
 	this.bind(ArticlePresenter.class).to(DefaultArticlePresenter.class).in(Singleton.class);
 	this.bind(UserPresenter.class).to(DefaultUserPresenter.class).in(Singleton.class);
     }

@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
+import com.smartgwt.client.widgets.tab.Tab;
+
+import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 
 /**
  * Default implementation of {@link UserView}.
@@ -25,36 +28,41 @@ import com.google.inject.Inject;
  * 
  */
 public class DefaultUserView implements UserView {
-    
-    /**
-     * {@link DefaultUserView}'s parent element
-     */
-    private final TabContainerView parentView;
-    
-    /**
-     * Creates an instance of {@link DefaultUserView}. All arguments are injected by Gin.
-     * 
-     * @param parentView
-     */
-    @Inject
-    public DefaultUserView(TabContainerView parentView) {
-	this.parentView = parentView;
-    }
-    
-    /**
-     * @see View
-     */
-    public void init() {
-	// TODO Auto-generated method stub
-	
-    }
-    
-    /**
-     * @see
-     */
-    public void dispose() {
-	// TODO Auto-generated method stub
-	
-    }
-    
+
+	/**
+	 * {@link DefaultUserView}'s parent element
+	 */
+	private final TabContainerView parentView;
+	private final Messages messages;
+
+	/**
+	 * Creates an instance of {@link DefaultUserView}. All arguments are
+	 * injected by Gin.
+	 * 
+	 * @param parentView
+	 */
+	@Inject
+	public DefaultUserView(TabContainerView parentView, Messages messages) {
+		this.parentView = parentView;
+		this.messages = messages;
+	}
+
+	private Tab userTab;
+
+	/**
+	 * @see View
+	 */
+	public void init() {
+		this.userTab = new Tab("User");
+		this.parentView.getMainTabContainer().addTab(this.userTab);
+	}
+
+	/**
+	 * @see
+	 */
+	public void dispose() {
+		// TODO Auto-generated method stub
+
+	}
+
 }
