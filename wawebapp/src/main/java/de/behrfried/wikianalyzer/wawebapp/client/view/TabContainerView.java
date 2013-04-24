@@ -17,6 +17,7 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 
+import com.google.gwt.user.client.ui.RootPanel;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 
@@ -27,14 +28,10 @@ import com.smartgwt.client.widgets.tab.TabSet;
  */
 public class TabContainerView implements StartPageView  {
 	private TabSet mainTabContainer;
-	private Tab articleTab, userTab, userComparisonTab;
 	
     public void init() {
 		this.mainTabContainer = new TabSet();
-		this.articleTab = new Tab("Article");
-		this.userTab = new Tab("User");
-		this.userComparisonTab = new Tab("User-Comparison");
-		this.mainTabContainer.setTabs(articleTab, userTab, userComparisonTab);
+		RootPanel.get().add(this.mainTabContainer);
     }
 
     public TabSet getMainTabContainer() {
