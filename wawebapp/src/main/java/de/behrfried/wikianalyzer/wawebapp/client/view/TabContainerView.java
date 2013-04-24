@@ -31,6 +31,8 @@ public class TabContainerView implements StartPageView  {
 	
     public void init() {
 		this.mainTabContainer = new TabSet();
+		this.mainTabContainer.setWidth100();
+		this.mainTabContainer.setHeight100();
 		RootPanel.get().add(this.mainTabContainer);
     }
 

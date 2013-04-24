@@ -58,10 +58,10 @@ public class DefaultArticleView implements ArticleView {
 		this.searchLayout.addChild(searchButton);
 		
 		this.articleTab = new Tab();
-		this.articleTab.setName("Article");
+		this.articleTab.setTitle("Article");
 		this.articleTab.setPane(this.searchLayout);
 				
-		this.parentView.getMainTabContainer().addTab(this.articleTab, 0);
+		this.parentView.getMainTabContainer().addTab(this.articleTab);
 	}
 
 	@Inject
