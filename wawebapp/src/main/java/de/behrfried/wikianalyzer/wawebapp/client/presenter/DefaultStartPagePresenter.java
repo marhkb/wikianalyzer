@@ -40,6 +40,8 @@ public class DefaultStartPagePresenter implements StartPagePresenter {
     public void init() {
 	this.view.init();
 	
+	
+	
 	//TODO add handlers
     }
 

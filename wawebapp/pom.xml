@@ -69,6 +69,13 @@
 			<version>1.3.3</version>
 		</dependency>
 
+		<!--  Charts Tools  -->
+		<dependency>
+			<groupId>com.google.gwt.google-apis</groupId>
+			<artifactId>gwt-visualization</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
 		<!-- HTML Parser -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -76,7 +83,7 @@
 			<version>1.7.2</version>
 		</dependency>
 
-		<!--  Guice Injector for GWT (Gin) -->
+		<!-- Guice Injector for GWT (Gin) -->
 		<dependency>
 			<groupId>com.google.gwt.inject</groupId>
 			<artifactId>gin</artifactId>

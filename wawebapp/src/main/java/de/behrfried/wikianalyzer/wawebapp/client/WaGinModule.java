@@ -23,7 +23,6 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultStartPagePrese
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.StartPagePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultStartPageView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
-
 /**
  * Main Module in the web application.
  * Defines which implementation is chosen for an interface.  
@@ -36,7 +35,7 @@ public class WaGinModule extends AbstractGinModule {
      * Configures the Module by defining implementations forinterfaces.
      */
     @Override
-    protected void configure() {
+    protected void configure() {	
 	this.bind(StartPageView.class).to(DefaultStartPageView.class).in(Singleton.class);
 	this.bind(StartPagePresenter.class).to(DefaultStartPagePresenter.class).in(Singleton.class);
     }

@@ -15,7 +15,11 @@
 	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
 	<!-- Other module inherits -->
+	<!-- GWT Injection lib -->
 	<inherits name="com.google.gwt.inject.Inject" />
+	
+	<!-- lib for chart vizualization  -->
+	<inherits name='com.google.gwt.visualization.Visualization'/>
 
 	<!-- English language, independent of country -->
 	<extend-property name="locale" values="en" />
