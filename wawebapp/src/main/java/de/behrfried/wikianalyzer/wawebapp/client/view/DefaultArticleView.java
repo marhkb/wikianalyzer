@@ -72,7 +72,6 @@ public class DefaultArticleView implements ArticleView {
 		this.articleTab.setPane(this.searchLayout);
 				
 		this.parentView.getMainTabContainer().addTab(this.articleTab);
-
 	}
 
 	/**
