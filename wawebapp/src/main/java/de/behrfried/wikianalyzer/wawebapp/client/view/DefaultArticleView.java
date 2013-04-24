@@ -24,6 +24,7 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tab.Tab;
 
 public class DefaultArticleView implements ArticleView {	
 	/**
@@ -39,6 +40,7 @@ public class DefaultArticleView implements ArticleView {
 	private VLayout layoutContainer;
 	private HLayout searchLayout;
 	private Button searchButton;
+	private Tab articleTab;
 
 	public void init() {
 		this.waLabel = new Label();
@@ -54,8 +56,12 @@ public class DefaultArticleView implements ArticleView {
 		this.searchLayout.addChild(waLabel);
 		this.searchLayout.addChild(formContainer);
 		this.searchLayout.addChild(searchButton);
+		
+		this.articleTab = new Tab();
+		this.articleTab.setName("Article");
+		this.articleTab.setPane(this.searchLayout);
 				
-		this.parentView.getMainTabContainer().getTab(0).setPane(this.searchLayout);
+		this.parentView.getMainTabContainer().addTab(this.articleTab, 0);
 	}
 
 	@Inject
