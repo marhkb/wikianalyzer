@@ -16,8 +16,9 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
+
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
 
 /**
  * Default implementation of {@link StartPageView}
@@ -25,13 +26,18 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
  *
  */
 public class TabContainerView implements StartPageView  {
-	private TabLayoutPanel mainTabContainer;
+	private TabSet mainTabContainer;
+	private Tab articleTab, userTab, userComparisonTab;
 	
     public void init() {
-		this.mainTabContainer = new TabLayoutPanel(20,Style.Unit.PX);
+		this.mainTabContainer = new TabSet();
+		this.articleTab = new Tab("Article");
+		this.userTab = new Tab("User");
+		this.userComparisonTab = new Tab("User-Comparison");
+		this.mainTabContainer.setTabs(articleTab, userTab, userComparisonTab);
     }
 
-    public TabLayoutPanel getMainTabContainer() {
+    public TabSet getMainTabContainer() {
 		return mainTabContainer;
 	}
 

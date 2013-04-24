@@ -1,33 +1,46 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.StackLayoutPanel;
-import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.inject.Inject;
+import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.HTMLPane;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
 
-public class DefaultArticleView implements ArticleView {
-	private Label waLabel;
-	private SuggestBox searchBox;
-	private Button searchButton;
-	private MenuBar menuBar;
-	private StackLayoutPanel wikiPrevPanel;
-
-	public void init() {
-		this.waLabel = new Label();
-		this.searchBox = new SuggestBox();
-		this.searchButton = new Button();
-		this.menuBar = new MenuBar();
-		this.wikiPrevPanel = new StackLayoutPanel(Style.Unit.PX);
-	}
-
+public class DefaultArticleView implements ArticleView {	
 	/**
 	 * the parent element of the {@link DefaultArticleView} where the widgets
 	 * has to be put in.
 	 */
 	private final StartPageView parentView;
+	
+	private Label waLabel;
+	private DynamicForm formContainer;
+	private ComboBoxItem searchBox;
+	private HTMLPane wikiPrevPanel;
+	private VLayout layoutContainer;
+	private HLayout searchLayout;
+	private Button searchButton;
+
+	public void init() {
+		this.waLabel = new Label();
+		
+		this.searchBox = new ComboBoxItem();
+		this.searchButton = new Button("Search");
+		
+		this.formContainer = new DynamicForm();
+		this.formContainer.setWidth(100);
+		this.formContainer.setItems(searchBox);
+		
+		this.searchLayout = new HLayout();
+		this.searchLayout.addChild(waLabel);
+		this.searchLayout.addChild(formContainer);
+		this.searchLayout.addChild(searchButton);
+				
+		this.parentView.getMainTabContainer().getTab(0).setPane(this.searchLayout);
+	}
 
 	@Inject
 	public DefaultArticleView(StartPageView parentView) {
@@ -42,24 +55,6 @@ public class DefaultArticleView implements ArticleView {
 
 	}
 
-	public Label getWaLabel() {
-		return waLabel;
-	}
-
-	public SuggestBox getSearchBox() {
-		return searchBox;
-	}
-
-	public Button getSearchButton() {
-		return searchButton;
-	}
-
-	public MenuBar getMenuBar() {
-		return menuBar;
-	}
-
-	public StackLayoutPanel getWikiPrevPanel() {
-		return wikiPrevPanel;
-	}
+	
 
 }

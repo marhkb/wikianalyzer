@@ -16,7 +16,7 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.user.client.ui.TabLayoutPanel;
+import com.smartgwt.client.widgets.tab.TabSet;
 
 /**
  * Interface for {@link StartPageView}
@@ -24,5 +24,5 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
  *
  */
 public interface StartPageView extends View {
-	public TabLayoutPanel getMainTabContainer();
+	public TabSet getMainTabContainer();
 }
