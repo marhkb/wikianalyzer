@@ -29,7 +29,7 @@ public class Wawebapp implements EntryPoint {
      */
     public void onModuleLoad() {
 	// create the main Ginjector
-	WaGinjector inj = GWT.create(WaGinjector.class);
+	final WaGinjector inj = GWT.create(WaGinjector.class);
 	
 	// get the StartPagePresenter
 	inj.getStartPagePresenter().init();

@@ -45,6 +45,8 @@ public class WaGinModule extends AbstractGinModule {
 	 * 
 	 */
 	this.bind(ArticleView.class).to(DefaultArticleView.class).in(Singleton.class);
+	
+	
 	this.bind(ArticlePresenter.class).to(DefaultArticlePresenter.class).in(Singleton.class);
 	this.bind(StartPageView.class).to(TabContainerView.class).in(Singleton.class);
 	this.bind(StartPagePresenter.class).to(DefaultStartPagePresenter.class).in(Singleton.class);
