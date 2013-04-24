@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultStartPagePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.StartPagePresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultStartPageView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.TabContainerView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
 /**
  * Main Module in the web application.
@@ -35,8 +35,8 @@ public class WaGinModule extends AbstractGinModule {
      * Configures the Module by defining implementations forinterfaces.
      */
     @Override
-    protected void configure() {	
-	this.bind(StartPageView.class).to(DefaultStartPageView.class).in(Singleton.class);
+    protected void configure() {
+	this.bind(StartPageView.class).to(TabContainerView.class).in(Singleton.class);
 	this.bind(StartPagePresenter.class).to(DefaultStartPagePresenter.class).in(Singleton.class);
     }
     
