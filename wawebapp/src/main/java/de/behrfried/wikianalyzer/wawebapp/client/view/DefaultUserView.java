@@ -14,49 +14,47 @@
  * limitations under the License. 
  */
  
-package de.behrfried.wikianalyzer.wawebapp.client.presenter;
+package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 /**
- * Default implementation for {@link ArticlePresenter}.
+ * Default implementation of {@link UserView}.
+ * 
  * @author marcus
- *
+ * 
  */
-public class DefaultArticlePresenter implements ArticlePresenter {
+public class DefaultUserView implements UserView {
     
     /**
-     * The {@link DefaultArticlePresenter}'s {@link ArticleView}
+     * {@link DefaultUserView}'s parent element
      */
-    private final ArticleView view;
+    private final StartPageView parentView;
     
     /**
-     * Creates a {@link DefaultArticlePresenter}. All parameters are injected by Gin.
-     * @param view the {@link DefaultArticlePresenter}'s {@link ArticleView}
-     * @throws IllegalArgumentException if view == null
+     * Creates an instance of {@link DefaultUserView}. All arguments are injected by Gin.
+     * 
+     * @param parentView
      */
     @Inject
-    public DefaultArticlePresenter(ArticleView view) throws IllegalArgumentException {
-	if(view == null) {
-	    throw new IllegalArgumentException("view == null");
-	}
-	this.view = view;
+    public DefaultUserView(StartPageView parentView) {
+	this.parentView = parentView;
     }
     
     /**
-     * @see Presenter
+     * @see View
      */
     public void init() {
-	this.view.init();
+	// TODO Auto-generated method stub
 	
     }
     
     /**
-     * @see Presenter
+     * @see
      */
     public void dispose() {
-	this.view.dispose();
+	// TODO Auto-generated method stub
+	
     }
     
 }

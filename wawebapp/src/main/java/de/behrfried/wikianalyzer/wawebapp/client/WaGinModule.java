@@ -22,11 +22,15 @@ import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.ArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultStartPagePresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.StartPagePresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.UserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultUserView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.TabContainerView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 /**
  * Main Module in the web application.
  * Defines which implementation is chosen for an interface.  
@@ -42,12 +46,18 @@ public class WaGinModule extends AbstractGinModule {
     protected void configure() {
 	
 	/*
-	 * 
+	 * firstly bind all views
 	 */
-	this.bind(ArticleView.class).to(DefaultArticleView.class).in(Singleton.class);
-	this.bind(ArticlePresenter.class).to(DefaultArticlePresenter.class).in(Singleton.class);
 	this.bind(StartPageView.class).to(TabContainerView.class).in(Singleton.class);
+	this.bind(ArticleView.class).to(DefaultArticleView.class).in(Singleton.class);
+	this.bind(UserView.class).to(DefaultUserView.class).in(Singleton.class);
+	
+	/*
+	 * secondly bind all presenters
+	 */
 	this.bind(StartPagePresenter.class).to(DefaultStartPagePresenter.class).in(Singleton.class);
+	this.bind(ArticlePresenter.class).to(DefaultArticlePresenter.class).in(Singleton.class);
+	this.bind(UserPresenter.class).to(DefaultUserPresenter.class).in(Singleton.class);
     }
     
 }

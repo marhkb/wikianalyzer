@@ -17,27 +17,28 @@
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.inject.Inject;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
+
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 
 /**
- * Default implementation for {@link ArticlePresenter}.
+ * Default implementation of {@link UserPresenter}.
  * @author marcus
  *
  */
-public class DefaultArticlePresenter implements ArticlePresenter {
-    
+public class DefaultUserPresenter implements UserPresenter {
+
     /**
-     * The {@link DefaultArticlePresenter}'s {@link ArticleView}
+     * the {@link DefaultUserPresenter}'s {@link UserView}
      */
-    private final ArticleView view;
+    private final UserView view;
     
     /**
-     * Creates a {@link DefaultArticlePresenter}. All parameters are injected by Gin.
-     * @param view the {@link DefaultArticlePresenter}'s {@link ArticleView}
+     * Creates a {@link DefaultUserPresenter}. All arguments are injected by Gin.
+     * @param view the {@link DefaultUserPresenter}'s {@link UserView}
      * @throws IllegalArgumentException if view == null
      */
     @Inject
-    public DefaultArticlePresenter(ArticleView view) throws IllegalArgumentException {
+    public DefaultUserPresenter(final UserView view) throws IllegalArgumentException {
 	if(view == null) {
 	    throw new IllegalArgumentException("view == null");
 	}
@@ -48,15 +49,16 @@ public class DefaultArticlePresenter implements ArticlePresenter {
      * @see Presenter
      */
     public void init() {
-	this.view.init();
+	// TODO Auto-generated method stub
 	
     }
-    
+
     /**
      * @see Presenter
      */
     public void dispose() {
-	this.view.dispose();
+	// TODO Auto-generated method stub
+	
     }
     
 }

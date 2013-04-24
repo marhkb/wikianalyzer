@@ -14,15 +14,13 @@
  * limitations under the License. 
  */
  
-package de.behrfried.wikianalyzer.wawebapp.client.presenter;
-
-import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
+package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 /**
- * Default interface for the presenter of {@link StartPageView}
+ * Base interfaces for the user view.
  * @author marcus
  *
  */
-public interface StartPagePresenter extends Presenter {
-
+public interface UserView extends View {
+    
 }
