@@ -18,31 +18,34 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.inject.Inject;
 
-import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.TabContainerView;
 
 /**
- * Default implementation for {@link StartPagePresenter}.
+ * Default implementation for {@link TabContainerPresenter}.
  * @author marcus
  *
  */
-public class DefaultStartPagePresenter implements StartPagePresenter {
+public class DefaultTabContainerPresenterPresenter implements TabContainerPresenter {
 
     /**
-     * the {@link DefaultStartPagePresenter}'s {@link StartPageView}
+     * the {@link DefaultTabContainerPresenterPresenter}'s {@link TabContainerView}
      */
-    private final StartPageView view;
+    private final TabContainerView view;
+    
+    private final ArticlePresenter articlePresenter;
     
     /**
-     * Creates an instance of {@link DefaultStartPagePresenter}. All arguments are injected by Gin.
-     * @param view the {@link DefaultStartPagePresenter}'s {@link StartPageView}
+     * Creates an instance of {@link DefaultTabContainerPresenterPresenter}. All arguments are injected by Gin.
+     * @param view the {@link DefaultTabContainerPresenterPresenter}'s {@link TabContainerView}
      * @throws IllegalArgumentException if view == null
      */
     @Inject
-    public DefaultStartPagePresenter(final StartPageView view) throws IllegalArgumentException {
+    public DefaultTabContainerPresenterPresenter(final TabContainerView view, final ArticlePresenter articlePresenter) throws IllegalArgumentException {
 	if(view == null) {
 	    throw new IllegalArgumentException("view == null");
 	}
 	this.view = view;
+	this.articlePresenter = articlePresenter;
     }
 
     /**
@@ -50,6 +53,7 @@ public class DefaultStartPagePresenter implements StartPagePresenter {
      */
     public void init() {
 	this.view.init();
+	this.articlePresenter.init();
 	
 	//TODO add handlers
     }

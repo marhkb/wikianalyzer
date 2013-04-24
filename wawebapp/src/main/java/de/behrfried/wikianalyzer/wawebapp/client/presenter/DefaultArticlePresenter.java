@@ -49,7 +49,6 @@ public class DefaultArticlePresenter implements ArticlePresenter {
      */
     public void init() {
 	this.view.init();
-	
     }
     
     /**

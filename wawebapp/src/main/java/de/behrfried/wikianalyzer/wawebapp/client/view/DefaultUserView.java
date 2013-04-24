@@ -29,7 +29,7 @@ public class DefaultUserView implements UserView {
     /**
      * {@link DefaultUserView}'s parent element
      */
-    private final StartPageView parentView;
+    private final TabContainerView parentView;
     
     /**
      * Creates an instance of {@link DefaultUserView}. All arguments are injected by Gin.
@@ -37,7 +37,7 @@ public class DefaultUserView implements UserView {
      * @param parentView
      */
     @Inject
-    public DefaultUserView(StartPageView parentView) {
+    public DefaultUserView(TabContainerView parentView) {
 	this.parentView = parentView;
     }
     

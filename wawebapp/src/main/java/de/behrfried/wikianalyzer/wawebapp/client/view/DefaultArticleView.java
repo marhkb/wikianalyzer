@@ -31,7 +31,7 @@ public class DefaultArticleView implements ArticleView {
 	 * the parent element of the {@link DefaultArticleView} where the widgets
 	 * has to be put in.
 	 */
-	private final StartPageView parentView;
+	private final TabContainerView parentView;
 	
 	private Label waLabel;
 	private DynamicForm formContainer;
@@ -61,11 +61,11 @@ public class DefaultArticleView implements ArticleView {
 		this.articleTab.setName("Article");
 		this.articleTab.setPane(this.searchLayout);
 				
-		this.parentView.getMainTabContainer().addTab(this.articleTab, 0);
+		this.parentView.getMainTabContainer().addTab(this.articleTab, this.parentView.getMainTabContainer().getTabs().length);
 	}
 
 	@Inject
-	public DefaultArticleView(StartPageView parentView) {
+	public DefaultArticleView(TabContainerView parentView) {
 		this.parentView = parentView;
 	}
 
@@ -76,7 +76,4 @@ public class DefaultArticleView implements ArticleView {
 		// TODO Auto-generated method stub
 
 	}
-
-	
-
 }

@@ -16,29 +16,13 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-
-import com.google.gwt.user.client.ui.RootPanel;
-import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 
 /**
- * Default implementation of {@link StartPageView}
+ * Interface for {@link TabContainerView}
  * @author marcus
  *
  */
-public class TabContainerView implements StartPageView  {
-	private TabSet mainTabContainer;
-	
-    public void init() {
-		this.mainTabContainer = new TabSet();
-		RootPanel.get().add(this.mainTabContainer);
-    }
-
-    public TabSet getMainTabContainer() {
-		return mainTabContainer;
-	}
-
-	public void dispose() {
-	// TODO Auto-generated method stub
-    }
+public interface TabContainerView extends View {
+	public TabSet getMainTabContainer();
 }
