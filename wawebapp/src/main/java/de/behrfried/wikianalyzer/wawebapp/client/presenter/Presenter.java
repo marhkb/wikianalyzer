@@ -19,7 +19,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 import de.behrfried.wikianalyzer.wawebapp.client.view.View;
 
 /**
- * Base interface for all Presenter.
+ * Base interface for all Presenters.
  * @author marcus
  *
  */

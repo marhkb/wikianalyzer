@@ -32,6 +32,6 @@ public class Wawebapp implements EntryPoint {
 	WaGinjector inj = GWT.create(WaGinjector.class);
 	
 	// get the StartPagePresenter
-	inj.getStartPagePresenter();
+	inj.getStartPagePresenter().init();
     }
 }
