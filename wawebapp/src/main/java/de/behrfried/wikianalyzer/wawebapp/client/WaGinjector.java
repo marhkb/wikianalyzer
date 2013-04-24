@@ -19,7 +19,7 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.StartPagePresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.TabContainerPresenter;
 
 /**
  * Main Injector of the web application.
@@ -31,8 +31,8 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.StartPagePresenter;
 public interface WaGinjector extends Ginjector {
     
     /**
-     * Returns an implementation of {@link StartPagePresenter} as declared in {@link WaGinModule}'s 'bind' method.
-     * @return an implementation of {@link StartPagePresenter} as declared in {@link WaGinModule}'s 'bind' method
+     * Returns an implementation of {@link TabContainerPresenter} as declared in {@link WaGinModule}'s 'bind' method.
+     * @return an implementation of {@link TabContainerPresenter} as declared in {@link WaGinModule}'s 'bind' method
      */
-    StartPagePresenter getStartPagePresenter();
+    TabContainerPresenter getStartPagePresenter();
 }
