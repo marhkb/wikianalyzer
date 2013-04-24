@@ -35,10 +35,6 @@ public class TabContainerView implements StartPageView  {
 		return mainTabContainer;
 	}
 
-	public void setMainTabContainer(TabLayoutPanel mainTabContainer) {
-		this.mainTabContainer = mainTabContainer;
-	}
-
 	public void dispose() {
 	// TODO Auto-generated method stub
     }

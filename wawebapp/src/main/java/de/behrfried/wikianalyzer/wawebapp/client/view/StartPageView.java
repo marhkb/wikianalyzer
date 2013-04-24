@@ -16,11 +16,13 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import com.google.gwt.user.client.ui.TabLayoutPanel;
+
 /**
  * Interface for {@link StartPageView}
  * @author marcus
  *
  */
 public interface StartPageView extends View {
-
+	public TabLayoutPanel getMainTabContainer();
 }

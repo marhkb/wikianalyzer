@@ -1,15 +1,52 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-public class DefaultArticleView implements ArticleView {
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.StackLayoutPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 
-    public void init() {
-	// TODO Auto-generated method stub
+public class DefaultArticleView implements ArticleView {
+private Label waLabel;
+private SuggestBox searchBox;
+private Button searchButton;
+private MenuBar menuBar;
+private StackLayoutPanel wikiPrevPanel;
 	
+    public void init() {
+    	this.waLabel = new Label();
+    	this.searchBox = new SuggestBox();
+    	this.searchButton = new Button();
+    	this.menuBar = new MenuBar();
+    	this.wikiPrevPanel = new StackLayoutPanel(Style.Unit.PX);
+	
+    	
     }
 
     public void dispose() {
 	// TODO Auto-generated method stub
 	
     }
+
+	public Label getWaLabel() {
+		return waLabel;
+	}
+
+	public SuggestBox getSearchBox() {
+		return searchBox;
+	}
+
+	public Button getSearchButton() {
+		return searchButton;
+	}
+
+	public MenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	public StackLayoutPanel getWikiPrevPanel() {
+		return wikiPrevPanel;
+	}
     
 }
