@@ -16,8 +16,10 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import de.behrfried.wikianalyzer.wawebapp.client.view.StartPageView;
+
 /**
- * 
+ * Default interface for the presenter of {@link StartPageView}
  * @author marcus
  *
  */

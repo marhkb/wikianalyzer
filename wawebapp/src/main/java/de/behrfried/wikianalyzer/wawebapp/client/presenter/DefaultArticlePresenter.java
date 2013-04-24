@@ -34,9 +34,13 @@ public class DefaultArticlePresenter implements ArticlePresenter {
     /**
      * Creates a {@link DefaultArticlePresenter}. All parameters are injected by Gin.
      * @param view the {@link DefaultArticlePresenter}'s {@link ArticleView}
+     * @throws IllegalArgumentException if view == null
      */
     @Inject
-    public DefaultArticlePresenter(ArticleView view) {
+    public DefaultArticlePresenter(ArticleView view) throws IllegalArgumentException {
+	if(view == null) {
+	    throw new IllegalArgumentException("view == null");
+	}
 	this.view = view;
     }
     

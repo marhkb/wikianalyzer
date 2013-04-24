@@ -16,6 +16,8 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import com.google.inject.Inject;
+
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 
 /**
@@ -35,6 +37,7 @@ public class DefaultUserPresenter implements UserPresenter {
      * @param view the {@link DefaultUserPresenter}'s {@link UserView}
      * @throws IllegalArgumentException if view == null
      */
+    @Inject
     public DefaultUserPresenter(final UserView view) throws IllegalArgumentException {
 	if(view == null) {
 	    throw new IllegalArgumentException("view == null");
