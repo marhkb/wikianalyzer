@@ -4,7 +4,10 @@
 # Package Files #
 *.jar
 *.war
+
+# executables
 *.bat
+*.sh
 
 # gwt caches and compiled units #
 war/gwt_bree/
@@ -18,6 +21,7 @@ war/WEB-INF/deploy/
 war/WEB-INF/classes/
 
 target/
+*.settings/
 *.gwt-log
 *~
 
