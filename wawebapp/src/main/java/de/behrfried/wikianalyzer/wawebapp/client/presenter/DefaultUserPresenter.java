@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
 
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
@@ -29,11 +30,6 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 public class DefaultUserPresenter implements UserPresenter {
 
 	/**
-	 * the {@link DefaultUserPresenter}'s {@link UserView}
-	 */
-	private final UserView view;
-
-	/**
 	 * Creates a {@link DefaultUserPresenter}. All arguments are injected by
 	 * Gin.
 	 * 
@@ -43,28 +39,6 @@ public class DefaultUserPresenter implements UserPresenter {
 	 *             if view == null
 	 */
 	@Inject
-	public DefaultUserPresenter(final UserView view)
-			throws IllegalArgumentException {
-		if (view == null) {
-			throw new IllegalArgumentException("view == null");
-		}
-		this.view = view;
+	public DefaultUserPresenter() {
 	}
-
-	/**
-	 * @see Presenter
-	 */
-	public void init() {
-		this.view.init();
-
-	}
-
-	/**
-	 * @see Presenter
-	 */
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

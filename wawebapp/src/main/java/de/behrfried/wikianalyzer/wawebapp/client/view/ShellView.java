@@ -19,11 +19,10 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
 import com.smartgwt.client.widgets.tab.TabSet;
 
 /**
- * Interface for {@link TabContainerView}
+ * Interface for {@link ShellView}
  * @author marcus
  *
  */
 
-public interface TabContainerView extends View {
-	public TabSet getMainTabContainer();
+public abstract class ShellView extends View {
 }

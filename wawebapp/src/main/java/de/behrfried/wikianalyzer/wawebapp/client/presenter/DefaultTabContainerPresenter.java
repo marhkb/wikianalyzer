@@ -16,25 +16,19 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
 
-import de.behrfried.wikianalyzer.wawebapp.client.view.TabContainerView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
- * Default implementation for {@link TabContainerPresenter}.
+ * Default implementation for {@link ShellPresenter}.
  * 
  * @author marcus
  * 
  */
-public class DefaultTabContainerPresenter implements TabContainerPresenter {
+public class DefaultTabContainerPresenter implements ShellPresenter {
 
-	/**
-	 * the {@link DefaultTabContainerPresenter}'s {@link TabContainerView}
-	 */
-	private final TabContainerView view;
-
-	private final ArticlePresenter articlePresenter;
-	private final UserPresenter userPresenter;
 
 	/**
 	 * Creates an instance of {@link DefaultTabContainerPresenter}. All
@@ -42,37 +36,11 @@ public class DefaultTabContainerPresenter implements TabContainerPresenter {
 	 * 
 	 * @param view
 	 *            the {@link DefaultTabContainerPresenter}'s
-	 *            {@link TabContainerView}
+	 *            {@link ShellView}
 	 * @throws IllegalArgumentException
 	 *             if view == null
 	 */
 	@Inject
-	public DefaultTabContainerPresenter(final TabContainerView view,
-			final ArticlePresenter articlePresenter,
-			final UserPresenter userPresenter) throws IllegalArgumentException {
-		if (view == null) {
-			throw new IllegalArgumentException("view == null");
-		}
-		this.view = view;
-		this.articlePresenter = articlePresenter;
-		this.userPresenter = userPresenter;
-	}
-
-	/**
-	 * @see Presenter
-	 */
-	public void init() {
-		this.view.init();
-		this.articlePresenter.init();
-		this.userPresenter.init();
-	}
-
-	/**
-	 * @see Presenter
-	 */
-	public void dispose() {
-		this.view.dispose();
-
-		// TODO remove handlers
+	public DefaultTabContainerPresenter() {
 	}
 }

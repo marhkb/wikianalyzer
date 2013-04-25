@@ -21,6 +21,6 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
  * @author marcus
  *
  */
-public interface UserView extends View {
+public abstract class UserView extends View {
     
 }

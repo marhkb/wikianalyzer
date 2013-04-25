@@ -30,40 +30,47 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
-import com.smartgwt.client.widgets.tab.Tab;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.ArticlePresenter;
 
-public class DefaultArticleView implements ArticleView {	
+public class DefaultArticleView extends ArticleView {	
+	
+	
+	private final ArticlePresenter presenter;
+	
 	/**
 	 * the parent element of the {@link DefaultArticleView} where the widgets
 	 * has to be put in.
 	 */
-	private final TabContainerView parentView;
 	
 	private Label waLabel;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private HTMLPane wikiPrevPanel;
-	private VLayout layoutContainer;
 	private HLayout searchLayout, generalWikiArticleLayout;
 	private Button searchButton;
-	private Tab articleTab;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
 	private MenuItem randomSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
 	private SectionStack sectionPanel;
 	private SectionStackSection generalArticleSection, articleAnalyzationSection;
+	private VLayout lay;
 	
 	private final Messages messages;
 
 	@Inject
-	public DefaultArticleView(TabContainerView parentView, Messages messages) {
-		this.parentView = parentView;
+	public DefaultArticleView(ArticlePresenter presenter, Messages messages) throws IllegalArgumentException {
+		if(presenter == null) {
+			throw new IllegalArgumentException("presenter == null");
+		}
+		this.presenter = presenter;
 		this.messages = messages;
+		
+		this.init();
 	}
-
-	public void init() {
+	
+	private void init() {
 		this.waLabel = new Label("WIKIAnalyzer");
 		this.waLabel.setHeight100();
 		this.waLabel.setMargin(10);
@@ -104,21 +111,16 @@ public class DefaultArticleView implements ArticleView {
 		//TODO weitermachen: WIkivorschau, allgemeine wikiinfos...
 		this.sectionPanel.setVisibilityMode(VisibilityMode.MULTIPLE);
 		
+		this.lay = new VLayout();
 		
-		this.layoutContainer = new VLayout();
-		this.layoutContainer.addMember(searchLayout);
-		this.layoutContainer.addMember(timeMenuButton);
+		this.lay.addMember(searchLayout);
+		this.lay.addMember(timeMenuButton);
 		
-		this.articleTab = new Tab("Article");
-		this.articleTab.setPane(this.layoutContainer);
-		this.parentView.getMainTabContainer().addTab(this.articleTab);
+		this.addChild(this.lay);
 	}
 
-	/**
-	 * @see View
-	 */
-	public void dispose() {
-		// TODO Auto-generated method stub
 
+	public String getName() {
+		return "Article";
 	}
 }

@@ -16,7 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
@@ -27,12 +31,11 @@ import de.behrfried.wikianalyzer.wawebapp.client.Messages;
  * @author marcus
  * 
  */
-public class DefaultUserView implements UserView {
+public class DefaultUserView extends UserView {
 
 	/**
 	 * {@link DefaultUserView}'s parent element
 	 */
-	private final TabContainerView parentView;
 	private final Messages messages;
 
 	/**
@@ -42,8 +45,7 @@ public class DefaultUserView implements UserView {
 	 * @param parentView
 	 */
 	@Inject
-	public DefaultUserView(TabContainerView parentView, Messages messages) {
-		this.parentView = parentView;
+	public DefaultUserView(Messages messages) {
 		this.messages = messages;
 	}
 
@@ -52,9 +54,9 @@ public class DefaultUserView implements UserView {
 	/**
 	 * @see View
 	 */
-	public void init() {
-		this.userTab = new Tab("User");
-		this.parentView.getMainTabContainer().addTab(this.userTab);
+	public Canvas init() {
+		//this.userTab = new Tab("User");
+		return this;
 	}
 
 	/**
@@ -63,6 +65,11 @@ public class DefaultUserView implements UserView {
 	public void dispose() {
 		// TODO Auto-generated method stub
 
+	}
+
+
+	public String getName() {
+		return "User";
 	}
 
 }

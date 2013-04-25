@@ -1,6 +1,10 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 
 /**
@@ -8,12 +12,12 @@ import com.smartgwt.client.widgets.tab.Tab;
  * @author marcus
  *
  */
-public class DefaultUserComparisonView implements UserComparisonView {
+public class DefaultUserComparisonView extends UserComparisonView {
     
     /**
      * parent view of this {@link DefaultUserComparisonView}
      */
-    private final TabContainerView parentView;
+    private final ShellView parentView;
     
     /**
      * Creates an instance of {@link DefaultUserComparisonView}. All arguments are injected by Gin
@@ -21,7 +25,7 @@ public class DefaultUserComparisonView implements UserComparisonView {
      * @throws IllegalArgumentException
      */
     @Inject
-    public DefaultUserComparisonView(final TabContainerView parentView)
+    public DefaultUserComparisonView(final ShellView parentView)
 	    throws IllegalArgumentException {
 	if(parentView == null) {
 	    throw new IllegalArgumentException("parentView == null");
@@ -34,9 +38,9 @@ public class DefaultUserComparisonView implements UserComparisonView {
     /**
      * @see View
      */
-    public void init() {
-	this.userComprisonTab = new Tab("User Comparison");
-	this.parentView.getMainTabContainer().addTab(this.userComprisonTab);
+    public Canvas init() {
+    	this.userComprisonTab = new Tab("User Comparison");
+    	return this;
     }
     
     /**
@@ -46,5 +50,9 @@ public class DefaultUserComparisonView implements UserComparisonView {
 	// TODO Auto-generated method stub
 	
     }
-    
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "User Comparison";
+	}
 }

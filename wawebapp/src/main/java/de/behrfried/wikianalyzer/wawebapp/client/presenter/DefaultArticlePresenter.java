@@ -16,6 +16,7 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
@@ -25,11 +26,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
  *
  */
 public class DefaultArticlePresenter implements ArticlePresenter {
-    
-    /**
-     * The {@link DefaultArticlePresenter}'s {@link ArticleView}
-     */
-    private final ArticleView view;
+   
     
     /**
      * Creates a {@link DefaultArticlePresenter}. All parameters are injected by Gin.
@@ -37,25 +34,7 @@ public class DefaultArticlePresenter implements ArticlePresenter {
      * @throws IllegalArgumentException if view == null
      */
     @Inject
-    public DefaultArticlePresenter(ArticleView view) throws IllegalArgumentException {
-	if(view == null) {
-	    throw new IllegalArgumentException("view == null");
-	}
-	this.view = view;
+    public DefaultArticlePresenter() {
     }
-    
-    /**
-     * @see Presenter
-     */
-    public void init() {
-	this.view.init();
-    }
-    
-    /**
-     * @see Presenter
-     */
-    public void dispose() {
-	this.view.dispose();
-    }
-    
+   
 }

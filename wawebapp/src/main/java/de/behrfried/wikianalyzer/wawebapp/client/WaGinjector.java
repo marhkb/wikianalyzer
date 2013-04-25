@@ -19,7 +19,8 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.TabContainerPresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.ShellPresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
  * Main Injector of the web application.
@@ -31,8 +32,8 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.TabContainerPresenter
 public interface WaGinjector extends Ginjector {
     
     /**
-     * Returns an implementation of {@link TabContainerPresenter} as declared in {@link WaGinModule}'s 'bind' method.
-     * @return an implementation of {@link TabContainerPresenter} as declared in {@link WaGinModule}'s 'bind' method
+     * Returns an implementation of {@link ShellPresenter} as declared in {@link WaGinModule}'s 'bind' method.
+     * @return an implementation of {@link ShellPresenter} as declared in {@link WaGinModule}'s 'bind' method
      */
-    TabContainerPresenter getStartPagePresenter();
+    ShellView getShellView();
 }

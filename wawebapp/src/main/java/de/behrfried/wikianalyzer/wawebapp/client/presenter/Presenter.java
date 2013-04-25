@@ -16,7 +16,6 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import de.behrfried.wikianalyzer.wawebapp.client.view.View;
 
 /**
  * Base interface for all Presenters.
@@ -25,13 +24,4 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.View;
  */
 public interface Presenter {
     
-    /**
-     * Initialises the {@link Presenter} and its {@link View}.
-     */
-    public void init();
-    
-    /**
-     * Disposes the {@link Presenter} and it s {@link View}.
-     */
-    public void dispose();
 }

@@ -16,22 +16,14 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import com.smartgwt.client.widgets.Canvas;
 
 /**
  * Base interface for all View Classes
  * @author marcus
  *
  */
-public interface View {
+public abstract class View extends Canvas {
     
-    /**
-     * Initializes the all widgets and puts them to the {@link RootPanel}.
-     */
-    public void init();
-    
-    /**
-     * Removes all the {@link View}'s widgets from the {@link RootPanel}.
-     */
-    public void dispose();
+    public abstract String getName();
 }

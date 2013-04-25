@@ -16,13 +16,13 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import de.behrfried.wikianalyzer.wawebapp.client.view.TabContainerView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
- * Default interface for the presenter of {@link TabContainerView}
+ * Default interface for the presenter of {@link ShellView}
  * @author marcus
  *
  */
-public interface TabContainerPresenter extends Presenter {
+public interface ShellPresenter extends Presenter {
 
 }
