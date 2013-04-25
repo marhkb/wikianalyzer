@@ -17,13 +17,19 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
+import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.SectionStack;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.menu.IMenuButton;
+import com.smartgwt.client.widgets.menu.Menu;
+import com.smartgwt.client.widgets.menu.MenuItem;
 import com.smartgwt.client.widgets.tab.Tab;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
@@ -36,13 +42,18 @@ public class DefaultArticleView implements ArticleView {
 	private final TabContainerView parentView;
 	
 	private Label waLabel;
-	private DynamicForm formContainer;
 	private ComboBoxItem searchBox;
+	private DynamicForm searchBoxContainer;
 	private HTMLPane wikiPrevPanel;
 	private VLayout layoutContainer;
-	private HLayout searchLayout;
+	private HLayout searchLayout, generalWikiArticleLayout;
 	private Button searchButton;
 	private Tab articleTab;
+	private IMenuButton timeMenuButton;
+	private Menu timeSpanMenu;
+	private MenuItem randomSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
+	private SectionStack sectionPanel;
+	private SectionStackSection generalArticleSection, articleAnalyzationSection;
 	
 	private final Messages messages;
 
@@ -53,26 +64,54 @@ public class DefaultArticleView implements ArticleView {
 	}
 
 	public void init() {
-		this.waLabel = new Label();
-		
+		this.waLabel = new Label("WIKIAnalyzer");
+		this.waLabel.setHeight100();
+		this.waLabel.setMargin(10);
 		this.searchBox = new ComboBoxItem();
-		this.searchButton = new Button(this.messages.searchButton());
-		
-		this.formContainer = new DynamicForm();
-		this.formContainer.setWidth(100);
-		this.formContainer.setItems(searchBox);
-		
+		this.searchBox.setWidth(200);
+		this.searchBox.setShowTitle(false);
+		this.searchBoxContainer = new DynamicForm();
+		this.searchBoxContainer.setBackgroundColor("white");
+		this.searchBoxContainer.setItems(this.searchBox);		
+		this.searchButton = new Button(this.messages.searchButton());		
 		this.searchLayout = new HLayout();
-		this.searchLayout.addChild(waLabel);
-		this.searchLayout.addChild(formContainer);
-		this.searchLayout.addChild(searchButton);
+		this.searchLayout.setMembersMargin(3);
+		this.searchLayout.setHeight(30);
+		this.searchLayout.setBackgroundColor("red");
+		this.searchLayout.addMember(waLabel);
+		this.searchLayout.addMember(searchBoxContainer);
+		this.searchLayout.addMember(searchButton);
 		
-		this.articleTab = new Tab();
-		this.articleTab.setTitle("Article");
-		this.articleTab.setPane(this.searchLayout);
-				
+		this.timeSpanMenu = new Menu();
+		this.randomSpan = new MenuItem("random time");
+		this.randomSpan.setChecked(true);
+		this.timeSpanMenu.addItem(randomSpan);
+		this.daySpan = new MenuItem("last day");
+		this.timeSpanMenu.addItem(daySpan);
+		this.weekSpan = new MenuItem("last week");
+		this.timeSpanMenu.addItem(weekSpan);
+		this.monthSpan = new MenuItem("last month");
+		this.timeSpanMenu.addItem(monthSpan);
+		this.yearSpan = new MenuItem("last year");
+		this.timeSpanMenu.addItem(yearSpan);
+		this.chooseSpan = new MenuItem("choose timespan");
+		this.timeSpanMenu.addItem(chooseSpan);
+		this.timeMenuButton = new IMenuButton(randomSpan.getTitle(), timeSpanMenu);
+		
+		
+		this.generalArticleSection = new SectionStackSection();
+		this.sectionPanel = new SectionStack();
+		//TODO weitermachen: WIkivorschau, allgemeine wikiinfos...
+		this.sectionPanel.setVisibilityMode(VisibilityMode.MULTIPLE);
+		
+		
+		this.layoutContainer = new VLayout();
+		this.layoutContainer.addMember(searchLayout);
+		this.layoutContainer.addMember(timeMenuButton);
+		
+		this.articleTab = new Tab("Article");
+		this.articleTab.setPane(this.layoutContainer);
 		this.parentView.getMainTabContainer().addTab(this.articleTab);
-
 	}
 
 	/**
