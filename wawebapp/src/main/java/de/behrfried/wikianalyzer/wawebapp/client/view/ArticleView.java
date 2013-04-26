@@ -13,15 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
+
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
-
+/**
+ * Base interface for article view.
+ * 
+ * @author marcus
+ * 
+ */
 public abstract class ArticleView extends View {
-	
+
+	/**
+	 * Presenter interface the ArticleView wants to use
+	 * 
+	 * @author marcus
+	 * 
+	 */
 	public interface Presenter extends PresenterBase {
-		
+
 		public void searchArticle(String article);
 
 		public void getArticleHtml();

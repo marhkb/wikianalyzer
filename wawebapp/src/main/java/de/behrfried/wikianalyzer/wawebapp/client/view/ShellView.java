@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
- * Interface for {@link ShellView}
+ * Interface for the top level view that contains several sub views.
+ * 
  * @author marcus
- *
+ * 
  */
 
 public abstract class ShellView extends View {
-	
+
 	/**
 	 * Default interface for the presenter of {@link ShellView}
+	 * 
 	 * @author marcus
-	 *
+	 * 
 	 */
 	public interface Presenter extends PresenterBase {
 

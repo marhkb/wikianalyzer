@@ -27,9 +27,10 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 public abstract class UserView extends View {
 	
 	/**
-	 * Base interface for user presenter.
+	 * Presenter interface the UserView wants to use
+	 * 
 	 * @author marcus
-	 *
+	 * 
 	 */
 	public interface Presenter extends PresenterBase {
 		

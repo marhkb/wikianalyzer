@@ -74,7 +74,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		}
 		
 		if(!old.equals(this.nameToServerErrorMessage)) {
-			this.getErrorNameToServerChanged().invoke(
+			this.getErrorNameToServerChanged().fire(
 					this.initializationContext, 
 					this, 
 					new GenericEventArgs<String>(this.getNameToServerErrorMessage()));
@@ -108,7 +108,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 						public void onSuccess(String result) {
 							setNameToServer(result);
 							getNameToServerChanged()
-								.invoke(initializationContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
+								.fire(initializationContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
 						}
 
 						public void onFailure(Throwable caught) {
@@ -128,7 +128,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		final boolean old = this.canSendNameToServer;
 		this.canSendNameToServer = this.getNameToServerErrorMessage().length() == 0;
 		if(old != this.canSendNameToServer) {
-			this.canSendNameToServerChanged().invoke(initializationContext, this, new GenericEventArgs<Boolean>(this.canSendNameToServer));
+			this.canSendNameToServerChanged().fire(initializationContext, this, new GenericEventArgs<Boolean>(this.canSendNameToServer));
 		}
 	}
 
