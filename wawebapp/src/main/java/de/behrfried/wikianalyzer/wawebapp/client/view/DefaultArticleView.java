@@ -118,12 +118,6 @@ public class DefaultArticleView extends ArticleView {
 		this.lay.addMember(timeMenuButton);
 		
 		this.addChild(this.lay);
-		
-		this.presenter.getFieldChangedEvent().addHandler(new Handler<FieldChangedEventArgs>() {
-			public void invoke(Object sender, FieldChangedEventArgs e) {
-				// TODO Auto-generated method stub			
-			}
-		});
 	}
 
 

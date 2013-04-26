@@ -33,7 +33,9 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 public class DefaultArticlePresenter implements ArticleView.Presenter {
 	
 	private final MainServiceAsync mainService;
-	private final Event<FieldChangedEventArgs> fieldChangedEvent = new Event<FieldChangedEventArgs>();
+	
+	private final Object initializationContext = new Object();
+	private final Event<FieldChangedEventArgs> fieldChangedEvent = new Event<FieldChangedEventArgs>(this.initializationContext);
 
 	@Inject
 	public DefaultArticlePresenter(final MainServiceAsync mainService) {
@@ -60,7 +62,5 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 	}
 
 	public void getArticleHtml() {
-		// TODO Auto-generated method stub
-		
 	}
 }

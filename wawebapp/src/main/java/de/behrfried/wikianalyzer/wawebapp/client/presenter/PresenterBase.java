@@ -26,6 +26,4 @@ import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
  * 
  */
 public interface PresenterBase {
-	
-	public Event<FieldChangedEventArgs> getFieldChangedEvent();
 }

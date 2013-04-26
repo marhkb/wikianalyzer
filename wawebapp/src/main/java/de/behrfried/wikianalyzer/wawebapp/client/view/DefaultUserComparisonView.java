@@ -16,12 +16,7 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.tab.Tab;
 
 /**
  * Default implementation for {@link UserComparisonView}.
@@ -33,7 +28,7 @@ public class DefaultUserComparisonView extends UserComparisonView {
     /**
      * parent view of this {@link DefaultUserComparisonView}
      */
-    private final ShellView parentView;
+    private final Presenter presenter;
     
     /**
      * Creates an instance of {@link DefaultUserComparisonView}. All arguments are injected by Gin
@@ -41,34 +36,14 @@ public class DefaultUserComparisonView extends UserComparisonView {
      * @throws IllegalArgumentException
      */
     @Inject
-    public DefaultUserComparisonView(final ShellView parentView)
-	    throws IllegalArgumentException {
-	if(parentView == null) {
-	    throw new IllegalArgumentException("parentView == null");
-	}
-	this.parentView = parentView;
+    public DefaultUserComparisonView(final Presenter presenter) throws IllegalArgumentException {
+    	if(presenter == null) {
+    		throw new IllegalArgumentException("presenter == null");
+    	}
+    	this.presenter = presenter;
     }
     
-    private Tab userComprisonTab;
-    
-    /**
-     * @see View
-     */
-    public Canvas init() {
-    	this.userComprisonTab = new Tab("User Comparison");
-    	return this;
-    }
-    
-    /**
-     * @see View
-     */
-    public void dispose() {
-	// TODO Auto-generated method stub
-	
-    }
-
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "User Comparison";
 	}
 }

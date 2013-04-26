@@ -15,7 +15,8 @@
  */
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
-
+import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
@@ -24,12 +25,23 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
  *
  */
 public abstract class UserView extends View {
+	
 	/**
 	 * Base interface for user presenter.
 	 * @author marcus
 	 *
 	 */
 	public interface Presenter extends PresenterBase {
+		
+		public void setNameToServer(final String nameToServer);
+		public String getNameToServer();
+		public Event<GenericEventArgs<String>> getNameToServerChanged();
+		public String getNameToServerErrorMessage();
+		public Event<GenericEventArgs<String>> getErrorNameToServerChanged();
 	    
+		
+		public void onSendNameToServer();
+		public boolean canSendNameToServer();
+		public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged();
 	}
 }

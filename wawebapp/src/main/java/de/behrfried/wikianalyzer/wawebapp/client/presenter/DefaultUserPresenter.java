@@ -16,8 +16,13 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
+
+import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 
 /**
@@ -28,8 +33,103 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
  */
 public class DefaultUserPresenter implements UserView.Presenter {
 
-	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
-		// TODO Auto-generated method stub
-		return null;
+	private final MainServiceAsync mainService;
+	private final Messages messages;
+
+	private final Object initializationContext = new Object();
+
+	@Inject
+	public DefaultUserPresenter(final MainServiceAsync mainService,
+			final Messages messages) throws IllegalArgumentException {
+		if (mainService == null) {
+			throw new IllegalArgumentException("mainService == null");
+		}
+		if (messages == null) {
+			throw new IllegalArgumentException("messages == null");
+		}
+		this.mainService = mainService;
+		this.messages = messages;
+	}
+
+	private String nameToServer;
+
+	public String getNameToServer() {
+		return this.nameToServer;
+	}
+
+	public void setNameToServer(final String nameToServer) {
+		if (!nameToServer.equals(this.nameToServer)) {
+			this.nameToServer = nameToServer;
+			this.checkNameToServer();
+		}
+	}
+
+	private void checkNameToServer() {
+		final String old = this.nameToServerErrorMessage;
+		if (this.getNameToServer() == null || this.getNameToServer().length() == 0) {
+			this.nameToServerErrorMessage = "empty string";
+		} else {
+			this.nameToServerErrorMessage = "";
+		}
+		
+		if(!old.equals(this.nameToServerErrorMessage)) {
+			this.getErrorNameToServerChanged().invoke(
+					this.initializationContext, 
+					this, 
+					new GenericEventArgs<String>(this.getNameToServerErrorMessage()));
+		}
+	}
+
+	private Event<GenericEventArgs<String>> nameToServerChanged = new Event<GenericEventArgs<String>>(this.initializationContext);
+	public Event<GenericEventArgs<String>> getNameToServerChanged() {
+		return this.nameToServerChanged;
+	}
+
+	private String nameToServerErrorMessage = "";
+	public String getNameToServerErrorMessage() {
+		return this.nameToServerErrorMessage;
+	}
+
+	private Event<GenericEventArgs<String>> errorNameToServerChanged = new Event<GenericEventArgs<String>>(
+			this.initializationContext);
+
+	public Event<GenericEventArgs<String>> getErrorNameToServerChanged() {
+		return this.errorNameToServerChanged;
+	}
+
+	/**
+	 * 
+	 */
+	public void onSendNameToServer() {
+		if (this.canSendNameToServer()) {
+			this.mainService.getArticle(this.nameToServer,
+					new AsyncCallback<String>() {
+						public void onSuccess(String result) {
+							setNameToServer(result);
+							getNameToServerChanged()
+							.invoke(initializationContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
+						}
+
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+						}
+					});
+		}
+	}
+
+	private boolean canSendNameToServer;
+
+	public boolean canSendNameToServer() {
+		final boolean old = this.canSendNameToServer;
+		this.canSendNameToServer = this.nameToServer != null && this.nameToServer.length() > 0;
+		if(old != this.canSendNameToServer) {
+			this.canSendNameToServerChanged().invoke(initializationContext, this, new GenericEventArgs<Boolean>(this.canSendNameToServer));
+		}
+		return this.canSendNameToServer;
+	}
+
+	private final Event<GenericEventArgs<Boolean>> canSendNameToServerChanged = new Event<GenericEventArgs<Boolean>>(this.initializationContext);
+	public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged() {
+		return this.canSendNameToServerChanged;
 	}
 }

@@ -16,14 +16,19 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.TextItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.tab.Tab;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.event.Handler;
 
 /**
  * Default implementation of {@link UserView}.
@@ -33,10 +38,16 @@ import de.behrfried.wikianalyzer.wawebapp.client.Messages;
  */
 public class DefaultUserView extends UserView {
 
+	private final Presenter presenter;
+	
 	/**
 	 * {@link DefaultUserView}'s parent element
 	 */
 	private final Messages messages;
+	
+	private VLayout vLayout;
+	private TextItem textItem;
+	private Button button;
 
 	/**
 	 * Creates an instance of {@link DefaultUserView}. All arguments are
@@ -45,31 +56,63 @@ public class DefaultUserView extends UserView {
 	 * @param parentView
 	 */
 	@Inject
-	public DefaultUserView(Messages messages) {
+	public DefaultUserView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
+		if(messages == null) {
+			throw new IllegalArgumentException("messages == null");
+		}
+		this.presenter = presenter;
 		this.messages = messages;
+		
+		this.textItem = new TextItem();
+		this.button = new Button("Send");
+		this.vLayout = new VLayout();
+		
+		DynamicForm dForm = new DynamicForm();
+		dForm.setFields(textItem);
+		
+		this.vLayout.addChild(dForm);
+		this.vLayout.addChild(this.button);
+		
+		this.addChild(this.vLayout);
+		
+		this.bind();
 	}
-
-	private Tab userTab;
-
-	/**
-	 * @see View
-	 */
-	public Canvas init() {
-		//this.userTab = new Tab("User");
-		return this;
+	
+	private void bind() {
+		
+		this.textItem.addChangedHandler(new ChangedHandler() {		
+			public void onChanged(ChangedEvent event) {
+				presenter.setNameToServer(textItem.getValueAsString());
+			}
+		});
+		this.textItem.setValue("");
+		
+		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {		
+			public void invoke(Object sender, GenericEventArgs<String> e) {
+				textItem.setValue(e.getValue());
+			}
+		});
+		
+		this.presenter.getErrorNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
+			public void invoke(Object sender, GenericEventArgs<String> e) {
+				//TODO
+			}
+		});
+		
+		this.presenter.canSendNameToServerChanged().addHandler(new Handler<GenericEventArgs<Boolean>>() {
+			public void invoke(Object sender, GenericEventArgs<Boolean> e) {
+				button.setDisabled(!e.getValue());
+			}
+		});
+		
+		this.button.addClickHandler(new ClickHandler() {	
+			public void onClick(ClickEvent event) {
+				presenter.onSendNameToServer();
+			}
+		});
 	}
-
-	/**
-	 * @see
-	 */
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
-
 
 	public String getName() {
 		return "User";
 	}
-
 }
