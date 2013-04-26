@@ -16,7 +16,7 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.smartgwt.client.widgets.tab.TabSet;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
  * Interface for {@link ShellView}
@@ -25,4 +25,13 @@ import com.smartgwt.client.widgets.tab.TabSet;
  */
 
 public abstract class ShellView extends View {
+	
+	/**
+	 * Default interface for the presenter of {@link ShellView}
+	 * @author marcus
+	 *
+	 */
+	public interface Presenter extends PresenterBase {
+
+	}
 }

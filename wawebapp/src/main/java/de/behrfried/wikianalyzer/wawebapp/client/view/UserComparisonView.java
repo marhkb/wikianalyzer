@@ -16,6 +16,16 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
+
 public abstract class UserComparisonView extends View {
-    
+	
+	/**
+	 * Base interface for user comparison presenters.
+	 * @author marcus
+	 *
+	 */
+	public interface Presenter extends PresenterBase {
+	    
+	}  
 }

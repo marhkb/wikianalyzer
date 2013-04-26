@@ -16,16 +16,16 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
+
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 /**
- * Default implementation for {@link ArticlePresenter}.
+ * Default implementation for {@link Presenter}.
  * @author marcus
  *
  */
-public class DefaultArticlePresenter implements ArticlePresenter {
+public class DefaultArticlePresenter implements ArticleView.Presenter {
    
     
     /**

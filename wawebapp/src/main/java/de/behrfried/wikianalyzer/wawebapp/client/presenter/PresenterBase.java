@@ -16,13 +16,12 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
- * Default interface for the presenter of {@link ShellView}
+ * Base interface for all Presenters.
  * @author marcus
  *
  */
-public interface ShellPresenter extends Presenter {
-
+public interface PresenterBase {
+    
 }

@@ -16,11 +16,20 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
+
 /**
  * Base interfaces for the user view.
  * @author marcus
  *
  */
 public abstract class UserView extends View {
-    
+	/**
+	 * Base interface for user presenter.
+	 * @author marcus
+	 *
+	 */
+	public interface Presenter extends PresenterBase {
+	    
+	}
 }

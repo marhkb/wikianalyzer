@@ -32,12 +32,11 @@ import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.ArticlePresenter;
 
 public class DefaultArticleView extends ArticleView {	
 	
 	
-	private final ArticlePresenter presenter;
+	private final Presenter presenter;
 	
 	/**
 	 * the parent element of the {@link DefaultArticleView} where the widgets
@@ -60,7 +59,7 @@ public class DefaultArticleView extends ArticleView {
 	private final Messages messages;
 
 	@Inject
-	public DefaultArticleView(ArticlePresenter presenter, Messages messages) throws IllegalArgumentException {
+	public DefaultArticleView(Presenter presenter, Messages messages) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}

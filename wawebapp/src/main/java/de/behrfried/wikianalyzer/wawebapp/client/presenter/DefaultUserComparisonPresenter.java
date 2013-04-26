@@ -22,11 +22,11 @@ import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
 
 /**
- * Default implementation of {@link UserComparisonPresenter}
+ * Default implementation of {@link Presenter}
  * @author marcus
  *
  */
-public class DefaultUserComparisonPresenter implements UserComparisonPresenter {
+public class DefaultUserComparisonPresenter implements UserComparisonView.Presenter {
    
     
     /**

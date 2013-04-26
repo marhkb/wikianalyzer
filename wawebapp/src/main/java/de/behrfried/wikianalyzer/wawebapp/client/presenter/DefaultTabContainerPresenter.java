@@ -22,12 +22,12 @@ import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
- * Default implementation for {@link ShellPresenter}.
+ * Default implementation for {@link Presenter}.
  * 
  * @author marcus
  * 
  */
-public class DefaultTabContainerPresenter implements ShellPresenter {
+public class DefaultTabContainerPresenter implements ShellView.Presenter {
 
 
 	/**

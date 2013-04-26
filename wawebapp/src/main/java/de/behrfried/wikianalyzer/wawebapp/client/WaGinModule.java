@@ -19,19 +19,15 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.ArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultTabContainerPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.ShellPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.UserComparisonPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.UserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultTabContainerView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultUserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultUserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.DefaultTabContainerView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
@@ -54,13 +50,13 @@ public class WaGinModule extends AbstractGinModule {
 		/*
 		 * bind presenters
 		 */
-		this.bind(ShellPresenter.class)
+		this.bind(ShellView.Presenter.class)
 				.to(DefaultTabContainerPresenter.class).in(Singleton.class);
-		this.bind(ArticlePresenter.class).to(DefaultArticlePresenter.class)
+		this.bind(ArticleView.Presenter.class).to(DefaultArticlePresenter.class)
 				.in(Singleton.class);
-		this.bind(UserPresenter.class).to(DefaultUserPresenter.class)
+		this.bind(UserView.Presenter.class).to(DefaultUserPresenter.class)
 				.in(Singleton.class);
-		this.bind(UserComparisonPresenter.class)
+		this.bind(UserComparisonView.Presenter.class)
 				.to(DefaultUserComparisonPresenter.class).in(Singleton.class);
 
 		/*

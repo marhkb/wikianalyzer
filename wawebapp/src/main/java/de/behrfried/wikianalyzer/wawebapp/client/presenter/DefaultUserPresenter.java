@@ -16,18 +16,18 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.ui.Panel;
 import com.google.inject.Inject;
 
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView.Presenter;
 
 /**
- * Default implementation of {@link UserPresenter}.
+ * Default implementation of {@link Presenter}.
  * 
  * @author marcus
  * 
  */
-public class DefaultUserPresenter implements UserPresenter {
+public class DefaultUserPresenter implements UserView.Presenter {
 
 	/**
 	 * Creates a {@link DefaultUserPresenter}. All arguments are injected by

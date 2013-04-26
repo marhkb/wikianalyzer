@@ -30,15 +30,9 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
-import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
-
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.ShellPresenter;
 
 /**
  * Default implementation of {@link ShellView}
@@ -48,7 +42,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.ShellPresenter;
  */
 public class DefaultTabContainerView extends ShellView {
 	
-	private ShellPresenter presenter;
+	private Presenter presenter;
 	
 	private final ArticleView articleView;
 	private final UserView userView;
@@ -56,7 +50,7 @@ public class DefaultTabContainerView extends ShellView {
 	private TabSet tabSet;
 	
 	@Inject
-	public DefaultTabContainerView(ShellPresenter presenter, ArticleView articleView, UserView userView) throws IllegalArgumentException {
+	public DefaultTabContainerView(Presenter presenter, ArticleView articleView, UserView userView) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
