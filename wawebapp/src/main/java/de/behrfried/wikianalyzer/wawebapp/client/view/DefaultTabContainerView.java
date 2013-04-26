@@ -30,9 +30,14 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
+import com.smartgwt.client.widgets.tab.events.TabSelectedEvent;
+import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
 
 /**
  * Default implementation of {@link ShellView}
@@ -42,7 +47,7 @@ import com.smartgwt.client.widgets.tab.TabSet;
  */
 public class DefaultTabContainerView extends ShellView {
 	
-	private Presenter presenter;
+	private final Presenter presenter;
 	
 	private final ArticleView articleView;
 	private final UserView userView;
@@ -59,11 +64,12 @@ public class DefaultTabContainerView extends ShellView {
 		this.userView = userView;
 		
 		/* init other tabs */
-		
 		final Tab tabArticle = new Tab(this.articleView.getName());
+		tabArticle.setID(this.articleView.getName());
 		tabArticle.setPane(this.articleView);
 		
 		final Tab tabUser = new Tab(this.userView.getName());
+		tabUser.setID(this.userView.getName());
 		tabUser.setPane(this.userView);
 		
 		this.tabSet = new TabSet();
@@ -77,11 +83,37 @@ public class DefaultTabContainerView extends ShellView {
 		this.setWidth100();
 		this.setHeight100();
 		
-		
 		this.addChild(this.tabSet);
+
 	}
 
 	public String getName() {
 		return "TabContainer";
+	}
+
+	@Override
+	public void postConstruct() {
+		
+	    final String initToken = History.getToken();
+	    if (initToken.length() == 0) {
+	    	History.newItem(this.tabSet.getTab(0).getID());
+	    }
+		
+		this.tabSet.addTabSelectedHandler(new TabSelectedHandler() {
+			public void onTabSelected(TabSelectedEvent event) {
+				History.newItem(event.getID());
+			}
+		});
+		
+		History.addValueChangeHandler(new ValueChangeHandler<String>() {	
+			public void onValueChange(ValueChangeEvent<String> event) {
+				String historyToken = event.getValue();
+				if(historyToken.isEmpty()) {
+					History.back();
+				}
+				DefaultTabContainerView.this.tabSet.selectTab(event.getValue());
+			}
+		});
+		History.fireCurrentHistoryState();
 	}
 }

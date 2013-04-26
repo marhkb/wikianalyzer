@@ -36,4 +36,6 @@ public abstract class ShellView extends View {
 	public interface Presenter extends PresenterBase {
 
 	}
+	
+	public abstract void postConstruct();
 }
