@@ -41,7 +41,7 @@ public abstract class UserView extends View {
 	    
 		
 		public void onSendNameToServer();
-		public boolean canSendNameToServer();
+		public boolean getCanSendNameToServer();
 		public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged();
 	}
 }

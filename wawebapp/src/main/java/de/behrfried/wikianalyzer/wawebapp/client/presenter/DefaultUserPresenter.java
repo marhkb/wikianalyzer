@@ -51,16 +51,17 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		this.messages = messages;
 	}
 
-	private String nameToServer;
+	private String nameToServer = "";
 
 	public String getNameToServer() {
 		return this.nameToServer;
 	}
 
 	public void setNameToServer(final String nameToServer) {
-		if (!nameToServer.equals(this.nameToServer)) {
+		if (!this.nameToServer.equals(nameToServer)) {
 			this.nameToServer = nameToServer;
 			this.checkNameToServer();
+			this.checkCanSendNameToServer();
 		}
 	}
 
@@ -85,7 +86,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		return this.nameToServerChanged;
 	}
 
-	private String nameToServerErrorMessage = "";
+	private String nameToServerErrorMessage = "empty string";
 	public String getNameToServerErrorMessage() {
 		return this.nameToServerErrorMessage;
 	}
@@ -101,13 +102,13 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	 * 
 	 */
 	public void onSendNameToServer() {
-		if (this.canSendNameToServer()) {
+		if (this.getCanSendNameToServer()) {
 			this.mainService.getArticle(this.nameToServer,
 					new AsyncCallback<String>() {
 						public void onSuccess(String result) {
 							setNameToServer(result);
 							getNameToServerChanged()
-							.invoke(initializationContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
+								.invoke(initializationContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
 						}
 
 						public void onFailure(Throwable caught) {
@@ -117,15 +118,18 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		}
 	}
 
-	private boolean canSendNameToServer;
+	private boolean canSendNameToServer = this.getNameToServerErrorMessage().length() == 0;
 
-	public boolean canSendNameToServer() {
+	public boolean getCanSendNameToServer() {
+		return this.canSendNameToServer;
+	}
+	
+	private void checkCanSendNameToServer() {
 		final boolean old = this.canSendNameToServer;
-		this.canSendNameToServer = this.nameToServer != null && this.nameToServer.length() > 0;
+		this.canSendNameToServer = this.getNameToServerErrorMessage().length() == 0;
 		if(old != this.canSendNameToServer) {
 			this.canSendNameToServerChanged().invoke(initializationContext, this, new GenericEventArgs<Boolean>(this.canSendNameToServer));
 		}
-		return this.canSendNameToServer;
 	}
 
 	private final Event<GenericEventArgs<Boolean>> canSendNameToServerChanged = new Event<GenericEventArgs<Boolean>>(this.initializationContext);

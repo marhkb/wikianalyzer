@@ -21,6 +21,7 @@ import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
@@ -39,14 +40,14 @@ import de.behrfried.wikianalyzer.wawebapp.client.event.Handler;
 public class DefaultUserView extends UserView {
 
 	private final Presenter presenter;
-	
+
 	/**
 	 * {@link DefaultUserView}'s parent element
 	 */
 	private final Messages messages;
-	
+
 	private VLayout vLayout;
-	private TextItem textItem;
+	private TextAreaItem textItem;
 	private Button button;
 
 	/**
@@ -56,36 +57,50 @@ public class DefaultUserView extends UserView {
 	 * @param parentView
 	 */
 	@Inject
-	public DefaultUserView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
-		if(messages == null) {
+	public DefaultUserView(final Presenter presenter, final Messages messages)
+			throws IllegalArgumentException {
+		if (messages == null) {
 			throw new IllegalArgumentException("messages == null");
 		}
 		this.presenter = presenter;
 		this.messages = messages;
-		
-		this.textItem = new TextItem();
+
+		this.textItem = new TextAreaItem();
+		this.textItem.setWidth("*");
+		this.textItem.setHeight("*");
+		this.textItem.setShowTitle(false);
 		this.button = new Button("Send");
-		this.vLayout = new VLayout();
-		
-		DynamicForm dForm = new DynamicForm();
-		dForm.setFields(textItem);
-		
-		this.vLayout.addChild(dForm);
-		this.vLayout.addChild(this.button);
-		
+		this.vLayout = new VLayout(5);
+
+		DynamicForm form = new DynamicForm();
+		form.setGroupTitle("Text");
+		form.setWidth(500);
+		form.setHeight(180);
+		form.setFields(textItem);
+
+		// this.vLayout.addChild(dForm);
+		this.vLayout.addMember(form);
+		this.vLayout.addMember(button);
+
+		this.vLayout.setWidth100();
+		this.vLayout.setHeight100();
+
 		this.addChild(this.vLayout);
-		
+
+		this.setWidth100();
+		this.setHeight100();
+
 		this.bind();
 	}
-	
+
 	private void bind() {
 		
+		this.textItem.setValue(this.presenter.getNameToServer());
 		this.textItem.addChangedHandler(new ChangedHandler() {		
 			public void onChanged(ChangedEvent event) {
 				presenter.setNameToServer(textItem.getValueAsString());
 			}
 		});
-		this.textItem.setValue("");
 		
 		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {		
 			public void invoke(Object sender, GenericEventArgs<String> e) {
@@ -95,10 +110,13 @@ public class DefaultUserView extends UserView {
 		
 		this.presenter.getErrorNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
 			public void invoke(Object sender, GenericEventArgs<String> e) {
-				//TODO
+				if(e.getValue().length() == 0) {
+					//textItem.
+				}
 			}
 		});
 		
+		this.button.setDisabled(!this.presenter.getCanSendNameToServer());
 		this.presenter.canSendNameToServerChanged().addHandler(new Handler<GenericEventArgs<Boolean>>() {
 			public void invoke(Object sender, GenericEventArgs<Boolean> e) {
 				button.setDisabled(!e.getValue());

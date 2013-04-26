@@ -41,7 +41,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
     }
 
 	public String getArticle(String article) {
-		return "Hallo";
+		return article.toUpperCase();
 	}
     
 }
