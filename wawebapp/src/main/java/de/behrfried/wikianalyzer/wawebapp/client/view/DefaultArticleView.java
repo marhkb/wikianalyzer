@@ -23,6 +23,8 @@ import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.SectionStack;
 import com.smartgwt.client.widgets.layout.SectionStackSection;
@@ -48,15 +50,17 @@ public class DefaultArticleView extends ArticleView {
 	private Label waLabel;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
+	private ListGrid generalInfoGrid;
+	private ListGridField attributeColumn, valueColumn;
 	private HTMLPane wikiPrevPanel;
 	private HLayout searchLayout, generalWikiArticleLayout;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
-	private MenuItem randomSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
+	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
 	private SectionStack sectionPanel;
 	private SectionStackSection generalArticleSection, articleAnalyzationSection;
-	private VLayout lay;
+	private VLayout siteLayoutContainer;
 	
 	private final Messages messages;
 
@@ -94,6 +98,8 @@ public class DefaultArticleView extends ArticleView {
 		this.randomSpan = new MenuItem("random time");
 		this.randomSpan.setChecked(true);
 		this.timeSpanMenu.addItem(randomSpan);
+		this.hourSpan = new MenuItem("last hour");
+		this.timeSpanMenu.addItem(hourSpan);
 		this.daySpan = new MenuItem("last day");
 		this.timeSpanMenu.addItem(daySpan);
 		this.weekSpan = new MenuItem("last week");
@@ -106,18 +112,35 @@ public class DefaultArticleView extends ArticleView {
 		this.timeSpanMenu.addItem(chooseSpan);
 		this.timeMenuButton = new IMenuButton(randomSpan.getTitle(), timeSpanMenu);
 		
+		this.generalWikiArticleLayout = new HLayout(); 
 		
-		this.generalArticleSection = new SectionStackSection();
+		this.wikiPrevPanel = new HTMLPane();
+		this.wikiPrevPanel.setWidth("50%");		
+		this.attributeColumn = new ListGridField("Attribute");
+		this.attributeColumn.setCanEdit(false);
+		this.valueColumn = new ListGridField("Value");
+		this.valueColumn.setCanEdit(false);
+		this.generalInfoGrid = new ListGrid();
+		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
+		this.generalInfoGrid.setWidth("50%");		
+		this.generalWikiArticleLayout.addMembers(wikiPrevPanel, this.generalInfoGrid);
+		
+		this.generalArticleSection = new SectionStackSection("General Article Infos");
+		this.generalArticleSection.setItems(this.generalWikiArticleLayout);
+		this.articleAnalyzationSection = new SectionStackSection("Article Analyzation");
+		//this.articleAnalyzationSection.setItems(null);
+		
 		this.sectionPanel = new SectionStack();
-		//TODO weitermachen: WIkivorschau, allgemeine wikiinfos...
+		this.sectionPanel.addSection(this.generalArticleSection);
+		this.sectionPanel.addSection(this.articleAnalyzationSection);
 		this.sectionPanel.setVisibilityMode(VisibilityMode.MULTIPLE);
 		
-		this.lay = new VLayout();
+		this.siteLayoutContainer = new VLayout();	
+		this.siteLayoutContainer.setWidth100();
+		this.siteLayoutContainer.setHeight100();
+		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.sectionPanel);		
 		
-		this.lay.addMember(searchLayout);
-		this.lay.addMember(timeMenuButton);
-		
-		this.addChild(this.lay);
+		this.addChild(this.siteLayoutContainer);
 		
 		this.presenter.getFieldChangedEvent().addHandler(new Handler<FieldChangedEventArgs>() {
 			public void invoke(Object sender, FieldChangedEventArgs e) {
