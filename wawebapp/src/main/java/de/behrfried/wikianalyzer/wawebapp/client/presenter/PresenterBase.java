@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 
 /**
  * Base interface for all Presenters.
+ * 
  * @author marcus
- *
+ * 
  */
 public interface PresenterBase {
-    
+	
+	public Event<FieldChangedEventArgs> getFieldChangedEvent();
 }

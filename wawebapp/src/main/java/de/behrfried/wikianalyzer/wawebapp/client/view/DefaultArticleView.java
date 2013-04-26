@@ -32,6 +32,8 @@ import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.event.Handler;
 
 public class DefaultArticleView extends ArticleView {	
 	
@@ -116,6 +118,12 @@ public class DefaultArticleView extends ArticleView {
 		this.lay.addMember(timeMenuButton);
 		
 		this.addChild(this.lay);
+		
+		this.presenter.getFieldChangedEvent().addHandler(new Handler<FieldChangedEventArgs>() {
+			public void invoke(Object sender, FieldChangedEventArgs e) {
+				// TODO Auto-generated method stub			
+			}
+		});
 	}
 
 

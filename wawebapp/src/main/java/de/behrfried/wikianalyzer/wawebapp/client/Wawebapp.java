@@ -32,7 +32,7 @@ public class Wawebapp implements EntryPoint {
 		// create the main Ginjector
 		final WaGinjector inj = GWT.create(WaGinjector.class);
 
-		// get the StartPagePresenter
+		// add the ShellView to RootPanel
 		RootPanel.get().add(inj.getShellView());
 	}
 }

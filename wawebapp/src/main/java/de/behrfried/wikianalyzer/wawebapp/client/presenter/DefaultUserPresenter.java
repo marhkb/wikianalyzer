@@ -16,29 +16,20 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.inject.Inject;
-
+import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView.Presenter;
 
 /**
- * Default implementation of {@link Presenter}.
+ * Default implementation of {@link UserView.Presenter}.
  * 
  * @author marcus
  * 
  */
 public class DefaultUserPresenter implements UserView.Presenter {
 
-	/**
-	 * Creates a {@link DefaultUserPresenter}. All arguments are injected by
-	 * Gin.
-	 * 
-	 * @param view
-	 *            the {@link DefaultUserPresenter}'s {@link UserView}
-	 * @throws IllegalArgumentException
-	 *             if view == null
-	 */
-	@Inject
-	public DefaultUserPresenter() {
+	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -37,7 +37,11 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
      * Look at {@link MainService}
      */
     public StringObject getStringObject(StringObject o) {
-	return o;
+    	return o;
     }
+
+	public String getArticle(String article) {
+		return "Hallo";
+	}
     
 }

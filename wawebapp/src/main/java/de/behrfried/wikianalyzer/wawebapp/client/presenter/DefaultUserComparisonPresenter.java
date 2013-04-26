@@ -13,29 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.ui.Panel;
-import com.google.inject.Inject;
-
+import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
 
 /**
- * Default implementation of {@link Presenter}
+ * Default implementation of {@link UserComparisonView.Presenter}
+ * 
  * @author marcus
- *
+ * 
  */
-public class DefaultUserComparisonPresenter implements UserComparisonView.Presenter {
-   
-    
-    /**
-     * Creates an instance of {@link DefaultUserComparisonPresenter}. All arguments are injected by Gin.
-     * @param view the {@link DefaultUserComparisonPresenter}'s {@link UserComparisonView}
-     * @throws IllegalArgumentException if view == null
-     */
-    @Inject
-    public DefaultUserComparisonPresenter()  {
-    }
-    
+public class DefaultUserComparisonPresenter implements
+		UserComparisonView.Presenter {
+
+	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

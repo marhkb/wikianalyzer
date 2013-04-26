@@ -16,31 +16,21 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.ui.Panel;
-import com.google.inject.Inject;
-
+import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
- * Default implementation for {@link Presenter}.
+ * Default implementation for {@link ShellView.Presenter}.
  * 
  * @author marcus
  * 
  */
-public class DefaultTabContainerPresenter implements ShellView.Presenter {
+public class DefaultShellViewPresenter implements ShellView.Presenter {
 
-
-	/**
-	 * Creates an instance of {@link DefaultTabContainerPresenter}. All
-	 * arguments are injected by Gin.
-	 * 
-	 * @param view
-	 *            the {@link DefaultTabContainerPresenter}'s
-	 *            {@link ShellView}
-	 * @throws IllegalArgumentException
-	 *             if view == null
-	 */
-	@Inject
-	public DefaultTabContainerPresenter() {
+	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

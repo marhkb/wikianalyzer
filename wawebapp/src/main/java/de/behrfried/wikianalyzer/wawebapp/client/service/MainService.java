@@ -35,4 +35,6 @@ public interface MainService extends RemoteService {
      * @return o
      */
     StringObject getStringObject(StringObject o);
+    
+    String getArticle(String article);
 }

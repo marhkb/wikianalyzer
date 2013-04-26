@@ -13,27 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView.Presenter;
 
 /**
- * Main Injector of the web application.
- * Returns dependencies as declared in {@link WaGinModule}'s 'bind' method.
+ * Main Injector of the web application. Returns dependencies as declared in
+ * {@link WaGinModule}'s 'bind' method.
+ * 
  * @author marcus
- *
+ * 
  */
 @GinModules(WaGinModule.class)
 public interface WaGinjector extends Ginjector {
-    
-    /**
-     * Returns an implementation of {@link Presenter} as declared in {@link WaGinModule}'s 'bind' method.
-     * @return an implementation of {@link Presenter} as declared in {@link WaGinModule}'s 'bind' method
-     */
-    ShellView getShellView();
+
+	/**
+	 * Returns an implementation of {@link ShellView} as declared in
+	 * {@link WaGinModule}'s 'bind' method.
+	 * 
+	 * @return an implementation of {@link ShellView} as declared in
+	 *         {@link WaGinModule}'s 'bind' method
+	 */
+	ShellView getShellView();
 }

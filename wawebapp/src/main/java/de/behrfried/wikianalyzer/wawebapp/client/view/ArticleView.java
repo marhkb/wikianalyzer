@@ -15,7 +15,6 @@
  */
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
-
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 
@@ -23,5 +22,8 @@ public abstract class ArticleView extends View {
 	
 	public interface Presenter extends PresenterBase {
 		
+		public void searchArticle(String article);
+
+		public void getArticleHtml();
 	}
 }
