@@ -71,11 +71,12 @@ public class DefaultTabContainerView extends ShellView {
 		this.tabSet.addTab(tabArticle);
 		this.tabSet.addTab(tabUser);
 		
-		this.tabSet.setWidth("99%");
-		this.tabSet.setHeight("97.8%");
+		this.tabSet.setWidth100();
+		this.tabSet.setHeight100();
 		
-		this.setWidth("99%");
-		this.setHeight("97.8%");
+		this.setWidth100();
+		this.setHeight100();
+		
 		
 		this.addChild(this.tabSet);
 	}
