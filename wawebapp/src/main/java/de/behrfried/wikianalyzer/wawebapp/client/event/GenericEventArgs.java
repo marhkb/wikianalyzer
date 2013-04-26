@@ -16,7 +16,6 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.event;
 
-import com.google.gwt.thirdparty.javascript.jscomp.mozilla.rhino.ast.ReturnStatement;
 
 /**
  * An generic implementation of {@link EventArgs}

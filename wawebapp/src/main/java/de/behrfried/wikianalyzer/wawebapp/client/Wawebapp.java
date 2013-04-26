@@ -18,7 +18,6 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
