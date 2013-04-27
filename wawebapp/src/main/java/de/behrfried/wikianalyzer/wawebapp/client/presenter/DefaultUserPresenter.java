@@ -38,7 +38,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	private final MainServiceAsync mainService;
 	private final Messages messages;
 
-	private final Object initializationContext = new Object();
+	private final Object initContext = new Object();
 
 	@Inject
 	public DefaultUserPresenter(final MainServiceAsync mainService,
@@ -64,6 +64,8 @@ public class DefaultUserPresenter implements UserView.Presenter {
 			this.nameToServer = nameToServer;
 			this.checkNameToServer();
 			this.checkCanSendNameToServer();
+			this.getNameToServerChanged()
+				.fire(this.initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
 			CommandManager.getInstance().requerySuggested();
 		}
 	}
@@ -78,13 +80,13 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		
 		if(!old.equals(this.nameToServerErrorMessage)) {
 			this.getErrorNameToServerChanged().fire(
-					this.initializationContext, 
+					this.initContext, 
 					this, 
 					new GenericEventArgs<String>(this.getNameToServerErrorMessage()));
 		}
 	}
 
-	private Event<GenericEventArgs<String>> nameToServerChanged = new Event<GenericEventArgs<String>>(this.initializationContext);
+	private Event<GenericEventArgs<String>> nameToServerChanged = new Event<GenericEventArgs<String>>(this.initContext);
 	public Event<GenericEventArgs<String>> getNameToServerChanged() {
 		return this.nameToServerChanged;
 	}
@@ -95,7 +97,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	}
 
 	private Event<GenericEventArgs<String>> errorNameToServerChanged = new Event<GenericEventArgs<String>>(
-			this.initializationContext);
+			this.initContext);
 
 	public Event<GenericEventArgs<String>> getErrorNameToServerChanged() {
 		return this.errorNameToServerChanged;
@@ -111,7 +113,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 						public void onSuccess(String result) {
 							setNameToServer(result);
 							getNameToServerChanged()
-								.fire(initializationContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
+								.fire(initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
 						}
 
 						public void onFailure(Throwable caught) {
@@ -131,11 +133,11 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		final boolean old = this.canSendNameToServer;
 		this.canSendNameToServer = this.getNameToServerErrorMessage().length() == 0;
 		if(old != this.canSendNameToServer) {
-			this.canSendNameToServerChanged().fire(initializationContext, this, new GenericEventArgs<Boolean>(this.canSendNameToServer));
+			this.canSendNameToServerChanged().fire(initContext, this, new GenericEventArgs<Boolean>(this.canSendNameToServer));
 		}
 	}
 
-	private final Event<GenericEventArgs<Boolean>> canSendNameToServerChanged = new Event<GenericEventArgs<Boolean>>(this.initializationContext);
+	private final Event<GenericEventArgs<Boolean>> canSendNameToServerChanged = new Event<GenericEventArgs<Boolean>>(this.initContext);
 	public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged() {
 		return this.canSendNameToServerChanged;
 	}

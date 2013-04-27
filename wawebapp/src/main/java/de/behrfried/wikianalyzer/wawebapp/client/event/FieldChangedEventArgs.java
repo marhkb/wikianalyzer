@@ -19,7 +19,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 
 /**
- * 
+ * EventArgs containing the name of a field which value has changed.
  * @author marcus
  * 
  */

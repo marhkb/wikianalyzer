@@ -24,6 +24,7 @@ import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
 
+import de.behrfried.wikianalyzer.util.data.DataContainer;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
@@ -47,6 +48,7 @@ public class DefaultUserView extends UserView {
 
 	private VLayout vLayout;
 	private TextAreaItem textItem;
+	private TextAreaItem textItem2;
 	private Button button;
 
 	/**
@@ -68,6 +70,12 @@ public class DefaultUserView extends UserView {
 		this.textItem.setWidth("*");
 		this.textItem.setHeight("*");
 		this.textItem.setShowTitle(false);
+		
+		this.textItem2 = new TextAreaItem();
+		this.textItem2.setWidth("*");
+		this.textItem2.setHeight("*");
+		this.textItem2.setShowTitle(false);
+		
 		this.button = new Button("Send");
 		this.vLayout = new VLayout(5);
 
@@ -75,7 +83,7 @@ public class DefaultUserView extends UserView {
 		form.setGroupTitle("Text");
 		form.setWidth(500);
 		form.setHeight(180);
-		form.setFields(textItem);
+		form.setFields(textItem, textItem2);
 
 		// this.vLayout.addChild(dForm);
 		this.vLayout.addMember(form);
@@ -94,16 +102,35 @@ public class DefaultUserView extends UserView {
 
 	private void bind() {
 		
+		final DataContainer<Boolean> textItemNameToServerSelfChanged = new DataContainer<Boolean>(false);
 		this.textItem.setValue(this.presenter.getNameToServer());
 		this.textItem.addChangedHandler(new ChangedHandler() {		
 			public void onChanged(ChangedEvent event) {
+				textItemNameToServerSelfChanged.setValue(true);
 				presenter.setNameToServer(textItem.getValueAsString());
+				textItemNameToServerSelfChanged.setValue(false);
 			}
 		});
 		
 		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {		
 			public void invoke(Object sender, GenericEventArgs<String> e) {
 				textItem.setValue(e.getValue());
+			}
+		});
+		
+		final DataContainer<Boolean> textItem2NameToServerSelfChanged = new DataContainer<Boolean>(false);
+		this.textItem2.setValue(this.presenter.getNameToServer());
+		this.textItem2.addChangedHandler(new ChangedHandler() {		
+			public void onChanged(ChangedEvent event) {
+				textItem2NameToServerSelfChanged.setValue(true);
+				presenter.setNameToServer(textItem2.getValueAsString());
+				textItem2NameToServerSelfChanged.setValue(false);
+			}
+		});
+		
+		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {		
+			public void invoke(Object sender, GenericEventArgs<String> e) {
+				textItem2.setValue(e.getValue());
 			}
 		});
 		
