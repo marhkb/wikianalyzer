@@ -14,7 +14,8 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.event;
+package de.behrfried.wikianalyzer.util.event;
+
 
 /**
  * Base class for all EventArgs. An EventArg is passed to the callback method

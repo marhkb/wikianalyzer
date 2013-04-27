@@ -14,7 +14,8 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.event;
+package de.behrfried.wikianalyzer.util.event;
+
 
 /**
  * An Delegate Interface which is mainly used in cooperation with {@link Event}

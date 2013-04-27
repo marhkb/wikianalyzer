@@ -10,6 +10,7 @@
 	<name>Wikianalyzer Parent POM</name>
 
 	<modules>
+		<module>util</module>
 		<module>simplemath</module>
 		<module>wawebapp</module>
 	</modules>

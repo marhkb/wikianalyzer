@@ -18,17 +18,17 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
 
+import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager.GenericGetter;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.event.Handler;
 
 /**
  * Default implementation of {@link UserView}.
@@ -115,16 +115,9 @@ public class DefaultUserView extends UserView {
 			}
 		});
 		
-		this.button.setDisabled(!this.presenter.getCanSendNameToServer());
-		this.presenter.canSendNameToServerChanged().addHandler(new Handler<GenericEventArgs<Boolean>>() {
-			public void invoke(Object sender, GenericEventArgs<Boolean> e) {
-				button.setDisabled(!e.getValue());
-			}
-		});
-		
-		this.button.addClickHandler(new ClickHandler() {	
-			public void onClick(ClickEvent event) {
-				presenter.onSendNameToServer();
+		CommandManager.getInstance().setCommand(this.button, this.presenter.getSendCommand(), new GenericGetter<Object>() {
+			public Object get() {
+				return null;
 			}
 		});
 	}

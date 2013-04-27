@@ -15,7 +15,8 @@
  */
  
 package de.behrfried.wikianalyzer.wawebapp.client.view;
-import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
@@ -41,8 +42,6 @@ public abstract class UserView extends View {
 		public Event<GenericEventArgs<String>> getErrorNameToServerChanged();
 	    
 		
-		public void onSendNameToServer();
-		public boolean getCanSendNameToServer();
-		public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged();
+		public Command getSendCommand();
 	}
 }

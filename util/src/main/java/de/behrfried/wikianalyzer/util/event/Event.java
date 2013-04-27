@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.event;
+package de.behrfried.wikianalyzer.util.event;
 
 import java.util.LinkedList;
 import java.util.List;

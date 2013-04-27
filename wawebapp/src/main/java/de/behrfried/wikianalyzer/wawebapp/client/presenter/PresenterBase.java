@@ -16,7 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 
 /**

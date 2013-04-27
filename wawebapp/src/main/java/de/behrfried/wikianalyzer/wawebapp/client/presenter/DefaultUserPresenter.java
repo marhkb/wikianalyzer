@@ -19,8 +19,10 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
+import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
@@ -62,6 +64,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 			this.nameToServer = nameToServer;
 			this.checkNameToServer();
 			this.checkCanSendNameToServer();
+			CommandManager.getInstance().requerySuggested();
 		}
 	}
 
@@ -135,5 +138,20 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	private final Event<GenericEventArgs<Boolean>> canSendNameToServerChanged = new Event<GenericEventArgs<Boolean>>(this.initializationContext);
 	public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged() {
 		return this.canSendNameToServerChanged;
+	}
+
+	private final Command sendCommand = new Command() {	
+		public void execute(Object param) {
+			DefaultUserPresenter.this.onSendNameToServer();
+			CommandManager.getInstance().requerySuggested();
+		}
+		
+		public boolean canExecute(Object Param) {
+			return DefaultUserPresenter.this.nameToServer.length() != 0;
+		}
+	};
+	
+	public Command getSendCommand() {
+		return this.sendCommand;
 	}
 }

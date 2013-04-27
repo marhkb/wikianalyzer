@@ -33,9 +33,9 @@ import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 
+import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.event.Handler;
 
 public class DefaultArticleView extends ArticleView {	
 	

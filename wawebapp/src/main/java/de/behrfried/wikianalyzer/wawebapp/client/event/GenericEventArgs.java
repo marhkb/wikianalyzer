@@ -16,6 +16,8 @@
  
 package de.behrfried.wikianalyzer.wawebapp.client.event;
 
+import de.behrfried.wikianalyzer.util.event.EventArgs;
+
 
 /**
  * An generic implementation of {@link EventArgs}
