@@ -196,6 +196,7 @@
 										</versionRange>
 										<goals>
 											<goal>i18n</goal>
+											<goal>resources</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

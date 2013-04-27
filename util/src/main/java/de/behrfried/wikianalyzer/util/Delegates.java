@@ -1,3 +1,5 @@
+package de.behrfried.wikianalyzer.util;
+
 /*
  * Copyright 2013 Marcus Behrendt & Robert Friedrichs
  *
@@ -14,7 +16,7 @@
  * limitations under the License. 
  */
  
-package de.behrfried.wikianalyzer.util;
+
 
 /**
  * Class containing various Delegate Interfaces.

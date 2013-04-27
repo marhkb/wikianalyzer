@@ -7,6 +7,7 @@
 	<!-- otherwise eclipse complains (Google plugin bug?) -->
 	<inherits name='com.google.gwt.junit.JUnit' />
 	
+	<!-- Util -->
 	<inherits name="de.behrfried.wikianalyzer.util.Util"/>
 	
 	<!-- SmartGWT -->
