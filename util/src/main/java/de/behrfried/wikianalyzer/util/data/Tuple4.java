@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.data;
 
 /**
  * Class for storing four values.
+ * 
  * @author marcus
- *
- * @param <E> specifies the type of the first value
- * @param <G> specifies the type of the second value
- * @param <I> specifies the type of the third value
- * @param <K> specifies the type of the fourth value
+ * 
+ * @param <E>
+ *            specifies the type of the first value
+ * @param <G>
+ *            specifies the type of the second value
+ * @param <I>
+ *            specifies the type of the third value
+ * @param <K>
+ *            specifies the type of the fourth value
  */
 public class Tuple4<E, G, I, K> {
 
@@ -31,17 +36,17 @@ public class Tuple4<E, G, I, K> {
 	 * the first value
 	 */
 	private final E item1;
-	
+
 	/**
 	 * the second value
 	 */
 	private final G item2;
-	
+
 	/**
 	 * the third value
 	 */
 	private final I item3;
-	
+
 	/**
 	 * the fourth value
 	 */
@@ -49,10 +54,15 @@ public class Tuple4<E, G, I, K> {
 
 	/**
 	 * Creates an Tuple4 with the passed values.
-	 * @param item1 the first value
-	 * @param item2 the second value
-	 * @param item3 the third value
-	 * @param item4 the fourth value
+	 * 
+	 * @param item1
+	 *            the first value
+	 * @param item2
+	 *            the second value
+	 * @param item3
+	 *            the third value
+	 * @param item4
+	 *            the fourth value
 	 */
 	public Tuple4(E item1, G item2, I item3, K item4) {
 		this.item1 = item1;
@@ -63,6 +73,7 @@ public class Tuple4<E, G, I, K> {
 
 	/**
 	 * Returns the first value.
+	 * 
 	 * @return the first value
 	 */
 	public E getItem1() {
@@ -71,6 +82,7 @@ public class Tuple4<E, G, I, K> {
 
 	/**
 	 * Returns the second value.
+	 * 
 	 * @return the second value
 	 */
 	public G getItem2() {
@@ -79,6 +91,7 @@ public class Tuple4<E, G, I, K> {
 
 	/**
 	 * Returns the third value.
+	 * 
 	 * @return the third value
 	 */
 	public I getItem3() {
@@ -87,11 +100,78 @@ public class Tuple4<E, G, I, K> {
 
 	/**
 	 * Returns the fourth value.
+	 * 
 	 * @return the fourth value
 	 */
 	public K getItem4() {
 		return item4;
 	}
 
+	/**
+	 * Calculates a hash code based on each item this Tuple4 contains.
+	 * 
+	 * @return a hash code based on each item this Tuple4 contains
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((item1 == null) ? 0 : item1.hashCode());
+		result = prime * result + ((item2 == null) ? 0 : item2.hashCode());
+		result = prime * result + ((item3 == null) ? 0 : item3.hashCode());
+		result = prime * result + ((item4 == null) ? 0 : item4.hashCode());
+		return result;
+	}
+
+	/**
+	 * Compares this Tuple4 with the passed {@link Object}. Only an instance of
+	 * Tuple4 can return true.
+	 * 
+	 * @param obj
+	 * @return true if 'obj' is an instance of Tuple4 and all items 'equals' return true,
+	 *         otherwise false
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Tuple4<?, ?, ?, ?> other = (Tuple4<?, ?, ?, ?>) obj;
+		if (item1 == null) {
+			if (other.item1 != null) {
+				return false;
+			}
+		} else if (!item1.equals(other.item1)) {
+			return false;
+		}
+		if (item2 == null) {
+			if (other.item2 != null) {
+				return false;
+			}
+		} else if (!item2.equals(other.item2)) {
+			return false;
+		}
+		if (item3 == null) {
+			if (other.item3 != null) {
+				return false;
+			}
+		} else if (!item3.equals(other.item3)) {
+			return false;
+		}
+		if (item4 == null) {
+			if (other.item4 != null) {
+				return false;
+			}
+		} else if (!item4.equals(other.item4)) {
+			return false;
+		}
+		return true;
+	}
 
 }

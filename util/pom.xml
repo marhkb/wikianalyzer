@@ -6,28 +6,37 @@
 		<artifactId>parent-pom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>de.behrfried.wikianalyzer</groupId>
 	<artifactId>util</artifactId>
 	<name>de.behrfried.wikianalyzer.util</name>
 	<packaging>jar</packaging>
 
 	<build>
-	<resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.java</include>
-          <include>**/*.gwt.xml</include>
-        </includes>
-      </resource>
-      
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.gwt.xml</include>
-        </includes>
-      </resource>
-    </resources>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.java</include>
+					<include>**/*.gwt.xml</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.gwt.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+
+	</dependencies>
 </project>

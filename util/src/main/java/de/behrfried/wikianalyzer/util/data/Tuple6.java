@@ -124,5 +124,87 @@ public class Tuple6<E, G, I, K, M, O> {
 	public O getItem6() {
 		return item6;
 	}
-	
+
+	/**
+	 * Calculates a hash code based on each item this Tuple6 contains.
+	 * 
+	 * @return a hash code based on each item this Tuple6 contains
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((item1 == null) ? 0 : item1.hashCode());
+		result = prime * result + ((item2 == null) ? 0 : item2.hashCode());
+		result = prime * result + ((item3 == null) ? 0 : item3.hashCode());
+		result = prime * result + ((item4 == null) ? 0 : item4.hashCode());
+		result = prime * result + ((item5 == null) ? 0 : item5.hashCode());
+		result = prime * result + ((item6 == null) ? 0 : item6.hashCode());
+		return result;
+	}
+
+	/**
+	 * Compares this Tuple6 with the passed {@link Object}. Only an instance of
+	 * Tuple6 can return true.
+	 * 
+	 * @param obj
+	 * @return true if 'obj' is an instance of Tuple6 and all items 'equals' return true,
+	 *         otherwise false
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Tuple6<?, ?, ?, ?, ?, ?> other = (Tuple6<?, ?, ?, ?, ?, ?>) obj;
+		if (item1 == null) {
+			if (other.item1 != null) {
+				return false;
+			}
+		} else if (!item1.equals(other.item1)) {
+			return false;
+		}
+		if (item2 == null) {
+			if (other.item2 != null) {
+				return false;
+			}
+		} else if (!item2.equals(other.item2)) {
+			return false;
+		}
+		if (item3 == null) {
+			if (other.item3 != null) {
+				return false;
+			}
+		} else if (!item3.equals(other.item3)) {
+			return false;
+		}
+		if (item4 == null) {
+			if (other.item4 != null) {
+				return false;
+			}
+		} else if (!item4.equals(other.item4)) {
+			return false;
+		}
+		if (item5 == null) {
+			if (other.item5 != null) {
+				return false;
+			}
+		} else if (!item5.equals(other.item5)) {
+			return false;
+		}
+		if (item6 == null) {
+			if (other.item6 != null) {
+				return false;
+			}
+		} else if (!item6.equals(other.item6)) {
+			return false;
+		}
+		return true;
+	}
 }
