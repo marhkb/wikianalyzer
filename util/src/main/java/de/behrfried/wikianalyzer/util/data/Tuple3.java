@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.data;
 
 /**
  * Class for storing three values.
+ * 
  * @author marcus
- *
- * @param <E> specifies the type of the first value
- * @param <G> specifies the type of the second value
- * @param <I> specifies the type of the third value
+ * 
+ * @param <E>
+ *            specifies the type of the first value
+ * @param <G>
+ *            specifies the type of the second value
+ * @param <I>
+ *            specifies the type of the third value
  */
 public class Tuple3<E, G, I> {
 
@@ -30,22 +34,26 @@ public class Tuple3<E, G, I> {
 	 * the first value
 	 */
 	private final E item1;
-	
+
 	/**
 	 * the second value
 	 */
 	private final G item2;
-	
+
 	/**
 	 * the third value
 	 */
 	private final I item3;
-	
+
 	/**
 	 * Creates an Tuple3 with the passed values.
-	 * @param item1 the first value
-	 * @param item2 the second value
-	 * @param item3 the third value
+	 * 
+	 * @param item1
+	 *            the first value
+	 * @param item2
+	 *            the second value
+	 * @param item3
+	 *            the third value
 	 */
 	public Tuple3(E item1, G item2, I item3) {
 		this.item1 = item1;
@@ -55,6 +63,7 @@ public class Tuple3<E, G, I> {
 
 	/**
 	 * Returns the first value.
+	 * 
 	 * @return the first value
 	 */
 	public E getItem1() {
@@ -63,6 +72,7 @@ public class Tuple3<E, G, I> {
 
 	/**
 	 * Returns the second value.
+	 * 
 	 * @return the second value
 	 */
 	public G getItem2() {
@@ -71,6 +81,7 @@ public class Tuple3<E, G, I> {
 
 	/**
 	 * Returns the third value.
+	 * 
 	 * @return the third value
 	 */
 	public I getItem3() {
@@ -97,8 +108,8 @@ public class Tuple3<E, G, I> {
 	 * Tuple3 can return true.
 	 * 
 	 * @param obj
-	 * @return true if 'obj' is an instance of Tuple3 and all items 'equals' return true,
-	 *         otherwise false
+	 * @return true if 'obj' is an instance of Tuple3 and all items 'equals'
+	 *         return true, otherwise false
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -135,7 +146,5 @@ public class Tuple3<E, G, I> {
 		}
 		return true;
 	}
-	
-	
-}
 
+}

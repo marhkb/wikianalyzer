@@ -30,6 +30,48 @@ import java.util.List;
 public class Event<E extends EventArgs> {
 
 	/**
+	 * A class that holds an {@link Handler} and can remove it.
+	 * 
+	 * @author marcus
+	 * 
+	 */
+	public final class EventHandlerRegistration {
+
+		/**
+		 * the encapsulated {@link Handler}
+		 */
+		private final Handler<E> handler;
+
+		/**
+		 * Creates an EventHandlerRegistration with the passed {@link Handler}
+		 * 
+		 * @param handler
+		 *            the {@link Handler} to be held
+		 */
+		private EventHandlerRegistration(final Handler<E> handler) {
+			this.handler = handler;
+		}
+
+		/**
+		 * Returns the encapsulated {@link Handler}.
+		 * 
+		 * @return the encapsulated {@link Handler}
+		 */
+		public Handler<E> getHandler() {
+			return handler;
+		}
+
+		/**
+		 * Removes the encapsulated {@link Handler} from the {@link Event}
+		 * 
+		 * @return true whether the {@link Handler} could have been removed
+		 */
+		public boolean removeHandler() {
+			return Event.this.removeHandler(this.handler);
+		}
+	}
+
+	/**
 	 * List containing all handlers
 	 */
 	private final List<Handler<E>> handlers = new LinkedList<Handler<E>>();
@@ -40,23 +82,22 @@ public class Event<E extends EventArgs> {
 	 * initializationContext is checked has to be passed as an argument to
 	 * 'fire' method.
 	 */
-	private final Object initializationContext;
+	private final Object initContext;
 
 	/**
 	 * Creates an Event with the passed initializationContext
 	 * 
-	 * @param initializationContext
+	 * @param initContext
 	 *            any {@link Object} to ensure that only the initializing class
 	 *            can fire this Event
 	 * @throws IllegalArgumentException
-	 *             if initializationContext == null
+	 *             if initContext == null
 	 */
-	public Event(final Object initializationContext)
-			throws IllegalArgumentException {
-		if (initializationContext == null) {
-			throw new IllegalArgumentException("initializationContext == null");
+	public Event(final Object initContext) throws IllegalArgumentException {
+		if (initContext == null) {
+			throw new IllegalArgumentException("initContext == null");
 		}
-		this.initializationContext = initializationContext;
+		this.initContext = initContext;
 	}
 
 	/**
@@ -66,9 +107,13 @@ public class Event<E extends EventArgs> {
 	 * @param handler
 	 * @throws IllegalArgumentException
 	 */
-	public void addHandler(final Handler<E> handler)
+	public EventHandlerRegistration addHandler(final Handler<E> handler)
 			throws IllegalArgumentException {
+		if (handler == null) {
+			throw new IllegalArgumentException("handler == null");
+		}
 		this.handlers.add(handler);
+		return new EventHandlerRegistration(handler);
 	}
 
 	/**
@@ -88,7 +133,27 @@ public class Event<E extends EventArgs> {
 		if (handler == null) {
 			throw new IllegalArgumentException("handler == null");
 		}
-		return this.removeHandler(handler);
+		return this.handlers.remove(handler);
+	}
+
+	/**
+	 * Checks whether an passed {@link Handler} is linked with this Event.
+	 * 
+	 * @param handler
+	 *            the Handler to be checked
+	 * @return 'true' if the passed Handler is linked with this Event
+	 */
+	public boolean containsHandler(final Handler<E> handler) {
+		return this.handlers.contains(handler);
+	}
+
+	/**
+	 * Returns the number of Handlers linked with this Event.
+	 * 
+	 * @return the number of Handlers linked with this Event
+	 */
+	public int size() {
+		return this.handlers.size();
 	}
 
 	/**
@@ -108,8 +173,8 @@ public class Event<E extends EventArgs> {
 	 */
 	public void fire(final Object initializationContext, final Object sender,
 			final E e) throws IllegalStateException {
-		if (this.initializationContext != initializationContext) {
-			throw new IllegalStateException("wrong initializationContext");
+		if (this.initContext != initializationContext) {
+			throw new IllegalStateException("wrong initContext");
 		}
 		for (final Handler<E> h : this.handlers) {
 			h.invoke(sender, e);

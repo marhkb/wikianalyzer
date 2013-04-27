@@ -27,7 +27,7 @@ package de.behrfried.wikianalyzer.util.data;
  *            specifies the type of the second value
  */
 public class Tuple2<E, G> {
-	
+
 	/**
 	 * the first value
 	 */
@@ -88,8 +88,8 @@ public class Tuple2<E, G> {
 	 * Tuple2 can return true.
 	 * 
 	 * @param obj
-	 * @return true if 'obj' is an instance of Tuple2 and all items 'equals' return true,
-	 *         otherwise false
+	 * @return true if 'obj' is an instance of Tuple2 and all items 'equals'
+	 *         return true, otherwise false
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -106,14 +106,14 @@ public class Tuple2<E, G> {
 		if (item1 == null) {
 			if (other.item1 != null) {
 				return false;
-			} 
+			}
 		} else if (!item1.equals(other.item1)) {
 			return false;
 		}
 		if (item2 == null) {
 			if (other.item2 != null) {
 				return false;
-			} 
+			}
 		} else if (!item2.equals(other.item2)) {
 			return false;
 		}

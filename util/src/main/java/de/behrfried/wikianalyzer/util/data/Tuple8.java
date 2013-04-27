@@ -44,37 +44,37 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 	 * the first value
 	 */
 	private final E item1;
-	
+
 	/**
 	 * the second value
 	 */
 	private final G item2;
-	
+
 	/**
 	 * the third value
 	 */
 	private final I item3;
-	
+
 	/**
 	 * the fourth value
 	 */
 	private final K item4;
-	
+
 	/**
 	 * the fifth value
 	 */
 	private final M item5;
-	
+
 	/**
 	 * the sixth value
 	 */
 	private final O item6;
-	
+
 	/**
 	 * the seventh value
 	 */
 	private final Q item7;
-	
+
 	/**
 	 * the eighth value
 	 */
@@ -82,14 +82,23 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Creates an Tuple8 with the passed values.
-	 * @param item1 the first value
-	 * @param item2 the second value
-	 * @param item3 the third value
-	 * @param item4 the fourth value
-	 * @param item5 the fifth value
-	 * @param item6 the sixth value
-	 * @param item7 the seventh value
-	 * @param item8 the eighth value
+	 * 
+	 * @param item1
+	 *            the first value
+	 * @param item2
+	 *            the second value
+	 * @param item3
+	 *            the third value
+	 * @param item4
+	 *            the fourth value
+	 * @param item5
+	 *            the fifth value
+	 * @param item6
+	 *            the sixth value
+	 * @param item7
+	 *            the seventh value
+	 * @param item8
+	 *            the eighth value
 	 */
 	public Tuple8(E item1, G item2, I item3, K item4, M item5, O item6,
 			Q item7, S item8) {
@@ -105,6 +114,7 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the first value.
+	 * 
 	 * @return the first value
 	 */
 	public E getItem1() {
@@ -113,6 +123,7 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the second value.
+	 * 
 	 * @return the second value
 	 */
 	public G getItem2() {
@@ -121,6 +132,7 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the third value.
+	 * 
 	 * @return the third value
 	 */
 	public I getItem3() {
@@ -129,6 +141,7 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the fourth value.
+	 * 
 	 * @return the fourth value
 	 */
 	public K getItem4() {
@@ -137,6 +150,7 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the fifth value.
+	 * 
 	 * @return the fifth value
 	 */
 	public M getItem5() {
@@ -145,14 +159,16 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the sixth value.
+	 * 
 	 * @return the sixth value
 	 */
 	public O getItem6() {
 		return item6;
 	}
-	
+
 	/**
 	 * Returns the seventh value.
+	 * 
 	 * @return the seventh value
 	 */
 	public Q getItem7() {
@@ -161,6 +177,7 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 
 	/**
 	 * Returns the eighth value.
+	 * 
 	 * @return the eighth value
 	 */
 	public S getItem8() {
@@ -192,8 +209,8 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 	 * Tuple8 can return true.
 	 * 
 	 * @param obj
-	 * @return true if 'obj' is an instance of Tuple8 and all items 'equals' return true,
-	 *         otherwise false
+	 * @return true if 'obj' is an instance of Tuple8 and all items 'equals'
+	 *         return true, otherwise false
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -265,7 +282,5 @@ public class Tuple8<E, G, I, K, M, O, Q, S> {
 		}
 		return true;
 	}
-	
-	
 
 }

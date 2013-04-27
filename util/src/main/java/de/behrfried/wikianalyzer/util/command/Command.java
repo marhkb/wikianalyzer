@@ -13,25 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.command;
 
 /**
- * Interface for Commands. Its implementation should override 'execute' and 'canExecute' and put their own logic in
+ * Interface for Commands. Its implementation should override 'execute' and
+ * 'canExecute' and put their own logic in
+ * 
  * @author marcus
- *
+ * 
  */
 public interface Command {
-	
+
 	/**
 	 * Method to be executed by the Command.
-	 * @param param additional {@link Object} that can be used by the Command
+	 * 
+	 * @param param
+	 *            additional {@link Object} that can be used by the Command
 	 */
 	void execute(Object param);
-	
+
 	/**
 	 * Returns a boolean to determine whether the Command can be executed.
-	 * @param param additional {@link Object} that can be used by the Command
+	 * 
+	 * @param param
+	 *            additional {@link Object} that can be used by the Command
 	 * @return true if the Command can be executed otherwise false
 	 */
 	boolean canExecute(Object param);

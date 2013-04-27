@@ -36,8 +36,6 @@ public interface Handler<E extends EventArgs> {
 	 *            raised
 	 * @param e
 	 *            An type of {@link EventArgs} that holds additional information
-	 * @throws IllegalArgumentException
-	 *             if object == null || e == null
 	 */
-	public void invoke(Object sender, E e) throws IllegalArgumentException;
+	public void invoke(Object sender, E e);
 }

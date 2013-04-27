@@ -13,19 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.data;
 
 /**
  * Class for storing six values.
+ * 
  * @author marcus
- *
- * @param <E> specifies the type of the first value
- * @param <G> specifies the type of the second value
- * @param <I> specifies the type of the third value
- * @param <K> specifies the type of the fourth value
- * @param <M> specifies the type of the fifth value
- * @param <O> specifies the type of the sixth value
+ * 
+ * @param <E>
+ *            specifies the type of the first value
+ * @param <G>
+ *            specifies the type of the second value
+ * @param <I>
+ *            specifies the type of the third value
+ * @param <K>
+ *            specifies the type of the fourth value
+ * @param <M>
+ *            specifies the type of the fifth value
+ * @param <O>
+ *            specifies the type of the sixth value
  */
 public class Tuple6<E, G, I, K, M, O> {
 
@@ -33,27 +40,27 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * the first value
 	 */
 	private final E item1;
-	
+
 	/**
 	 * the second value
 	 */
 	private final G item2;
-	
+
 	/**
 	 * the third value
 	 */
 	private final I item3;
-	
+
 	/**
 	 * the fourth value
 	 */
 	private final K item4;
-	
+
 	/**
 	 * the fifth value
 	 */
 	private final M item5;
-	
+
 	/**
 	 * the sixth value
 	 */
@@ -61,12 +68,19 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Creates an Tuple6 with the passed values.
-	 * @param item1 the first value
-	 * @param item2 the second value
-	 * @param item3 the third value
-	 * @param item4 the fourth value
-	 * @param item5 the fifth value
-	 * @param item6 the sixth value
+	 * 
+	 * @param item1
+	 *            the first value
+	 * @param item2
+	 *            the second value
+	 * @param item3
+	 *            the third value
+	 * @param item4
+	 *            the fourth value
+	 * @param item5
+	 *            the fifth value
+	 * @param item6
+	 *            the sixth value
 	 */
 	public Tuple6(E item1, G item2, I item3, K item4, M item5, O item6) {
 		this.item1 = item1;
@@ -79,6 +93,7 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Returns the first value.
+	 * 
 	 * @return the first value
 	 */
 	public E getItem1() {
@@ -87,6 +102,7 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Returns the second value.
+	 * 
 	 * @return the second value
 	 */
 	public G getItem2() {
@@ -95,6 +111,7 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Returns the third value.
+	 * 
 	 * @return the third value
 	 */
 	public I getItem3() {
@@ -103,6 +120,7 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Returns the fourth value.
+	 * 
 	 * @return the fourth value
 	 */
 	public K getItem4() {
@@ -111,6 +129,7 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Returns the fifth value.
+	 * 
 	 * @return the fifth value
 	 */
 	public M getItem5() {
@@ -119,6 +138,7 @@ public class Tuple6<E, G, I, K, M, O> {
 
 	/**
 	 * Returns the sixth value.
+	 * 
 	 * @return the sixth value
 	 */
 	public O getItem6() {
@@ -148,8 +168,8 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * Tuple6 can return true.
 	 * 
 	 * @param obj
-	 * @return true if 'obj' is an instance of Tuple6 and all items 'equals' return true,
-	 *         otherwise false
+	 * @return true if 'obj' is an instance of Tuple6 and all items 'equals'
+	 *         return true, otherwise false
 	 */
 	@Override
 	public boolean equals(Object obj) {
