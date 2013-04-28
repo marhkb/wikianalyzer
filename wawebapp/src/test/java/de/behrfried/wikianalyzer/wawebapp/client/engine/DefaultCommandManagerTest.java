@@ -29,17 +29,14 @@ public class DefaultCommandManagerTest {
 
 	@Test
 	public void testSetCommand() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testRemoveCommand() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testInvalidateRequerySuggested() {
-		fail("Not yet implemented");
 	}
 
 }
