@@ -17,9 +17,8 @@
 package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
-
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**
@@ -31,14 +30,14 @@ public class Wawebapp implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+
 		// create the main Ginjector and load ShellView
 		final ShellView shellView = ((WaGinjector)GWT.create(WaGinjector.class)).getShellView();
-		
+
 		// add the ShellView to RootPanel
 		RootPanel.get().add(shellView, 0, 0);
-		
-		//do post construct action
+
+		// do post construct action
 		shellView.postConstruct();
 	}
-
 }

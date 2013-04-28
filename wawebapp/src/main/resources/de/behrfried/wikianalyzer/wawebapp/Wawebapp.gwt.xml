@@ -3,22 +3,30 @@
 	<!-- Inherit the core Web Toolkit stuff. -->
 	<inherits name='com.google.gwt.user.User' />
 
+	<!-- Inherit the default GWT style sheet. You can change -->
+	<!-- the theme of your GWT application by uncommenting -->
+	<!-- any one of the following lines. -->
+	<inherits name='com.google.gwt.user.theme.clean.Clean' />
+	<!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
+
 	<!-- We need the JUnit module in the main module, -->
 	<!-- otherwise eclipse complains (Google plugin bug?) -->
 	<inherits name='com.google.gwt.junit.JUnit' />
-	
+
 	<!-- Util -->
-	<inherits name="de.behrfried.wikianalyzer.util.Util"/>
-	
+	<inherits name="de.behrfried.wikianalyzer.util.Util" />
+
 	<!-- SmartGWT -->
-	<inherits name="com.smartgwt.SmartGwt"/>
-	
+	<inherits name="com.smartgwt.SmartGwt" />
+
 	<!-- GWT Injection lib -->
 	<inherits name="com.google.gwt.inject.Inject" />
-	
-	<!-- lib for chart vizualization  -->
-	<inherits name='com.google.gwt.visualization.Visualization'/>
 
+	<!-- lib for chart vizualization -->
+	<inherits name='com.google.gwt.visualization.Visualization' />
+	
 	<!-- English language, independent of country -->
 	<extend-property name="locale" values="en" />
 	<!-- German -->
@@ -27,8 +35,7 @@
 	<set-property-fallback name="locale" value="en" />
 
 	<!-- Specify the app entry point class. -->
-	<entry-point
-		class='de.behrfried.wikianalyzer.wawebapp.client.Wawebapp' />
+	<entry-point class='de.behrfried.wikianalyzer.wawebapp.client.Wawebapp' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

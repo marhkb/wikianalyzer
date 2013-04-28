@@ -60,7 +60,7 @@
 			<artifactId>smartgwt</artifactId>
 			<version>3.1</version>
 		</dependency>
-		
+
 		<!-- Util -->
 		<dependency>
 			<groupId>de.behrfried.wikianalyzer</groupId>

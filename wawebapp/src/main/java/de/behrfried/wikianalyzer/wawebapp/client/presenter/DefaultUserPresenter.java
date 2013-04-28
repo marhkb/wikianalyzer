@@ -18,13 +18,11 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.DefaultCommandManager;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
@@ -39,19 +37,19 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 public class DefaultUserPresenter implements UserView.Presenter {
 
 	private final CommandManager commandManager;
-	
+
 	private final MainServiceAsync mainService;
 	private final Messages messages;
 
 	private final Object initContext = new Object();
 
 	@Inject
-	public DefaultUserPresenter(final CommandManager commandManager, final MainServiceAsync mainService,
-			final Messages messages) throws IllegalArgumentException {
-		if (mainService == null) {
+	public DefaultUserPresenter(final CommandManager commandManager, final MainServiceAsync mainService, final Messages messages)
+	        throws IllegalArgumentException {
+		if(mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
 		}
-		if (messages == null) {
+		if(messages == null) {
 			throw new IllegalArgumentException("messages == null");
 		}
 		this.commandManager = commandManager;
@@ -66,44 +64,41 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	}
 
 	public void setNameToServer(final String nameToServer) {
-		if (!this.nameToServer.equals(nameToServer)) {
+		if(!this.nameToServer.equals(nameToServer)) {
 			this.nameToServer = nameToServer;
 			this.checkNameToServer();
 			this.checkCanSendNameToServer();
-			this.getNameToServerChanged()
-				.fire(this.initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
+			this.getNameToServerChanged().fire(this.initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
 			this.commandManager.invalidateRequerySuggested();
 		}
 	}
 
 	private void checkNameToServer() {
 		final String old = this.nameToServerErrorMessage;
-		if (this.getNameToServer() == null || this.getNameToServer().length() == 0) {
+		if(this.getNameToServer() == null || this.getNameToServer().length() == 0) {
 			this.nameToServerErrorMessage = "empty string";
 		} else {
 			this.nameToServerErrorMessage = "";
 		}
-		
+
 		if(!old.equals(this.nameToServerErrorMessage)) {
-			this.getErrorNameToServerChanged().fire(
-					this.initContext, 
-					this, 
-					new GenericEventArgs<String>(this.getNameToServerErrorMessage()));
+			this.getErrorNameToServerChanged().fire(this.initContext, this, new GenericEventArgs<String>(this.getNameToServerErrorMessage()));
 		}
 	}
 
 	private Event<GenericEventArgs<String>> nameToServerChanged = new Event<GenericEventArgs<String>>(this.initContext);
+
 	public Event<GenericEventArgs<String>> getNameToServerChanged() {
 		return this.nameToServerChanged;
 	}
 
 	private String nameToServerErrorMessage = "empty string";
+
 	public String getNameToServerErrorMessage() {
 		return this.nameToServerErrorMessage;
 	}
 
-	private Event<GenericEventArgs<String>> errorNameToServerChanged = new Event<GenericEventArgs<String>>(
-			this.initContext);
+	private Event<GenericEventArgs<String>> errorNameToServerChanged = new Event<GenericEventArgs<String>>(this.initContext);
 
 	public Event<GenericEventArgs<String>> getErrorNameToServerChanged() {
 		return this.errorNameToServerChanged;
@@ -113,18 +108,16 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	 * 
 	 */
 	public void onSendNameToServer() {
-		if (this.getCanSendNameToServer()) {
-			this.mainService.getArticle(this.nameToServer,
-					new AsyncCallback<String>() {
-						public void onSuccess(String result) {
-							setNameToServer(result);
-							getNameToServerChanged()
-								.fire(initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
-						}
+		if(this.getCanSendNameToServer()) {
+			this.mainService.getArticle(this.nameToServer, new AsyncCallback<String>() {
 
-						public void onFailure(Throwable caught) {
-						}
-					});
+				public void onSuccess(String result) {
+					setNameToServer(result);
+					getNameToServerChanged().fire(initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
+				}
+
+				public void onFailure(Throwable caught) {}
+			});
 		}
 	}
 
@@ -133,7 +126,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	public boolean getCanSendNameToServer() {
 		return this.canSendNameToServer;
 	}
-	
+
 	private void checkCanSendNameToServer() {
 		final boolean old = this.canSendNameToServer;
 		this.canSendNameToServer = this.getNameToServerErrorMessage().length() == 0;
@@ -143,21 +136,23 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	}
 
 	private final Event<GenericEventArgs<Boolean>> canSendNameToServerChanged = new Event<GenericEventArgs<Boolean>>(this.initContext);
+
 	public Event<GenericEventArgs<Boolean>> canSendNameToServerChanged() {
 		return this.canSendNameToServerChanged;
 	}
 
 	private final Command sendCommand = new UICommand() {
+
 		public void execute(Object param) {
 			DefaultUserPresenter.this.onSendNameToServer();
 			this.raiseCanExecuteChanged(EventArgs.EMPTY);
 		}
-		
+
 		public boolean canExecute(Object Param) {
 			return DefaultUserPresenter.this.nameToServer.length() != 0;
 		}
 	};
-	
+
 	public Command getSendCommand() {
 		return this.sendCommand;
 	}
