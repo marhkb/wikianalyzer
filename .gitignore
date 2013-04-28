@@ -21,6 +21,7 @@ war/WEB-INF/deploy/
 war/WEB-INF/classes/
 
 target/
+www-test/
 *.settings/
 *.gwt-log
 *~

@@ -4,6 +4,6 @@
   <inherits name='de.behrfried.wikianalyzer.wawebapp.Wawebapp' />
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/Wawebapp/greet" class="de.behrfried.wikianalyzer.wawebapp.server.GreetingServiceImpl" />
+  <servlet path="/Wawebapp/main" class="de.behrfried.wikianalyzer.wawebapp.server.MainServiceImpl" />
 
 </module>
