@@ -18,7 +18,8 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
-
+import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.DefaultCommandManager;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
@@ -48,27 +49,25 @@ public class WaGinModule extends AbstractGinModule {
 	protected void configure() {
 
 		/*
+		 * bind services
+		 */
+		this.bind(CommandManager.class).to(DefaultCommandManager.class).in(Singleton.class);
+
+		/*
 		 * bind presenters
 		 */
-		this.bind(ShellView.Presenter.class)
-				.to(DefaultShellViewPresenter.class).in(Singleton.class);
-		this.bind(ArticleView.Presenter.class).to(DefaultArticlePresenter.class)
-				.in(Singleton.class);
-		this.bind(UserView.Presenter.class).to(DefaultUserPresenter.class)
-				.in(Singleton.class);
-		this.bind(UserComparisonView.Presenter.class)
-				.to(DefaultUserComparisonPresenter.class).in(Singleton.class);
+		this.bind(ShellView.Presenter.class).to(DefaultShellViewPresenter.class).in(Singleton.class);
+		this.bind(ArticleView.Presenter.class).to(DefaultArticlePresenter.class).in(Singleton.class);
+		this.bind(UserView.Presenter.class).to(DefaultUserPresenter.class).in(Singleton.class);
+		this.bind(UserComparisonView.Presenter.class).to(DefaultUserComparisonPresenter.class).in(Singleton.class);
 
 		/*
 		 * bind views
 		 */
-		this.bind(ShellView.class).to(DefaultTabContainerView.class)
-				.in(Singleton.class);
-		this.bind(ArticleView.class).to(DefaultArticleView.class)
-				.in(Singleton.class);
+		this.bind(ShellView.class).to(DefaultTabContainerView.class).in(Singleton.class);
+		this.bind(ArticleView.class).to(DefaultArticleView.class).in(Singleton.class);
 		this.bind(UserView.class).to(DefaultUserView.class).in(Singleton.class);
-		this.bind(UserComparisonView.class).to(DefaultUserComparisonView.class)
-				.in(Singleton.class);
+		this.bind(UserComparisonView.class).to(DefaultUserComparisonView.class).in(Singleton.class);
 
 	}
 

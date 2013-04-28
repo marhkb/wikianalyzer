@@ -21,8 +21,11 @@ import com.google.inject.Inject;
 
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.DefaultCommandManager;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
@@ -35,13 +38,15 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
  */
 public class DefaultUserPresenter implements UserView.Presenter {
 
+	private final CommandManager commandManager;
+	
 	private final MainServiceAsync mainService;
 	private final Messages messages;
 
 	private final Object initContext = new Object();
 
 	@Inject
-	public DefaultUserPresenter(final MainServiceAsync mainService,
+	public DefaultUserPresenter(final CommandManager commandManager, final MainServiceAsync mainService,
 			final Messages messages) throws IllegalArgumentException {
 		if (mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
@@ -49,6 +54,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		if (messages == null) {
 			throw new IllegalArgumentException("messages == null");
 		}
+		this.commandManager = commandManager;
 		this.mainService = mainService;
 		this.messages = messages;
 	}
@@ -66,7 +72,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 			this.checkCanSendNameToServer();
 			this.getNameToServerChanged()
 				.fire(this.initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
-			CommandManager.getInstance().requerySuggested();
+			this.commandManager.invalidateRequerySuggested();
 		}
 	}
 
@@ -117,7 +123,6 @@ public class DefaultUserPresenter implements UserView.Presenter {
 						}
 
 						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
 						}
 					});
 		}
@@ -142,10 +147,10 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		return this.canSendNameToServerChanged;
 	}
 
-	private final Command sendCommand = new Command() {	
+	private final Command sendCommand = new UICommand() {
 		public void execute(Object param) {
 			DefaultUserPresenter.this.onSendNameToServer();
-			CommandManager.getInstance().requerySuggested();
+			this.raiseCanExecuteChanged(EventArgs.EMPTY);
 		}
 		
 		public boolean canExecute(Object Param) {

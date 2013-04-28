@@ -37,5 +37,8 @@ public abstract class ShellView extends View {
 
 	}
 	
+	/**
+	 * Logic to be executed after construction.
+	 */
 	public abstract void postConstruct();
 }

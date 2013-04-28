@@ -16,6 +16,9 @@
 
 package de.behrfried.wikianalyzer.util.command;
 
+import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
+
 /**
  * Interface for Commands. Its implementation should override 'execute' and
  * 'canExecute' and put their own logic in
@@ -41,4 +44,10 @@ public interface Command {
 	 * @return true if the Command can be executed otherwise false
 	 */
 	boolean canExecute(Object param);
+	
+	/**
+	 * Gets fired when canExecute could have changed.
+	 * @return an {@link Event}
+	 */
+	public Event<EventArgs> canExecuteChanged();
 }
