@@ -61,7 +61,7 @@ public class GwtTestWawebapp extends GWTTestCase {
 	 * This test will send a request to the server using the greetServer method
 	 * in GreetingService and verify the response.
 	 */
-	public void testGreetingService() {
+	public void testMainService() {
 		// Create the service that we will test.
 		MainServiceAsync greetingService = GWT.create(MainService.class);
 		ServiceDefTarget target = (ServiceDefTarget) greetingService;
