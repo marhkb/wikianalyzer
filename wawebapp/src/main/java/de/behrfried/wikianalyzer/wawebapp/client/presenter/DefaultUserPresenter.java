@@ -36,15 +36,13 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
  */
 public class DefaultUserPresenter implements UserView.Presenter {
 
-	private final CommandManager commandManager;
-
 	private final MainServiceAsync mainService;
 	private final Messages messages;
 
 	private final Object initContext = new Object();
 
 	@Inject
-	public DefaultUserPresenter(final CommandManager commandManager, final MainServiceAsync mainService, final Messages messages)
+	public DefaultUserPresenter(final MainServiceAsync mainService, final Messages messages)
 	        throws IllegalArgumentException {
 		if(mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
@@ -52,7 +50,6 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		if(messages == null) {
 			throw new IllegalArgumentException("messages == null");
 		}
-		this.commandManager = commandManager;
 		this.mainService = mainService;
 		this.messages = messages;
 	}
@@ -69,7 +66,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 			this.checkNameToServer();
 			this.checkCanSendNameToServer();
 			this.getNameToServerChanged().fire(this.initContext, DefaultUserPresenter.this, new GenericEventArgs<String>(getNameToServer()));
-			this.commandManager.invalidateRequerySuggested();
+			this.getSendCommand().raiseCanExecuteChanged();
 		}
 	}
 
@@ -145,12 +142,16 @@ public class DefaultUserPresenter implements UserView.Presenter {
 
 		public void execute(Object param) {
 			DefaultUserPresenter.this.onSendNameToServer();
-			this.raiseCanExecuteChanged(EventArgs.EMPTY);
 		}
 
-		public boolean canExecute(Object Param) {
+		public boolean canExecute(Object param) {
 			return DefaultUserPresenter.this.nameToServer.length() != 0;
 		}
+
+		@Override
+        protected EventArgs getEventArgs() {
+	        return EventArgs.EMPTY;
+        }
 	};
 
 	public Command getSendCommand() {

@@ -49,5 +49,10 @@ public interface Command {
 	 * Gets fired when canExecute could have changed.
 	 * @return an {@link Event}
 	 */
-	public Event<EventArgs> canExecuteChanged();
+	Event<EventArgs> canExecuteChanged();
+	
+	/**
+	 * Raises the {@code canExecuteChanged} event.
+	 */
+	void raiseCanExecuteChanged();
 }

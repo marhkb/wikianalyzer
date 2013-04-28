@@ -18,6 +18,8 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
@@ -26,6 +28,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.behrfried.wikianalyzer.util.Delegates.Func;
 import de.behrfried.wikianalyzer.util.data.DataContainer;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
@@ -40,8 +43,6 @@ import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 public class DefaultUserView extends UserView {
 
 	private final Presenter presenter;
-
-	private final CommandManager commandManager;
 
 	/**
 	 * {@link DefaultUserView}'s parent element
@@ -60,14 +61,12 @@ public class DefaultUserView extends UserView {
 	 * @param parentView
 	 */
 	@Inject
-	public DefaultUserView(final Presenter presenter,
-			final CommandManager commandManager, final Messages messages)
+	public DefaultUserView(final Presenter presenter, final Messages messages)
 			throws IllegalArgumentException {
 		if (messages == null) {
 			throw new IllegalArgumentException("messages == null");
 		}
 		this.presenter = presenter;
-		this.commandManager = commandManager;
 		this.messages = messages;
 
 		this.textItem = new TextAreaItem();
@@ -150,13 +149,18 @@ public class DefaultUserView extends UserView {
 						}
 					}
 				});
-
-		this.commandManager.setCommand(this.button,
-				this.presenter.getSendCommand(), new Func<Object>() {
-					public Object invoke() {
-						return null;
-					}
-				});
+		
+		this.button.setDisabled(!presenter.getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+			public void invoke(Object sender, EventArgs e) {
+				button.setDisabled(!presenter.getSendCommand().canExecute(null));
+			}
+		});
+		this.button.addClickHandler(new ClickHandler() {	
+			public void onClick(ClickEvent event) {
+				presenter.getSendCommand().execute(null);
+			}
+		});
 	}
 
 	public String getName() {

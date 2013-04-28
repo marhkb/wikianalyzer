@@ -32,9 +32,16 @@ public abstract class UICommand implements Command {
 	 * the initContext to fire 'canExecutedChanged'
 	 */
 	protected final Object initContext = new Object();
+	
+	/**
+	 * 
+	 */
+	public UICommand() {
+		CommandManager.get().addCommand(this);
+	}
 
 	/**
-	 * the event
+	 * the event returned in {@code canExecuteChanged}
 	 */
 	private final Event<EventArgs> canExecutedChanged = new Event<EventArgs>(this.initContext);
 
@@ -46,12 +53,15 @@ public abstract class UICommand implements Command {
 	}
 
 	/**
-	 * Raises the 'canExecuteChanged'.
-	 * 
-	 * @param e
-	 *            an EventArgs passed to callback methods
+	 * {@inheritDoc}
 	 */
-	protected void raiseCanExecuteChanged(final EventArgs e) {
-		this.canExecuteChanged().fire(this.initContext, this, e);
+	public void raiseCanExecuteChanged() {
+		this.canExecuteChanged().fire(this.initContext, this, this.getEventArgs());
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	protected abstract EventArgs getEventArgs();
 }

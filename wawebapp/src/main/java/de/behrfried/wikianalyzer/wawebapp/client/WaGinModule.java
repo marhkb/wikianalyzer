@@ -18,8 +18,6 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.DefaultCommandManager;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultArticlePresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
@@ -51,7 +49,6 @@ public class WaGinModule extends AbstractGinModule {
 		/*
 		 * bind services
 		 */
-		this.bind(CommandManager.class).to(DefaultCommandManager.class).in(Singleton.class);
 
 		/*
 		 * bind presenters

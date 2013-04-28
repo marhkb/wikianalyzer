@@ -13,51 +13,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.engine;
 
+import java.util.HashSet;
+import java.util.Set;
 import com.smartgwt.client.widgets.Canvas;
-import de.behrfried.wikianalyzer.util.Delegates.Func;
 import de.behrfried.wikianalyzer.util.command.Command;
 
 /**
- * Service interface for registering {@link Command}s.
+ * Default implementation for {@link CommandManager}.
  * 
  * @author marcus
  * 
  */
-public interface CommandManager {
+public class CommandManager {
+
+	private final static CommandManager INSTANCE = new CommandManager();
+
+	public static CommandManager get() {
+		return INSTANCE;
+	}
 
 	/**
-	 * Sets the passed {@link Command} for the passed {@link Canvas}. If there
-	 * is already an command associated with this canvas the previous command
-	 * will be removed.
-	 * 
-	 * @param canvas
-	 *            the {@link Canvas} on which the {@link Command} will be set
-	 * @param command
-	 *            the {@link Command} to be set on the the Canvas
-	 * @param paramGetter
-	 *            an {@link Func} thats returned {@link Object} will be passed
-	 *            to {@link Command}'s 'execute' and 'canExecute' method
+	 * Stores {@link Canvas}es with their registered {@link Command}s
 	 */
-	public void setCommand(final Canvas canvas, final Command command, final Func<Object> paramGetter);
+	private final Set<Command> commands = new HashSet<Command>();
+
+	private CommandManager() {}
 
 	/**
-	 * Removes the associated {@link Command} from the passed {@link Canvas}.
-	 * 
-	 * @param canvas
-	 *            the {@link Canvas} which {@link Command} shall be removed.
-	 * @throws IllegalArgumentException
-	 *             if canvas == null
-	 * @throws IllegalStateException
-	 *             if no {@link Command} is associated with the passed
-	 *             {@link Canvas}
+	 * {@inheritDoc}
 	 */
-	public void removeCommand(final Canvas canvas) throws IllegalArgumentException, IllegalStateException;
+	public boolean addCommand(final Command command) throws IllegalArgumentException {
+		if(command == null) {
+			throw new IllegalArgumentException("command == null");
+		}
+		return this.commands.add(command);
+	}
 
 	/**
-	 * Validates every {@link Command} by invoking their 'execute' methods.
+	 * {@inheritDoc}
 	 */
-	public void invalidateRequerySuggested();
+	public boolean removeCommand(final Command command) throws IllegalArgumentException {
+		if(command == null) {
+			throw new IllegalArgumentException("command == null");
+		}
+		return this.commands.remove(command);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void invalidateRequerySuggested() {
+		for(final Command command : this.commands) {
+			command.raiseCanExecuteChanged();
+		}
+	}
 }
