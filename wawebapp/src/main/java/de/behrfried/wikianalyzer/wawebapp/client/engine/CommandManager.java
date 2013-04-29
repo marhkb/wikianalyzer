@@ -18,32 +18,44 @@ package de.behrfried.wikianalyzer.wawebapp.client.engine;
 
 import java.util.HashSet;
 import java.util.Set;
-import com.smartgwt.client.widgets.Canvas;
 import de.behrfried.wikianalyzer.util.command.Command;
 
 /**
- * Default implementation for {@link CommandManager}.
+ * Singleton class for holding {@link Command}s and invoking their {@code raiseExecuteChanged()}.
  * 
  * @author marcus
  * 
  */
 public class CommandManager {
 
+	/**
+	 * the Singleton CommandManager instance
+	 */
 	private final static CommandManager INSTANCE = new CommandManager();
 
+	/**
+	 * Returns the Singleton CommandManager instance.
+	 * @return
+	 */
 	public static CommandManager get() {
 		return INSTANCE;
 	}
 
 	/**
-	 * Stores {@link Canvas}es with their registered {@link Command}s
+	 * stores {@link Command}s
 	 */
 	private final Set<Command> commands = new HashSet<Command>();
 
+	/**
+	 * Private constructor to prevent instantiation.
+	 */
 	private CommandManager() {}
 
 	/**
-	 * {@inheritDoc}
+	 * Adds the passed {@link Command} to the CommandManager.
+	 * @param command the Command to be added to the CommandManager
+	 * @return <code>true</code> if passed Command didn't exist the CommandManager before
+	 * @throws IllegalArgumentException if command == <code>null</code>
 	 */
 	public boolean addCommand(final Command command) throws IllegalArgumentException {
 		if(command == null) {
@@ -53,7 +65,10 @@ public class CommandManager {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Removes the passed {@link Command} from the CommandManager.
+	 * @param command the Command to be removed from the CommandManager
+	 * @return <code>true</code> if the CommandManager has contained the passed Command and could remove it, otherwise <code>false</code>
+	 * @throws IllegalArgumentException if command == <code>null</code>
 	 */
 	public boolean removeCommand(final Command command) throws IllegalArgumentException {
 		if(command == null) {
@@ -63,7 +78,7 @@ public class CommandManager {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Invokes the {@code raiseCanExecuteChanged()} of each {@link Command}.
 	 */
 	public void invalidateRequerySuggested() {
 		for(final Command command : this.commands) {
