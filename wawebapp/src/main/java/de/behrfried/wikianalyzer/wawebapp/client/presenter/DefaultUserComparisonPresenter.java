@@ -26,8 +26,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
  * @author marcus
  * 
  */
-public class DefaultUserComparisonPresenter implements
-		UserComparisonView.Presenter {
+public class DefaultUserComparisonPresenter implements UserComparisonView.Presenter {
 
 	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
 		// TODO Auto-generated method stub

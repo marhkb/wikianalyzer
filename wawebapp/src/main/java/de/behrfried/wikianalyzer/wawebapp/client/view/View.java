@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.smartgwt.client.widgets.Canvas;
 
 /**
  * Base interface for all View Classes
+ * 
  * @author marcus
- *
+ * 
  */
 public abstract class View extends Canvas {
-    
-    public abstract String getName();
+
+	public abstract String getName();
 }

@@ -23,7 +23,8 @@ package de.behrfried.wikianalyzer.util.data;
  * 
  * @author marcus
  * 
- * @param <E> specifies the type this DataContainer stores
+ * @param <E>
+ *            specifies the type this DataContainer stores
  */
 public class DataContainer<E> {
 
@@ -34,7 +35,9 @@ public class DataContainer<E> {
 
 	/**
 	 * Creates an DataContainer with the passed argument.
-	 * @param value the Object to be stored by this DataContainer
+	 * 
+	 * @param value
+	 *            the Object to be stored by this DataContainer
 	 */
 	public DataContainer(final E value) {
 		this.value = value;
@@ -42,17 +45,20 @@ public class DataContainer<E> {
 
 	/**
 	 * Returns the stored Object.
+	 * 
 	 * @return the stored Object
 	 */
 	public E getValue() {
-		return value;
+		return this.value;
 	}
 
 	/**
 	 * Sets the stored Object.
-	 * @param value the new Object to be stored
+	 * 
+	 * @param value
+	 *            the new Object to be stored
 	 */
-	public void setValue(E value) {
+	public void setValue(final E value) {
 		this.value = value;
 	}
 }

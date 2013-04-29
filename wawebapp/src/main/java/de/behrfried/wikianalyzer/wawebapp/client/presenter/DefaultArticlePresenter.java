@@ -18,7 +18,6 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
@@ -31,36 +30,34 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
  * 
  */
 public class DefaultArticlePresenter implements ArticleView.Presenter {
-	
+
 	private final MainServiceAsync mainService;
-	
+
 	private final Object initializationContext = new Object();
 	private final Event<FieldChangedEventArgs> fieldChangedEvent = new Event<FieldChangedEventArgs>(this.initializationContext);
 
 	@Inject
 	public DefaultArticlePresenter(final MainServiceAsync mainService) {
 		this.mainService = mainService;
-		
+
 	}
-	
-	public void searchArticle(String article) {
+
+	public void searchArticle(final String article) {
 		this.mainService.getArticle(article, new AsyncCallback<String>() {
-			
-			public void onSuccess(String result) {
-				
+
+			public void onSuccess(final String result) {
+
 			}
-			
-			public void onFailure(Throwable caught) {
-				
+
+			public void onFailure(final Throwable caught) {
+
 			}
 		});
 	}
 
-	
 	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
 		return this.fieldChangedEvent;
 	}
 
-	public void getArticleHtml() {
-	}
+	public void getArticleHtml() {}
 }

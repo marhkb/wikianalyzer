@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.event;
 
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 
-
 /**
  * An generic implementation of {@link EventArgs}
+ * 
  * @author marcus
- *
- * @param <E> specifies the enclosed type which the GenericEventArgs holds
+ * 
+ * @param <E>
+ *            specifies the enclosed type which the GenericEventArgs holds
  */
 public class GenericEventArgs<E> extends EventArgs {
-	
+
 	/**
 	 * the enclosed type to hold by this GenericEventArgs
 	 */
@@ -34,7 +35,9 @@ public class GenericEventArgs<E> extends EventArgs {
 
 	/**
 	 * Created an GenericEventArgs.
-	 * @param value the enclosed type to hold by this GenericEventArgs
+	 * 
+	 * @param value
+	 *            the enclosed type to hold by this GenericEventArgs
 	 */
 	public GenericEventArgs(final E value) {
 		this.value = value;
@@ -42,9 +45,10 @@ public class GenericEventArgs<E> extends EventArgs {
 
 	/**
 	 * Returns the enclosed type of by this GenericEventArgs.
+	 * 
 	 * @return the enclosed type of by this GenericEventArgs
 	 */
 	public E getValue() {
-		return value;
+		return this.value;
 	}
 }

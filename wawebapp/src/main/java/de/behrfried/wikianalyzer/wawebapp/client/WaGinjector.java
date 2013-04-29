@@ -18,7 +18,6 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 
 /**

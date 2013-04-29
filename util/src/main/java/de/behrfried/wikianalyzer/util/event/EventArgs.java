@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.util.event;
 
-
 /**
  * Base class for all EventArgs. An EventArg is passed to the callback method
  * when an {@link Event} fires.

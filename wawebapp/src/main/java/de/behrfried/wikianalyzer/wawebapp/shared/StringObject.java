@@ -13,55 +13,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.shared;
 
 import java.io.Serializable;
 
 /**
  * Wrapper around an {@link String} that is used for client server communication
+ * 
  * @author marcus
- *
+ * 
  */
 public class StringObject implements Serializable {
-    
-    /**
-     * generated UID
-     */
-    private static final long serialVersionUID = -6407435912570206085L;
-    
-    /**
-     * the String instance
-     */
-    private String str;
-    
-    /**
-     * Default constructor for {@link Serializable}
-     */
-    public StringObject() {  }
 
-    /**
-     * Creates a {@link StringObject} instance
-     * @param str the {@link String} to be held by this {@link StringObject}
-     */
-    public StringObject(String str) {
-	super();
-	this.str = str;
-    }
+	/**
+	 * generated UID
+	 */
+	private static final long serialVersionUID = -6407435912570206085L;
 
-    /**
-     * Returns the inner {@link String}.
-     * @return the inner {@link String}
-     */
-    public String getStr() {
-        return this.str;
-    }
+	/**
+	 * the String instance
+	 */
+	private String str;
 
-    /**
-     * Sets the inner {@link String}.
-     * @param str the inner {@link String} to be set
-     */
-    public void setStr(String str) {
-        this.str = str;
-    }
+	/**
+	 * Default constructor for {@link Serializable}
+	 */
+	public StringObject() {}
+
+	/**
+	 * Creates a {@link StringObject} instance
+	 * 
+	 * @param str
+	 *            the {@link String} to be held by this {@link StringObject}
+	 */
+	public StringObject(final String str) {
+		super();
+		this.str = str;
+	}
+
+	/**
+	 * Returns the inner {@link String}.
+	 * 
+	 * @return the inner {@link String}
+	 */
+	public String getStr() {
+		return this.str;
+	}
+
+	/**
+	 * Sets the inner {@link String}.
+	 * 
+	 * @param str
+	 *            the inner {@link String} to be set
+	 */
+	public void setStr(final String str) {
+		this.str = str;
+	}
 }

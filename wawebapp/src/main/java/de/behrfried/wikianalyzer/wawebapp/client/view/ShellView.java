@@ -36,7 +36,7 @@ public abstract class ShellView extends View {
 	public interface Presenter extends PresenterBase {
 
 	}
-	
+
 	/**
 	 * Logic to be executed after construction.
 	 */

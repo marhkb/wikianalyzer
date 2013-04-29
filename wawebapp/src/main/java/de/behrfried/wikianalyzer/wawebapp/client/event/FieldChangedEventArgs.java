@@ -20,6 +20,7 @@ import de.behrfried.wikianalyzer.util.event.EventArgs;
 
 /**
  * EventArgs containing the name of a field which value has changed.
+ * 
  * @author marcus
  * 
  */
@@ -38,17 +39,17 @@ public class FieldChangedEventArgs extends EventArgs {
 	 * @throws IllegalArgumentException
 	 *             if fieldName == null
 	 */
-	public FieldChangedEventArgs(String fieldName)
-			throws IllegalArgumentException {
+	public FieldChangedEventArgs(final String fieldName) throws IllegalArgumentException {
 		this.fieldName = fieldName;
 	}
 
 	/**
 	 * Returns the name of the field that has changed.
+	 * 
 	 * @return the name of the field that has changed
 	 */
 	public String getFieldName() {
-		return fieldName;
+		return this.fieldName;
 	}
 
 }

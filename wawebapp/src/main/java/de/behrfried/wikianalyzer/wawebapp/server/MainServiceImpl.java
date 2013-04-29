@@ -13,35 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
 import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
 
 /**
  * Server side implementation of {@link MainService}
+ * 
  * @author marcus
- *
+ * 
  */
 public class MainServiceImpl extends RemoteServiceServlet implements MainService {
 
-    /**
-     * generated UID
-     */
-    private static final long serialVersionUID = 200675849907147502L;
+	/**
+	 * generated UID
+	 */
+	private static final long serialVersionUID = 200675849907147502L;
 
-    /**
-     * Look at {@link MainService}
-     */
-    public StringObject getStringObject(StringObject o) {
-    	return o;
-    }
+	/**
+	 * Look at {@link MainService}
+	 */
+	public StringObject getStringObject(final StringObject o) {
+		return o;
+	}
 
-	public String getArticle(String article) {
+	public String getArticle(final String article) {
 		return article.toUpperCase();
 	}
-    
+
 }

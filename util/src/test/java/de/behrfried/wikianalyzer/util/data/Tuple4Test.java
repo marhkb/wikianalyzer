@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.data;
 
-import static org.junit.Assert.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Various tests on {@link Tuple4}
+ * 
  * @author marcus
  * 
  */
@@ -38,12 +38,11 @@ public class Tuple4Test {
 		final Double arg3 = -11942.48266;
 		final Object arg4 = new Object();
 
-		final Tuple4<Integer, String, Double, Object> result = new Tuple4<Integer, String, Double, Object>(
-				arg1, arg2, arg3, arg4);
+		final Tuple4<Integer, String, Double, Object> result = new Tuple4<Integer, String, Double, Object>(arg1, arg2, arg3, arg4);
 
-		assertEquals(arg1, result.getItem1().intValue());
-		assertEquals(arg2, result.getItem2());
-		assertEquals(arg3, result.getItem3());
-		assertEquals(arg4, result.getItem4());
+		Assert.assertEquals(arg1, result.getItem1().intValue());
+		Assert.assertEquals(arg2, result.getItem2());
+		Assert.assertEquals(arg3, result.getItem3());
+		Assert.assertEquals(arg4, result.getItem4());
 	}
 }

@@ -82,7 +82,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @param item6
 	 *            the sixth value
 	 */
-	public Tuple6(E item1, G item2, I item3, K item4, M item5, O item6) {
+	public Tuple6(final E item1, final G item2, final I item3, final K item4, final M item5, final O item6) {
 		this.item1 = item1;
 		this.item2 = item2;
 		this.item3 = item3;
@@ -97,7 +97,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @return the first value
 	 */
 	public E getItem1() {
-		return item1;
+		return this.item1;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @return the second value
 	 */
 	public G getItem2() {
-		return item2;
+		return this.item2;
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @return the third value
 	 */
 	public I getItem3() {
-		return item3;
+		return this.item3;
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @return the fourth value
 	 */
 	public K getItem4() {
-		return item4;
+		return this.item4;
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @return the fifth value
 	 */
 	public M getItem5() {
-		return item5;
+		return this.item5;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class Tuple6<E, G, I, K, M, O> {
 	 * @return the sixth value
 	 */
 	public O getItem6() {
-		return item6;
+		return this.item6;
 	}
 
 	/**
@@ -154,12 +154,12 @@ public class Tuple6<E, G, I, K, M, O> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((item1 == null) ? 0 : item1.hashCode());
-		result = prime * result + ((item2 == null) ? 0 : item2.hashCode());
-		result = prime * result + ((item3 == null) ? 0 : item3.hashCode());
-		result = prime * result + ((item4 == null) ? 0 : item4.hashCode());
-		result = prime * result + ((item5 == null) ? 0 : item5.hashCode());
-		result = prime * result + ((item6 == null) ? 0 : item6.hashCode());
+		result = prime * result + (this.item1 == null ? 0 : this.item1.hashCode());
+		result = prime * result + (this.item2 == null ? 0 : this.item2.hashCode());
+		result = prime * result + (this.item3 == null ? 0 : this.item3.hashCode());
+		result = prime * result + (this.item4 == null ? 0 : this.item4.hashCode());
+		result = prime * result + (this.item5 == null ? 0 : this.item5.hashCode());
+		result = prime * result + (this.item6 == null ? 0 : this.item6.hashCode());
 		return result;
 	}
 
@@ -172,57 +172,57 @@ public class Tuple6<E, G, I, K, M, O> {
 	 *         return true, otherwise false
 	 */
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(final Object obj) {
+		if(this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if(obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if(this.getClass() != obj.getClass()) {
 			return false;
 		}
-		Tuple6<?, ?, ?, ?, ?, ?> other = (Tuple6<?, ?, ?, ?, ?, ?>) obj;
-		if (item1 == null) {
-			if (other.item1 != null) {
+		final Tuple6<?, ?, ?, ?, ?, ?> other = (Tuple6<?, ?, ?, ?, ?, ?>)obj;
+		if(this.item1 == null) {
+			if(other.item1 != null) {
 				return false;
 			}
-		} else if (!item1.equals(other.item1)) {
+		} else if(!this.item1.equals(other.item1)) {
 			return false;
 		}
-		if (item2 == null) {
-			if (other.item2 != null) {
+		if(this.item2 == null) {
+			if(other.item2 != null) {
 				return false;
 			}
-		} else if (!item2.equals(other.item2)) {
+		} else if(!this.item2.equals(other.item2)) {
 			return false;
 		}
-		if (item3 == null) {
-			if (other.item3 != null) {
+		if(this.item3 == null) {
+			if(other.item3 != null) {
 				return false;
 			}
-		} else if (!item3.equals(other.item3)) {
+		} else if(!this.item3.equals(other.item3)) {
 			return false;
 		}
-		if (item4 == null) {
-			if (other.item4 != null) {
+		if(this.item4 == null) {
+			if(other.item4 != null) {
 				return false;
 			}
-		} else if (!item4.equals(other.item4)) {
+		} else if(!this.item4.equals(other.item4)) {
 			return false;
 		}
-		if (item5 == null) {
-			if (other.item5 != null) {
+		if(this.item5 == null) {
+			if(other.item5 != null) {
 				return false;
 			}
-		} else if (!item5.equals(other.item5)) {
+		} else if(!this.item5.equals(other.item5)) {
 			return false;
 		}
-		if (item6 == null) {
-			if (other.item6 != null) {
+		if(this.item6 == null) {
+			if(other.item6 != null) {
 				return false;
 			}
-		} else if (!item6.equals(other.item6)) {
+		} else if(!this.item6.equals(other.item6)) {
 			return false;
 		}
 		return true;

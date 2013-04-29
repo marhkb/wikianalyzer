@@ -15,58 +15,73 @@ package de.behrfried.wikianalyzer.util;
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
-
 
 /**
  * Class containing various Delegate Interfaces.
+ * 
  * @author marcus
- *
+ * 
  */
 public final class Delegates {
-	
+
 	/**
 	 * Private constructor to prevent initialization.
 	 */
-	private Delegates() { }
+	private Delegates() {}
 
 	/**
-	 * A simple Delegate Interface for methods without a return type and without arguments.
+	 * A simple Delegate Interface for methods without a return type and without
+	 * arguments.
+	 * 
 	 * @author marcus
-	 *
+	 * 
 	 */
 	public interface Action {
+
 		public void invoke();
 	}
 
 	/**
-	 * A simple Delegate Interface for methods without a return type and with one argument.
+	 * A simple Delegate Interface for methods without a return type and with
+	 * one argument.
+	 * 
 	 * @author marcus
-	 *
-	 * @param <E1> the type to be passed as an argument into the Delegate
+	 * 
+	 * @param <E1>
+	 *            the type to be passed as an argument into the Delegate
 	 */
 	public interface Action1<E1> {
+
 		public void invoke(E1 e1);
 	}
 
 	/**
-	 * A simple Delegate Interface for methods with a return type and without arguments.
+	 * A simple Delegate Interface for methods with a return type and without
+	 * arguments.
+	 * 
 	 * @author marcus
-	 *
-	 * @param <EResult> the type to be returned by the Delegate
+	 * 
+	 * @param <EResult>
+	 *            the type to be returned by the Delegate
 	 */
 	public interface Func<EResult> {
+
 		public EResult invoke();
 	}
-	
+
 	/**
-	 * A simple Delegate Interface for methods with a return type and with one argument.
+	 * A simple Delegate Interface for methods with a return type and with one
+	 * argument.
+	 * 
 	 * @author marcus
-	 *
-	 * @param <E1> the type to be passed as an argument into the Delegate
-	 * @param <EResult> the type to be returned by the Delegate
+	 * 
+	 * @param <E1>
+	 *            the type to be passed as an argument into the Delegate
+	 * @param <EResult>
+	 *            the type to be returned by the Delegate
 	 */
 	public interface Func1<E1, EResult> {
+
 		public EResult invoke(E1 e1);
 	}
 }

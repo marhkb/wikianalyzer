@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.data;
 
-import static org.junit.Assert.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Various tests on {@link Tuple7}
+ * 
  * @author marcus
  * 
  */
@@ -41,15 +41,15 @@ public class Tuple7Test {
 		final char arg6 = 'z';
 		final boolean arg7 = false;
 
-		final Tuple7<Integer, String, Double, Object, StringBuilder, Character, Boolean> result = 
-				new Tuple7<Integer, String, Double, Object, StringBuilder, Character, Boolean>(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+		final Tuple7<Integer, String, Double, Object, StringBuilder, Character, Boolean> result = new Tuple7<Integer, String, Double, Object, StringBuilder, Character, Boolean>(
+		        arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
-		assertEquals(arg1, result.getItem1().intValue());
-		assertEquals(arg2, result.getItem2());
-		assertEquals(arg3, result.getItem3().doubleValue(), 0.0);
-		assertEquals(arg4, result.getItem4());
-		assertEquals(arg5, result.getItem5());
-		assertEquals(arg6, result.getItem6().charValue());
-		assertEquals(arg7, result.getItem7().booleanValue());
+		Assert.assertEquals(arg1, result.getItem1().intValue());
+		Assert.assertEquals(arg2, result.getItem2());
+		Assert.assertEquals(arg3, result.getItem3().doubleValue(), 0.0);
+		Assert.assertEquals(arg4, result.getItem4());
+		Assert.assertEquals(arg5, result.getItem5());
+		Assert.assertEquals(arg6, result.getItem6().charValue());
+		Assert.assertEquals(arg7, result.getItem7().booleanValue());
 	}
 }

@@ -13,28 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.service;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-
 import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
 
 /**
  * Test service
+ * 
  * @author marcus
- *
+ * 
  */
 @RemoteServiceRelativePath("main")
 public interface MainService extends RemoteService {
-    
-    /**
-     * Passes an {@link StringObject} and returns it.
-     * @param o an {@link StringObject}
-     * @return o
-     */
-    StringObject getStringObject(StringObject o);
-    
-    String getArticle(String article);
+
+	/**
+	 * Passes an {@link StringObject} and returns it.
+	 * 
+	 * @param o
+	 *            an {@link StringObject}
+	 * @return o
+	 */
+	StringObject getStringObject(StringObject o);
+
+	String getArticle(String article);
 }

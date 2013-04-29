@@ -32,7 +32,7 @@ public abstract class UICommand implements Command {
 	 * the initContext to fire 'canExecutedChanged'
 	 */
 	protected final Object initContext = new Object();
-	
+
 	/**
 	 * 
 	 */
@@ -58,7 +58,7 @@ public abstract class UICommand implements Command {
 	public void raiseCanExecuteChanged() {
 		this.canExecuteChanged().fire(this.initContext, this, this.getEventArgs());
 	}
-	
+
 	/**
 	 * 
 	 * @return

@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
+
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
@@ -22,11 +23,12 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
  * Base interfaces for the user view.
+ * 
  * @author marcus
- *
+ * 
  */
 public abstract class UserView extends View {
-	
+
 	/**
 	 * Presenter interface the UserView wants to use
 	 * 
@@ -34,14 +36,17 @@ public abstract class UserView extends View {
 	 * 
 	 */
 	public interface Presenter extends PresenterBase {
-		
+
 		public void setNameToServer(final String nameToServer);
+
 		public String getNameToServer();
+
 		public Event<GenericEventArgs<String>> getNameToServerChanged();
+
 		public String getNameToServerErrorMessage();
+
 		public Event<GenericEventArgs<String>> getErrorNameToServerChanged();
-	    
-		
+
 		public Command getSendCommand();
 	}
 }

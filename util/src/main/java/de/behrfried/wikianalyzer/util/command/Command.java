@@ -44,13 +44,14 @@ public interface Command {
 	 * @return true if the Command can be executed otherwise false
 	 */
 	boolean canExecute(Object param);
-	
+
 	/**
 	 * Gets fired when canExecute could have changed.
+	 * 
 	 * @return an {@link Event}
 	 */
 	Event<EventArgs> canExecuteChanged();
-	
+
 	/**
 	 * Raises the {@code canExecuteChanged} event.
 	 */

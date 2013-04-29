@@ -16,8 +16,6 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import de.behrfried.wikianalyzer.util.event.Event;
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 
 /**
  * Base interface for all Presenters.
@@ -25,5 +23,4 @@ import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
  * @author marcus
  * 
  */
-public interface PresenterBase {
-}
+public interface PresenterBase {}

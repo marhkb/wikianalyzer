@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
-package de.behrfried.wikianalyzer.util.data;
 
-import static org.junit.Assert.*;
+package de.behrfried.wikianalyzer.util.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Various tests on {@link DataContainer}.
+ * 
  * @author marcus
- *
+ * 
  */
 public class DataContainerTest {
 
@@ -37,7 +36,7 @@ public class DataContainerTest {
 	@Test
 	public void testDataContainer() {
 		final DataContainer<Boolean> result = new DataContainer<Boolean>(true);
-		assertTrue(result.getValue());
+		Assert.assertTrue(result.getValue());
 	}
 
 	/**
@@ -48,12 +47,12 @@ public class DataContainerTest {
 		final List<String> arg = new ArrayList<String>();
 		arg.add("Hello");
 		arg.add("World");
-		
+
 		final DataContainer<List<String>> result = new DataContainer<List<String>>(arg);
-		
+
 		result.getValue().add("!");
-		
-		assertEquals(arg, result.getValue());
+
+		Assert.assertEquals(arg, result.getValue());
 	}
 
 	/**
@@ -62,12 +61,12 @@ public class DataContainerTest {
 	@Test
 	public void testSetValue() {
 		final DataContainer<Integer> result = new DataContainer<Integer>(0);
-		
+
 		final int arg = -4532785;
-		
+
 		result.setValue(arg);
-		
-		assertEquals(arg, result.getValue().intValue());
+
+		Assert.assertEquals(arg, result.getValue().intValue());
 	}
 
 }

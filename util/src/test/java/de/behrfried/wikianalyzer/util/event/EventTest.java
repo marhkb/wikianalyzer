@@ -16,15 +16,11 @@
 
 package de.behrfried.wikianalyzer.util.event;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import org.junit.Assert;
 import org.junit.Test;
-
 import de.behrfried.wikianalyzer.util.data.DataContainer;
 
 /**
@@ -51,17 +47,17 @@ public class EventTest {
 		final Dummy dummy = new Dummy();
 
 		/* add as many Handlers to the Event as expected */
-		for (int i = 0; i < expected; i++) {
+		for(int i = 0; i < expected; i++) {
 			dummy.getSimpleEvent().addHandler(new Handler<EventArgs>() {
-				public void invoke(Object sender, EventArgs e) {
-				}
+
+				public void invoke(final Object sender, final EventArgs e) {}
 			});
 		}
 
 		/*
 		 * test the result
 		 */
-		assertEquals(expected, dummy.getSimpleEvent().size());
+		Assert.assertEquals(expected, dummy.getSimpleEvent().size());
 	}
 
 	/**
@@ -90,16 +86,15 @@ public class EventTest {
 		final List<Event<EventArgs>.EventHandlerRegistration> regList = new ArrayList<Event<EventArgs>.EventHandlerRegistration>();
 
 		/* add the first Handlers to the Event */
-		for (int i = 0; i < add1; i++) {
+		for(int i = 0; i < add1; i++) {
 			/*
 			 * 'add' returns a EventHandlerRegistration that is stored in the
 			 * list
 			 */
-			regList.add(dummy.getSimpleEvent().addHandler(
-					new Handler<EventArgs>() {
-						public void invoke(Object sender, EventArgs e) {
-						}
-					}));
+			regList.add(dummy.getSimpleEvent().addHandler(new Handler<EventArgs>() {
+
+				public void invoke(final Object sender, final EventArgs e) {}
+			}));
 		}
 
 		/*
@@ -109,27 +104,27 @@ public class EventTest {
 		final Random r = new Random();
 
 		/* remove Handlers from the Event */
-		for (int i = 0; i < rem; i++) {
+		for(int i = 0; i < rem; i++) {
 			/* */
 			regList.remove(r.nextInt(regList.size())).removeHandler();
 		}
 
 		/* add Handlers again to the event */
-		for (int i = 0; i < add2; i++) {
+		for(int i = 0; i < add2; i++) {
 			/*
 			 * EventHandlerRegistration is not needed here since test is almost
 			 * finished
 			 */
 			dummy.getSimpleEvent().addHandler(new Handler<EventArgs>() {
-				public void invoke(Object sender, EventArgs e) {
-				}
+
+				public void invoke(final Object sender, final EventArgs e) {}
 			});
 		}
 
 		/*
 		 * test the result
 		 */
-		assertEquals(add1 + add2 - rem, dummy.getSimpleEvent().size());
+		Assert.assertEquals(add1 + add2 - rem, dummy.getSimpleEvent().size());
 	}
 
 	/**
@@ -151,7 +146,7 @@ public class EventTest {
 		final Dummy dummy = new Dummy();
 
 		/* add the first Handlers to the Event */
-		for (int i = 0; i < expected; i++) {
+		for(int i = 0; i < expected; i++) {
 			/*
 			 * EventHandlerRegistration is not needed here since Handlers aren't
 			 * to be removed
@@ -166,7 +161,7 @@ public class EventTest {
 				 * @param e
 				 *            additional argument
 				 */
-				public void invoke(Object sender, EventArgs e) {
+				public void invoke(final Object sender, final EventArgs e) {
 					/* when the Event is fired actuasl's value is to be changed */
 					actual.setValue(actual.getValue() + 1);
 				}
@@ -181,29 +176,26 @@ public class EventTest {
 		/*
 		 * test the result
 		 */
-		assertEquals(expected, actual.getValue().intValue());
+		Assert.assertEquals(expected, actual.getValue().intValue());
 
 		/* Test fire without permission */
 		try {
 			/* try to pass a null value */
 			dummy.getSimpleEvent().fire(null, this, EventArgs.EMPTY);
-			fail("Can fire without having the right initContext!");
-		} catch (Exception e) {
-		}
+			Assert.fail("Can fire without having the right initContext!");
+		} catch(final Exception e) {}
 		try {
 			/* try to pass an Object */
 			dummy.getSimpleEvent().fire(new Object(), this, EventArgs.EMPTY);
-			fail("Can fire without having the right initContext!");
-		} catch (Exception e) {
-		}
+			Assert.fail("Can fire without having the right initContext!");
+		} catch(final Exception e) {}
 	}
 }
 
 class Dummy {
 
 	private final Object initContext = new Object();
-	private final Event<EventArgs> simpleEvent = new Event<EventArgs>(
-			this.initContext);
+	private final Event<EventArgs> simpleEvent = new Event<EventArgs>(this.initContext);
 
 	public Event<EventArgs> getSimpleEvent() {
 		return this.simpleEvent;

@@ -46,7 +46,7 @@ public class Tuple2<E, G> {
 	 * @param item2
 	 *            the second value
 	 */
-	public Tuple2(E item1, G item2) {
+	public Tuple2(final E item1, final G item2) {
 		this.item1 = item1;
 		this.item2 = item2;
 	}
@@ -57,7 +57,7 @@ public class Tuple2<E, G> {
 	 * @return the first value
 	 */
 	public E getItem1() {
-		return item1;
+		return this.item1;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Tuple2<E, G> {
 	 * @return the second value
 	 */
 	public G getItem2() {
-		return item2;
+		return this.item2;
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class Tuple2<E, G> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((item1 == null) ? 0 : item1.hashCode());
-		result = prime * result + ((item2 == null) ? 0 : item2.hashCode());
+		result = prime * result + (this.item1 == null ? 0 : this.item1.hashCode());
+		result = prime * result + (this.item2 == null ? 0 : this.item2.hashCode());
 		return result;
 	}
 
@@ -92,29 +92,29 @@ public class Tuple2<E, G> {
 	 *         return true, otherwise false
 	 */
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(final Object obj) {
+		if(this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if(obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if(this.getClass() != obj.getClass()) {
 			return false;
 		}
-		Tuple2<?, ?> other = (Tuple2<?, ?>) obj;
-		if (item1 == null) {
-			if (other.item1 != null) {
+		final Tuple2<?, ?> other = (Tuple2<?, ?>)obj;
+		if(this.item1 == null) {
+			if(other.item1 != null) {
 				return false;
 			}
-		} else if (!item1.equals(other.item1)) {
+		} else if(!this.item1.equals(other.item1)) {
 			return false;
 		}
-		if (item2 == null) {
-			if (other.item2 != null) {
+		if(this.item2 == null) {
+			if(other.item2 != null) {
 				return false;
 			}
-		} else if (!item2.equals(other.item2)) {
+		} else if(!this.item2.equals(other.item2)) {
 			return false;
 		}
 		return true;

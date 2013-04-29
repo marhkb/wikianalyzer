@@ -21,7 +21,8 @@ import java.util.Set;
 import de.behrfried.wikianalyzer.util.command.Command;
 
 /**
- * Singleton class for holding {@link Command}s and invoking their {@code raiseExecuteChanged()}.
+ * Singleton class for holding {@link Command}s and invoking their
+ * {@code raiseExecuteChanged()}.
  * 
  * @author marcus
  * 
@@ -35,10 +36,11 @@ public class CommandManager {
 
 	/**
 	 * Returns the Singleton CommandManager instance.
+	 * 
 	 * @return
 	 */
 	public static CommandManager get() {
-		return INSTANCE;
+		return CommandManager.INSTANCE;
 	}
 
 	/**
@@ -53,9 +55,13 @@ public class CommandManager {
 
 	/**
 	 * Adds the passed {@link Command} to the CommandManager.
-	 * @param command the Command to be added to the CommandManager
-	 * @return <code>true</code> if passed Command didn't exist the CommandManager before
-	 * @throws IllegalArgumentException if command == <code>null</code>
+	 * 
+	 * @param command
+	 *            the Command to be added to the CommandManager
+	 * @return <code>true</code> if passed Command didn't exist the
+	 *         CommandManager before
+	 * @throws IllegalArgumentException
+	 *             if command == <code>null</code>
 	 */
 	public boolean addCommand(final Command command) throws IllegalArgumentException {
 		if(command == null) {
@@ -66,9 +72,13 @@ public class CommandManager {
 
 	/**
 	 * Removes the passed {@link Command} from the CommandManager.
-	 * @param command the Command to be removed from the CommandManager
-	 * @return <code>true</code> if the CommandManager has contained the passed Command and could remove it, otherwise <code>false</code>
-	 * @throws IllegalArgumentException if command == <code>null</code>
+	 * 
+	 * @param command
+	 *            the Command to be removed from the CommandManager
+	 * @return <code>true</code> if the CommandManager has contained the passed
+	 *         Command and could remove it, otherwise <code>false</code>
+	 * @throws IllegalArgumentException
+	 *             if command == <code>null</code>
 	 */
 	public boolean removeCommand(final Command command) throws IllegalArgumentException {
 		if(command == null) {

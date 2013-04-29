@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.util.event;
 
-
 /**
  * An Delegate Interface which is mainly used in cooperation with {@link Event}
  * s.

@@ -13,36 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
 
 /**
  * Default implementation for {@link UserComparisonView}.
+ * 
  * @author marcus
- *
+ * 
  */
 public class DefaultUserComparisonView extends UserComparisonView {
-    
-    /**
-     * parent view of this {@link DefaultUserComparisonView}
-     */
-    private final Presenter presenter;
-    
-    /**
-     * Creates an instance of {@link DefaultUserComparisonView}. All arguments are injected by Gin
-     * @param parentView
-     * @throws IllegalArgumentException
-     */
-    @Inject
-    public DefaultUserComparisonView(final Presenter presenter) throws IllegalArgumentException {
-    	if(presenter == null) {
-    		throw new IllegalArgumentException("presenter == null");
-    	}
-    	this.presenter = presenter;
-    }
-    
+
+	/**
+	 * parent view of this {@link DefaultUserComparisonView}
+	 */
+	private final Presenter presenter;
+
+	/**
+	 * Creates an instance of {@link DefaultUserComparisonView}. All arguments
+	 * are injected by Gin
+	 * 
+	 * @param parentView
+	 * @throws IllegalArgumentException
+	 */
+	@Inject
+	public DefaultUserComparisonView(final Presenter presenter) throws IllegalArgumentException {
+		if(presenter == null) {
+			throw new IllegalArgumentException("presenter == null");
+		}
+		this.presenter = presenter;
+	}
+
+	@Override
 	public String getName() {
 		return "User Comparison";
 	}

@@ -58,7 +58,7 @@ public class Event<E extends EventArgs> {
 		 * @return the encapsulated {@link Handler}
 		 */
 		public Handler<E> getHandler() {
-			return handler;
+			return this.handler;
 		}
 
 		/**
@@ -94,7 +94,7 @@ public class Event<E extends EventArgs> {
 	 *             if initContext == null
 	 */
 	public Event(final Object initContext) throws IllegalArgumentException {
-		if (initContext == null) {
+		if(initContext == null) {
 			throw new IllegalArgumentException("initContext == null");
 		}
 		this.initContext = initContext;
@@ -107,9 +107,8 @@ public class Event<E extends EventArgs> {
 	 * @param handler
 	 * @throws IllegalArgumentException
 	 */
-	public EventHandlerRegistration addHandler(final Handler<E> handler)
-			throws IllegalArgumentException {
-		if (handler == null) {
+	public EventHandlerRegistration addHandler(final Handler<E> handler) throws IllegalArgumentException {
+		if(handler == null) {
 			throw new IllegalArgumentException("handler == null");
 		}
 		this.handlers.add(handler);
@@ -128,9 +127,8 @@ public class Event<E extends EventArgs> {
 	 * @throws IllegalArgumentException
 	 *             if handler == null
 	 */
-	public boolean removeHandler(final Handler<E> handler)
-			throws IllegalArgumentException {
-		if (handler == null) {
+	public boolean removeHandler(final Handler<E> handler) throws IllegalArgumentException {
+		if(handler == null) {
 			throw new IllegalArgumentException("handler == null");
 		}
 		return this.handlers.remove(handler);
@@ -171,12 +169,11 @@ public class Event<E extends EventArgs> {
 	 *             if the passed initializationContext is not the same object as
 	 *             passed at construction of this Event
 	 */
-	public void fire(final Object initializationContext, final Object sender,
-			final E e) throws IllegalStateException {
-		if (this.initContext != initializationContext) {
+	public void fire(final Object initializationContext, final Object sender, final E e) throws IllegalStateException {
+		if(this.initContext != initializationContext) {
 			throw new IllegalStateException("wrong initContext");
 		}
-		for (final Handler<E> h : this.handlers) {
+		for(final Handler<E> h : this.handlers) {
 			h.invoke(sender, e);
 		}
 	}

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
@@ -32,21 +32,17 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
-
-import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 
-public class DefaultArticleView extends ArticleView {	
-	
-	
+public class DefaultArticleView extends ArticleView {
+
 	private final Presenter presenter;
-	
+
 	/**
 	 * the parent element of the {@link DefaultArticleView} where the widgets
 	 * has to be put in.
 	 */
-	
+
 	private Label waLabel;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
@@ -61,20 +57,20 @@ public class DefaultArticleView extends ArticleView {
 	private SectionStack sectionPanel;
 	private SectionStackSection generalArticleSection, articleAnalyzationSection;
 	private VLayout siteLayoutContainer;
-		
+
 	private final Messages messages;
 
 	@Inject
-	public DefaultArticleView(Presenter presenter, Messages messages) throws IllegalArgumentException {
+	public DefaultArticleView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
 		this.presenter = presenter;
 		this.messages = messages;
-		
+
 		this.init();
 	}
-	
+
 	private void init() {
 		this.waLabel = new Label("WIKIAnalyzer");
 		this.waLabel.setHeight100();
@@ -84,67 +80,67 @@ public class DefaultArticleView extends ArticleView {
 		this.searchBox.setShowTitle(false);
 		this.searchBoxContainer = new DynamicForm();
 		this.searchBoxContainer.setBackgroundColor("white");
-		this.searchBoxContainer.setItems(this.searchBox);		
-		this.searchButton = new Button(this.messages.searchButton());		
+		this.searchBoxContainer.setItems(this.searchBox);
+		this.searchButton = new Button(this.messages.searchButton());
 		this.searchLayout = new HLayout();
 		this.searchLayout.setMembersMargin(3);
 		this.searchLayout.setHeight(30);
 		this.searchLayout.setBackgroundColor("red");
-		this.searchLayout.addMember(waLabel);
-		this.searchLayout.addMember(searchBoxContainer);
-		this.searchLayout.addMember(searchButton);
-		
+		this.searchLayout.addMember(this.waLabel);
+		this.searchLayout.addMember(this.searchBoxContainer);
+		this.searchLayout.addMember(this.searchButton);
+
 		this.timeSpanMenu = new Menu();
 		this.randomSpan = new MenuItem("random time");
 		this.randomSpan.setChecked(true);
-		this.timeSpanMenu.addItem(randomSpan);
+		this.timeSpanMenu.addItem(this.randomSpan);
 		this.hourSpan = new MenuItem("last hour");
-		this.timeSpanMenu.addItem(hourSpan);
+		this.timeSpanMenu.addItem(this.hourSpan);
 		this.daySpan = new MenuItem("last day");
-		this.timeSpanMenu.addItem(daySpan);
+		this.timeSpanMenu.addItem(this.daySpan);
 		this.weekSpan = new MenuItem("last week");
-		this.timeSpanMenu.addItem(weekSpan);
+		this.timeSpanMenu.addItem(this.weekSpan);
 		this.monthSpan = new MenuItem("last month");
-		this.timeSpanMenu.addItem(monthSpan);
+		this.timeSpanMenu.addItem(this.monthSpan);
 		this.yearSpan = new MenuItem("last year");
-		this.timeSpanMenu.addItem(yearSpan);
+		this.timeSpanMenu.addItem(this.yearSpan);
 		this.chooseSpan = new MenuItem("choose timespan");
-		this.timeSpanMenu.addItem(chooseSpan);
-		this.timeMenuButton = new IMenuButton(randomSpan.getTitle(), timeSpanMenu);
-		
-		this.generalWikiArticleLayout = new HLayout(); 
-		
+		this.timeSpanMenu.addItem(this.chooseSpan);
+		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
+
+		this.generalWikiArticleLayout = new HLayout();
+
 		this.wikiPrevPanel = new HTMLPane();
-		this.wikiPrevPanel.setWidth("50%");		
+		this.wikiPrevPanel.setWidth("50%");
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
 		this.valueColumn = new ListGridField("Value");
 		this.valueColumn.setCanEdit(false);
 		this.generalInfoGrid = new ListGrid();
 		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
-		this.generalInfoGrid.setWidth("50%");		
-		this.generalWikiArticleLayout.addMembers(wikiPrevPanel, this.generalInfoGrid);
-		
+		this.generalInfoGrid.setWidth("50%");
+		this.generalWikiArticleLayout.addMembers(this.wikiPrevPanel, this.generalInfoGrid);
+
 		this.generalArticleSection = new SectionStackSection("General Article Infos");
 		this.generalArticleSection.setItems(this.generalWikiArticleLayout);
 		this.articleAnalyzationSection = new SectionStackSection("Article Analyzation");
-		//this.articleAnalyzationSection.setItems(null);
-		
+		// this.articleAnalyzationSection.setItems(null);
+
 		this.sectionPanel = new SectionStack();
 		this.sectionPanel.addSection(this.generalArticleSection);
 		this.sectionPanel.addSection(this.articleAnalyzationSection);
 		this.sectionPanel.setVisibilityMode(VisibilityMode.MULTIPLE);
-		
-		this.siteLayoutContainer = new VLayout();	
+
+		this.siteLayoutContainer = new VLayout();
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
-		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.sectionPanel);		
-		
+		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.sectionPanel);
+
 		this.addChild(this.siteLayoutContainer);
 
 	}
 
-
+	@Override
 	public String getName() {
 		return "Article";
 	}

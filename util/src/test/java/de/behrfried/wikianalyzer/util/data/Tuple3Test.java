@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 package de.behrfried.wikianalyzer.util.data;
 
-import static org.junit.Assert.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Various tests on {@link Tuple3}
+ * 
  * @author marcus
  * 
  */
@@ -37,11 +37,10 @@ public class Tuple3Test {
 		final String arg2 = "Hello World!";
 		final Double arg3 = -11942.48266;
 
-		final Tuple3<Integer, String, Double> result = new Tuple3<Integer, String, Double>(
-				arg1, arg2, arg3);
+		final Tuple3<Integer, String, Double> result = new Tuple3<Integer, String, Double>(arg1, arg2, arg3);
 
-		assertEquals(arg1, result.getItem1().intValue());
-		assertEquals(arg2, result.getItem2());
-		assertEquals(arg3, result.getItem3());
+		Assert.assertEquals(arg1, result.getItem1().intValue());
+		Assert.assertEquals(arg2, result.getItem2());
+		Assert.assertEquals(arg3, result.getItem3());
 	}
 }

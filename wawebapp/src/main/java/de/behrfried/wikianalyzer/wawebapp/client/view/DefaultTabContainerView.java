@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
- 
+
 /*
  * Copyright 2013 Marcus Behrendt & Robert Friedrichs
  * 
@@ -46,68 +46,71 @@ import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
  * 
  */
 public class DefaultTabContainerView extends ShellView {
-	
+
 	private final Presenter presenter;
-	
+
 	private final ArticleView articleView;
 	private final UserView userView;
-	
-	private TabSet tabSet;
-	
+
+	private final TabSet tabSet;
+
 	@Inject
-	public DefaultTabContainerView(Presenter presenter, ArticleView articleView, UserView userView) throws IllegalArgumentException {
+	public DefaultTabContainerView(final Presenter presenter, final ArticleView articleView, final UserView userView) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
 		this.presenter = presenter;
 		this.articleView = articleView;
 		this.userView = userView;
-		
+
 		/* init other tabs */
 		final Tab tabArticle = new Tab(this.articleView.getName());
 		tabArticle.setID(this.articleView.getName());
 		tabArticle.setPane(this.articleView);
-		
+
 		final Tab tabUser = new Tab(this.userView.getName());
 		tabUser.setID(this.userView.getName());
 		tabUser.setPane(this.userView);
-		
+
 		this.tabSet = new TabSet();
-		
+
 		this.tabSet.addTab(tabArticle);
 		this.tabSet.addTab(tabUser);
-		
+
 		this.tabSet.setWidth100();
 		this.tabSet.setHeight100();
-		
+
 		this.setWidth100();
 		this.setHeight100();
-		
+
 		this.addChild(this.tabSet);
 
 	}
 
+	@Override
 	public String getName() {
 		return "TabContainer";
 	}
 
 	@Override
 	public void postConstruct() {
-		
-	    final String initToken = History.getToken();
-	    if (initToken.length() == 0) {
-	    	History.newItem(this.tabSet.getTab(0).getID());
-	    }
-		
+
+		final String initToken = History.getToken();
+		if(initToken.length() == 0) {
+			History.newItem(this.tabSet.getTab(0).getID());
+		}
+
 		this.tabSet.addTabSelectedHandler(new TabSelectedHandler() {
-			public void onTabSelected(TabSelectedEvent event) {
+
+			public void onTabSelected(final TabSelectedEvent event) {
 				History.newItem(event.getID());
 			}
 		});
-		
-		History.addValueChangeHandler(new ValueChangeHandler<String>() {	
-			public void onValueChange(ValueChangeEvent<String> event) {
-				String historyToken = event.getValue();
+
+		History.addValueChangeHandler(new ValueChangeHandler<String>() {
+
+			public void onValueChange(final ValueChangeEvent<String> event) {
+				final String historyToken = event.getValue();
 				if(historyToken.isEmpty()) {
 					History.back();
 				}

@@ -25,13 +25,10 @@ import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.VLayout;
-
-import de.behrfried.wikianalyzer.util.Delegates.Func;
 import de.behrfried.wikianalyzer.util.data.DataContainer;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.CommandManager;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 
 /**
@@ -49,10 +46,10 @@ public class DefaultUserView extends UserView {
 	 */
 	private final Messages messages;
 
-	private VLayout vLayout;
-	private TextAreaItem textItem;
-	private TextAreaItem textItem2;
-	private Button button;
+	private final VLayout vLayout;
+	private final TextAreaItem textItem;
+	private final TextAreaItem textItem2;
+	private final Button button;
 
 	/**
 	 * Creates an instance of {@link DefaultUserView}. All arguments are
@@ -61,9 +58,8 @@ public class DefaultUserView extends UserView {
 	 * @param parentView
 	 */
 	@Inject
-	public DefaultUserView(final Presenter presenter, final Messages messages)
-			throws IllegalArgumentException {
-		if (messages == null) {
+	public DefaultUserView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
+		if(messages == null) {
 			throw new IllegalArgumentException("messages == null");
 		}
 		this.presenter = presenter;
@@ -82,15 +78,15 @@ public class DefaultUserView extends UserView {
 		this.button = new Button("Send");
 		this.vLayout = new VLayout(5);
 
-		DynamicForm form = new DynamicForm();
+		final DynamicForm form = new DynamicForm();
 		form.setGroupTitle("Text");
 		form.setWidth(500);
 		form.setHeight(180);
-		form.setFields(textItem, textItem2);
+		form.setFields(this.textItem, this.textItem2);
 
 		// this.vLayout.addChild(dForm);
 		this.vLayout.addMember(form);
-		this.vLayout.addMember(button);
+		this.vLayout.addMember(this.button);
 
 		this.vLayout.setWidth100();
 		this.vLayout.setHeight100();
@@ -105,64 +101,67 @@ public class DefaultUserView extends UserView {
 
 	private void bind() {
 
-		final DataContainer<Boolean> textItemNameToServerSelfChanged = new DataContainer<Boolean>(
-				false);
+		final DataContainer<Boolean> textItemNameToServerSelfChanged = new DataContainer<Boolean>(false);
 		this.textItem.setValue(this.presenter.getNameToServer());
 		this.textItem.addChangedHandler(new ChangedHandler() {
-			public void onChanged(ChangedEvent event) {
+
+			public void onChanged(final ChangedEvent event) {
 				textItemNameToServerSelfChanged.setValue(true);
-				presenter.setNameToServer(textItem.getValueAsString());
+				DefaultUserView.this.presenter.setNameToServer(DefaultUserView.this.textItem.getValueAsString());
 				textItemNameToServerSelfChanged.setValue(false);
 			}
 		});
 
-		this.presenter.getNameToServerChanged().addHandler(
-				new Handler<GenericEventArgs<String>>() {
-					public void invoke(Object sender, GenericEventArgs<String> e) {
-						textItem.setValue(e.getValue());
-					}
-				});
+		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
 
-		final DataContainer<Boolean> textItem2NameToServerSelfChanged = new DataContainer<Boolean>(
-				false);
+			public void invoke(final Object sender, final GenericEventArgs<String> e) {
+				DefaultUserView.this.textItem.setValue(e.getValue());
+			}
+		});
+
+		final DataContainer<Boolean> textItem2NameToServerSelfChanged = new DataContainer<Boolean>(false);
 		this.textItem2.setValue(this.presenter.getNameToServer());
 		this.textItem2.addChangedHandler(new ChangedHandler() {
-			public void onChanged(ChangedEvent event) {
+
+			public void onChanged(final ChangedEvent event) {
 				textItem2NameToServerSelfChanged.setValue(true);
-				presenter.setNameToServer(textItem2.getValueAsString());
+				DefaultUserView.this.presenter.setNameToServer(DefaultUserView.this.textItem2.getValueAsString());
 				textItem2NameToServerSelfChanged.setValue(false);
 			}
 		});
 
-		this.presenter.getNameToServerChanged().addHandler(
-				new Handler<GenericEventArgs<String>>() {
-					public void invoke(Object sender, GenericEventArgs<String> e) {
-						textItem2.setValue(e.getValue());
-					}
-				});
+		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
 
-		this.presenter.getErrorNameToServerChanged().addHandler(
-				new Handler<GenericEventArgs<String>>() {
-					public void invoke(Object sender, GenericEventArgs<String> e) {
-						if (e.getValue().length() == 0) {
-							// textItem.
-						}
-					}
-				});
-		
-		this.button.setDisabled(!presenter.getSendCommand().canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
-			public void invoke(Object sender, EventArgs e) {
-				button.setDisabled(!presenter.getSendCommand().canExecute(null));
+			public void invoke(final Object sender, final GenericEventArgs<String> e) {
+				DefaultUserView.this.textItem2.setValue(e.getValue());
 			}
 		});
-		this.button.addClickHandler(new ClickHandler() {	
-			public void onClick(ClickEvent event) {
-				presenter.getSendCommand().execute(null);
+
+		this.presenter.getErrorNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
+
+			public void invoke(final Object sender, final GenericEventArgs<String> e) {
+				if(e.getValue().length() == 0) {
+					// textItem.
+				}
+			}
+		});
+
+		this.button.setDisabled(!this.presenter.getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				DefaultUserView.this.button.setDisabled(!DefaultUserView.this.presenter.getSendCommand().canExecute(null));
+			}
+		});
+		this.button.addClickHandler(new ClickHandler() {
+
+			public void onClick(final ClickEvent event) {
+				DefaultUserView.this.presenter.getSendCommand().execute(null);
 			}
 		});
 	}
 
+	@Override
 	public String getName() {
 		return "User";
 	}
