@@ -28,10 +28,16 @@ public class ListChangedEventArgs<E> extends EventArgs {
     }
 	
     public List<E> getOldItems() {
+    	if(this.oldItems == null) {
+    		return null;
+    	}
     	return Collections.unmodifiableList(this.oldItems);
     }
 	
     public List<E> getNewItems() {
+    	if(this.newItems == null) {
+    		return null;
+    	}
     	return Collections.unmodifiableList(this.newItems);
     }
 }

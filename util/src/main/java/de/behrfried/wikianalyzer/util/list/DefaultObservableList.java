@@ -143,8 +143,8 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 	@SuppressWarnings("unchecked")
     public boolean retainAll(Collection<?> c) {
 		final List<E> oldItems = new LinkedList<E>();
-		for(final Object e : c) {
-			if(!this.contains(e)) {
+		for(final Object e : this.internalList) {
+			if(!c.contains(e)) {
 				oldItems.add((E)e);
 			}
 		}
@@ -157,9 +157,11 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 
 	public E set(int index, E element) {
 		final E result = this.internalList.set(index, element);
+		final List<E> oldItems = new LinkedList<E>();
 		final List<E> newItems = new LinkedList<E>();
+		oldItems.add(result);
 		newItems.add(element);
-		this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, null, newItems));
+		this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, oldItems, newItems));
 		return result;
 	}
 
