@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.LinkItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
@@ -61,18 +63,19 @@ public class DefaultArticleView extends ArticleView {
 	 * has to be put in.
 	 */
 
-	private Label waLabel, genArtInfLabel, artAnaLabel;
+	private Label waLabel, yourSearchedArticleLabel, urlLabel, genArtInfLabel, artAnaLabel;
+	private LinkItem wikiLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalInfoGrid;
 	private ListGridField attributeColumn, valueColumn;
-	private HLayout searchLayout, articleInfoAnalyzationLayout;
+	private HLayout searchLayout, articleInfoAnalyzationLayout, menuURLLayout;
+	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
 	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan,
 			yearSpan, chooseSpan;
-	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
 
 	private final Messages messages;
 
@@ -124,6 +127,10 @@ public class DefaultArticleView extends ArticleView {
 		this.timeSpanMenu.addItem(this.chooseSpan);
 		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(),
 				this.timeSpanMenu);
+		this.yourSearchedArticleLabel = new Label("Ihr gesuchter Artikel war: ");
+		//TODO this.wikiLink = new LinkItem("www.google.de");
+		this.menuURLLayout = new HLayout();
+		this.menuURLLayout.addMembers(this.timeMenuButton, this.yourSearchedArticleLabel);
 
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
@@ -157,7 +164,7 @@ public class DefaultArticleView extends ArticleView {
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
 		this.siteLayoutContainer.addMembers(this.searchLayout,
-				this.timeMenuButton, this.articleInfoAnalyzationLayout);
+				this.menuURLLayout, this.articleInfoAnalyzationLayout);
 
 		this.addChild(this.siteLayoutContainer);
 
