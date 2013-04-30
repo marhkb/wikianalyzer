@@ -21,8 +21,14 @@ import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.layout.HLayout;
@@ -32,6 +38,9 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
+
+import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 
 public class DefaultArticleView extends ArticleView {
@@ -137,7 +146,46 @@ public class DefaultArticleView extends ArticleView {
 		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.sectionPanel);
 
 		this.addChild(this.siteLayoutContainer);
+		
+		this.bind();
 
+	}
+	
+	private void bind() {
+		this.searchBox.setValue(this.presenter.getArticleName());
+		this.searchBox.addChangedHandler(new ChangedHandler() {
+			public void onChanged(ChangedEvent event) {
+				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
+			}
+		});
+		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {	
+			public void invoke(Object sender, EventArgs e) {
+				if(!searchBox.equals(presenter.getArticleName())) {
+					wikiPrevPanel.getContentsURL();
+				}
+			}
+		});
+		
+		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+			public void invoke(Object sender, EventArgs e) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+			}
+		});
+		this.searchButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				presenter.getSendCommand().execute(null);
+			}
+		});
+		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
+			public void onKeyUp(KeyUpEvent event) {
+				if(event.getKeyName().equals("Enter")) {
+					if(presenter.getSendCommand().canExecute(null)) {
+						presenter.getSendCommand().execute(null);
+					}
+				}
+			}
+		});
 	}
 
 	@Override

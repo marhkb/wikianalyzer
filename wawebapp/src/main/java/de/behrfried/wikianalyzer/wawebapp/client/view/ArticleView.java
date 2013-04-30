@@ -16,6 +16,9 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
@@ -34,8 +37,13 @@ public abstract class ArticleView extends View {
 	 */
 	public interface Presenter extends PresenterBase {
 
-		public void searchArticle(String article);
-
-		public void getArticleHtml();
+		String getArticleName();
+		void setArticleName(String string);
+		Event<EventArgs> articleNameChanged();
+		
+		Command getSendCommand();
+		
+		String getArticleHtml();
+		Event<EventArgs> articleHtmlChanged();
 	}
 }

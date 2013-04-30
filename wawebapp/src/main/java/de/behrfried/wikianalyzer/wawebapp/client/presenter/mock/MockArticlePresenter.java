@@ -16,18 +16,42 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
-	public void searchArticle(final String article) {
+	public String getArticleName() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
-	public void getArticleHtml() {
+	public void setArticleName(String string) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	public Event<EventArgs> articleNameChanged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Command getSendCommand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getArticleHtml() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Event<EventArgs> articleHtmlChanged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

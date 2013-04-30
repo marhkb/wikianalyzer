@@ -18,7 +18,11 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+
+import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
 import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
@@ -33,8 +37,7 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 
 	private final MainServiceAsync mainService;
 
-	private final Object initializationContext = new Object();
-	private final Event<FieldChangedEventArgs> fieldChangedEvent = new Event<FieldChangedEventArgs>(this.initializationContext);
+	private final Object initContext = new Object();
 
 	@Inject
 	public DefaultArticlePresenter(final MainServiceAsync mainService) {
@@ -42,22 +45,55 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 
 	}
 
-	public void searchArticle(final String article) {
-		this.mainService.getArticle(article, new AsyncCallback<String>() {
+	private String articleName = "";
+	
 
-			public void onSuccess(final String result) {
-
-			}
-
-			public void onFailure(final Throwable caught) {
-
-			}
-		});
+	public String getArticleName() {
+		return this.articleName;
 	}
 
-	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
-		return this.fieldChangedEvent;
+	public void setArticleName(String string) {
+		if(!string.equals(this.articleName)) {
+			this.articleName = string;
+			//this.articleName = "$" + this.articleName;
+			this.articleNameChanged()
+			    .fire(this.initContext, this, EventArgs.EMPTY);
+			this.sendCommand.raiseCanExecuteChanged();
+		}
 	}
 
-	public void getArticleHtml() {}
+	private final Event<EventArgs> articleChanged = new Event<EventArgs>(initContext);
+	public Event<EventArgs> articleNameChanged() {
+		return articleChanged;
+	}
+
+	private final Command sendCommand = new UICommand() {
+		
+		public void execute(Object param) {
+			setArticleName(getArticleName().toUpperCase());
+		}
+		
+		public boolean canExecute(Object param) {
+			return getArticleName().length() > 0;
+		}
+		
+		@Override
+		protected EventArgs getEventArgs() {
+			return EventArgs.EMPTY;
+		}
+	};
+	
+	public Command getSendCommand() {
+		return this.sendCommand;
+	}
+
+	public String getArticleHtml() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Event<EventArgs> articleHtmlChanged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

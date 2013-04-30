@@ -113,7 +113,6 @@ public class DefaultUserView extends UserView {
 		});
 
 		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
-
 			public void invoke(final Object sender, final GenericEventArgs<String> e) {
 				DefaultUserView.this.textItem.setValue(e.getValue());
 			}
