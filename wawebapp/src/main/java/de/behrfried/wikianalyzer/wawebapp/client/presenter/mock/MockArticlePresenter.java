@@ -16,6 +16,8 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
@@ -53,5 +55,8 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return null;
 	}
 
-
+	public ListGridRecord[] getArticleInfos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

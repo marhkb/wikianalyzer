@@ -17,6 +17,7 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
+import com.smartgwt.client.types.ContentsType;
 import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.HTMLPane;
@@ -120,6 +121,7 @@ public class DefaultArticleView extends ArticleView {
 		this.generalWikiArticleLayout = new HLayout();
 
 		this.wikiPrevPanel = new HTMLPane();
+		this.wikiPrevPanel.setContentsType(ContentsType.PAGE);
 		this.wikiPrevPanel.setWidth("50%");
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
@@ -128,6 +130,7 @@ public class DefaultArticleView extends ArticleView {
 		this.generalInfoGrid = new ListGrid();
 		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
 		this.generalInfoGrid.setWidth("50%");
+		
 		this.generalWikiArticleLayout.addMembers(this.wikiPrevPanel, this.generalInfoGrid);
 
 		this.generalArticleSection = new SectionStackSection("General Article Infos");
@@ -152,19 +155,7 @@ public class DefaultArticleView extends ArticleView {
 	}
 	
 	private void bind() {
-		this.searchBox.setValue(this.presenter.getArticleName());
-		this.searchBox.addChangedHandler(new ChangedHandler() {
-			public void onChanged(ChangedEvent event) {
-				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
-			}
-		});
-		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {	
-			public void invoke(Object sender, EventArgs e) {
-				if(!searchBox.equals(presenter.getArticleName())) {
-					wikiPrevPanel.getContentsURL();
-				}
-			}
-		});
+		this.bindSearchBox();
 		
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
@@ -186,6 +177,26 @@ public class DefaultArticleView extends ArticleView {
 				}
 			}
 		});
+	}
+	
+	private void bindSearchBox() {
+		this.searchBox.setValue(this.presenter.getArticleName());
+		this.searchBox.addChangedHandler(new ChangedHandler() {
+			public void onChanged(ChangedEvent event) {
+				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
+			}
+		});
+		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {	
+			public void invoke(Object sender, EventArgs e) {
+				if(!searchBox.equals(presenter.getArticleName())) {
+					searchBox.setValue(presenter.getArticleName());
+				}
+			}
+		});
+	}
+	
+	private void bindGeneralInfoGrid() {
+		this.generalInfoGrid.setData(DefaultArticleView.this.presenter.getArticleInfos());
 	}
 
 	@Override

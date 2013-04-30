@@ -18,6 +18,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
@@ -93,6 +94,11 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 	}
 
 	public Event<EventArgs> articleHtmlChanged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListGridRecord[] getArticleInfos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
