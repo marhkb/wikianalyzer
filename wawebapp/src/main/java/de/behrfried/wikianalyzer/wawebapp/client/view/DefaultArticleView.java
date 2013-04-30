@@ -18,8 +18,9 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
+import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.ContentsType;
@@ -46,7 +47,6 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
-
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
@@ -74,15 +74,13 @@ public class DefaultArticleView extends ArticleView {
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
-	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan,
-			yearSpan, chooseSpan;
+	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
 
 	private final Messages messages;
 
 	@Inject
-	public DefaultArticleView(final Presenter presenter, final Messages messages)
-			throws IllegalArgumentException {
-		if (presenter == null) {
+	public DefaultArticleView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
+		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
 		this.presenter = presenter;
@@ -125,20 +123,19 @@ public class DefaultArticleView extends ArticleView {
 		this.timeSpanMenu.addItem(this.yearSpan);
 		this.chooseSpan = new MenuItem("choose timespan");
 		this.timeSpanMenu.addItem(this.chooseSpan);
-		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(),
-				this.timeSpanMenu);
+		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
 		this.yourSearchedArticleLabel = new Label("Ihr gesuchter Artikel war: ");
-		//TODO this.wikiLink = new LinkItem("www.google.de");
+		// TODO this.wikiLink = new LinkItem("www.google.de");
 		this.menuURLLayout = new HLayout();
 		this.menuURLLayout.addMembers(this.timeMenuButton, this.yourSearchedArticleLabel);
 
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
 		this.valueColumn = new ListGridField("Value");
-		//this.valueColumn.setC
+		// this.valueColumn.setC
 		this.valueColumn.setCanEdit(false);
 		this.generalInfoGrid = new ListGrid();
-	
+
 		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
 
 		this.artAnaLayout = new VLayout();
@@ -157,14 +154,12 @@ public class DefaultArticleView extends ArticleView {
 		this.genInfLayout.addMembers(this.genArtInfLabel, this.generalInfoGrid);
 
 		this.articleInfoAnalyzationLayout = new HLayout();
-		this.articleInfoAnalyzationLayout.addMembers(
-				this.artAnaLayout, this.genInfLayout);
+		this.articleInfoAnalyzationLayout.addMembers(this.artAnaLayout, this.genInfLayout);
 
 		this.siteLayoutContainer = new VLayout();
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
-		this.siteLayoutContainer.addMembers(this.searchLayout,
-				this.menuURLLayout, this.articleInfoAnalyzationLayout);
+		this.siteLayoutContainer.addMembers(this.searchLayout, this.menuURLLayout, this.articleInfoAnalyzationLayout);
 
 		this.addChild(this.siteLayoutContainer);
 
@@ -176,24 +171,24 @@ public class DefaultArticleView extends ArticleView {
 		this.bindSearchBox();
 		this.bindGeneralInfoGrid();
 
-		this.searchButton.setDisabled(!this.presenter.getSendCommand()
-				.canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged()
-				.addHandler(new Handler<EventArgs>() {
-					public void invoke(Object sender, EventArgs e) {
-						searchButton.setDisabled(!presenter.getSendCommand()
-								.canExecute(null));
-					}
-				});
+		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(Object sender, EventArgs e) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+			}
+		});
 		this.searchButton.addClickHandler(new ClickHandler() {
+
 			public void onClick(ClickEvent event) {
 				presenter.getSendCommand().execute(null);
 			}
 		});
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
+
 			public void onKeyUp(KeyUpEvent event) {
-				if (event.getKeyName().equals("Enter")) {
-					if (presenter.getSendCommand().canExecute(null)) {
+				if(event.getKeyName().equals("Enter")) {
+					if(presenter.getSendCommand().canExecute(null)) {
 						presenter.getSendCommand().execute(null);
 					}
 				}
@@ -204,67 +199,72 @@ public class DefaultArticleView extends ArticleView {
 	private void bindSearchBox() {
 		this.searchBox.setValue(this.presenter.getArticleName());
 		this.searchBox.addChangedHandler(new ChangedHandler() {
+
 			public void onChanged(ChangedEvent event) {
-				DefaultArticleView.this.presenter.setArticleName(searchBox
-						.getValueAsString());
+				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
 			}
 		});
-		this.presenter.articleNameChanged().addHandler(
-				new Handler<EventArgs>() {
-					public void invoke(Object sender, EventArgs e) {
-						if (!searchBox.equals(presenter.getArticleName())) {
-							searchBox.setValue(presenter.getArticleName());
-						}
+		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(Object sender, EventArgs e) {
+				if(!searchBox.equals(presenter.getArticleName())) {
+					searchBox.setValue(presenter.getArticleName());
+				}
+			}
+		});
+
+		final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+		for(final String suggestion : this.presenter.getSuggestions()) {
+			map.put(suggestion, suggestion);
+		}
+		this.searchBox.setValueMap(map);
+		this.presenter.getSuggestions().listChanged().addHandler(new Handler<ListChangedEventArgs<String>>() {
+
+			public void invoke(Object sender, ListChangedEventArgs<String> e) {
+					map.clear();
+					for(final String suggestion : presenter.getSuggestions()) {
+						map.put(suggestion, suggestion);
 					}
-				});
+					searchBox.setValueMap(map);
+			}
+		});
 	}
 
 	private void bindGeneralInfoGrid() {
 
 		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
-		for (Tuple2<String, String> t : this.presenter.getArticleInfos()) {
+		for(Tuple2<String, String> t : this.presenter.getArticleInfos()) {
 			ListGridRecord lsg = new ListGridRecord();
 			lsg.setAttribute("Attribute", t.getItem1());
 			lsg.setAttribute("Value", t.getItem2());
 			this.generalInfoGrid.addData(lsg);
 			recordsO.put(t, lsg);
 		}
-		this.presenter
-				.getArticleInfos()
-				.listChanged()
-				.addHandler(
-						new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
+		this.presenter.getArticleInfos().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
 
-							public void invoke(
-									Object sender,
-									ListChangedEventArgs<Tuple2<String, String>> e) {
-								if (e.getListChangedType() == ListChangedType.ADD_REMOVE) {
-									if (e.getOldItems() != null) {
-										for (Tuple2<String, String> t : e
-												.getOldItems()) {
-											generalInfoGrid.removeData(recordsO
-													.remove(t));
-										}
-									}
+			public void invoke(Object sender, ListChangedEventArgs<Tuple2<String, String>> e) {
+				if(e.getListChangedType() == ListChangedType.ADD_REMOVE) {
+					if(e.getOldItems() != null) {
+						for(Tuple2<String, String> t : e.getOldItems()) {
+							generalInfoGrid.removeData(recordsO.remove(t));
+						}
+					}
 
-									if (e.getNewItems() != null) {
-										for (Tuple2<String, String> t : e
-												.getNewItems()) {
-											ListGridRecord lsg = new ListGridRecord();
-											lsg.setAttribute("Attribute",
-													t.getItem1());
-											lsg.setAttribute("Value",
-													t.getItem2());
-											generalInfoGrid.addData(lsg);
-											recordsO.put(t, lsg);
-										}
-									}
-								} else {
-									generalInfoGrid.clear();
-									recordsO.clear();
-								}
-							}
-						});
+					if(e.getNewItems() != null) {
+						for(Tuple2<String, String> t : e.getNewItems()) {
+							ListGridRecord lsg = new ListGridRecord();
+							lsg.setAttribute("Attribute", t.getItem1());
+							lsg.setAttribute("Value", t.getItem2());
+							generalInfoGrid.addData(lsg);
+							recordsO.put(t, lsg);
+						}
+					}
+				} else {
+					generalInfoGrid.clear();
+					recordsO.clear();
+				}
+			}
+		});
 	}
 
 	@Override
