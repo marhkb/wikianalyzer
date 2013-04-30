@@ -42,8 +42,15 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 	}
 
 	public boolean addAll(Collection<? extends E> c) {
-		// TODO Auto-generated method stub
-		return false;
+		final boolean result = this.internalList.addAll(c);
+		if(result) {
+			final List<E> newItems = new LinkedList<E>();
+			for(final E e : c) {
+				newItems.add(e);
+			}
+			this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, null, newItems));
+		}
+		return result;
 	}
 
 	public boolean addAll(int index, Collection<? extends E> c) {
@@ -118,17 +125,41 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 		return e;
 	}
 
-	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+	@SuppressWarnings("unchecked")
+    public boolean removeAll(Collection<?> c) {
+		final List<E> oldItems = new LinkedList<E>();
+		for(final Object e : c) {
+			if(this.contains(e)) {
+				oldItems.add((E)e);
+			}
+		}
+		final boolean result = this.internalList.removeAll(c);
+		if(result) {
+			this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, oldItems, null));
+		}
+		return result;
 	}
 
-	public boolean retainAll(Collection<?> c) {
-		return this.internalList.retainAll(c);
+	@SuppressWarnings("unchecked")
+    public boolean retainAll(Collection<?> c) {
+		final List<E> oldItems = new LinkedList<E>();
+		for(final Object e : c) {
+			if(!this.contains(e)) {
+				oldItems.add((E)e);
+			}
+		}
+		final boolean result = this.internalList.retainAll(c);
+		if(result) {
+			this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, oldItems, null));
+		}
+		return result;
 	}
 
 	public E set(int index, E element) {
 		final E result = this.internalList.set(index, element);
+		final List<E> newItems = new LinkedList<E>();
+		newItems.add(element);
+		this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, null, newItems));
 		return result;
 	}
 
