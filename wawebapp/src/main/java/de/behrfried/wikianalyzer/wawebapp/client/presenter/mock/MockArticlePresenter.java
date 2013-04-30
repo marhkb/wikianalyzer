@@ -16,33 +16,68 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import com.google.inject.Inject;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
+import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
+	private final MainServiceAsync mainService;
+
+	private final Object initContext = new Object();
+
+	@Inject
+	public MockArticlePresenter(final MainServiceAsync mainService) {
+		this.mainService = mainService;
+
+	}
+
+	private String articleName = "";
+	
+
 	public String getArticleName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.articleName;
 	}
 
 	public void setArticleName(String string) {
-		// TODO Auto-generated method stub
-		
+		if(!string.equals(this.articleName)) {
+			this.articleName = string;
+			//this.articleName = "$" + this.articleName;
+			this.articleNameChanged()
+			    .fire(this.initContext, this, EventArgs.EMPTY);
+			this.sendCommand.raiseCanExecuteChanged();
+		}
 	}
 
+	private final Event<EventArgs> articleChanged = new Event<EventArgs>(initContext);
 	public Event<EventArgs> articleNameChanged() {
-		// TODO Auto-generated method stub
-		return null;
+		return articleChanged;
 	}
 
+	private final Command sendCommand = new UICommand() {
+		
+		public void execute(Object param) {
+			setArticleName(getArticleName().toUpperCase());
+		}
+		
+		public boolean canExecute(Object param) {
+			return getArticleName().length() > 0;
+		}
+		
+		@Override
+		protected EventArgs getEventArgs() {
+			return EventArgs.EMPTY;
+		}
+	};
+	
 	public Command getSendCommand() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sendCommand;
 	}
 
 	public String getArticleHtml() {
