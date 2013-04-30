@@ -16,30 +16,30 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import java.util.LinkedList;
+import java.util.Random;
 import com.google.inject.Inject;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
-import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
-	private final MainServiceAsync mainService;
-
 	private final Object initContext = new Object();
 
 	@Inject
-	public MockArticlePresenter(final MainServiceAsync mainService) {
-		this.mainService = mainService;
-
+	public MockArticlePresenter() {
+		this.articleInfos.add(Tuple.create("Ast", "Loch"));
+		this.articleInfos.add(Tuple.create("Rosa", "Schlüpfer"));
 	}
 
 	private String articleName = "";
-	
 
 	public String getArticleName() {
 		return this.articleName;
@@ -48,50 +48,103 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public void setArticleName(String string) {
 		if(!string.equals(this.articleName)) {
 			this.articleName = string;
-			//this.articleName = "$" + this.articleName;
-			this.articleNameChanged()
-			    .fire(this.initContext, this, EventArgs.EMPTY);
+			this.articleNameChanged().fire(this.initContext, this, EventArgs.EMPTY);
 			this.sendCommand.raiseCanExecuteChanged();
+
+			this.suggestions.clear();
+			if(this.articleName.startsWith("A")) {
+				this.suggestions.add("Arschloch");
+				this.suggestions.add("Amerika");
+				this.suggestions.add("Atombombe");
+			} else {
+				this.suggestions.add("Fliegenfänger");
+				this.suggestions.add("Menschenfleich");
+				this.suggestions.add("Rauch");
+				this.suggestions.add("Katasteramt");
+				this.suggestions.add("Blubb");
+				this.suggestions.add("=<o> : <o>=");
+			}
 		}
 	}
 
 	private final Event<EventArgs> articleChanged = new Event<EventArgs>(initContext);
+
 	public Event<EventArgs> articleNameChanged() {
 		return articleChanged;
 	}
 
 	private final Command sendCommand = new UICommand() {
-		
+
 		public void execute(Object param) {
 			setArticleName(getArticleName().toUpperCase());
+			
+			final Random r = new Random();
+			switch(r.nextInt(5)) {
+				case 0:
+					setArticleLink("http://www.google.de");
+					break;
+				case 1:
+					setArticleLink("http://www.golem.de");
+					break;
+				case 2:
+					setArticleLink("http://www.mit.de");
+					break;
+				case 3:
+					setArticleLink("http://www.yahoo.de");
+					break;
+				case 4:
+					setArticleLink("http://www.pampers.de");
+					break;
+				default:
+					setArticleLink("http://youporn.com");
+					break;
+			}
 		}
-		
+
 		public boolean canExecute(Object param) {
 			return getArticleName().length() > 0;
 		}
-		
+
 		@Override
 		protected EventArgs getEventArgs() {
 			return EventArgs.EMPTY;
 		}
 	};
-	
+
 	public Command getSendCommand() {
 		return this.sendCommand;
 	}
 
-	public String getArticleHtml() {
-		// TODO Auto-generated method stub
-		return null;
+	private String articleLink = "";
+
+	private void setArticleLink(final String articleLink) {
+		if(!this.articleLink.equals(articleLink)) {
+			this.articleLink = articleLink;
+			this.articleLinkChanged().fire(this.initContext, this, EventArgs.EMPTY);
+
+		}
 	}
 
-	public Event<EventArgs> articleHtmlChanged() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getArticleLink() {
+		return this.articleLink;
 	}
 
-	public ListGridRecord[] getArticleInfos() {
-		// TODO Auto-generated method stub
-		return null;
+	private final Event<EventArgs> articleLinkChanged = new Event<EventArgs>(this.initContext);
+
+	public Event<EventArgs> articleLinkChanged() {
+		return this.articleLinkChanged;
+	}
+
+	private final ObservableList<Tuple2<String, String>> articleInfos = new DefaultObservableList<Tuple2<String, String>>(
+	        new LinkedList<Tuple2<String, String>>());
+
+	public ObservableList<Tuple2<String, String>> getArticleInfos() {
+		return this.articleInfos;
+	}
+
+	private final ObservableList<String> suggestions = new DefaultObservableList<String>(new LinkedList<String>());
+
+	public ObservableList<String> getSuggestions() {
+		return this.suggestions;
 	}
 }

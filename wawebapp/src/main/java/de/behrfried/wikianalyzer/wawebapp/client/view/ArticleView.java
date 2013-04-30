@@ -16,11 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
@@ -45,9 +45,10 @@ public abstract class ArticleView extends View {
 		
 		Command getSendCommand();
 		
-		String getArticleHtml();
-		Event<EventArgs> articleHtmlChanged();
+		String getArticleLink();
+		Event<EventArgs> articleLinkChanged();
 		
-		ListGridRecord[] getArticleInfos();
+		ObservableList<Tuple2<String, String>> getArticleInfos();
+		ObservableList<String> getSuggestions();
 	}
 }

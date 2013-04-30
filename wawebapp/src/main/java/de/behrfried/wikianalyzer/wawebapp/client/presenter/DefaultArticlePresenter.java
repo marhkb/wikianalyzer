@@ -16,16 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Inject;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 /**
@@ -36,70 +31,44 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
  */
 public class DefaultArticlePresenter implements ArticleView.Presenter {
 
-	private final MainServiceAsync mainService;
-
-	private final Object initContext = new Object();
-
-	@Inject
-	public DefaultArticlePresenter(final MainServiceAsync mainService) {
-		this.mainService = mainService;
-
-	}
-
-	private String articleName = "";
-	
-
 	public String getArticleName() {
-		return this.articleName;
-	}
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 
 	public void setArticleName(String string) {
-		if(!string.equals(this.articleName)) {
-			this.articleName = string;
-			//this.articleName = "$" + this.articleName;
-			this.articleNameChanged()
-			    .fire(this.initContext, this, EventArgs.EMPTY);
-			this.sendCommand.raiseCanExecuteChanged();
-		}
-	}
+	    // TODO Auto-generated method stub
+	    
+    }
 
-	private final Event<EventArgs> articleChanged = new Event<EventArgs>(initContext);
 	public Event<EventArgs> articleNameChanged() {
-		return articleChanged;
-	}
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 
-	private final Command sendCommand = new UICommand() {
-		
-		public void execute(Object param) {
-			setArticleName(getArticleName().toUpperCase());
-		}
-		
-		public boolean canExecute(Object param) {
-			return getArticleName().length() > 0;
-		}
-		
-		@Override
-		protected EventArgs getEventArgs() {
-			return EventArgs.EMPTY;
-		}
-	};
-	
 	public Command getSendCommand() {
-		return this.sendCommand;
-	}
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 
-	public String getArticleHtml() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getArticleLink() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 
-	public Event<EventArgs> articleHtmlChanged() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Event<EventArgs> articleLinkChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 
-	public ListGridRecord[] getArticleInfos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public ObservableList<Tuple2<String, String>> getArticleInfos() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	public ObservableList<String> getSuggestions() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
 }
