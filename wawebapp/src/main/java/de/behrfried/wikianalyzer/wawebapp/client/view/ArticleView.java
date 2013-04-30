@@ -16,6 +16,8 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
@@ -45,5 +47,7 @@ public abstract class ArticleView extends View {
 		
 		String getArticleHtml();
 		Event<EventArgs> articleHtmlChanged();
+		
+		ListGridRecord[] getArticleInfos();
 	}
 }
