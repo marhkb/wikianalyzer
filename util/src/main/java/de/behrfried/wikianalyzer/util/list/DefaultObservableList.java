@@ -3,9 +3,11 @@ package de.behrfried.wikianalyzer.util.list;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
 
 
 public final class DefaultObservableList<E> implements ObservableList<E> {
@@ -13,16 +15,32 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 	private final Object initContext = new Object();
 	
 	private final Event<ListChangedEventArgs<E>> listChanged = new Event<ListChangedEventArgs<E>>(this.initContext);
+	
+	private final List<E> internalList;
+	
+	public DefaultObservableList(final List<E> internalList) {
+		this.internalList = internalList;
+	}
+	
 	public Event<ListChangedEventArgs<E>> listChanged() {
 	    return this.listChanged;
     }
+	
+	
 	public boolean add(E e) {
-	    // TODO Auto-generated method stub
-	    return false;
+	    final boolean result = this.internalList.add(e);
+	    if(result) {
+	    	final List<E> newItems = new LinkedList<E>();
+	    	newItems.add(e);
+	    	this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, null, newItems));
+	    }
+	    return result;
     }
 	public void add(int index, E element) {
-	    // TODO Auto-generated method stub
-	    
+	    this.internalList.add(index, element);
+    	final List<E> newItems = new LinkedList<E>();
+    	newItems.add(element);
+	    this.listChanged().fire(this.initContext, this, new ListChangedEventArgs<E>(ListChangedType.ADD_REMOVE, null, newItems));
     }
 	public boolean addAll(Collection<? extends E> c) {
 	    // TODO Auto-generated method stub
@@ -89,23 +107,19 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 	    return false;
     }
 	public E set(int index, E element) {
-	    // TODO Auto-generated method stub
-	    return null;
+	    final E result = this.internalList.set(index, element);
+	    return result;
     }
 	public int size() {
-	    // TODO Auto-generated method stub
-	    return 0;
+	    return this.internalList.size();
     }
 	public List<E> subList(int fromIndex, int toIndex) {
-	    // TODO Auto-generated method stub
-	    return null;
+	    return new DefaultObservableList<E>(this.internalList.subList(fromIndex, toIndex));
     }
 	public Object[] toArray() {
-	    // TODO Auto-generated method stub
-	    return null;
+	    return this.internalList.toArray();
     }
 	public <T> T[] toArray(T[] a) {
-	    // TODO Auto-generated method stub
-	    return null;
+	    return this.internalList.toArray(a);
     }
 }

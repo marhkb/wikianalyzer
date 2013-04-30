@@ -1,37 +1,37 @@
 package de.behrfried.wikianalyzer.util.list;
 
-import de.behrfried.wikianalyzer.util.data.Tuple2;
+import java.util.Collections;
+import java.util.List;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 
 
 public class ListChangedEventArgs<E> extends EventArgs {
 
 	public enum ListChangedType {
-		ADD,
-		REMOVE,
+		ADD_REMOVE,
 		CLEAR
 	}
 	
 	private final ListChangedType listChangedType;
 	
-	private final Tuple2<E, Integer> oldItem;
-	private final Tuple2<E, Integer> newItem;
+	private final List<E> oldItems;
+	private final List<E> newItems;
 	
-	public ListChangedEventArgs(ListChangedType listChangedType, final Tuple2<E, Integer> oldItem, Tuple2<E, Integer> newItem) {
+	public ListChangedEventArgs(ListChangedType listChangedType, final List<E> oldItems, List<E> newItems) {
 		this.listChangedType = listChangedType;
-		this.oldItem = oldItem;
-		this.newItem = newItem;
+		this.oldItems = oldItems;
+		this.newItems = newItems;
 	}
 	
     public ListChangedType getListChangedType() {
     	return listChangedType;
     }
 	
-    public Tuple2<E, Integer> getOldItem() {
-    	return oldItem;
+    public List<E> getOldItems() {
+    	return Collections.unmodifiableList(this.oldItems);
     }
 	
-    public Tuple2<E, Integer> getNewItem() {
-    	return newItem;
+    public List<E> getNewItems() {
+    	return Collections.unmodifiableList(this.newItems);
     }
 }
