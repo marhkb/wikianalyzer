@@ -19,8 +19,10 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
@@ -55,7 +57,12 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return null;
 	}
 
-	public ListGridRecord[] getArticleInfos() {
+	public ObservableList<Tuple2<String, String>> getArticleInfos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getSuggestions() {
 		// TODO Auto-generated method stub
 		return null;
 	}

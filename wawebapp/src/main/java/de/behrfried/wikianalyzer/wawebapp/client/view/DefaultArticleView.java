@@ -16,7 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.inject.Inject;
+import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.ContentsType;
 import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Button;
@@ -32,6 +36,7 @@ import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.SectionStack;
 import com.smartgwt.client.widgets.layout.SectionStackSection;
@@ -40,8 +45,11 @@ import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
+import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
+import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 
 public class DefaultArticleView extends ArticleView {
@@ -53,26 +61,25 @@ public class DefaultArticleView extends ArticleView {
 	 * has to be put in.
 	 */
 
-	private Label waLabel;
+	private Label waLabel, genArtInfLabel, artAnaLabel;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalInfoGrid;
 	private ListGridField attributeColumn, valueColumn;
-	private HTMLPane wikiPrevPanel;
-	private HLayout searchLayout, generalWikiArticleLayout;
+	private HLayout searchLayout, articleInfoAnalyzationLayout;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
-	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
-	private SectionStack sectionPanel;
-	private SectionStackSection generalArticleSection, articleAnalyzationSection;
-	private VLayout siteLayoutContainer;
+	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan,
+			yearSpan, chooseSpan;
+	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
 
 	private final Messages messages;
 
 	@Inject
-	public DefaultArticleView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
-		if(presenter == null) {
+	public DefaultArticleView(final Presenter presenter, final Messages messages)
+			throws IllegalArgumentException {
+		if (presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
 		this.presenter = presenter;
@@ -95,7 +102,6 @@ public class DefaultArticleView extends ArticleView {
 		this.searchLayout = new HLayout();
 		this.searchLayout.setMembersMargin(3);
 		this.searchLayout.setHeight(30);
-		this.searchLayout.setBackgroundColor("red");
 		this.searchLayout.addMember(this.waLabel);
 		this.searchLayout.addMember(this.searchBoxContainer);
 		this.searchLayout.addMember(this.searchButton);
@@ -116,53 +122,62 @@ public class DefaultArticleView extends ArticleView {
 		this.timeSpanMenu.addItem(this.yearSpan);
 		this.chooseSpan = new MenuItem("choose timespan");
 		this.timeSpanMenu.addItem(this.chooseSpan);
-		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
+		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(),
+				this.timeSpanMenu);
 
-		this.generalWikiArticleLayout = new HLayout();
-
-		this.wikiPrevPanel = new HTMLPane();
-		this.wikiPrevPanel.setContentsType(ContentsType.PAGE);
-		this.wikiPrevPanel.setWidth("50%");
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
 		this.valueColumn = new ListGridField("Value");
+		//this.valueColumn.setC
 		this.valueColumn.setCanEdit(false);
 		this.generalInfoGrid = new ListGrid();
+	
 		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
-		this.generalInfoGrid.setWidth("50%");
-		
-		this.generalWikiArticleLayout.addMembers(this.wikiPrevPanel, this.generalInfoGrid);
 
-		this.generalArticleSection = new SectionStackSection("General Article Infos");
-		this.generalArticleSection.setItems(this.generalWikiArticleLayout);
-		this.articleAnalyzationSection = new SectionStackSection("Article Analyzation");
-		// this.articleAnalyzationSection.setItems(null);
+		this.artAnaLayout = new VLayout();
+		this.artAnaLayout.setWidth100();
+		this.artAnaLabel = new Label("Article Analyzation");
+		this.artAnaLabel.setHeight(10);
+		this.artAnaLabel.setWidth100();
+		this.artAnaLayout.addMember(this.artAnaLabel);
 
-		this.sectionPanel = new SectionStack();
-		this.sectionPanel.addSection(this.generalArticleSection);
-		this.sectionPanel.addSection(this.articleAnalyzationSection);
-		this.sectionPanel.setVisibilityMode(VisibilityMode.MULTIPLE);
+		this.genInfLayout = new VLayout();
+		this.genInfLayout.setWidth("33%");
+		this.genInfLayout.setHeight100();
+		this.genArtInfLabel = new Label("General Article Infos");
+		this.genArtInfLabel.setHeight(10);
+		this.genArtInfLabel.setWidth100();
+		this.genInfLayout.addMembers(this.genArtInfLabel, this.generalInfoGrid);
+
+		this.articleInfoAnalyzationLayout = new HLayout();
+		this.articleInfoAnalyzationLayout.addMembers(
+				this.artAnaLayout, this.genInfLayout);
 
 		this.siteLayoutContainer = new VLayout();
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
-		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.sectionPanel);
+		this.siteLayoutContainer.addMembers(this.searchLayout,
+				this.timeMenuButton, this.articleInfoAnalyzationLayout);
 
 		this.addChild(this.siteLayoutContainer);
-		
+
 		this.bind();
 
 	}
-	
+
 	private void bind() {
 		this.bindSearchBox();
-		
-		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
-			public void invoke(Object sender, EventArgs e) {
-				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
-			}
-		});
+		this.bindGeneralInfoGrid();
+
+		this.searchButton.setDisabled(!this.presenter.getSendCommand()
+				.canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged()
+				.addHandler(new Handler<EventArgs>() {
+					public void invoke(Object sender, EventArgs e) {
+						searchButton.setDisabled(!presenter.getSendCommand()
+								.canExecute(null));
+					}
+				});
 		this.searchButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				presenter.getSendCommand().execute(null);
@@ -170,33 +185,79 @@ public class DefaultArticleView extends ArticleView {
 		});
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
-				if(event.getKeyName().equals("Enter")) {
-					if(presenter.getSendCommand().canExecute(null)) {
+				if (event.getKeyName().equals("Enter")) {
+					if (presenter.getSendCommand().canExecute(null)) {
 						presenter.getSendCommand().execute(null);
 					}
 				}
 			}
 		});
 	}
-	
+
 	private void bindSearchBox() {
 		this.searchBox.setValue(this.presenter.getArticleName());
 		this.searchBox.addChangedHandler(new ChangedHandler() {
 			public void onChanged(ChangedEvent event) {
-				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
+				DefaultArticleView.this.presenter.setArticleName(searchBox
+						.getValueAsString());
 			}
 		});
-		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {	
-			public void invoke(Object sender, EventArgs e) {
-				if(!searchBox.equals(presenter.getArticleName())) {
-					searchBox.setValue(presenter.getArticleName());
-				}
-			}
-		});
+		this.presenter.articleNameChanged().addHandler(
+				new Handler<EventArgs>() {
+					public void invoke(Object sender, EventArgs e) {
+						if (!searchBox.equals(presenter.getArticleName())) {
+							searchBox.setValue(presenter.getArticleName());
+						}
+					}
+				});
 	}
-	
+
 	private void bindGeneralInfoGrid() {
-		this.generalInfoGrid.setData(DefaultArticleView.this.presenter.getArticleInfos());
+
+		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
+		for (Tuple2<String, String> t : this.presenter.getArticleInfos()) {
+			ListGridRecord lsg = new ListGridRecord();
+			lsg.setAttribute("Attribute", t.getItem1());
+			lsg.setAttribute("Value", t.getItem2());
+			this.generalInfoGrid.addData(lsg);
+			recordsO.put(t, lsg);
+		}
+		this.presenter
+				.getArticleInfos()
+				.listChanged()
+				.addHandler(
+						new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
+
+							public void invoke(
+									Object sender,
+									ListChangedEventArgs<Tuple2<String, String>> e) {
+								if (e.getListChangedType() == ListChangedType.ADD_REMOVE) {
+									if (e.getOldItems() != null) {
+										for (Tuple2<String, String> t : e
+												.getOldItems()) {
+											generalInfoGrid.removeData(recordsO
+													.remove(t));
+										}
+									}
+
+									if (e.getNewItems() != null) {
+										for (Tuple2<String, String> t : e
+												.getNewItems()) {
+											ListGridRecord lsg = new ListGridRecord();
+											lsg.setAttribute("Attribute",
+													t.getItem1());
+											lsg.setAttribute("Value",
+													t.getItem2());
+											generalInfoGrid.addData(lsg);
+											recordsO.put(t, lsg);
+										}
+									}
+								} else {
+									generalInfoGrid.clear();
+									recordsO.clear();
+								}
+							}
+						});
 	}
 
 	@Override

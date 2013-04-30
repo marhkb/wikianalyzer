@@ -16,15 +16,18 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+
 import com.google.inject.Inject;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
@@ -43,7 +46,9 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 	@Inject
 	public DefaultArticlePresenter(final MainServiceAsync mainService) {
 		this.mainService = mainService;
-
+		
+		this.articleInfos.add(Tuple.create("Hans", "Wurst"));
+		this.articleInfos.add(Tuple.create("Kack", "Wurst"));
 	}
 
 	private String articleName = "";
@@ -98,7 +103,13 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 		return null;
 	}
 
-	public ListGridRecord[] getArticleInfos() {
+	private ObservableList<Tuple2<String, String>> articleInfos = 
+			new DefaultObservableList<Tuple2<String, String>>(new ArrayList<Tuple2<String, String>> ());
+	public ObservableList<Tuple2<String, String>> getArticleInfos() {
+		return this.articleInfos;
+	}
+
+	public ObservableList<String> getSuggestions() {
 		// TODO Auto-generated method stub
 		return null;
 	}
