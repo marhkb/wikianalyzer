@@ -207,7 +207,7 @@ public class DefaultArticleView extends ArticleView {
 		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {
 
 			public void invoke(Object sender, EventArgs e) {
-				if(!searchBox.equals(presenter.getArticleName())) {
+				if(!searchBox.getValueAsString().equals(presenter.getArticleName())) {
 					searchBox.setValue(presenter.getArticleName());
 				}
 			}
