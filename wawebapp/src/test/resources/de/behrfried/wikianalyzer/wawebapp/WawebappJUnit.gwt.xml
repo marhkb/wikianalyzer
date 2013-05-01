@@ -5,5 +5,4 @@
 
   <!-- Specify the path to any remote services.                   -->
   <servlet path="/Wawebapp/main" class="de.behrfried.wikianalyzer.wawebapp.server.MainServiceImpl" />
-
 </module>

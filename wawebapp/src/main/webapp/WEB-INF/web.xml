@@ -5,20 +5,19 @@
 
 <web-app>
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>mainServlet</servlet-name>
-    <servlet-class>de.behrfried.wikianalyzer.wawebapp.server.MainServiceImpl</servlet-class>
-  </servlet>
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>mainServlet</servlet-name>
+		<servlet-class>de.behrfried.wikianalyzer.wawebapp.server.MainServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mainServlet</servlet-name>
+		<url-pattern>/WawebappJUnit/Wawebapp/main</url-pattern>
+	</servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>mainServlet</servlet-name>
-    <url-pattern>/Wawebapp/main</url-pattern>
-  </servlet-mapping>
-
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Wawebapp.html</welcome-file>
-  </welcome-file-list>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>Wawebapp.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>
