@@ -14,9 +14,11 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import com.google.inject.Inject;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView.Presenter;
 
 /**
  * Default implementation for {@link UserComparisonView}.

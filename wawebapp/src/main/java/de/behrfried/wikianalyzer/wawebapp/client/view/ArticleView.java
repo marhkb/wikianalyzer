@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
@@ -49,6 +50,8 @@ public abstract class ArticleView extends View {
 		Event<EventArgs> articleLinkChanged();
 		
 		ObservableList<Tuple2<String, String>> getArticleInfos();
-		ObservableList<String> getSuggestions();
+		
+		LinkedHashMap<String,String> getSuggestions();
+		Event<EventArgs> suggestionsChanged();
 	}
 }

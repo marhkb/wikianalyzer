@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
@@ -30,6 +30,8 @@ import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView.Presenter;
 
 /**
  * Default implementation of {@link UserView}.

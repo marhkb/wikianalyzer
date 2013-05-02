@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Random;
 import com.google.inject.Inject;
@@ -53,17 +54,20 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 			this.suggestions.clear();
 			if(this.articleName.startsWith("A")) {
-				this.suggestions.add("Arschloch");
-				this.suggestions.add("Amerika");
-				this.suggestions.add("Atombombe");
+				this.suggestions.put("Arschloch", "Arschloch");
+				this.suggestions.put("Amerika", "Amerika");
+				this.suggestions.put("Atombombe", "Atombombe");
 			} else {
-				this.suggestions.add("Fliegenfänger");
-				this.suggestions.add("Menschenfleich");
-				this.suggestions.add("Rauch");
-				this.suggestions.add("Katasteramt");
-				this.suggestions.add("Blubb");
-				this.suggestions.add("=<o> : <o>=");
+				this.suggestions.put("Fliegenfänger", "Fliegenfänger");
+				this.suggestions.put("Menschenfleich", "Menschenfleich");
+				this.suggestions.put("Rauch", "Rauch");
+				this.suggestions.put("Katasteramt", "Katasteramt");
+				this.suggestions.put("Blubb", "Blubb");
+				this.suggestions.put("Banane", "Banane");
+				this.suggestions.put("Burgfrieden", "Burgfrieden");
+				this.suggestions.put("=<o> : <o>=", "=<o> : <o>=");
 			}
+			this.suggestionsChanged().fire(this.initContext, this, EventArgs.EMPTY);
 		}
 	}
 
@@ -142,9 +146,14 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleInfos;
 	}
 
-	private final ObservableList<String> suggestions = new DefaultObservableList<String>(new LinkedList<String>());
+	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
 
-	public ObservableList<String> getSuggestions() {
+	public LinkedHashMap<String, String> getSuggestions() {
 		return this.suggestions;
 	}
+
+	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(this.initContext);
+	public Event<EventArgs> suggestionsChanged() {
+	    return this.suggestionsChanged;
+    }
 }

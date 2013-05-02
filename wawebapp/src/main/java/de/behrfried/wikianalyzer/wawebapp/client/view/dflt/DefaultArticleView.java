@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -53,6 +53,8 @@ import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView.Presenter;
 
 public class DefaultArticleView extends ArticleView {
 
@@ -169,31 +171,9 @@ public class DefaultArticleView extends ArticleView {
 
 	private void bind() {
 		this.bindSearchBox();
+		this.bindSearchButton();
 		this.bindGeneralInfoGrid();
 
-		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
-
-			public void invoke(Object sender, EventArgs e) {
-				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
-			}
-		});
-		this.searchButton.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				presenter.getSendCommand().execute(null);
-			}
-		});
-		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
-
-			public void onKeyUp(KeyUpEvent event) {
-				if(event.getKeyName().equals("Enter")) {
-					if(presenter.getSendCommand().canExecute(null)) {
-						presenter.getSendCommand().execute(null);
-					}
-				}
-			}
-		});
 	}
 
 	private void bindSearchBox() {
@@ -212,24 +192,41 @@ public class DefaultArticleView extends ArticleView {
 				}
 			}
 		});
-
-		final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-		for(final String suggestion : this.presenter.getSuggestions()) {
-			map.put(suggestion, suggestion);
-		}
-		this.searchBox.setValueMap(map);
-		this.presenter.getSuggestions().listChanged().addHandler(new Handler<ListChangedEventArgs<String>>() {
-
-			public void invoke(Object sender, ListChangedEventArgs<String> e) {
-					map.clear();
-					for(final String suggestion : presenter.getSuggestions()) {
-						map.put(suggestion, suggestion);
+		
+		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
+			public void onKeyUp(KeyUpEvent event) {
+				if(event.getKeyName().equals("Enter")) {
+					if(presenter.getSendCommand().canExecute(null)) {
+						presenter.getSendCommand().execute(null);
 					}
-					searchBox.setValueMap(map);
+				}
+			}
+		});
+		
+		this.searchBox.setValueMap(this.presenter.getSuggestions());
+		this.presenter.suggestionsChanged().addHandler(new Handler<EventArgs>() {
+			public void invoke(Object sender, EventArgs e) {
+				searchBox.setValueMap(presenter.getSuggestions());
 			}
 		});
 	}
 
+	private void bindSearchButton() {
+		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(Object sender, EventArgs e) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+			}
+		});
+		this.searchButton.addClickHandler(new ClickHandler() {
+
+			public void onClick(ClickEvent event) {
+				presenter.getSendCommand().execute(null);
+			}
+		});
+	}
+	
 	private void bindGeneralInfoGrid() {
 
 		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();

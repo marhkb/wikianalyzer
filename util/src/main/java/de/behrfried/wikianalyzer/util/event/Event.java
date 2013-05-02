@@ -157,7 +157,7 @@ public class Event<E extends EventArgs> {
 	/**
 	 * Fires this Event by invoking all associated {@link Handler}'s.
 	 * 
-	 * @param initializationContext
+	 * @param initContext
 	 *            this should be the same object as passed to constructor at
 	 *            Event's instantiation
 	 * @param sender
@@ -169,8 +169,8 @@ public class Event<E extends EventArgs> {
 	 *             if the passed initializationContext is not the same object as
 	 *             passed at construction of this Event
 	 */
-	public void fire(final Object initializationContext, final Object sender, final E e) throws IllegalStateException {
-		if(this.initContext != initializationContext) {
+	public void fire(final Object initContext, final Object sender, final E e) throws IllegalStateException {
+		if(this.initContext != initContext) {
 			throw new IllegalStateException("wrong initContext");
 		}
 		for(final Handler<E> h : this.handlers) {

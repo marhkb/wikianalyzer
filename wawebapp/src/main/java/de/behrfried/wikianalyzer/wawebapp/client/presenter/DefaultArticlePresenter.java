@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
@@ -66,7 +67,13 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 	    return null;
     }
 
-	public ObservableList<String> getSuggestions() {
+
+	public Event<EventArgs> suggestionsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	public LinkedHashMap<String, String> getSuggestions() {
 	    // TODO Auto-generated method stub
 	    return null;
     }

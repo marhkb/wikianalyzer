@@ -83,6 +83,13 @@
 			<version>3.1</version>
 		</dependency>
 
+		<!-- the Wiki API Implementation in Java (server side) -->
+		<dependency>
+			<groupId>info.bliki.wiki</groupId>
+			<artifactId>bliki-core</artifactId>
+			<version>3.0.19</version>
+		</dependency>
+
 		<!-- Util -->
 		<dependency>
 			<groupId>de.behrfried.wikianalyzer</groupId>
