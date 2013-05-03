@@ -29,14 +29,5 @@ import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
 @RemoteServiceRelativePath("main")
 public interface MainService extends RemoteService {
 
-	/**
-	 * Passes an {@link StringObject} and returns it.
-	 * 
-	 * @param o
-	 *            an {@link StringObject}
-	 * @return o
-	 */
-	StringObject getStringObject(StringObject o);
-
-	String getArticle(String article);
+	int sendArticleName(String articleName);
 }

@@ -76,6 +76,14 @@
 			<version>3.1</version>
 		</dependency>
 
+		<!-- Guice for serverside -->
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>3.0</version>
+		</dependency>
+            
+		
 		<!-- the Wiki API Implementation in Java (server side) -->
 		<dependency>
 			<groupId>info.bliki.wiki</groupId>

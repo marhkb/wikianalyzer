@@ -31,6 +31,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
  * 
  */
 public abstract class ArticleView extends View {
+	
 
 	/**
 	 * Presenter interface the ArticleView wants to use
@@ -40,9 +41,9 @@ public abstract class ArticleView extends View {
 	 */
 	public interface Presenter extends PresenterBase {
 
-		String getArticleName();
-		void setArticleName(String string);
-		Event<EventArgs> articleNameChanged();
+		String getArticleTitle();
+		void setArticleTitle(String title);
+		Event<EventArgs> articleTitleChanged();
 		
 		Command getSendCommand();
 		
@@ -51,7 +52,9 @@ public abstract class ArticleView extends View {
 		
 		ObservableList<Tuple2<String, String>> getArticleInfos();
 		
-		LinkedHashMap<String,String> getSuggestions();
+		LinkedHashMap<String, String> getSuggestions();
 		Event<EventArgs> suggestionsChanged();
+		
+	
 	}
 }

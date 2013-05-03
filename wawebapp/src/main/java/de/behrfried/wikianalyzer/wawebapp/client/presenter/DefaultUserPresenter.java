@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
@@ -104,16 +103,7 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	 */
 	public void onSendNameToServer() {
 		if(this.getCanSendNameToServer()) {
-			this.mainService.getArticle(this.nameToServer, new AsyncCallback<String>() {
 
-				public void onSuccess(final String result) {
-					DefaultUserPresenter.this.setNameToServer(result);
-					DefaultUserPresenter.this.getNameToServerChanged().fire(DefaultUserPresenter.this.initContext, DefaultUserPresenter.this,
-					        new GenericEventArgs<String>(DefaultUserPresenter.this.getNameToServer()));
-				}
-
-				public void onFailure(final Throwable caught) {}
-			});
 		}
 	}
 

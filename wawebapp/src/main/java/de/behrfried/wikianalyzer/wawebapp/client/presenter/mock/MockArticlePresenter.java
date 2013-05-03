@@ -19,6 +19,8 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Random;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.data.Tuple;
@@ -28,28 +30,36 @@ import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
+import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
+	private final MainServiceAsync mainService;
+
 	private final Object initContext = new Object();
 
 	@Inject
-	public MockArticlePresenter() {
+	public MockArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
+		if(mainService == null) {
+			throw new IllegalArgumentException("mainService == null");
+		}
+		this.mainService = mainService;
+
 		this.articleInfos.add(Tuple.create("Ast", "Loch"));
 		this.articleInfos.add(Tuple.create("Rosa", "Schlüpfer"));
 	}
 
 	private String articleName = "";
 
-	public String getArticleName() {
+	public String getArticleTitle() {
 		return this.articleName;
 	}
 
-	public void setArticleName(String string) {
+	public void setArticleTitle(String string) {
 		if(!string.equals(this.articleName)) {
 			this.articleName = string;
-			this.articleNameChanged().fire(this.initContext, this, EventArgs.EMPTY);
+			this.articleTitleChanged().fire(this.initContext, this, EventArgs.EMPTY);
 			this.sendCommand.raiseCanExecuteChanged();
 
 			this.jGetArticleTitles(this.articleName, 10);
@@ -58,15 +68,27 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private final Event<EventArgs> articleChanged = new Event<EventArgs>(initContext);
 
-	public Event<EventArgs> articleNameChanged() {
+	public Event<EventArgs> articleTitleChanged() {
 		return articleChanged;
 	}
 
 	private final Command sendCommand = new UICommand() {
 
 		public void execute(Object param) {
-			setArticleName(getArticleName().toUpperCase());
 
+			mainService.sendArticleName(getArticleTitle(), new AsyncCallback<Integer>() {
+				
+				public void onSuccess(Integer result) {
+					// TODO Auto-generated method stub
+					Window.alert(result + "");
+				}
+				
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 			final Random r = new Random();
 			switch(r.nextInt(5)) {
 				case 0:
@@ -91,7 +113,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		}
 
 		public boolean canExecute(Object param) {
-			return getArticleName().length() > 0;
+			return getArticleTitle().length() > 0;
 		}
 
 		@Override
@@ -131,7 +153,8 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleInfos;
 	}
 
-	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
+	private final LinkedHashMap<String, String> suggestions = 
+			new LinkedHashMap<String, String>();
 
 	public LinkedHashMap<String, String> getSuggestions() {
 		return this.suggestions;
@@ -144,18 +167,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	void fireSuggestionsChanged() {
-		// Window.alert("fire");
 		this.suggestionsChanged.fire(this.initContext, this, EventArgs.EMPTY);
 	}
 
 	private final void clearSuggestions() {
-		// Window.alert("CLEAR");
 		this.suggestions.clear();
 	}
 
-	private final void addToSuggestions(Object o) {
-		// Window.alert(o.toString());
-		this.suggestions.put((String)o, (String)o);
+	private final void addToSuggestions(String name) {
+		this.suggestions.put(name, name);
 	}
 
 	public final native void jGetArticleTitles(String word, int maxResults) /*-{
@@ -164,16 +184,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		var inst = this;
 		$wnd.$
 				.getJSON(
-						"http://en.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&gaplimit="
-								+ maxResults
-								+ "&gapfrom="
-								+ word
-								+ "&callback=?",
+						"http://en.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&callback=?", 
+						{gaplimit: maxResults, gapfrom: word}, 
 						function(data) {
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
 							for ( var d in data["query"]["pages"]) {
-								var s = data["query"]["pages"][d].title;
-								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/Object;)(data["query"]["pages"][d].title);
+								var title = data["query"]["pages"][d].title;
+								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
 
 							}
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();

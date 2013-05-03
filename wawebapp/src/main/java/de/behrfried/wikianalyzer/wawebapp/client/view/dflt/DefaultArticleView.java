@@ -177,18 +177,17 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindSearchBox() {
-		this.searchBox.setValue(this.presenter.getArticleName());
+		this.searchBox.setValue(this.presenter.getArticleTitle());
 		this.searchBox.addChangedHandler(new ChangedHandler() {
 
 			public void onChanged(ChangedEvent event) {
-				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
+				DefaultArticleView.this.presenter.setArticleTitle((searchBox.getValueAsString()));
 			}
 		});
-		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {
-
+		this.presenter.articleTitleChanged().addHandler(new Handler<EventArgs>() {
 			public void invoke(Object sender, EventArgs e) {
-				if(!searchBox.getValueAsString().equals(presenter.getArticleName())) {
-					searchBox.setValue(presenter.getArticleName());
+				if(!searchBox.getValueAsString().equals(presenter.getArticleTitle())) {
+					searchBox.setValue(presenter.getArticleTitle());
 				}
 			}
 		});

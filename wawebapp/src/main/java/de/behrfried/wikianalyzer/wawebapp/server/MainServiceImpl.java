@@ -16,9 +16,15 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server;
 
+import info.bliki.api.Connector;
+import info.bliki.api.User;
+import info.bliki.api.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
-import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
 
 /**
  * Server side implementation of {@link MainService}
@@ -26,22 +32,41 @@ import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
  * @author marcus
  * 
  */
+@Singleton
 public class MainServiceImpl extends RemoteServiceServlet implements MainService {
-
+	
 	/**
-	 * generated UID
-	 */
-	private static final long serialVersionUID = 200675849907147502L;
-
-	/**
-	 * Look at {@link MainService}
-	 */
-	public StringObject getStringObject(final StringObject o) {
-		return o;
+     * 
+     */
+    private static final long serialVersionUID = 3575183933435770570L;
+    
+    
+	private final Logger logger = LoggerFactory.getLogger(MainServiceImpl.class);
+	
+	private final RandomGen randomGen;
+	
+	@Inject
+	public MainServiceImpl(RandomGen randomGen) {
+		this.randomGen = randomGen;
 	}
 
-	public String getArticle(final String article) {
-		return article.toUpperCase();
+	public int sendArticleName(String articleName) {
+		
+		logger.info(articleName);		
+		User user = new User("", "", "http://de.wikipedia.org/w/api.php");
+		user.login();
+		Connector connector = new Connector();
+		
+		final Query query = new Query();
+		query.action("query");
+		query.format("json");
+		query.generator("allpages");
+		//final List<Page> pages = connector.query(user, query);
+		
+//		for(Page p : pages) {
+//			this.logger.info(p.getTitle());
+//		}
+		return this.randomGen.getR();
 	}
 
 }

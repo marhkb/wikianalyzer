@@ -32,17 +32,17 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
  */
 public class DefaultArticlePresenter implements ArticleView.Presenter {
 
-	public String getArticleName() {
+	public String getArticleTitle() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
 
-	public void setArticleName(String string) {
+	public void setArticleTitle(String string) {
 	    // TODO Auto-generated method stub
 	    
     }
 
-	public Event<EventArgs> articleNameChanged() {
+	public Event<EventArgs> articleTitleChanged() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
