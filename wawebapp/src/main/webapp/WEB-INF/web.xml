@@ -12,7 +12,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mainServlet</servlet-name>
-		<url-pattern>/WawebappJUnit/Wawebapp/main</url-pattern>
+		<url-pattern>Wawebapp/main</url-pattern>
 	</servlet-mapping>
 
 	<!-- Default page to serve -->
