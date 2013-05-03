@@ -22,6 +22,8 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPrese
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.service.JQueryWikiAccess;
+import de.behrfried.wikianalyzer.wawebapp.client.service.WikiAccess;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
@@ -49,6 +51,7 @@ public class WaGinModule extends AbstractGinModule {
 		/*
 		 * bind services
 		 */
+		this.bind(WikiAccess.class).to(JQueryWikiAccess.class).in(Singleton.class);
 
 		/*
 		 * bind presenters

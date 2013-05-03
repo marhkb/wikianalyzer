@@ -28,14 +28,20 @@ import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
+import de.behrfried.wikianalyzer.wawebapp.client.service.WikiAccess;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private final Object initContext = new Object();
 
+	private final WikiAccess wikiAccess;
+
 	@Inject
-	public MockArticlePresenter() {
+	public MockArticlePresenter(final WikiAccess wikiAccess) {
+
+		this.wikiAccess = wikiAccess;
+
 		this.articleInfos.add(Tuple.create("Ast", "Loch"));
 		this.articleInfos.add(Tuple.create("Rosa", "Schlüpfer"));
 	}
@@ -52,22 +58,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 			this.articleNameChanged().fire(this.initContext, this, EventArgs.EMPTY);
 			this.sendCommand.raiseCanExecuteChanged();
 
-			this.suggestions.clear();
-			if(this.articleName.startsWith("A")) {
-				this.suggestions.put("Arschloch", "Arschloch");
-				this.suggestions.put("Amerika", "Amerika");
-				this.suggestions.put("Atombombe", "Atombombe");
-			} else {
-				this.suggestions.put("Fliegenfänger", "Fliegenfänger");
-				this.suggestions.put("Menschenfleich", "Menschenfleich");
-				this.suggestions.put("Rauch", "Rauch");
-				this.suggestions.put("Katasteramt", "Katasteramt");
-				this.suggestions.put("Blubb", "Blubb");
-				this.suggestions.put("Banane", "Banane");
-				this.suggestions.put("Burgfrieden", "Burgfrieden");
-				this.suggestions.put("=<o> : <o>=", "=<o> : <o>=");
-			}
-			this.suggestionsChanged().fire(this.initContext, this, EventArgs.EMPTY);
+			this.jGetArticleTitles(this.articleName, 2);
 		}
 	}
 
@@ -81,7 +72,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 		public void execute(Object param) {
 			setArticleName(getArticleName().toUpperCase());
-			
+
 			final Random r = new Random();
 			switch(r.nextInt(5)) {
 				case 0:
@@ -153,7 +144,42 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(this.initContext);
+
 	public Event<EventArgs> suggestionsChanged() {
-	    return this.suggestionsChanged;
-    }
+		return this.suggestionsChanged;
+	}
+
+	void fire() {
+		// Window.alert("fire");
+		this.suggestionsChanged.fire(this.initContext, this, EventArgs.EMPTY);
+	}
+
+	void clear() {
+		// Window.alert("CLEAR");
+		this.suggestions.clear();
+	}
+
+	void addT(Object o) {
+		// Window.alert(o.toString());
+		this.suggestions.put((String)o, (String)o);
+	}
+
+	public native void jGetArticleTitles(String word, int maxResults) /*-{
+		//this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::suggestions.@java.util.LinkedHashMap::clear();
+		//this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fire()();
+		var inst = this;
+		$wnd.$
+				.getJSON(
+						"http://en.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&gaplimit=3&gapfrom="
+								+ word + "Ba&callback=?",
+						function(data) {
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clear()();
+							for ( var d in data["query"]["pages"]) {
+								var s = data["query"]["pages"][d].title;
+								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addT(Ljava/lang/Object;)(s);
+
+							}
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fire()();
+						});
+	}-*/;
 }

@@ -2,6 +2,9 @@
 <module rename-to='Wawebapp'>
 	<!-- Inherit the core Web Toolkit stuff. -->
 	<inherits name='com.google.gwt.user.User' />
+	
+	<!-- Inherit JSON -->
+	<inherits name="com.google.gwt.json.JSON" /> 
 
 	<!-- Inherit the default GWT style sheet. You can change -->
 	<!-- the theme of your GWT application by uncommenting -->
@@ -26,6 +29,10 @@
 
 	<!-- lib for chart vizualization -->
 	<inherits name='com.google.gwt.visualization.Visualization' />
+	
+	<script src="jquery-2.0.0.js"></script>
+	
+	
 	
 	<!-- English language, independent of country -->
 	<extend-property name="locale" values="en" />

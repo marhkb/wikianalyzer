@@ -207,6 +207,7 @@ public class DefaultArticleView extends ArticleView {
 		this.presenter.suggestionsChanged().addHandler(new Handler<EventArgs>() {
 			public void invoke(Object sender, EventArgs e) {
 				searchBox.setValueMap(presenter.getSuggestions());
+				searchBox.showPicker();
 			}
 		});
 	}
