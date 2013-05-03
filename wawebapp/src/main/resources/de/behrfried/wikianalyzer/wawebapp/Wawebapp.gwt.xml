@@ -30,9 +30,8 @@
 	<!-- lib for chart vizualization -->
 	<inherits name='com.google.gwt.visualization.Visualization' />
 	
-	<script src="jquery-2.0.0.js"></script>
-	
-	
+	<!-- jquery for client side wikimedia api usage -->
+	<script src="jquery-2.0.0.js"/>
 	
 	<!-- English language, independent of country -->
 	<extend-property name="locale" values="en" />

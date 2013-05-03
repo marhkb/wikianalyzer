@@ -168,7 +168,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 								+ maxResults
 								+ "&gapfrom="
 								+ word
-								+ "Ba&callback=?",
+								+ "&callback=?",
 						function(data) {
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
 							for ( var d in data["query"]["pages"]) {
