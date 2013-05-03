@@ -28,20 +28,14 @@ import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
-import de.behrfried.wikianalyzer.wawebapp.client.service.WikiAccess;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private final Object initContext = new Object();
 
-	private final WikiAccess wikiAccess;
-
 	@Inject
-	public MockArticlePresenter(final WikiAccess wikiAccess) {
-
-		this.wikiAccess = wikiAccess;
-
+	public MockArticlePresenter() {
 		this.articleInfos.add(Tuple.create("Ast", "Loch"));
 		this.articleInfos.add(Tuple.create("Rosa", "Schlüpfer"));
 	}
@@ -58,7 +52,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 			this.articleNameChanged().fire(this.initContext, this, EventArgs.EMPTY);
 			this.sendCommand.raiseCanExecuteChanged();
 
-			this.jGetArticleTitles(this.articleName, 2);
+			this.jGetArticleTitles(this.articleName, 10);
 		}
 	}
 
@@ -149,37 +143,40 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.suggestionsChanged;
 	}
 
-	void fire() {
+	void fireSuggestionsChanged() {
 		// Window.alert("fire");
 		this.suggestionsChanged.fire(this.initContext, this, EventArgs.EMPTY);
 	}
 
-	void clear() {
+	private final void clearSuggestions() {
 		// Window.alert("CLEAR");
 		this.suggestions.clear();
 	}
 
-	void addT(Object o) {
+	private final void addToSuggestions(Object o) {
 		// Window.alert(o.toString());
 		this.suggestions.put((String)o, (String)o);
 	}
 
-	public native void jGetArticleTitles(String word, int maxResults) /*-{
-		//this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::suggestions.@java.util.LinkedHashMap::clear();
-		//this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fire()();
+	public final native void jGetArticleTitles(String word, int maxResults) /*-{
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
 		var inst = this;
 		$wnd.$
 				.getJSON(
-						"http://en.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&gaplimit=3&gapfrom="
-								+ word + "Ba&callback=?",
+						"http://en.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&gaplimit="
+								+ maxResults
+								+ "&gapfrom="
+								+ word
+								+ "Ba&callback=?",
 						function(data) {
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clear()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
 							for ( var d in data["query"]["pages"]) {
 								var s = data["query"]["pages"][d].title;
-								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addT(Ljava/lang/Object;)(s);
+								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/Object;)(data["query"]["pages"][d].title);
 
 							}
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fire()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
 						});
 	}-*/;
 }
