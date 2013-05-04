@@ -223,16 +223,6 @@
 
 	<repositories>
 		<repository>
-			<id>info-bliki-repository</id>
-			<url>http://gwtwiki.googlecode.com/svn/maven-repository/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>smartclient</id>
 			<url>http://www.smartclient.com/maven2/</url>
 			<releases>
