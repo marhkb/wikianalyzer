@@ -14,17 +14,15 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.server;
+package de.behrfried.wikianalyzer.wawebapp.server.servlets;
 
-import info.bliki.api.Connector;
-import info.bliki.api.User;
-import info.bliki.api.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
+import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
 
 /**
  * Server side implementation of {@link MainService}
@@ -43,30 +41,15 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
     
 	private final Logger logger = LoggerFactory.getLogger(MainServiceImpl.class);
 	
-	private final RandomGen randomGen;
+	private final WikiAccess wikiAccess;
 	
 	@Inject
-	public MainServiceImpl(RandomGen randomGen) {
-		this.randomGen = randomGen;
+	public MainServiceImpl(WikiAccess wikiAccess) {
+		this.wikiAccess = wikiAccess;
 	}
 
 	public int sendArticleName(String articleName) {
-		
-		logger.info(articleName);		
-		User user = new User("", "", "http://de.wikipedia.org/w/api.php");
-		user.login();
-		Connector connector = new Connector();
-		
-		final Query query = new Query();
-		query.action("query");
-		query.format("json");
-		query.generator("allpages");
-		//final List<Page> pages = connector.query(user, query);
-		
-//		for(Page p : pages) {
-//			this.logger.info(p.getTitle());
-//		}
-		return this.randomGen.getR();
+		return this.wikiAccess.getPageId(articleName);
 	}
 
 }
