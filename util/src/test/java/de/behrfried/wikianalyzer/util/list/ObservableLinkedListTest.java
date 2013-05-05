@@ -33,7 +33,7 @@ import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
  * @author marcus
  * 
  */
-public class DefaultObservableListTest {
+public class ObservableLinkedListTest {
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ public class DefaultObservableListTest {
 	 */
 	@Before
 	public void setUp() {
-		this.observableList = new DefaultObservableList<Object>(new ArrayList<Object>());
+		this.observableList = new ObservableLinkedList<Object>();
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class DefaultObservableListTest {
 		 * first create a copy of the current list to check it again after
 		 * exception testing
 		 */
-		final DefaultObservableList<Object> copiedList = new DefaultObservableList<Object>(new LinkedList<Object>(this.observableList));
+		final DefaultObservableList<Object> copiedList = new ObservableLinkedList<Object>(this.observableList);
 		try {
 			/* at a negative index */
 			this.observableList.add(-1, new Object());
@@ -373,7 +373,7 @@ public class DefaultObservableListTest {
 		 * first create a copy of the current list to check it again after
 		 * exception testing
 		 */
-		final DefaultObservableList<Object> copiedList = new DefaultObservableList<Object>(new LinkedList<Object>(this.observableList));
+		final DefaultObservableList<Object> copiedList = new ObservableLinkedList<Object>(this.observableList);
 		try {
 			/* at a negative index */
 			this.observableList.addAll(-1, objectsToAdd);
@@ -770,7 +770,7 @@ public class DefaultObservableListTest {
 		 * first create a copy of the current list to check it again after
 		 * exception testing
 		 */
-		final DefaultObservableList<Object> copiedList = new DefaultObservableList<Object>(new LinkedList<Object>(this.observableList));
+		final DefaultObservableList<Object> copiedList = new ObservableLinkedList<Object>(this.observableList);
 		try {
 			/* at a negative index */
 			this.observableList.remove(-1);
@@ -1037,7 +1037,7 @@ public class DefaultObservableListTest {
 		 * first create a copy of the current list to check it again after
 		 * exception testing
 		 */
-		final DefaultObservableList<Object> copiedList = new DefaultObservableList<Object>(new LinkedList<Object>(this.observableList));
+		final DefaultObservableList<Object> copiedList = new ObservableLinkedList<Object>(this.observableList);
 		try {
 			/* at a negative index */
 			this.observableList.set(-1, new Object());
@@ -1122,7 +1122,7 @@ public class DefaultObservableListTest {
 		final List<Object> sublist = this.observableList.subList(6, 14);
 		
 		/* assert the sublist is a DefaultObservableList */
-		assertTrue(sublist.getClass() == DefaultObservableList.class);
+		assertTrue(sublist.getClass() == ObservableLinkedList.class);
 		
 		/* assert the sublist has the correct size */
 		assertEquals(14 - 6, sublist.size());

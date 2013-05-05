@@ -28,6 +28,7 @@ import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
+import de.behrfried.wikianalyzer.util.list.ObservableLinkedList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
@@ -146,7 +147,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleLinkChanged;
 	}
 
-	private final ObservableList<Tuple2<String, String>> articleInfos = new DefaultObservableList<Tuple2<String, String>>(
+	private final ObservableList<Tuple2<String, String>> articleInfos = new ObservableLinkedList<Tuple2<String, String>>(
 	        new LinkedList<Tuple2<String, String>>());
 
 	public ObservableList<Tuple2<String, String>> getArticleInfos() {

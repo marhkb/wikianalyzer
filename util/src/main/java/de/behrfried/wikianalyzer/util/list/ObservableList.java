@@ -19,8 +19,17 @@ package de.behrfried.wikianalyzer.util.list;
 import java.util.List;
 import de.behrfried.wikianalyzer.util.event.Event;
 
-
+/**
+ * 
+ * @author marcus
+ *
+ * @param <E>
+ */
 public interface ObservableList<E> extends List<E> {
 
+	/**
+	 * 
+	 * @return
+	 */
 	Event<ListChangedEventArgs<E>> listChanged();
 }

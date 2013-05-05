@@ -24,7 +24,7 @@ import java.util.ListIterator;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
 
-public final class DefaultObservableList<E> implements ObservableList<E> {
+public abstract class DefaultObservableList<E> implements ObservableList<E> {
 
 	private final Object initContext = new Object();
 
@@ -32,9 +32,18 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 
 	private final List<E> internalList;
 
-	public DefaultObservableList(final List<E> internalList) {
-		this.internalList = internalList;
+	public DefaultObservableList() {
+		this.internalList = this.createInternalList(null);
 	}
+	
+	public DefaultObservableList(Collection<E> collection) {
+		this.internalList = this.createInternalList(collection);
+	}
+	
+	protected abstract List<E> createInternalList(Collection<E> collection);
+	
+	protected abstract DefaultObservableList<E> createObservableList(Collection<E> collection);
+	
 
 	public Event<ListChangedEventArgs<E>> listChanged() {
 		return this.listChanged;
@@ -186,7 +195,7 @@ public final class DefaultObservableList<E> implements ObservableList<E> {
 	}
 
 	public List<E> subList(int fromIndex, int toIndex) {
-		return new DefaultObservableList<E>(this.internalList.subList(fromIndex, toIndex));
+		return this.createObservableList(this.internalList.subList(fromIndex, toIndex));
 	}
 
 	public Object[] toArray() {

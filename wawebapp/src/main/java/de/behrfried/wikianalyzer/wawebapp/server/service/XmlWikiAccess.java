@@ -39,6 +39,7 @@ public class XmlWikiAccess implements WikiAccess {
 		this.xPathfactory = XPathFactory.newInstance();
 	}
 
+	
 	public int getPageId(String title) {
 		final String convertedTitle = title.replaceAll(" ", "%20");
 		this.logger.debug("Request 'pageid' for title '" + title + "' (converted to '" + convertedTitle + "')");
