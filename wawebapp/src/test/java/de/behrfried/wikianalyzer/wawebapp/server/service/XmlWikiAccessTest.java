@@ -35,6 +35,10 @@ public class XmlWikiAccessTest {
 		expected = 105066;
 		actual = this.wikiAccess.getPageId("Ratte");
 		assertEquals(expected, actual);
+		
+		expected = 2578216;
+		actual = this.wikiAccess.getPageId("Hans Wurst");
+		assertEquals(expected, actual);
 	}
 
 }

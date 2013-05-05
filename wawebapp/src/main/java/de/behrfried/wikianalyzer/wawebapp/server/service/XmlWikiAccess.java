@@ -40,9 +40,10 @@ public class XmlWikiAccess implements WikiAccess {
 	}
 
 	public int getPageId(String title) {
-		this.logger.debug("Request 'pageid' for title '" + title + "'");
+		final String convertedTitle = title.replaceAll(" ", "%20");
+		this.logger.debug("Request 'pageid' for title '" + title + "' (converted to '" + convertedTitle + "')");
 		final String response =
-				this.requester.getResult("http://de.wikipedia.org/w/api.php?action=query&format=xml&indexpageids&titles=" + title);
+				this.requester.getResult("http://de.wikipedia.org/w/api.php?action=query&format=xml&indexpageids&titles=" + convertedTitle);
 		this.logger.debug("Response: " + response);
 		try {
 			InputSource is = new InputSource(new StringReader(response));

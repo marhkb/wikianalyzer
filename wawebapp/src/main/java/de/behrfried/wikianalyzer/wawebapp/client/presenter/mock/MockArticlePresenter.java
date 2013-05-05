@@ -184,7 +184,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		var inst = this;
 		$wnd.$
 				.getJSON(
-						"http://en.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&callback=?", 
+						"http://de.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&callback=?", 
 						{gaplimit: maxResults, gapfrom: word}, 
 						function(data) {
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
