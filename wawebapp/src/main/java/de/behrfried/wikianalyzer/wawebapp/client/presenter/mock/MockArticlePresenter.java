@@ -23,14 +23,14 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.command.CommandManager;
+import de.behrfried.wikianalyzer.util.command.UICommand;
 import de.behrfried.wikianalyzer.util.data.Tuple;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
 import de.behrfried.wikianalyzer.util.list.ObservableLinkedList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
@@ -61,8 +61,6 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		if(!string.equals(this.articleName)) {
 			this.articleName = string;
 			this.articleTitleChanged().fire(this.initContext, this, EventArgs.EMPTY);
-			this.sendCommand.raiseCanExecuteChanged();
-
 			this.jGetArticleTitles(this.articleName, 10);
 		}
 	}
@@ -80,13 +78,10 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 			mainService.sendArticleName(getArticleTitle(), new AsyncCallback<Integer>() {
 				
 				public void onSuccess(Integer result) {
-					// TODO Auto-generated method stub
 					Window.alert(result + "");
 				}
 				
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
+				public void onFailure(Throwable caught) {					
 				}
 			});
 			

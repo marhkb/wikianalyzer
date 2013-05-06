@@ -21,11 +21,11 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.inject.Inject;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.ContentsType;
 import com.smartgwt.client.types.VisibilityMode;
-import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -47,6 +47,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
+import de.behrfried.wikianalyzer.util.command.CommandManager;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
@@ -212,19 +213,23 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindSearchButton() {
-		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
-
-			public void invoke(Object sender, EventArgs e) {
-				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
-			}
-		});
-		this.searchButton.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				presenter.getSendCommand().execute(null);
-			}
-		});
+//		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
+//		CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {	
+//			public void invoke(Object sender, EventArgs e) {
+//				presenter.getSendCommand().raiseCanExecuteChanged();
+//			}
+//		});
+//		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+//			public void invoke(Object sender, EventArgs e) {
+//				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+//			}
+//		});
+//		this.searchButton.addClickHandler(new ClickHandler() {
+//
+//			public void onClick(ClickEvent event) {
+//				presenter.getSendCommand().execute(null);
+//			}
+//		});
 	}
 	
 	private void bindGeneralInfoGrid() {
