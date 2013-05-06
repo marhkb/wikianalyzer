@@ -20,16 +20,21 @@ import java.util.List;
 import de.behrfried.wikianalyzer.util.event.Event;
 
 /**
+ * An interface for observable {@link List}s.
  * 
  * @author marcus
- *
+ * 
  * @param <E>
+ *            specifies the type this {@link DefaultObservableList} shall hold
  */
 public interface ObservableList<E> extends List<E> {
 
 	/**
+	 * Returns an {@link Event} that is raised when elements of the
+	 * {@link ObservableList} has been added, removed, or replaced or the
+	 * {@link ObservableList} has been cleared.
 	 * 
-	 * @return
+	 * @return an {@link Event} that is raised when the List has changed
 	 */
 	Event<ListChangedEventArgs<E>> listChanged();
 }

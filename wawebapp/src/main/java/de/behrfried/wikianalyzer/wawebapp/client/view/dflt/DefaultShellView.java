@@ -129,18 +129,5 @@ public class DefaultShellView extends ShellView {
 			}
 		});
 		History.fireCurrentHistoryState();
-		
-		
-		this.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				CommandManager.get().invalidateRequerySuggested();
-			}
-		});
-		this.addDomHandler(new com.google.gwt.event.dom.client.ClickHandler() {
-			
-			public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
-				Window.alert("bobob");
-			}
-		}, com.google.gwt.event.dom.client.ClickEvent.getType());
 	}
 }

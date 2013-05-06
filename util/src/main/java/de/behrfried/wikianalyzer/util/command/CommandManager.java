@@ -20,8 +20,7 @@ import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 
 /**
- * Singleton class for holding {@link Command}s and invoking their
- * {@code raiseExecuteChanged()}.
+ * Singleton class that can raise {@link Command}s' {@code canExecuteChanged()}.
  * 
  * @author marcus
  * 
@@ -34,7 +33,7 @@ public class CommandManager {
 	private final static CommandManager INSTANCE = new CommandManager();
 	
 	/**
-	 * 
+	 * the initialization context for requerySuggested
 	 */
 	private final Object initContext = new Object();
 
@@ -53,20 +52,20 @@ public class CommandManager {
 	private CommandManager() { }
 	
 	/**
-	 * 
+	 * {@link Event} that is fired when some {@link Command} logic might have changed
 	 */
 	private final Event<EventArgs> requerySuggested = new Event<EventArgs>(this.initContext);
 	
 	/**
-	 * 
-	 * @return
+	 * Returns the {@link Event} that is fired when some {@link Command} logic might have changed.
+	 * @return the {@link Event} that is fired when some {@link Command} logic might have changed
 	 */
 	public Event<EventArgs> requerySuggested() {
 		return this.requerySuggested;
 	}
 
 	/**
-	 * Invokes the {@code raiseCanExecuteChanged()} of each {@link Command}.
+	 * Raises {@code requerySuggested()}.
 	 */
 	public void invalidateRequerySuggested() {
 		this.requerySuggested().fire(this.initContext, this, EventArgs.EMPTY);

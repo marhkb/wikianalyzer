@@ -18,15 +18,20 @@ package de.behrfried.wikianalyzer.util.list;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import de.behrfried.wikianalyzer.util.data.DataContainer;
 import de.behrfried.wikianalyzer.util.event.Handler;
-import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
+import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedAction;
 
 /**
  * 
@@ -49,7 +54,7 @@ public class ObservableLinkedListTest {
 	}
 
 	/**
-	 * 
+	 * Tests whether elements can be added and callbacks are invoked.
 	 */
 	@Test
 	public void testAddE() {
@@ -71,7 +76,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
@@ -115,7 +120,7 @@ public class ObservableLinkedListTest {
 	}
 
 	/**
-	 * 
+	 * Tests whether elements can be added at a specific position and callbacks are invoked.
 	 */
 	@Test
 	public void testAddIntE() {
@@ -144,7 +149,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
@@ -217,6 +222,9 @@ public class ObservableLinkedListTest {
 		assertTrue(this.observableList.containsAll(copiedList));
 	}
 
+	/**
+	 * Tests whether collections can be added and callbacks are invoked.
+	 */
 	@Test
 	public void testAddAllCollectionOfQextendsE() {
 
@@ -250,7 +258,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
@@ -293,6 +301,9 @@ public class ObservableLinkedListTest {
 		assertTrue(this.observableList.containsAll(objectsToAdd));
 	}
 
+	/**
+	 * Tests whether collections can be added at specific position and callbacks are invoked.
+	 */
 	@Test
 	public void testAddAllIntCollectionOfQextendsE() {
 
@@ -326,7 +337,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
@@ -399,6 +410,9 @@ public class ObservableLinkedListTest {
 
 	}
 
+	/**
+	 * Tests whether list can be cleared and callback are invoked.
+	 */
 	@Test
 	public void testClear() {
 
@@ -427,7 +441,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.CLEAR, e.getListChangedType());
+				assertEquals(ListChangedAction.CLEAR, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because the list has been cleared
@@ -461,6 +475,9 @@ public class ObservableLinkedListTest {
 
 	}
 
+	/**
+	 * Tests whether {@code contains()} works properly.
+	 */
 	@Test
 	public void testContains() {
 
@@ -484,6 +501,9 @@ public class ObservableLinkedListTest {
 		}
 	}
 
+	/**
+	 * Tests whether {@code containsAll()} works properly.
+	 */
 	@Test
 	public void testContainsAll() {
 
@@ -506,6 +526,9 @@ public class ObservableLinkedListTest {
 		}
 	}
 
+	/**
+	 * Tests whether elements can be retrieved from the list.
+	 */
 	@Test
 	public void testGet() {
 
@@ -539,6 +562,9 @@ public class ObservableLinkedListTest {
 		} catch(Exception e) {}
 	}
 
+	/**
+	 * Tests whether positions of elements can be retrieved.
+	 */
 	@Test
 	public void testIndexOf() {
 
@@ -566,7 +592,7 @@ public class ObservableLinkedListTest {
 	}
 
 	/**
-	 * 
+	 * Tests whether {@code isEmpty()} works properly.
 	 */
 	@Test
 	public void testIsEmpty() {
@@ -608,6 +634,9 @@ public class ObservableLinkedListTest {
 		assertTrue(this.observableList.isEmpty());
 	}
 
+	/**
+	 * Tests whether the last index of an elements is correct.
+	 */
 	@Test
 	public void testLastIndexOf() {
 
@@ -634,6 +663,9 @@ public class ObservableLinkedListTest {
 		assertEquals(-1, this.observableList.indexOf(new Object()));
 	}
 
+	/**
+	 * Tests whether elements can be removed and callbacks are invoked.
+	 */
 	@Test
 	public void testRemoveObject() {
 		/* this is the object we want to remove later */
@@ -656,7 +688,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because an element has been
@@ -696,6 +728,9 @@ public class ObservableLinkedListTest {
 		assertEquals(0, this.observableList.size());
 	}
 
+	/**
+	 * Tests whether elements can be removed at an specific position and callbacks are invoked.
+	 */
 	@Test
 	public void testRemoveInt() {
 		/* at first add two objects to the list */
@@ -722,7 +757,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because an element has been
@@ -792,6 +827,9 @@ public class ObservableLinkedListTest {
 		assertTrue(this.observableList.containsAll(copiedList));
 	}
 
+	/**
+	 * Tests whether a collection of elements can be removed and callbacks are invoked.
+	 */
 	@Test
 	public void testRemoveAll() {
 		/* this lists is to be removed from the observable list */
@@ -826,7 +864,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because elements has been
@@ -871,6 +909,9 @@ public class ObservableLinkedListTest {
 		}
 	}
 
+	/**
+	 * Tests whether a collection of elements can be retained and callbacks are invoked.
+	 */
 	@Test
 	public void testRetainAll() {
 		
@@ -906,7 +947,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because elements has been
@@ -953,6 +994,9 @@ public class ObservableLinkedListTest {
 		}
 	}
 
+	/**
+	 * Tests whether elements can be set and callbacks are invoked.
+	 */
 	@Test
 	public void testSet() {
 		/* at first add two objects to the list */
@@ -980,7 +1024,7 @@ public class ObservableLinkedListTest {
 			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedType.ADD_REMOVE, e.getListChangedType());
+				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because an element has been
@@ -1063,7 +1107,7 @@ public class ObservableLinkedListTest {
 	}
 
 	/**
-	 * 
+	 * Tests whether the size is correct.
 	 */
 	@Test
 	public void testSize() {
@@ -1106,6 +1150,9 @@ public class ObservableLinkedListTest {
 		assertTrue(this.observableList.isEmpty());
 	}
 
+	/**
+	 * Tests whether correct sublists are returned.
+	 */
 	@Test
 	public void testSubList() {
 		

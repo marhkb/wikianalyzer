@@ -20,40 +20,104 @@ import java.util.Collections;
 import java.util.List;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 
-
+/**
+ * {@link EventArgs} that is forwarded when a {@link ObservableList} has
+ * changed.
+ * 
+ * @author marcus
+ * 
+ * @param <E>
+ */
 public class ListChangedEventArgs<E> extends EventArgs {
 
-	public enum ListChangedType {
+	/**
+	 * Enum determining the specific change action of a
+	 * {@link ListChangedEventArgs}.
+	 * 
+	 * @author marcus
+	 * 
+	 */
+	public enum ListChangedAction {
+
+		/**
+		 * Elements has been added and/or removed from the
+		 * {@link ObservableList}.
+		 */
 		ADD_REMOVE,
-		CLEAR
+
+		/**
+		 * The {@link ObservableList} has been cleared.
+		 */
+		CLEAR,
 	}
-	
-	private final ListChangedType listChangedType;
-	
+
+	/**
+	 * determines what has happened to the list
+	 */
+	private final ListChangedAction listChangedAction;
+
+	/**
+	 * list containing the removed elements
+	 */
 	private final List<E> oldItems;
+
+	/**
+	 * list containing the added elements.
+	 */
 	private final List<E> newItems;
-	
-	public ListChangedEventArgs(ListChangedType listChangedType, final List<E> oldItems, List<E> newItems) {
-		this.listChangedType = listChangedType;
+
+	/**
+	 * Creates a {@link ListChangedEventArgs}.
+	 * 
+	 * @param listChangedType
+	 *            the {@link ListChangedAction}
+	 * @param oldItems
+	 *            a {@link List} containing the removed elements
+	 * @param newItems
+	 *            a {@link List} containing the added elements
+	 */
+	public ListChangedEventArgs(ListChangedAction listChangedType, final List<E> oldItems, List<E> newItems) {
+		this.listChangedAction = listChangedType;
 		this.oldItems = oldItems;
 		this.newItems = newItems;
 	}
-	
-    public ListChangedType getListChangedType() {
-    	return listChangedType;
-    }
-	
-    public List<E> getOldItems() {
-    	if(this.oldItems == null) {
-    		return null;
-    	}
-    	return Collections.unmodifiableList(this.oldItems);
-    }
-	
-    public List<E> getNewItems() {
-    	if(this.newItems == null) {
-    		return null;
-    	}
-    	return Collections.unmodifiableList(this.newItems);
-    }
+
+	/**
+	 * Returns a {@link ListChangedAction} that determines what actions has been
+	 * performed on the {@link ObservableList}.
+	 * 
+	 * @return a {@link ListChangedAction} that determines what actions has been
+	 *         performed on the {@link ObservableList}
+	 */
+	public ListChangedAction getListChangedAction() {
+		return listChangedAction;
+	}
+
+	/**
+	 * Returns a list containing the removed elements or {@code null}.
+	 * 
+	 * @return if {@code getListChangedAction() != ListChangedAction.CLEAR } and
+	 *         elements has been removed -> a list containing the removed
+	 *         elements, otherwise {@code null}
+	 */
+	public List<E> getOldItems() {
+		if(this.oldItems == null) {
+			return null;
+		}
+		return Collections.unmodifiableList(this.oldItems);
+	}
+
+	/**
+	 * Returns a list containing the new elements or {@code null}.
+	 * 
+	 * @return if {@code getListChangedAction() != ListChangedAction.CLEAR } and
+	 *         elements has been added -> a list containing the added elements,
+	 *         otherwise {@code null}
+	 */
+	public List<E> getNewItems() {
+		if(this.newItems == null) {
+			return null;
+		}
+		return Collections.unmodifiableList(this.newItems);
+	}
 }

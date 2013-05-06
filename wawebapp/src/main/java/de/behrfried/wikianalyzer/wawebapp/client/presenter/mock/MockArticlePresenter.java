@@ -29,6 +29,7 @@ import de.behrfried.wikianalyzer.util.data.Tuple;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.util.list.ObservableLinkedList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
@@ -62,6 +63,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 			this.articleName = string;
 			this.articleTitleChanged().fire(this.initContext, this, EventArgs.EMPTY);
 			this.jGetArticleTitles(this.articleName, 10);
+			CommandManager.get().invalidateRequerySuggested();
 		}
 	}
 
@@ -71,54 +73,62 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return articleChanged;
 	}
 
-	private final Command sendCommand = new UICommand() {
-
-		public void execute(Object param) {
-
-			mainService.sendArticleName(getArticleTitle(), new AsyncCallback<Integer>() {
-				
-				public void onSuccess(Integer result) {
-					Window.alert(result + "");
-				}
-				
-				public void onFailure(Throwable caught) {					
-				}
-			});
-			
-			final Random r = new Random();
-			switch(r.nextInt(5)) {
-				case 0:
-					setArticleLink("http://www.google.de");
-					break;
-				case 1:
-					setArticleLink("http://www.golem.de");
-					break;
-				case 2:
-					setArticleLink("http://www.mit.de");
-					break;
-				case 3:
-					setArticleLink("http://www.yahoo.de");
-					break;
-				case 4:
-					setArticleLink("http://www.pampers.de");
-					break;
-				default:
-					setArticleLink("http://youporn.com");
-					break;
-			}
-		}
-
-		public boolean canExecute(Object param) {
-			return getArticleTitle().length() > 0;
-		}
-
-		@Override
-		protected EventArgs getEventArgs() {
-			return EventArgs.EMPTY;
-		}
-	};
+	private Command sendCommand;
 
 	public Command getSendCommand() {
+		if(this.sendCommand == null) {
+			this.sendCommand = new UICommand() {
+
+				public void execute(Object param) {
+
+					mainService.sendArticleName(getArticleTitle(), new AsyncCallback<Integer>() {
+						
+						public void onSuccess(Integer result) {
+							Window.alert(result + "");
+						}
+						
+						public void onFailure(Throwable caught) {					
+						}
+					});
+					
+					final Random r = new Random();
+					switch(r.nextInt(5)) {
+						case 0:
+							setArticleLink("http://www.google.de");
+							break;
+						case 1:
+							setArticleLink("http://www.golem.de");
+							break;
+						case 2:
+							setArticleLink("http://www.mit.de");
+							break;
+						case 3:
+							setArticleLink("http://www.yahoo.de");
+							break;
+						case 4:
+							setArticleLink("http://www.pampers.de");
+							break;
+						default:
+							setArticleLink("http://youporn.com");
+							break;
+					}
+				}
+
+				public boolean canExecute(Object param) {
+					return getArticleTitle().length() > 0;
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {	
+				public void invoke(Object sender, EventArgs e) {
+					getSendCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
 		return this.sendCommand;
 	}
 

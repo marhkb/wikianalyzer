@@ -52,7 +52,7 @@ import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
-import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
+import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedAction;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView.Presenter;
@@ -214,11 +214,6 @@ public class DefaultArticleView extends ArticleView {
 
 	private void bindSearchButton() {
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
-		CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {	
-			public void invoke(Object sender, EventArgs e) {
-				presenter.getSendCommand().raiseCanExecuteChanged();
-			}
-		});
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
 			public void invoke(Object sender, EventArgs e) {
 				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
@@ -245,7 +240,7 @@ public class DefaultArticleView extends ArticleView {
 		this.presenter.getArticleInfos().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
 
 			public void invoke(Object sender, ListChangedEventArgs<Tuple2<String, String>> e) {
-				if(e.getListChangedType() == ListChangedType.ADD_REMOVE) {
+				if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
 					if(e.getOldItems() != null) {
 						for(Tuple2<String, String> t : e.getOldItems()) {
 							generalInfoGrid.removeData(recordsO.remove(t));
