@@ -16,17 +16,10 @@
 
 package de.behrfried.wikianalyzer.util.list;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import de.behrfried.wikianalyzer.util.data.DataContainer;
@@ -35,6 +28,7 @@ import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedActio
 
 /**
  * Various tests on {@link ObservableArrayList}.
+ * 
  * @author marcus
  * 
  */
@@ -73,28 +67,28 @@ public class ObservableArrayListTest {
 		 */
 		this.observableArrayList.listChanged().addHandler(new Handler<ListChangedEventArgs<Object>>() {
 
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
 				 * removed
 				 */
-				assertNull(e.getOldItems());
+				Assert.assertNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is not null because new elements has been
 				 * added
 				 */
-				assertNotNull(e.getNewItems());
+				Assert.assertNotNull(e.getNewItems());
 
 				/* assert the new items list's size is 1 */
-				assertEquals(1, e.getNewItems().size());
+				Assert.assertEquals(1, e.getNewItems().size());
 
 				/* assert the new item is the expected one */
-				assertEquals(objectToAdd, e.getNewItems().get(0));
+				Assert.assertEquals(objectToAdd, e.getNewItems().get(0));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -110,17 +104,18 @@ public class ObservableArrayListTest {
 		this.observableArrayList.add(objectToAdd);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after insertion */
-		assertEquals(1, this.observableArrayList.size());
+		Assert.assertEquals(1, this.observableArrayList.size());
 
 		/* assert the list's first object is the expected one */
-		assertEquals(objectToAdd, this.observableArrayList.get(0));
+		Assert.assertEquals(objectToAdd, this.observableArrayList.get(0));
 	}
 
 	/**
-	 * Tests whether elements can be added at a specific position and callbacks are invoked.
+	 * Tests whether elements can be added at a specific position and callbacks
+	 * are invoked.
 	 */
 	@Test
 	public void testAddIntE() {
@@ -146,28 +141,28 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
 				 * removed
 				 */
-				assertNull(e.getOldItems());
+				Assert.assertNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is not null because new elements has been
 				 * added
 				 */
-				assertNotNull(e.getNewItems());
+				Assert.assertNotNull(e.getNewItems());
 
 				/* assert the new items list's size is 1 */
-				assertEquals(1, e.getNewItems().size());
+				Assert.assertEquals(1, e.getNewItems().size());
 
 				/* assert the new item is the expected one */
-				assertEquals(objectToAdd, e.getNewItems().get(0));
+				Assert.assertEquals(objectToAdd, e.getNewItems().get(0));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -183,13 +178,13 @@ public class ObservableArrayListTest {
 		this.observableArrayList.add(0, objectToAdd);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after insertion */
-		assertEquals(3, this.observableArrayList.size());
+		Assert.assertEquals(3, this.observableArrayList.size());
 
 		/* assert the list's first object is the expected one */
-		assertEquals(objectToAdd, this.observableArrayList.get(0));
+		Assert.assertEquals(objectToAdd, this.observableArrayList.get(0));
 
 		/* try to insert at a position that is not allowed */
 
@@ -201,25 +196,25 @@ public class ObservableArrayListTest {
 		try {
 			/* at a negative index */
 			this.observableArrayList.add(-1, new Object());
-			fail("Can add items at negative index.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at negative index.");
+		} catch(final Exception e) {}
 		try {
 			/*
 			 * at an index greater than the greatest accessible index of the
 			 * list
 			 */
 			this.observableArrayList.add(this.observableArrayList.size() + 1, new Object());
-			fail("Can add items at index greater than the greatest index of the list.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at index greater than the greatest index of the list.");
+		} catch(final Exception e) {}
 
 		/* test whether the list still has the same size after exception testing */
-		assertEquals(3, this.observableArrayList.size());
+		Assert.assertEquals(3, this.observableArrayList.size());
 
 		/* test whether the list's first object is still the expected one */
-		assertEquals(objectToAdd, this.observableArrayList.get(0));
+		Assert.assertEquals(objectToAdd, this.observableArrayList.get(0));
 
 		/* test whether the list still is unchanged after exception testing */
-		assertTrue(this.observableArrayList.containsAll(copiedList));
+		Assert.assertTrue(this.observableArrayList.containsAll(copiedList));
 	}
 
 	/**
@@ -255,28 +250,28 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
 				 * removed
 				 */
-				assertNull(e.getOldItems());
+				Assert.assertNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is not null because new elements has been
 				 * added
 				 */
-				assertNotNull(e.getNewItems());
+				Assert.assertNotNull(e.getNewItems());
 
 				/* assert the new items list's size is correct */
-				assertEquals(objectsToAdd.size(), e.getNewItems().size());
+				Assert.assertEquals(objectsToAdd.size(), e.getNewItems().size());
 
 				/* assert the new items are the expected ones */
-				assertThat(e.getNewItems(), is(equalTo(objectsToAdd)));
+				Assert.assertThat(e.getNewItems(), CoreMatchers.is(CoreMatchers.equalTo(objectsToAdd)));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -292,17 +287,18 @@ public class ObservableArrayListTest {
 		this.observableArrayList.addAll(objectsToAdd);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after insertion */
-		assertEquals(30, this.observableArrayList.size());
+		Assert.assertEquals(30, this.observableArrayList.size());
 
 		/* assert all newly added elements are in the list */
-		assertTrue(this.observableArrayList.containsAll(objectsToAdd));
+		Assert.assertTrue(this.observableArrayList.containsAll(objectsToAdd));
 	}
 
 	/**
-	 * Tests whether collections can be added at specific position and callbacks are invoked.
+	 * Tests whether collections can be added at specific position and callbacks
+	 * are invoked.
 	 */
 	@Test
 	public void testAddAllIntCollectionOfQextendsE() {
@@ -334,28 +330,28 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because no elements has been
 				 * removed
 				 */
-				assertNull(e.getOldItems());
+				Assert.assertNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is not null because new elements has been
 				 * added
 				 */
-				assertNotNull(e.getNewItems());
+				Assert.assertNotNull(e.getNewItems());
 
 				/* assert the new items list's size is correct */
-				assertEquals(objectsToAdd.size(), e.getNewItems().size());
+				Assert.assertEquals(objectsToAdd.size(), e.getNewItems().size());
 
 				/* assert the new items are the expected ones */
-				assertThat(e.getNewItems(), is(equalTo(objectsToAdd)));
+				Assert.assertThat(e.getNewItems(), CoreMatchers.is(CoreMatchers.equalTo(objectsToAdd)));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -371,13 +367,13 @@ public class ObservableArrayListTest {
 		this.observableArrayList.addAll(5, objectsToAdd);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after insertion */
-		assertEquals(30, this.observableArrayList.size());
+		Assert.assertEquals(30, this.observableArrayList.size());
 
 		/* assert all newly added elements are in the list */
-		assertTrue(this.observableArrayList.containsAll(objectsToAdd));
+		Assert.assertTrue(this.observableArrayList.containsAll(objectsToAdd));
 
 		/* try to insert at a position that is not allowed */
 		/*
@@ -388,25 +384,25 @@ public class ObservableArrayListTest {
 		try {
 			/* at a negative index */
 			this.observableArrayList.addAll(-1, objectsToAdd);
-			fail("Can add items at negative index.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at negative index.");
+		} catch(final Exception e) {}
 		try {
 			/*
 			 * at an index greater than the greatest accessible index of the
 			 * list
 			 */
 			this.observableArrayList.addAll(this.observableArrayList.size() + 1, objectsToAdd);
-			fail("Can add items at index greater than the greatest index of the list.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at index greater than the greatest index of the list.");
+		} catch(final Exception e) {}
 
 		/* test whether the list still has the same size after exception testing */
-		assertEquals(30, this.observableArrayList.size());
+		Assert.assertEquals(30, this.observableArrayList.size());
 
 		/* assert all newly added elements are still in the list */
-		assertTrue(this.observableArrayList.containsAll(objectsToAdd));
+		Assert.assertTrue(this.observableArrayList.containsAll(objectsToAdd));
 
 		/* test whether the list still is unchanged after exception testing */
-		assertTrue(this.observableArrayList.containsAll(copiedList));
+		Assert.assertTrue(this.observableArrayList.containsAll(copiedList));
 
 	}
 
@@ -422,7 +418,7 @@ public class ObservableArrayListTest {
 		}
 
 		/* assert the list's size is 20 */
-		assertEquals(20, this.observableArrayList.size());
+		Assert.assertEquals(20, this.observableArrayList.size());
 
 		/*
 		 * inokeCntr is used to count the actual invocations of the callback
@@ -438,21 +434,21 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.CLEAR, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.CLEAR, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is null because the list has been cleared
 				 */
-				assertNull(e.getOldItems());
+				Assert.assertNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is not null because the list has been
 				 * cleared
 				 */
-				assertNull(e.getNewItems());
+				Assert.assertNull(e.getNewItems());
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -468,10 +464,10 @@ public class ObservableArrayListTest {
 		this.observableArrayList.clear();
 
 		/* assert this method is only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the lists size is now 0 */
-		assertEquals(0, this.observableArrayList.size());
+		Assert.assertEquals(0, this.observableArrayList.size());
 
 	}
 
@@ -491,13 +487,13 @@ public class ObservableArrayListTest {
 		}
 
 		/* now test whether each added object is in the list */
-		for(int i = 0; i < objectsToAdd.length; i++) {
-			assertTrue(this.observableArrayList.contains(objectsToAdd[i]));
+		for(final Object element : objectsToAdd) {
+			Assert.assertTrue(this.observableArrayList.contains(element));
 		}
 
 		/* assert that not added objects aren't in the list */
 		for(int i = 0; i < 10; i++) {
-			assertFalse(this.observableArrayList.contains(new Object()));
+			Assert.assertFalse(this.observableArrayList.contains(new Object()));
 		}
 	}
 
@@ -514,15 +510,15 @@ public class ObservableArrayListTest {
 		for(int i = 0; i < 20; i++) {
 			final Object objectToAdd = new Object();
 			objectsToAdd.add(objectToAdd);
-			assertTrue(this.observableArrayList.add(objectToAdd));
+			Assert.assertTrue(this.observableArrayList.add(objectToAdd));
 		}
 
 		/* now test whether each added object is in the list */
-		assertTrue(this.observableArrayList.containsAll(objectsToAdd));
+		Assert.assertTrue(this.observableArrayList.containsAll(objectsToAdd));
 
 		/* assert that not added objects aren't in the list */
 		for(int i = 0; i < 10; i++) {
-			assertFalse(this.observableArrayList.contains(new Object()));
+			Assert.assertFalse(this.observableArrayList.contains(new Object()));
 		}
 	}
 
@@ -543,23 +539,23 @@ public class ObservableArrayListTest {
 
 		/* now test whether each added object can be retrieved */
 		for(int i = 0; i < objectsToAdd.length; i++) {
-			assertEquals(objectsToAdd[i], this.observableArrayList.get(i));
+			Assert.assertEquals(objectsToAdd[i], this.observableArrayList.get(i));
 		}
 
 		/* try to retrieve elements with an index out of bounds */
 		try {
 			/* at a negative index */
 			this.observableArrayList.get(-1);
-			fail("Can get items at negative index.");
-		} catch(Exception e) {}
+			Assert.fail("Can get items at negative index.");
+		} catch(final Exception e) {}
 		try {
 			/*
 			 * at an index greater than the greatest accessible index of the
 			 * list
 			 */
 			this.observableArrayList.get(this.observableArrayList.size());
-			fail("Can get items at index greater than the greatest index of the list.");
-		} catch(Exception e) {}
+			Assert.fail("Can get items at index greater than the greatest index of the list.");
+		} catch(final Exception e) {}
 	}
 
 	/**
@@ -578,17 +574,17 @@ public class ObservableArrayListTest {
 		}
 
 		/* again add the same objects to the list */
-		for(int i = 0; i < objectsToAdd.length; i++) {
-			this.observableArrayList.add(objectsToAdd[i]);
+		for(final Object element : objectsToAdd) {
+			this.observableArrayList.add(element);
 		}
 
 		/* Test whether the first index of an object is returned properly */
 		for(int i = 0; i < objectsToAdd.length; i++) {
-			assertEquals(i, this.observableArrayList.indexOf(objectsToAdd[i]));
+			Assert.assertEquals(i, this.observableArrayList.indexOf(objectsToAdd[i]));
 		}
 
 		/* try to retrieve the index of an element that isn't in the list */
-		assertEquals(-1, this.observableArrayList.indexOf(new Object()));
+		Assert.assertEquals(-1, this.observableArrayList.indexOf(new Object()));
 	}
 
 	/**
@@ -598,40 +594,40 @@ public class ObservableArrayListTest {
 	public void testIsEmpty() {
 
 		/* assert the list is empty at initial state */
-		assertTrue(this.observableArrayList.isEmpty());
+		Assert.assertTrue(this.observableArrayList.isEmpty());
 
 		/* add objects to the list */
 		for(int i = 0; i < 20; i++) {
 			this.observableArrayList.add(new Object());
 
 			/* assert the list is not empty */
-			assertFalse(this.observableArrayList.isEmpty());
+			Assert.assertFalse(this.observableArrayList.isEmpty());
 		}
 
 		/* clear the list */
 		this.observableArrayList.clear();
 
 		/* assert the list is empty again */
-		assertTrue(this.observableArrayList.isEmpty());
+		Assert.assertTrue(this.observableArrayList.isEmpty());
 
 		/* again add objects to the list */
 		for(int i = 0; i < 20; i++) {
 			this.observableArrayList.add(new Object());
 
 			/* assert list is not empty */
-			assertFalse(this.observableArrayList.isEmpty());
+			Assert.assertFalse(this.observableArrayList.isEmpty());
 		}
 
 		/* remove all elements separately */
 		for(int i = 0; i < 20; i++) {
 			/* assert the list is not empty */
-			assertFalse(this.observableArrayList.isEmpty());
+			Assert.assertFalse(this.observableArrayList.isEmpty());
 
 			this.observableArrayList.remove(0);
 		}
 
 		/* assert the list is empty again */
-		assertTrue(this.observableArrayList.isEmpty());
+		Assert.assertTrue(this.observableArrayList.isEmpty());
 	}
 
 	/**
@@ -650,17 +646,17 @@ public class ObservableArrayListTest {
 		}
 
 		/* again add the same objects to the list */
-		for(int i = 0; i < objectsToAdd.length; i++) {
-			this.observableArrayList.add(objectsToAdd[i]);
+		for(final Object element : objectsToAdd) {
+			this.observableArrayList.add(element);
 		}
 
 		/* Test whether the last index of an object is returned properly */
 		for(int i = 0; i < objectsToAdd.length; i++) {
-			assertEquals(i + objectsToAdd.length, this.observableArrayList.lastIndexOf(objectsToAdd[i]));
+			Assert.assertEquals(i + objectsToAdd.length, this.observableArrayList.lastIndexOf(objectsToAdd[i]));
 		}
 
 		/* try to retrieve the index of an element that isn't in the list */
-		assertEquals(-1, this.observableArrayList.indexOf(new Object()));
+		Assert.assertEquals(-1, this.observableArrayList.indexOf(new Object()));
 	}
 
 	/**
@@ -670,7 +666,7 @@ public class ObservableArrayListTest {
 	public void testRemoveObject() {
 		/* this is the object we want to remove later */
 		final Object objectToRemove = new Object();
-		
+
 		/* insert the object that is to be removed later */
 		this.observableArrayList.add(objectToRemove);
 
@@ -685,28 +681,28 @@ public class ObservableArrayListTest {
 		 */
 		this.observableArrayList.listChanged().addHandler(new Handler<ListChangedEventArgs<Object>>() {
 
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because an element has been
 				 * removed
 				 */
-				assertNotNull(e.getOldItems());
+				Assert.assertNotNull(e.getOldItems());
 
 				/* assert the old items list's size is 1 */
-				assertEquals(1, e.getOldItems().size());
-				
+				Assert.assertEquals(1, e.getOldItems().size());
+
 				/*
 				 * assert getNewItems is null because no new elements has been
 				 * added
 				 */
-				assertNull(e.getNewItems());
+				Assert.assertNull(e.getNewItems());
 
 				/* assert the old item is the expected one */
-				assertEquals(objectToRemove, e.getOldItems().get(0));
+				Assert.assertEquals(objectToRemove, e.getOldItems().get(0));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -722,14 +718,15 @@ public class ObservableArrayListTest {
 		this.observableArrayList.remove(objectToRemove);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after insertion */
-		assertEquals(0, this.observableArrayList.size());
+		Assert.assertEquals(0, this.observableArrayList.size());
 	}
 
 	/**
-	 * Tests whether elements can be removed at an specific position and callbacks are invoked.
+	 * Tests whether elements can be removed at an specific position and
+	 * callbacks are invoked.
 	 */
 	@Test
 	public void testRemoveInt() {
@@ -754,28 +751,28 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because an element has been
 				 * removed
 				 */
-				assertNotNull(e.getOldItems());
+				Assert.assertNotNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is null because no new elements has been
 				 * added
 				 */
-				assertNull(e.getNewItems());
+				Assert.assertNull(e.getNewItems());
 
 				/* assert the old items list's size is 1 */
-				assertEquals(1, e.getOldItems().size());
+				Assert.assertEquals(1, e.getOldItems().size());
 
 				/* assert the old item is the expected one */
-				assertEquals(objectToBeRemoved, e.getOldItems().get(0));
+				Assert.assertEquals(objectToBeRemoved, e.getOldItems().get(0));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -791,13 +788,13 @@ public class ObservableArrayListTest {
 		this.observableArrayList.remove(0);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after removing */
-		assertEquals(1, this.observableArrayList.size());
+		Assert.assertEquals(1, this.observableArrayList.size());
 
-		/* assert the list's doesn't contain the removed object any more*/
-		assertFalse(this.observableArrayList.contains(objectToBeRemoved));
+		/* assert the list's doesn't contain the removed object any more */
+		Assert.assertFalse(this.observableArrayList.contains(objectToBeRemoved));
 
 		/* try to remove at a position that is not allowed */
 
@@ -809,26 +806,27 @@ public class ObservableArrayListTest {
 		try {
 			/* at a negative index */
 			this.observableArrayList.remove(-1);
-			fail("Can add items at negative index.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at negative index.");
+		} catch(final Exception e) {}
 		try {
 			/*
 			 * at an index greater than the greatest accessible index of the
 			 * list
 			 */
 			this.observableArrayList.remove(this.observableArrayList.size());
-			fail("Can add items at index greater than the greatest index of the list.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at index greater than the greatest index of the list.");
+		} catch(final Exception e) {}
 
 		/* test whether the list still has the same size after exception testing */
-		assertEquals(1, this.observableArrayList.size());
+		Assert.assertEquals(1, this.observableArrayList.size());
 
 		/* test whether the list still is unchanged after exception testing */
-		assertTrue(this.observableArrayList.containsAll(copiedList));
+		Assert.assertTrue(this.observableArrayList.containsAll(copiedList));
 	}
 
 	/**
-	 * Tests whether a collection of elements can be removed and callbacks are invoked.
+	 * Tests whether a collection of elements can be removed and callbacks are
+	 * invoked.
 	 */
 	@Test
 	public void testRemoveAll() {
@@ -861,28 +859,28 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because elements has been
 				 * removed
 				 */
-				assertNotNull(e.getOldItems());
+				Assert.assertNotNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is null because no new elements has been
 				 * added
 				 */
-				assertNull(e.getNewItems());
+				Assert.assertNull(e.getNewItems());
 
 				/* assert the old items list's size is correct */
-				assertEquals(objectsToBeRemoved.size(), e.getOldItems().size());
+				Assert.assertEquals(objectsToBeRemoved.size(), e.getOldItems().size());
 
 				/* assert the old items are the expected ones */
-				assertThat(e.getOldItems(), is(equalTo(objectsToBeRemoved)));
+				Assert.assertThat(e.getOldItems(), CoreMatchers.is(CoreMatchers.equalTo(objectsToBeRemoved)));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -898,23 +896,24 @@ public class ObservableArrayListTest {
 		this.observableArrayList.removeAll(objectsToBeRemoved);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after removing */
-		assertEquals(10, this.observableArrayList.size());
+		Assert.assertEquals(10, this.observableArrayList.size());
 
 		/* assert all removed elements aren't in the list any more */
 		for(final Object removedObject : objectsToBeRemoved) {
-			assertFalse(this.observableArrayList.contains(removedObject));
+			Assert.assertFalse(this.observableArrayList.contains(removedObject));
 		}
 	}
 
 	/**
-	 * Tests whether a collection of elements can be retained and callbacks are invoked.
+	 * Tests whether a collection of elements can be retained and callbacks are
+	 * invoked.
 	 */
 	@Test
 	public void testRetainAll() {
-		
+
 		/* this lists is to be retained in the observable list */
 		final List<Object> objectsToBeRetained = new ArrayList<Object>();
 
@@ -944,29 +943,29 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because elements has been
 				 * removed
 				 */
-				assertNotNull(e.getOldItems());
+				Assert.assertNotNull(e.getOldItems());
 
 				/*
 				 * assert getNewItems is null because no new elements has been
 				 * added
 				 */
-				assertNull(e.getNewItems());
+				Assert.assertNull(e.getNewItems());
 
 				/* assert the old items list's size is correct */
-				assertEquals(10, e.getOldItems().size());
+				Assert.assertEquals(10, e.getOldItems().size());
 
 				/* assert the old items are the expected ones */
 				for(final Object object : e.getOldItems()) {
-					assertFalse(objectsToBeRetained.contains(object));
+					Assert.assertFalse(objectsToBeRetained.contains(object));
 				}
 
 				/*
@@ -983,14 +982,14 @@ public class ObservableArrayListTest {
 		this.observableArrayList.retainAll(objectsToBeRetained);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after retaining */
-		assertEquals(20, this.observableArrayList.size());
+		Assert.assertEquals(20, this.observableArrayList.size());
 
 		/* assert all retained elements are still in the list */
 		for(final Object removedObject : objectsToBeRetained) {
-			assertTrue(this.observableArrayList.contains(removedObject));
+			Assert.assertTrue(this.observableArrayList.contains(removedObject));
 		}
 	}
 
@@ -1021,34 +1020,34 @@ public class ObservableArrayListTest {
 			/*
 			 * This method is invoked after the object has been added
 			 */
-			public void invoke(Object sender, ListChangedEventArgs<Object> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Object> e) {
 
 				/* assert ListChangedType is ADD_REMOVE */
-				assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
+				Assert.assertEquals(ListChangedAction.ADD_REMOVE, e.getListChangedAction());
 
 				/*
 				 * assert getOldItems is not null because an element has been
 				 * removed by replacing it eith another element
 				 */
-				assertNotNull(e.getOldItems());
+				Assert.assertNotNull(e.getOldItems());
 
 				/* assert the old items list's size is 1 */
-				assertEquals(1, e.getOldItems().size());
+				Assert.assertEquals(1, e.getOldItems().size());
 
 				/*
 				 * assert getNewItems is not null because new elements has been
 				 * added by replacing another element
 				 */
-				assertNotNull(e.getNewItems());
+				Assert.assertNotNull(e.getNewItems());
 
 				/* assert the new items list's size is 1 */
-				assertEquals(1, e.getNewItems().size());
+				Assert.assertEquals(1, e.getNewItems().size());
 
 				/* assert the removed item is the expected one */
-				assertEquals(objectToBeRemoved, e.getOldItems().get(0));
+				Assert.assertEquals(objectToBeRemoved, e.getOldItems().get(0));
 
 				/* assert the new item is the expected one */
-				assertEquals(objectToAdd, e.getNewItems().get(0));
+				Assert.assertEquals(objectToAdd, e.getNewItems().get(0));
 
 				/*
 				 * in the end increment the counter to assert that this method
@@ -1064,16 +1063,16 @@ public class ObservableArrayListTest {
 		this.observableArrayList.set(1, objectToAdd);
 
 		/* assert the callback method was only invoked once */
-		assertEquals(1, invokeCntr.getValue().intValue());
+		Assert.assertEquals(1, invokeCntr.getValue().intValue());
 
 		/* assert the list has the correct size after insertion */
-		assertEquals(2, this.observableArrayList.size());
+		Assert.assertEquals(2, this.observableArrayList.size());
 
 		/* assert the list's first object is the expected one */
-		assertEquals(objectToAdd, this.observableArrayList.get(1));
-		
+		Assert.assertEquals(objectToAdd, this.observableArrayList.get(1));
+
 		/* assert the replaced element isn't in the list any more */
-		assertFalse(this.observableArrayList.contains(objectToBeRemoved));
+		Assert.assertFalse(this.observableArrayList.contains(objectToBeRemoved));
 
 		/* try to replace at a position that is not allowed */
 
@@ -1085,25 +1084,25 @@ public class ObservableArrayListTest {
 		try {
 			/* at a negative index */
 			this.observableArrayList.set(-1, new Object());
-			fail("Can add items at negative index.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at negative index.");
+		} catch(final Exception e) {}
 		try {
 			/*
 			 * at an index greater than the greatest accessible index of the
 			 * list
 			 */
 			this.observableArrayList.set(this.observableArrayList.size(), new Object());
-			fail("Can add items at index greater than the greatest index of the list.");
-		} catch(Exception e) {}
+			Assert.fail("Can add items at index greater than the greatest index of the list.");
+		} catch(final Exception e) {}
 
 		/* test whether the list still has the same size after exception testing */
-		assertEquals(2, this.observableArrayList.size());
+		Assert.assertEquals(2, this.observableArrayList.size());
 
 		/* test whether the list's first object is still the expected one */
-		assertEquals(objectToAdd, this.observableArrayList.get(1));
+		Assert.assertEquals(objectToAdd, this.observableArrayList.get(1));
 
 		/* test whether the list still is unchanged after exception testing */
-		assertTrue(this.observableArrayList.containsAll(copiedList));
+		Assert.assertTrue(this.observableArrayList.containsAll(copiedList));
 	}
 
 	/**
@@ -1112,7 +1111,7 @@ public class ObservableArrayListTest {
 	@Test
 	public void testSize() {
 		/* assert the list's size is 0 at initial state */
-		assertEquals(0, this.observableArrayList.size());
+		Assert.assertEquals(0, this.observableArrayList.size());
 
 		/* add objects to the list */
 		for(int i = 0; i < 20; i++) {
@@ -1120,34 +1119,34 @@ public class ObservableArrayListTest {
 			this.observableArrayList.add(new Object());
 
 			/* assert the list's size is correct */
-			assertEquals(i + 1, this.observableArrayList.size());
+			Assert.assertEquals(i + 1, this.observableArrayList.size());
 		}
 
 		/* clear the list */
 		this.observableArrayList.clear();
 
 		/* assert the list's size is 0 again */
-		assertTrue(this.observableArrayList.isEmpty());
+		Assert.assertTrue(this.observableArrayList.isEmpty());
 
 		/* again add objects to the list */
 		for(int i = 0; i < 20; i++) {
 			this.observableArrayList.add(new Object());
 
 			/* assert the list's size is correct */
-			assertEquals(i + 1, this.observableArrayList.size());
+			Assert.assertEquals(i + 1, this.observableArrayList.size());
 		}
 
 		/* remove all elements separately */
 		for(int i = 0; i < 20; i++) {
 
 			/* assert the list's is correct */
-			assertEquals(20 - i, this.observableArrayList.size());;
+			Assert.assertEquals(20 - i, this.observableArrayList.size());;
 
 			this.observableArrayList.remove(0);
 		}
 
 		/* assert the list is empty again */
-		assertTrue(this.observableArrayList.isEmpty());
+		Assert.assertTrue(this.observableArrayList.isEmpty());
 	}
 
 	/**
@@ -1155,7 +1154,7 @@ public class ObservableArrayListTest {
 	 */
 	@Test
 	public void testSubList() {
-		
+
 		/* store the objects to add in an array */
 		final Object[] objectsToAdd = new Object[20];
 
@@ -1164,29 +1163,29 @@ public class ObservableArrayListTest {
 			objectsToAdd[i] = new Object();
 			this.observableArrayList.add(objectsToAdd[i]);
 		}
-		
+
 		/* get a sublist */
 		final List<Object> sublist = this.observableArrayList.subList(6, 14);
-		
+
 		/* assert the sublist is a DefaultObservableList */
-		assertTrue(sublist.getClass() == ObservableArrayList.class);
-		
+		Assert.assertTrue(sublist.getClass() == ObservableArrayList.class);
+
 		/* assert the sublist has the correct size */
-		assertEquals(14 - 6, sublist.size());
-		
+		Assert.assertEquals(14 - 6, sublist.size());
+
 		/* assert the sublist has the correct elements */
 		for(int i = 6; i < 14; i++) {
-			assertTrue(sublist.contains(objectsToAdd[i]));
+			Assert.assertTrue(sublist.contains(objectsToAdd[i]));
 		}
-		
+
 		/* assert the sublist hasn't false elements */
 		for(int i = 0; i < 6; i++) {
-			assertFalse(sublist.contains(objectsToAdd[i]));
+			Assert.assertFalse(sublist.contains(objectsToAdd[i]));
 		}
-		
+
 		/* assert the sublist hasn't false elements */
 		for(int i = 14; i < objectsToAdd.length; i++) {
-			assertFalse(sublist.contains(objectsToAdd[i]));
+			Assert.assertFalse(sublist.contains(objectsToAdd[i]));
 		}
 	}
 

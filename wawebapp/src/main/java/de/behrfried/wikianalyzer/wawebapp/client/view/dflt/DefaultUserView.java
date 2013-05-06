@@ -31,7 +31,6 @@ import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView.Presenter;
 
 /**
  * Default implementation of {@link UserView}.
@@ -115,6 +114,7 @@ public class DefaultUserView extends UserView {
 		});
 
 		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
+
 			public void invoke(final Object sender, final GenericEventArgs<String> e) {
 				DefaultUserView.this.textItem.setValue(e.getValue());
 			}

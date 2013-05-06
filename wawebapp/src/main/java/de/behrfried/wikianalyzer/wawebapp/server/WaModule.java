@@ -27,25 +27,26 @@ import de.behrfried.wikianalyzer.wawebapp.server.service.WikiApi;
 
 /**
  * Server side module for configuring regular services.
+ * 
  * @author marcus
- *
+ * 
  */
-public class WaModule extends AbstractModule{
+public class WaModule extends AbstractModule {
 
 	/**
 	 * logger linked to any logging framework
 	 */
 	private final Logger logger = LoggerFactory.getLogger(WaModule.class);
-	
+
 	/**
 	 * Binds all regular interfaces to a certain implementation.
 	 */
 	@Override
-    protected void configure() {
+	protected void configure() {
 		this.logger.info("configuring dependencies");
 		this.bind(WikiApi.class).to(HttpWikiApi.class).in(Singleton.class);
 		this.bind(WikiAccess.class).to(JsonWikiAccess.class).in(Singleton.class);
 		this.logger.info("dependencies configured");
-    }
+	}
 
 }

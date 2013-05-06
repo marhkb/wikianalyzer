@@ -31,7 +31,7 @@ public class CommandManager {
 	 * the Singleton CommandManager instance
 	 */
 	private final static CommandManager INSTANCE = new CommandManager();
-	
+
 	/**
 	 * the initialization context for requerySuggested
 	 */
@@ -49,16 +49,20 @@ public class CommandManager {
 	/**
 	 * Private constructor to prevent instantiation.
 	 */
-	private CommandManager() { }
-	
+	private CommandManager() {}
+
 	/**
-	 * {@link Event} that is fired when some {@link Command} logic might have changed
+	 * {@link Event} that is fired when some {@link Command} logic might have
+	 * changed
 	 */
 	private final Event<EventArgs> requerySuggested = new Event<EventArgs>(this.initContext);
-	
+
 	/**
-	 * Returns the {@link Event} that is fired when some {@link Command} logic might have changed.
-	 * @return the {@link Event} that is fired when some {@link Command} logic might have changed
+	 * Returns the {@link Event} that is fired when some {@link Command} logic
+	 * might have changed.
+	 * 
+	 * @return the {@link Event} that is fired when some {@link Command} logic
+	 *         might have changed
 	 */
 	public Event<EventArgs> requerySuggested() {
 		return this.requerySuggested;

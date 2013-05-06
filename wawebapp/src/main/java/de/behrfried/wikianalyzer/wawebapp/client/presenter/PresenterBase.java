@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-
 /**
  * Base interface for all Presenters.
  * 

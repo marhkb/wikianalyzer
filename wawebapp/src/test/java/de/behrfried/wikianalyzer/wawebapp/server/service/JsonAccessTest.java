@@ -16,13 +16,12 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
-import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 
 public class JsonAccessTest {
 
@@ -31,7 +30,7 @@ public class JsonAccessTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {}
-	
+
 	private WikiAccess wikiAccess;
 
 	@Before
@@ -46,11 +45,11 @@ public class JsonAccessTest {
 	public void testGetPageId() {
 		int expected = 88112;
 		int actual = this.wikiAccess.getPageId("Hamster");
-		assertEquals(expected, actual);
-		
+		Assert.assertEquals(expected, actual);
+
 		expected = 105066;
 		actual = this.wikiAccess.getPageId("Ratte");
-		assertEquals(expected, actual);
+		Assert.assertEquals(expected, actual);
 	}
 
 }

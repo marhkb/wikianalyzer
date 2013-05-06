@@ -36,7 +36,7 @@ public abstract class UICommand implements Command {
 	 * the {@link Event} returned in {@code canExecuteChanged}
 	 */
 	private final Event<EventArgs> canExecuteChanged = new Event<EventArgs>(this.initContext);
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -52,8 +52,11 @@ public abstract class UICommand implements Command {
 	}
 
 	/**
-	 * Returns an {@link EventArgs} used when {@code canExecudeChanged()} is raised.
-	 * @return an {@link EventArgs} used when {@code canExecudeChanged()} is raised
+	 * Returns an {@link EventArgs} used when {@code canExecudeChanged()} is
+	 * raised.
+	 * 
+	 * @return an {@link EventArgs} used when {@code canExecudeChanged()} is
+	 *         raised
 	 */
 	protected abstract EventArgs getEventArgs();
 }

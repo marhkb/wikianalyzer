@@ -65,7 +65,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	 *            a {@link Collection} which elements shall be added to the
 	 *            {@link DefaultObservableList}
 	 */
-	public DefaultObservableList(Collection<E> collection) {
+	public DefaultObservableList(final Collection<E> collection) {
 		this.internalList = this.createInternalList(collection);
 	}
 
@@ -101,7 +101,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean add(E e) {
+	public boolean add(final E e) {
 		final boolean result = this.internalList.add(e);
 		if(result) {
 			final List<E> newItems = new LinkedList<E>();
@@ -114,7 +114,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void add(int index, E element) {
+	public void add(final int index, final E element) {
 		this.internalList.add(index, element);
 		final List<E> newItems = new LinkedList<E>();
 		newItems.add(element);
@@ -124,7 +124,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean addAll(Collection<? extends E> c) {
+	public boolean addAll(final Collection<? extends E> c) {
 		final boolean result = this.internalList.addAll(c);
 		if(result) {
 			final List<E> newItems = new LinkedList<E>();
@@ -139,7 +139,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean addAll(int index, Collection<? extends E> c) {
+	public boolean addAll(final int index, final Collection<? extends E> c) {
 		final boolean result = this.internalList.addAll(index, c);
 		if(result) {
 			final List<E> newItems = new LinkedList<E>();
@@ -162,28 +162,28 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean contains(Object o) {
+	public boolean contains(final Object o) {
 		return this.internalList.contains(o);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean containsAll(Collection<?> c) {
+	public boolean containsAll(final Collection<?> c) {
 		return this.internalList.containsAll(c);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public E get(int index) {
+	public E get(final int index) {
 		return this.internalList.get(index);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public int indexOf(Object o) {
+	public int indexOf(final Object o) {
 		return this.internalList.indexOf(o);
 	}
 
@@ -204,7 +204,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int lastIndexOf(Object o) {
+	public int lastIndexOf(final Object o) {
 		return this.internalList.lastIndexOf(o);
 	}
 
@@ -218,7 +218,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ListIterator<E> listIterator(int index) {
+	public ListIterator<E> listIterator(final int index) {
 		return this.internalList.listIterator(index);
 	}
 
@@ -226,7 +226,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean remove(Object o) {
+	public boolean remove(final Object o) {
 		final boolean result = this.internalList.remove(o);
 		if(result) {
 			final List<E> oldItems = new LinkedList<E>();
@@ -239,7 +239,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public E remove(int index) {
+	public E remove(final int index) {
 		final E e = this.internalList.remove(index);
 		final List<E> oldItems = new LinkedList<E>();
 		oldItems.add(e);
@@ -251,7 +251,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean removeAll(Collection<?> c) {
+	public boolean removeAll(final Collection<?> c) {
 		final List<E> oldItems = new LinkedList<E>();
 		for(final Object e : c) {
 			if(this.contains(e)) {
@@ -269,7 +269,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	 * {@inheritDoc}
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean retainAll(Collection<?> c) {
+	public boolean retainAll(final Collection<?> c) {
 		final List<E> oldItems = new LinkedList<E>();
 		for(final Object e : this.internalList) {
 			if(!c.contains(e)) {
@@ -286,7 +286,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public E set(int index, E element) {
+	public E set(final int index, final E element) {
 		final E result = this.internalList.set(index, element);
 		final List<E> oldItems = new LinkedList<E>();
 		final List<E> newItems = new LinkedList<E>();
@@ -306,7 +306,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<E> subList(int fromIndex, int toIndex) {
+	public List<E> subList(final int fromIndex, final int toIndex) {
 		return this.createObservableList(this.internalList.subList(fromIndex, toIndex));
 	}
 
@@ -320,7 +320,7 @@ public abstract class DefaultObservableList<E> implements ObservableList<E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public <T> T[] toArray(T[] a) {
+	public <T> T[] toArray(final T[] a) {
 		return this.internalList.toArray(a);
 	}
 }

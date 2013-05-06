@@ -16,17 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
-import java.net.URI;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.smartgwt.client.data.Record;
-import com.smartgwt.client.types.ContentsType;
-import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Button;
-import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
@@ -41,13 +35,10 @@ import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
-import com.smartgwt.client.widgets.layout.SectionStack;
-import com.smartgwt.client.widgets.layout.SectionStackSection;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
-import de.behrfried.wikianalyzer.util.command.CommandManager;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
@@ -55,7 +46,6 @@ import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedAction;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView.Presenter;
 
 public class DefaultArticleView extends ArticleView {
 
@@ -181,33 +171,36 @@ public class DefaultArticleView extends ArticleView {
 		this.searchBox.setValue(this.presenter.getArticleTitle());
 		this.searchBox.addChangedHandler(new ChangedHandler() {
 
-			public void onChanged(ChangedEvent event) {
-				DefaultArticleView.this.presenter.setArticleTitle((searchBox.getValueAsString()));
+			public void onChanged(final ChangedEvent event) {
+				DefaultArticleView.this.presenter.setArticleTitle(DefaultArticleView.this.searchBox.getValueAsString());
 			}
 		});
 		this.presenter.articleTitleChanged().addHandler(new Handler<EventArgs>() {
-			public void invoke(Object sender, EventArgs e) {
-				if(!searchBox.getValueAsString().equals(presenter.getArticleTitle())) {
-					searchBox.setValue(presenter.getArticleTitle());
+
+			public void invoke(final Object sender, final EventArgs e) {
+				if(!DefaultArticleView.this.searchBox.getValueAsString().equals(DefaultArticleView.this.presenter.getArticleTitle())) {
+					DefaultArticleView.this.searchBox.setValue(DefaultArticleView.this.presenter.getArticleTitle());
 				}
 			}
 		});
-		
+
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
-			public void onKeyUp(KeyUpEvent event) {
+
+			public void onKeyUp(final KeyUpEvent event) {
 				if(event.getKeyName().equals("Enter")) {
-					if(presenter.getSendCommand().canExecute(null)) {
-						presenter.getSendCommand().execute(null);
+					if(DefaultArticleView.this.presenter.getSendCommand().canExecute(null)) {
+						DefaultArticleView.this.presenter.getSendCommand().execute(null);
 					}
 				}
 			}
 		});
-		
+
 		this.searchBox.setValueMap(this.presenter.getSuggestions());
 		this.presenter.suggestionsChanged().addHandler(new Handler<EventArgs>() {
-			public void invoke(Object sender, EventArgs e) {
-				searchBox.setValueMap(presenter.getSuggestions());
-				searchBox.showPicker();
+
+			public void invoke(final Object sender, final EventArgs e) {
+				DefaultArticleView.this.searchBox.setValueMap(DefaultArticleView.this.presenter.getSuggestions());
+				DefaultArticleView.this.searchBox.showPicker();
 			}
 		});
 	}
@@ -215,23 +208,24 @@ public class DefaultArticleView extends ArticleView {
 	private void bindSearchButton() {
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
-			public void invoke(Object sender, EventArgs e) {
-				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+
+			public void invoke(final Object sender, final EventArgs e) {
+				DefaultArticleView.this.searchButton.setDisabled(!DefaultArticleView.this.presenter.getSendCommand().canExecute(null));
 			}
 		});
 		this.searchButton.addClickHandler(new ClickHandler() {
 
-			public void onClick(ClickEvent event) {
-				presenter.getSendCommand().execute(null);
+			public void onClick(final ClickEvent event) {
+				DefaultArticleView.this.presenter.getSendCommand().execute(null);
 			}
 		});
 	}
-	
+
 	private void bindGeneralInfoGrid() {
 
 		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
-		for(Tuple2<String, String> t : this.presenter.getArticleInfos()) {
-			ListGridRecord lsg = new ListGridRecord();
+		for(final Tuple2<String, String> t : this.presenter.getArticleInfos()) {
+			final ListGridRecord lsg = new ListGridRecord();
 			lsg.setAttribute("Attribute", t.getItem1());
 			lsg.setAttribute("Value", t.getItem2());
 			this.generalInfoGrid.addData(lsg);
@@ -239,25 +233,25 @@ public class DefaultArticleView extends ArticleView {
 		}
 		this.presenter.getArticleInfos().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
 
-			public void invoke(Object sender, ListChangedEventArgs<Tuple2<String, String>> e) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Tuple2<String, String>> e) {
 				if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
 					if(e.getOldItems() != null) {
-						for(Tuple2<String, String> t : e.getOldItems()) {
-							generalInfoGrid.removeData(recordsO.remove(t));
+						for(final Tuple2<String, String> t : e.getOldItems()) {
+							DefaultArticleView.this.generalInfoGrid.removeData(recordsO.remove(t));
 						}
 					}
 
 					if(e.getNewItems() != null) {
-						for(Tuple2<String, String> t : e.getNewItems()) {
-							ListGridRecord lsg = new ListGridRecord();
+						for(final Tuple2<String, String> t : e.getNewItems()) {
+							final ListGridRecord lsg = new ListGridRecord();
 							lsg.setAttribute("Attribute", t.getItem1());
 							lsg.setAttribute("Value", t.getItem2());
-							generalInfoGrid.addData(lsg);
+							DefaultArticleView.this.generalInfoGrid.addData(lsg);
 							recordsO.put(t, lsg);
 						}
 					}
 				} else {
-					generalInfoGrid.clear();
+					DefaultArticleView.this.generalInfoGrid.clear();
 					recordsO.clear();
 				}
 			}

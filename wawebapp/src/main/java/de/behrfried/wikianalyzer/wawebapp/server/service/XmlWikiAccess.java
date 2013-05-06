@@ -36,44 +36,43 @@ public class XmlWikiAccess implements WikiAccess {
 	private final Logger logger = LoggerFactory.getLogger(XmlWikiAccess.class);
 
 	private final WikiApi requester;
-	
+
 	private final DocumentBuilder builder;
 	private final XPathFactory xPathfactory;
-	
+
 	@Inject
-	public XmlWikiAccess(WikiApi requester) {
+	public XmlWikiAccess(final WikiApi requester) {
 		this.requester = requester;
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder = null;
-	    try {
-	        builder = factory.newDocumentBuilder();
-        } catch(ParserConfigurationException e) {
-        	this.logger.error(e.getMessage(), e);
-        }
-	    this.builder = builder;
+		try {
+			builder = factory.newDocumentBuilder();
+		} catch(final ParserConfigurationException e) {
+			this.logger.error(e.getMessage(), e);
+		}
+		this.builder = builder;
 		this.xPathfactory = XPathFactory.newInstance();
 	}
 
-	
-	public int getPageId(String title) {
+	public int getPageId(final String title) {
 		final String convertedTitle = title.replaceAll(" ", "%20");
 		this.logger.debug("Request 'pageid' for title '" + title + "' (converted to '" + convertedTitle + "')");
-		final String response =
-				this.requester.getResult("http://de.wikipedia.org/w/api.php?action=query&format=xml&indexpageids&titles=" + convertedTitle);
+		final String response = this.requester.getResult("http://de.wikipedia.org/w/api.php?action=query&format=xml&indexpageids&titles="
+		        + convertedTitle);
 		this.logger.debug("Response: " + response);
 		try {
-			InputSource is = new InputSource(new StringReader(response));
-			
-			Document doc = builder.parse(is);
-			
-			XPath xpath = xPathfactory.newXPath();
-			XPathExpression expr = xpath.compile("//page[1]");
-			
-			Node result = (Node)expr.evaluate(doc, XPathConstants.NODE);
-				
+			final InputSource is = new InputSource(new StringReader(response));
+
+			final Document doc = this.builder.parse(is);
+
+			final XPath xpath = this.xPathfactory.newXPath();
+			final XPathExpression expr = xpath.compile("//page[1]");
+
+			final Node result = (Node)expr.evaluate(doc, XPathConstants.NODE);
+
 			return Integer.parseInt(result.getAttributes().getNamedItem("pageid").getNodeValue());
-		} catch(Exception e) {
+		} catch(final Exception e) {
 			this.logger.error(e.getMessage(), e);
 		}
 		return -1;

@@ -15,7 +15,6 @@
  */
 package de.behrfried.wikianalyzer.util;
 
-
 /**
  * Class containing various Delegate Interfaces.
  * 

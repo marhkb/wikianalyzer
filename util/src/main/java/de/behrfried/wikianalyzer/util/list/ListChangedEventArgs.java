@@ -76,7 +76,7 @@ public class ListChangedEventArgs<E> extends EventArgs {
 	 * @param newItems
 	 *            a {@link List} containing the added elements
 	 */
-	public ListChangedEventArgs(ListChangedAction listChangedType, final List<E> oldItems, List<E> newItems) {
+	public ListChangedEventArgs(final ListChangedAction listChangedType, final List<E> oldItems, final List<E> newItems) {
 		this.listChangedAction = listChangedType;
 		this.oldItems = oldItems;
 		this.newItems = newItems;
@@ -90,7 +90,7 @@ public class ListChangedEventArgs<E> extends EventArgs {
 	 *         performed on the {@link ObservableList}
 	 */
 	public ListChangedAction getListChangedAction() {
-		return listChangedAction;
+		return this.listChangedAction;
 	}
 
 	/**

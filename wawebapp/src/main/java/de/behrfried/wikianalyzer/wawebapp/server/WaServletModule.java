@@ -21,11 +21,11 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.servlet.ServletModule;
 import de.behrfried.wikianalyzer.wawebapp.server.servlets.MainServiceImpl;
 
-
 /**
  * Server side module for for configuring servlets.
+ * 
  * @author marcus
- *
+ * 
  */
 public class WaServletModule extends ServletModule {
 
@@ -33,7 +33,7 @@ public class WaServletModule extends ServletModule {
 	 * logger linked to any logging framework
 	 */
 	private final Logger logger = LoggerFactory.getLogger(WaServletModule.class);
-	
+
 	/**
 	 * Binds all Servlets.
 	 */

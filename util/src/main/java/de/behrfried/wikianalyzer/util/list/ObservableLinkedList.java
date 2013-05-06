@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * Implementation of {@link DefaultObservableList} internally using an
  * {@link LinkedList}.
@@ -34,41 +33,47 @@ import java.util.List;
  *            specifies the type this {@link ObservableLinkedList} shall hold
  */
 public class ObservableLinkedList<E> extends DefaultObservableList<E> {
-	
+
 	/**
 	 * Creates an empty {@link ObservableLinkedList}.
 	 */
-	public ObservableLinkedList() {
-    }
+	public ObservableLinkedList() {}
 
 	/**
-	 * Creates an {@link ObservableLinkedList} based on the passed {@link Collection}.
-	 * @param collection a {@link Collection} which elements shall be added to the
+	 * Creates an {@link ObservableLinkedList} based on the passed
+	 * {@link Collection}.
+	 * 
+	 * @param collection
+	 *            a {@link Collection} which elements shall be added to the
 	 *            {@link ObservableLinkedList}
 	 */
-	public ObservableLinkedList(Collection<E> collection) {
-	    super(collection);
-    }
+	public ObservableLinkedList(final Collection<E> collection) {
+		super(collection);
+	}
 
 	/**
 	 * Returns a new {@link linkedList} based on the passed {@link Collection}.
+	 * 
 	 * @return a new {@link LinkedList} based on the passed {@link Collection}
 	 */
 	@Override
-    protected List<E> createInternalList(Collection<E> collection) {
-	    if(collection == null) {
-	    	return new LinkedList<E>();
-	    }
-	    return new LinkedList<E>(collection);
-    }
+	protected List<E> createInternalList(final Collection<E> collection) {
+		if(collection == null) {
+			return new LinkedList<E>();
+		}
+		return new LinkedList<E>(collection);
+	}
 
 	/**
-	 * Returns a new {@link ObservableLinkedList} based on the passed {@link Collection}.
-	 * @return a new {@link ObservableLinkedList} based on the passed {@link Collection}
+	 * Returns a new {@link ObservableLinkedList} based on the passed
+	 * {@link Collection}.
+	 * 
+	 * @return a new {@link ObservableLinkedList} based on the passed
+	 *         {@link Collection}
 	 */
 	@Override
-    protected DefaultObservableList<E> createObservableList(Collection<E> collection) {
-	    return new ObservableLinkedList<E>(collection);
-    }
+	protected DefaultObservableList<E> createObservableList(final Collection<E> collection) {
+		return new ObservableLinkedList<E>(collection);
+	}
 
 }

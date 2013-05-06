@@ -32,22 +32,15 @@ package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.inject.Inject;
-import com.smartgwt.client.widgets.events.ClickEvent;
-import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import com.smartgwt.client.widgets.tab.events.TabSelectedEvent;
 import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
-import de.behrfried.wikianalyzer.util.command.CommandManager;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView.Presenter;
 
 /**
  * Default implementation of {@link ShellView}
@@ -69,11 +62,11 @@ public class DefaultShellView extends ShellView {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
-		
+
 		this.presenter = presenter;
 		this.articleView = articleView;
 		this.userView = userView;
-		
+
 		/* init other tabs */
 		final Tab tabArticle = new Tab(this.articleView.getName());
 		tabArticle.setID(this.articleView.getName());

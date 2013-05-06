@@ -30,14 +30,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client;
 
-import org.junit.Test;
-import junit.framework.Assert;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
-import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 
 /**
  * GWT JUnit <b>integration</b> tests must extend GWTTestCase. Using

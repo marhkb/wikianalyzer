@@ -32,23 +32,22 @@ import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
  */
 @Singleton
 public class MainServiceImpl extends RemoteServiceServlet implements MainService {
-	
+
 	/**
      * 
      */
-    private static final long serialVersionUID = 3575183933435770570L;
-    
-    
+	private static final long serialVersionUID = 3575183933435770570L;
+
 	private final Logger logger = LoggerFactory.getLogger(MainServiceImpl.class);
-	
+
 	private final WikiAccess wikiAccess;
-	
+
 	@Inject
-	public MainServiceImpl(WikiAccess wikiAccess) {
+	public MainServiceImpl(final WikiAccess wikiAccess) {
 		this.wikiAccess = wikiAccess;
 	}
 
-	public int sendArticleName(String articleName) {
+	public int sendArticleName(final String articleName) {
 		return this.wikiAccess.getPageId(articleName);
 	}
 

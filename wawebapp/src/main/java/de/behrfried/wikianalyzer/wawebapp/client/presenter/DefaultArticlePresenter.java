@@ -33,49 +33,48 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 public class DefaultArticlePresenter implements ArticleView.Presenter {
 
 	public String getArticleTitle() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	public void setArticleTitle(String string) {
-	    // TODO Auto-generated method stub
-	    
-    }
+	public void setArticleTitle(final String string) {
+		// TODO Auto-generated method stub
+
+	}
 
 	public Event<EventArgs> articleTitleChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public Command getSendCommand() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public String getArticleLink() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public Event<EventArgs> articleLinkChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public ObservableList<Tuple2<String, String>> getArticleInfos() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public Event<EventArgs> suggestionsChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public LinkedHashMap<String, String> getSuggestions() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

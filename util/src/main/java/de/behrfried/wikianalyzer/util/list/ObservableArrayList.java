@@ -37,20 +37,24 @@ public class ObservableArrayList<E> extends DefaultObservableList<E> {
 	public ObservableArrayList() {}
 
 	/**
-	 * Creates an {@link ObservableArrayList} based on the passed {@link Collection}.
-	 * @param collection a {@link Collection} which elements shall be added to the
+	 * Creates an {@link ObservableArrayList} based on the passed
+	 * {@link Collection}.
+	 * 
+	 * @param collection
+	 *            a {@link Collection} which elements shall be added to the
 	 *            {@link ObservableArrayList}
 	 */
-	public ObservableArrayList(Collection<E> collection) {
+	public ObservableArrayList(final Collection<E> collection) {
 		super(collection);
 	}
 
 	/**
 	 * Returns a new {@link ArrayList} based on the passed {@link Collection}.
+	 * 
 	 * @return a new {@link ArrayList} based on the passed {@link Collection}
 	 */
 	@Override
-	protected List<E> createInternalList(Collection<E> collection) {
+	protected List<E> createInternalList(final Collection<E> collection) {
 		if(collection == null) {
 			return new ArrayList<E>();
 		}
@@ -58,11 +62,14 @@ public class ObservableArrayList<E> extends DefaultObservableList<E> {
 	}
 
 	/**
-	 * Returns a new {@link DefaultObservableList} based on the passed {@link Collection}.
-	 * @return a new {@link DefaultObservableList} based on the passed {@link Collection}
+	 * Returns a new {@link DefaultObservableList} based on the passed
+	 * {@link Collection}.
+	 * 
+	 * @return a new {@link DefaultObservableList} based on the passed
+	 *         {@link Collection}
 	 */
 	@Override
-	protected DefaultObservableList<E> createObservableList(Collection<E> collection) {
+	protected DefaultObservableList<E> createObservableList(final Collection<E> collection) {
 		return new ObservableArrayList<E>(collection);
 	}
 
