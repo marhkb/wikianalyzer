@@ -19,7 +19,6 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.google.inject.Inject;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.ContentsType;
@@ -46,7 +45,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
-
+import com.smartgwt.client.widgets.menu.events.MenuItemClickEvent;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
@@ -63,8 +62,8 @@ public class DefaultArticleView extends ArticleView {
 	 * has to be put in.
 	 */
 
-	private Label waLabel, yourSearchedArticleLabel, urlLabel, genArtInfLabel, artAnaLabel;
-	private LinkItem wikiLink;
+	private Label waLabel, yourSearchedArticleLabel, genArtInfLabel, artAnaLabel;
+	private HTMLPane wikiLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalInfoGrid;
@@ -74,15 +73,13 @@ public class DefaultArticleView extends ArticleView {
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
-	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan,
-			yearSpan, chooseSpan;
+	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
 
 	private final Messages messages;
 
 	@Inject
-	public DefaultArticleView(final Presenter presenter, final Messages messages)
-			throws IllegalArgumentException {
-		if (presenter == null) {
+	public DefaultArticleView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
+		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
 		this.presenter = presenter;
@@ -125,20 +122,19 @@ public class DefaultArticleView extends ArticleView {
 		this.timeSpanMenu.addItem(this.yearSpan);
 		this.chooseSpan = new MenuItem("choose timespan");
 		this.timeSpanMenu.addItem(this.chooseSpan);
-		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(),
-				this.timeSpanMenu);
+		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
 		this.yourSearchedArticleLabel = new Label("Ihr gesuchter Artikel war: ");
-		//TODO this.wikiLink = new LinkItem("www.google.de");
+		this.wikiLink = new HTMLPane();
 		this.menuURLLayout = new HLayout();
-		this.menuURLLayout.addMembers(this.timeMenuButton, this.yourSearchedArticleLabel);
+		this.menuURLLayout.addMembers(this.timeMenuButton, this.yourSearchedArticleLabel, this.wikiLink);
 
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
 		this.valueColumn = new ListGridField("Value");
-		//this.valueColumn.setC
+		// this.valueColumn.setC
 		this.valueColumn.setCanEdit(false);
 		this.generalInfoGrid = new ListGrid();
-	
+
 		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
 
 		this.artAnaLayout = new VLayout();
@@ -157,14 +153,12 @@ public class DefaultArticleView extends ArticleView {
 		this.genInfLayout.addMembers(this.genArtInfLabel, this.generalInfoGrid);
 
 		this.articleInfoAnalyzationLayout = new HLayout();
-		this.articleInfoAnalyzationLayout.addMembers(
-				this.artAnaLayout, this.genInfLayout);
+		this.articleInfoAnalyzationLayout.addMembers(this.genInfLayout, this.artAnaLayout);
 
 		this.siteLayoutContainer = new VLayout();
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
-		this.siteLayoutContainer.addMembers(this.searchLayout,
-				this.menuURLLayout, this.articleInfoAnalyzationLayout);
+		this.siteLayoutContainer.addMembers(this.searchLayout, this.menuURLLayout, this.articleInfoAnalyzationLayout);
 
 		this.addChild(this.siteLayoutContainer);
 
@@ -175,25 +169,32 @@ public class DefaultArticleView extends ArticleView {
 	private void bind() {
 		this.bindSearchBox();
 		this.bindGeneralInfoGrid();
+		this.bindSearchButton();
+		this.bindTimeSpanMenu();
 
-		this.searchButton.setDisabled(!this.presenter.getSendCommand()
-				.canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged()
-				.addHandler(new Handler<EventArgs>() {
-					public void invoke(Object sender, EventArgs e) {
-						searchButton.setDisabled(!presenter.getSendCommand()
-								.canExecute(null));
-					}
-				});
-		this.searchButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				presenter.getSendCommand().execute(null);
+	}
+
+	private void bindSearchBox() {
+		this.searchBox.setValue(this.presenter.getArticleName());
+		this.searchBox.addChangedHandler(new ChangedHandler() {
+
+			public void onChanged(ChangedEvent event) {
+				DefaultArticleView.this.presenter.setArticleName(searchBox.getValueAsString());
+			}
+		});
+		this.presenter.articleNameChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(Object sender, EventArgs e) {
+				if(!searchBox.equals(presenter.getArticleName())) {
+					searchBox.setValue(presenter.getArticleName());
+				}
 			}
 		});
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
+
 			public void onKeyUp(KeyUpEvent event) {
-				if (event.getKeyName().equals("Enter")) {
-					if (presenter.getSendCommand().canExecute(null)) {
+				if(event.getKeyName().equals("Enter")) {
+					if(presenter.getSendCommand().canExecute(null)) {
 						presenter.getSendCommand().execute(null);
 					}
 				}
@@ -201,70 +202,123 @@ public class DefaultArticleView extends ArticleView {
 		});
 	}
 
-	private void bindSearchBox() {
-		this.searchBox.setValue(this.presenter.getArticleName());
-		this.searchBox.addChangedHandler(new ChangedHandler() {
-			public void onChanged(ChangedEvent event) {
-				DefaultArticleView.this.presenter.setArticleName(searchBox
-						.getValueAsString());
+	private void bindSearchButton() {
+		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(Object sender, EventArgs e) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
 			}
 		});
-		this.presenter.articleNameChanged().addHandler(
-				new Handler<EventArgs>() {
-					public void invoke(Object sender, EventArgs e) {
-						if (!searchBox.equals(presenter.getArticleName())) {
-							searchBox.setValue(presenter.getArticleName());
-						}
-					}
-				});
+		this.searchButton.addClickHandler(new ClickHandler() {
+
+			public void onClick(ClickEvent event) {
+				presenter.getSendCommand().execute(null);
+			}
+		});
 	}
 
 	private void bindGeneralInfoGrid() {
-
 		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
-		for (Tuple2<String, String> t : this.presenter.getArticleInfos()) {
+		for(Tuple2<String, String> t : this.presenter.getArticleInfos()) {
 			ListGridRecord lsg = new ListGridRecord();
 			lsg.setAttribute("Attribute", t.getItem1());
 			lsg.setAttribute("Value", t.getItem2());
 			this.generalInfoGrid.addData(lsg);
 			recordsO.put(t, lsg);
 		}
-		this.presenter
-				.getArticleInfos()
-				.listChanged()
-				.addHandler(
-						new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
+		this.presenter.getArticleInfos().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
 
-							public void invoke(
-									Object sender,
-									ListChangedEventArgs<Tuple2<String, String>> e) {
-								if (e.getListChangedType() == ListChangedType.ADD_REMOVE) {
-									if (e.getOldItems() != null) {
-										for (Tuple2<String, String> t : e
-												.getOldItems()) {
-											generalInfoGrid.removeData(recordsO
-													.remove(t));
-										}
-									}
+			public void invoke(Object sender, ListChangedEventArgs<Tuple2<String, String>> e) {
+				if(e.getListChangedType() == ListChangedType.ADD_REMOVE) {
+					if(e.getOldItems() != null) {
+						for(Tuple2<String, String> t : e.getOldItems()) {
+							generalInfoGrid.removeData(recordsO.remove(t));
+						}
+					}
 
-									if (e.getNewItems() != null) {
-										for (Tuple2<String, String> t : e
-												.getNewItems()) {
-											ListGridRecord lsg = new ListGridRecord();
-											lsg.setAttribute("Attribute",
-													t.getItem1());
-											lsg.setAttribute("Value",
-													t.getItem2());
-											generalInfoGrid.addData(lsg);
-											recordsO.put(t, lsg);
-										}
-									}
-								} else {
-									generalInfoGrid.clear();
-									recordsO.clear();
-								}
-							}
-						});
+					if(e.getNewItems() != null) {
+						for(Tuple2<String, String> t : e.getNewItems()) {
+							ListGridRecord lsg = new ListGridRecord();
+							lsg.setAttribute("Attribute", t.getItem1());
+							lsg.setAttribute("Value", t.getItem2());
+							generalInfoGrid.addData(lsg);
+							recordsO.put(t, lsg);
+						}
+					}
+				} else {
+					generalInfoGrid.clear();
+					recordsO.clear();
+				}
+			}
+		});
+	}
+
+	private void bindTimeSpanMenu() {
+		this.randomSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				randomSpan.setChecked(true);
+				timeMenuButton.setTitle(randomSpan.getTitle());
+			}
+		});
+		this.hourSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				hourSpan.setChecked(true);
+				timeMenuButton.setTitle(hourSpan.getTitle());
+			}
+		});
+		this.daySpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				daySpan.setChecked(true);
+				timeMenuButton.setTitle(daySpan.getTitle());
+			}
+		});
+		this.weekSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				weekSpan.setChecked(true);
+				timeMenuButton.setTitle(weekSpan.getTitle());
+			}
+		});
+		this.monthSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				monthSpan.setChecked(true);
+				timeMenuButton.setTitle(monthSpan.getTitle());
+			}
+		});
+		this.yearSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				yearSpan.setChecked(true);
+				timeMenuButton.setTitle(yearSpan.getTitle());
+			}
+		});
+		this.chooseSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
+			public void onClick(MenuItemClickEvent event) {
+				for(MenuItem mi : timeSpanMenu.getItems()) {
+					mi.setChecked(false);
+				}
+				chooseSpan.setChecked(true);
+				
+			}
+		});
+		
 	}
 
 	@Override

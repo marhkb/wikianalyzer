@@ -17,7 +17,10 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
+import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
@@ -48,5 +51,13 @@ public abstract class UserView extends View {
 		public Event<GenericEventArgs<String>> getErrorNameToServerChanged();
 
 		public Command getSendCommand();
+
+		public void setUserName(String valueAsString);
+
+		public Event<EventArgs> usrNameChanged();
+
+		public String getUsrName();
+
+		public ObservableList<Tuple2<String, String>> getUsrInfos();
 	}
 }

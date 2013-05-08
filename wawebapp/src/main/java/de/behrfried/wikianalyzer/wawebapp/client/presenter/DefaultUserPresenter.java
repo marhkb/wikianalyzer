@@ -19,8 +19,10 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
@@ -156,4 +158,24 @@ public class DefaultUserPresenter implements UserView.Presenter {
 	public Command getSendCommand() {
 		return this.sendCommand;
 	}
+
+	public void setUserName(String valueAsString) {
+	    // TODO Auto-generated method stub
+	    
+    }
+
+	public Event<EventArgs> usrNameChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	public String getUsrName() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	public ObservableList<Tuple2<String, String>> getUsrInfos() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 }
