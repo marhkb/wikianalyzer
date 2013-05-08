@@ -28,7 +28,7 @@
  * the License.
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -38,6 +38,9 @@ import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import com.smartgwt.client.widgets.tab.events.TabSelectedEvent;
 import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
 
 /**
  * Default implementation of {@link ShellView}
@@ -45,7 +48,7 @@ import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
  * @author marcus
  * 
  */
-public class DefaultTabContainerView extends ShellView {
+public class DefaultShellView extends ShellView {
 
 	private final Presenter presenter;
 
@@ -55,10 +58,11 @@ public class DefaultTabContainerView extends ShellView {
 	private final TabSet tabSet;
 
 	@Inject
-	public DefaultTabContainerView(final Presenter presenter, final ArticleView articleView, final UserView userView) throws IllegalArgumentException {
+	public DefaultShellView(final Presenter presenter, final ArticleView articleView, final UserView userView) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
+
 		this.presenter = presenter;
 		this.articleView = articleView;
 		this.userView = userView;
@@ -114,7 +118,7 @@ public class DefaultTabContainerView extends ShellView {
 				if(historyToken.isEmpty()) {
 					History.back();
 				}
-				DefaultTabContainerView.this.tabSet.selectTab(event.getValue());
+				DefaultShellView.this.tabSet.selectTab(event.getValue());
 			}
 		});
 		History.fireCurrentHistoryState();

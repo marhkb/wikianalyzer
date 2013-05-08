@@ -16,102 +16,119 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Random;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
+import de.behrfried.wikianalyzer.util.command.CommandManager;
+import de.behrfried.wikianalyzer.util.command.UICommand;
 import de.behrfried.wikianalyzer.util.data.Tuple;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.list.DefaultObservableList;
+import de.behrfried.wikianalyzer.util.event.Handler;
+import de.behrfried.wikianalyzer.util.list.ObservableLinkedList;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
-import de.behrfried.wikianalyzer.wawebapp.client.engine.UICommand;
+import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
+	private final MainServiceAsync mainService;
+
 	private final Object initContext = new Object();
 
 	@Inject
-	public MockArticlePresenter() {
+	public MockArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
+		if(mainService == null) {
+			throw new IllegalArgumentException("mainService == null");
+		}
+		this.mainService = mainService;
+
 		this.articleInfos.add(Tuple.create("Ast", "Loch"));
 		this.articleInfos.add(Tuple.create("Rosa", "Schlüpfer"));
 	}
 
 	private String articleName = "";
 
-	public String getArticleName() {
+	public String getArticleTitle() {
 		return this.articleName;
 	}
 
-	public void setArticleName(String string) {
+	public void setArticleTitle(final String string) {
 		if(!string.equals(this.articleName)) {
 			this.articleName = string;
-			this.articleNameChanged().fire(this.initContext, this, EventArgs.EMPTY);
-			this.sendCommand.raiseCanExecuteChanged();
-
-			this.suggestions.clear();
-			if(this.articleName.startsWith("A")) {
-				this.suggestions.add("Arschloch");
-				this.suggestions.add("Amerika");
-				this.suggestions.add("Atombombe");
-			} else {
-				this.suggestions.add("Fliegenfänger");
-				this.suggestions.add("Menschenfleich");
-				this.suggestions.add("Rauch");
-				this.suggestions.add("Katasteramt");
-				this.suggestions.add("Blubb");
-				this.suggestions.add("=<o> : <o>=");
-			}
+			this.articleTitleChanged().fire(this.initContext, this, EventArgs.EMPTY);
+			this.jGetArticleTitles(this.articleName, 10);
+			CommandManager.get().invalidateRequerySuggested();
 		}
 	}
 
-	private final Event<EventArgs> articleChanged = new Event<EventArgs>(initContext);
+	private final Event<EventArgs> articleChanged = new Event<EventArgs>(this.initContext);
 
-	public Event<EventArgs> articleNameChanged() {
-		return articleChanged;
+	public Event<EventArgs> articleTitleChanged() {
+		return this.articleChanged;
 	}
 
-	private final Command sendCommand = new UICommand() {
-
-		public void execute(Object param) {
-			setArticleName(getArticleName().toUpperCase());
-			
-			final Random r = new Random();
-			switch(r.nextInt(5)) {
-				case 0:
-					setArticleLink("http://www.google.de");
-					break;
-				case 1:
-					setArticleLink("http://www.golem.de");
-					break;
-				case 2:
-					setArticleLink("http://www.mit.de");
-					break;
-				case 3:
-					setArticleLink("http://www.yahoo.de");
-					break;
-				case 4:
-					setArticleLink("http://www.pampers.de");
-					break;
-				default:
-					setArticleLink("http://youporn.com");
-					break;
-			}
-		}
-
-		public boolean canExecute(Object param) {
-			return getArticleName().length() > 0;
-		}
-
-		@Override
-		protected EventArgs getEventArgs() {
-			return EventArgs.EMPTY;
-		}
-	};
+	private Command sendCommand;
 
 	public Command getSendCommand() {
+		if(this.sendCommand == null) {
+			this.sendCommand = new UICommand() {
+
+				public void execute(final Object param) {
+
+					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle(), new AsyncCallback<Integer>() {
+
+						public void onSuccess(final Integer result) {
+							Window.alert(result + "");
+						}
+
+						public void onFailure(final Throwable caught) {}
+					});
+
+					final Random r = new Random();
+					switch(r.nextInt(5)) {
+						case 0:
+							MockArticlePresenter.this.setArticleLink("http://www.google.de");
+							break;
+						case 1:
+							MockArticlePresenter.this.setArticleLink("http://www.golem.de");
+							break;
+						case 2:
+							MockArticlePresenter.this.setArticleLink("http://www.mit.de");
+							break;
+						case 3:
+							MockArticlePresenter.this.setArticleLink("http://www.yahoo.de");
+							break;
+						case 4:
+							MockArticlePresenter.this.setArticleLink("http://www.pampers.de");
+							break;
+						default:
+							MockArticlePresenter.this.setArticleLink("http://youporn.com");
+							break;
+					}
+				}
+
+				public boolean canExecute(final Object param) {
+					return MockArticlePresenter.this.getArticleTitle().length() > 0;
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
 		return this.sendCommand;
 	}
 
@@ -135,16 +152,53 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleLinkChanged;
 	}
 
-	private final ObservableList<Tuple2<String, String>> articleInfos = new DefaultObservableList<Tuple2<String, String>>(
+	private final ObservableList<Tuple2<String, String>> articleInfos = new ObservableLinkedList<Tuple2<String, String>>(
 	        new LinkedList<Tuple2<String, String>>());
 
 	public ObservableList<Tuple2<String, String>> getArticleInfos() {
 		return this.articleInfos;
 	}
 
-	private final ObservableList<String> suggestions = new DefaultObservableList<String>(new LinkedList<String>());
+	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
 
-	public ObservableList<String> getSuggestions() {
+	public LinkedHashMap<String, String> getSuggestions() {
 		return this.suggestions;
 	}
+
+	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(this.initContext);
+
+	public Event<EventArgs> suggestionsChanged() {
+		return this.suggestionsChanged;
+	}
+
+	void fireSuggestionsChanged() {
+		this.suggestionsChanged.fire(this.initContext, this, EventArgs.EMPTY);
+	}
+
+	private final void clearSuggestions() {
+		this.suggestions.clear();
+	}
+
+	private final void addToSuggestions(final String name) {
+		this.suggestions.put(name, name);
+	}
+
+	public final native void jGetArticleTitles(String word, int maxResults) /*-{
+	                                                                        this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+	                                                                        this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+	                                                                        var inst = this;
+	                                                                        $wnd.$
+	                                                                        .getJSON(
+	                                                                        "http://de.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&callback=?", 
+	                                                                        {gaplimit: maxResults, gapfrom: word}, 
+	                                                                        function(data) {
+	                                                                        inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+	                                                                        for ( var d in data["query"]["pages"]) {
+	                                                                        var title = data["query"]["pages"][d].title;
+	                                                                        inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
+
+	                                                                        }
+	                                                                        inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+	                                                                        });
+	                                                                        }-*/;
 }

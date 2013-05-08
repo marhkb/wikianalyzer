@@ -14,9 +14,7 @@
  | See the License for the specific language governing permissions and
  | limitations under the License. 
  |-->
-  
-
-
+ 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -79,6 +77,20 @@
 			<version>3.1</version>
 		</dependency>
 
+		<!-- Guice for serverside -->
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+		<!-- Google Gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
 		<!-- Util -->
 		<dependency>
 			<groupId>de.behrfried.wikianalyzer</groupId>
@@ -86,25 +98,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
-		<!-- The java wiki api implementation -->
-		<!-- <dependency>
-			<groupId>net.sourceforge</groupId>
-			<artifactId>jwbf</artifactId>
-			<version>1.3.3</version>
-		</dependency> -->
-
 		<!-- Charts Tools -->
 		<dependency>
 			<groupId>com.google.gwt.google-apis</groupId>
 			<artifactId>gwt-visualization</artifactId>
 			<version>1.0.2</version>
-		</dependency>
-
-		<!-- HTML Parser -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.7.2</version>
 		</dependency>
 
 		<!-- Guice Injector for GWT (Gin) -->
@@ -163,6 +161,7 @@
 					<webappDirectory>${webappDirectory}</webappDirectory>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -173,6 +172,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
@@ -230,16 +230,6 @@
 	</build>
 
 	<repositories>
-		<repository>
-			<id>info-bliki-repository</id>
-			<url>http://gwtwiki.googlecode.com/svn/maven-repository/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
 		<repository>
 			<id>smartclient</id>
 			<url>http://www.smartclient.com/maven2/</url>

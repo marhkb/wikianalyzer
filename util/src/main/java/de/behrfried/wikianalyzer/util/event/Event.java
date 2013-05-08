@@ -102,7 +102,7 @@ public class Event<E extends EventArgs> {
 
 	/**
 	 * Adds the passed {@link Handler} to this Event. It will be invoked on
-	 * 'fire' method.
+	 * {@code fire()}.
 	 * 
 	 * @param handler
 	 * @throws IllegalArgumentException
@@ -118,7 +118,7 @@ public class Event<E extends EventArgs> {
 	/**
 	 * Removes the passed {@link Handler} from this Event. If the handler is
 	 * linked with this Event it will be removed and won't be invoked any more
-	 * on 'fire'.
+	 * on {@code fire()}.
 	 * 
 	 * @param handler
 	 *            the Handler to be removed from this Event
@@ -155,9 +155,9 @@ public class Event<E extends EventArgs> {
 	}
 
 	/**
-	 * Fires this Event by invoking all associated {@link Handler}'s.
+	 * Fires this {@link Event} by invoking all associated {@link Handler}'s.
 	 * 
-	 * @param initializationContext
+	 * @param initContext
 	 *            this should be the same object as passed to constructor at
 	 *            Event's instantiation
 	 * @param sender
@@ -169,8 +169,8 @@ public class Event<E extends EventArgs> {
 	 *             if the passed initializationContext is not the same object as
 	 *             passed at construction of this Event
 	 */
-	public void fire(final Object initializationContext, final Object sender, final E e) throws IllegalStateException {
-		if(this.initContext != initializationContext) {
+	public void fire(final Object initContext, final Object sender, final E e) throws IllegalStateException {
+		if(this.initContext != initContext) {
 			throw new IllegalStateException("wrong initContext");
 		}
 		for(final Handler<E> h : this.handlers) {

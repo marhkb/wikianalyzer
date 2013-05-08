@@ -14,12 +14,19 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.presenter;
+package de.behrfried.wikianalyzer.wawebapp.client;
 
-/**
- * Base interface for all Presenters.
- * 
- * @author marcus
- * 
- */
-public interface PresenterBase {}
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import com.google.gwt.junit.tools.GWTTestSuite;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.GwtTestMockArticlePresenter;
+
+public class GwtWaTestSuite extends GWTTestSuite {
+
+	public static Test suite() {
+		final TestSuite suite = new TestSuite("Test for a Maps Application");
+		suite.addTestSuite(GwtTestWawebapp.class);
+		suite.addTestSuite(GwtTestMockArticlePresenter.class);
+		return suite;
+	}
+}

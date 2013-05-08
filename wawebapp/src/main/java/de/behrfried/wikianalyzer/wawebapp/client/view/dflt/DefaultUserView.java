@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +42,11 @@ import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+<<<<<<< HEAD:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/DefaultUserView.java
+=======
+import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+>>>>>>> 9565e7e66fcd14eb590d7404e4f509939388252e:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/DefaultUserView.java
 
 /**
  * Default implementation of {@link UserView}.
@@ -248,10 +253,17 @@ public class DefaultUserView extends UserView {
 		});
 		this.presenter.usrNameChanged().addHandler(new Handler<EventArgs>() {
 
+<<<<<<< HEAD:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/DefaultUserView.java
 			public void invoke(Object sender, EventArgs e) {
 				if(!searchBox.equals(presenter.getUsrName())) {
 					searchBox.setValue(presenter.getUsrName());
 				}
+=======
+		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
+
+			public void invoke(final Object sender, final GenericEventArgs<String> e) {
+				DefaultUserView.this.textItem.setValue(e.getValue());
+>>>>>>> 9565e7e66fcd14eb590d7404e4f509939388252e:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/DefaultUserView.java
 			}
 		});
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {

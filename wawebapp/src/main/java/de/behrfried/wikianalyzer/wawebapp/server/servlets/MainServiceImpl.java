@@ -14,11 +14,15 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.server;
+package de.behrfried.wikianalyzer.wawebapp.server.servlets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
-import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
+import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
 
 /**
  * Server side implementation of {@link MainService}
@@ -26,22 +30,25 @@ import de.behrfried.wikianalyzer.wawebapp.shared.StringObject;
  * @author marcus
  * 
  */
+@Singleton
 public class MainServiceImpl extends RemoteServiceServlet implements MainService {
 
 	/**
-	 * generated UID
-	 */
-	private static final long serialVersionUID = 200675849907147502L;
+     * 
+     */
+	private static final long serialVersionUID = 3575183933435770570L;
 
-	/**
-	 * Look at {@link MainService}
-	 */
-	public StringObject getStringObject(final StringObject o) {
-		return o;
+	private final Logger logger = LoggerFactory.getLogger(MainServiceImpl.class);
+
+	private final WikiAccess wikiAccess;
+
+	@Inject
+	public MainServiceImpl(final WikiAccess wikiAccess) {
+		this.wikiAccess = wikiAccess;
 	}
 
-	public String getArticle(final String article) {
-		return article.toUpperCase();
+	public int sendArticleName(final String articleName) {
+		return this.wikiAccess.getPageId(articleName);
 	}
 
 }

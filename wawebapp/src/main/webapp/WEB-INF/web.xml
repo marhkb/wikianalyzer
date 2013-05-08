@@ -5,20 +5,22 @@
 
 <web-app>
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>mainServlet</servlet-name>
-    <servlet-class>de.behrfried.wikianalyzer.wawebapp.server.MainServiceImpl</servlet-class>
-  </servlet>
+	<filter>
+		<filter-name>guiceFilter</filter-name>
+		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+	</filter>
 
-  <servlet-mapping>
-    <servlet-name>mainServlet</servlet-name>
-    <url-pattern>/Wawebapp/main</url-pattern>
-  </servlet-mapping>
+	<filter-mapping>
+		<filter-name>guiceFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Wawebapp.html</welcome-file>
-  </welcome-file-list>
+	<listener>
+		<listener-class>de.behrfried.wikianalyzer.wawebapp.server.WaServletContextListener</listener-class>
+	</listener>
 
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>Wawebapp.html</welcome-file>
+	</welcome-file-list>
 </web-app>

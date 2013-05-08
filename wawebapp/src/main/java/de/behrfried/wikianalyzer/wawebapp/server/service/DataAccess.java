@@ -14,12 +14,8 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.presenter;
+package de.behrfried.wikianalyzer.wawebapp.server.service;
 
-/**
- * Base interface for all Presenters.
- * 
- * @author marcus
- * 
- */
-public interface PresenterBase {}
+public interface DataAccess {
+
+}

@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
@@ -31,44 +32,49 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
  */
 public class DefaultArticlePresenter implements ArticleView.Presenter {
 
-	public String getArticleName() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public String getArticleTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	public void setArticleName(String string) {
-	    // TODO Auto-generated method stub
-	    
-    }
+	public void setArticleTitle(final String string) {
+		// TODO Auto-generated method stub
 
-	public Event<EventArgs> articleNameChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	}
+
+	public Event<EventArgs> articleTitleChanged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public Command getSendCommand() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public String getArticleLink() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public Event<EventArgs> articleLinkChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public ObservableList<Tuple2<String, String>> getArticleInfos() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	public ObservableList<String> getSuggestions() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public Event<EventArgs> suggestionsChanged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LinkedHashMap<String, String> getSuggestions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
