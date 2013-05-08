@@ -40,13 +40,9 @@ import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
-import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedType;
+import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedAction;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-<<<<<<< HEAD:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/DefaultUserView.java
-=======
-import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
->>>>>>> 9565e7e66fcd14eb590d7404e4f509939388252e:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/DefaultUserView.java
 
 /**
  * Default implementation of {@link UserView}.
@@ -138,10 +134,9 @@ public class DefaultUserView extends UserView {
 		this.usrNameLabel = new Label();
 		// TODO this.usrNameLabel = new LinkItem("www.google.de");
 		this.searchInfoLayout = new HLayout();
-		//this.searchInfoLayout.setHeight("auto");
+		// this.searchInfoLayout.setHeight("auto");
 		this.searchInfoLayout.addMembers(this.yourSearchedUserLabel, this.usrNameLabel);
 
-		
 		this.usrAttributeColumn = new ListGridField("Attribute");
 		this.usrAttributeColumn.setCanEdit(false);
 		this.usrValueColumn = new ListGridField("Value");
@@ -149,7 +144,6 @@ public class DefaultUserView extends UserView {
 		this.usrValueColumn.setCanEdit(false);
 		this.generalUsrInfoGrid = new ListGrid();
 		this.generalUsrInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
-		
 
 		this.genUsrInfLayout = new VLayout();
 		this.genUsrInfLayout.setWidth("33%");
@@ -180,10 +174,11 @@ public class DefaultUserView extends UserView {
 	}
 
 	private void bind() {
-		this.bindGeneralInfoGrid();
-		this.bindSearchBox();
-		this.bindSearchButton();
-		/**
+		// this.bindGeneralInfoGrid();
+		// this.bindSearchBox();
+		// this.bindSearchButton();
+
+		/*
 		 * final DataContainer<Boolean> textItemNameToServerSelfChanged = new
 		 * DataContainer<Boolean>(false);
 		 * this.textItem.setValue(this.presenter.getNameToServer());
@@ -243,61 +238,55 @@ public class DefaultUserView extends UserView {
 		 * DefaultUserView.this.presenter.getSendCommand().execute(null); } });
 		 */
 	}
+
 	private void bindSearchBox() {
 		this.searchBox.setValue(this.presenter.getUsrName());
 		this.searchBox.addChangedHandler(new ChangedHandler() {
 
-			public void onChanged(ChangedEvent event) {
-				DefaultUserView.this.presenter.setUserName(searchBox.getValueAsString());
+			public void onChanged(final ChangedEvent event) {
+				DefaultUserView.this.presenter.setUserName(DefaultUserView.this.searchBox.getValueAsString());
 			}
 		});
 		this.presenter.usrNameChanged().addHandler(new Handler<EventArgs>() {
 
-<<<<<<< HEAD:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/DefaultUserView.java
-			public void invoke(Object sender, EventArgs e) {
-				if(!searchBox.equals(presenter.getUsrName())) {
-					searchBox.setValue(presenter.getUsrName());
+			public void invoke(final Object sender, final EventArgs e) {
+				if(!DefaultUserView.this.searchBox.equals(DefaultUserView.this.presenter.getUsrName())) {
+					DefaultUserView.this.searchBox.setValue(DefaultUserView.this.presenter.getUsrName());
 				}
-=======
-		this.presenter.getNameToServerChanged().addHandler(new Handler<GenericEventArgs<String>>() {
-
-			public void invoke(final Object sender, final GenericEventArgs<String> e) {
-				DefaultUserView.this.textItem.setValue(e.getValue());
->>>>>>> 9565e7e66fcd14eb590d7404e4f509939388252e:wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/DefaultUserView.java
 			}
 		});
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
 
-			public void onKeyUp(KeyUpEvent event) {
+			public void onKeyUp(final KeyUpEvent event) {
 				if(event.getKeyName().equals("Enter")) {
-					if(presenter.getSendCommand().canExecute(null)) {
-						presenter.getSendCommand().execute(null);
+					if(DefaultUserView.this.presenter.getSendCommand().canExecute(null)) {
+						DefaultUserView.this.presenter.getSendCommand().execute(null);
 					}
 				}
 			}
 		});
 	}
-	
+
 	private void bindSearchButton() {
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
 
-			public void invoke(Object sender, EventArgs e) {
-				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+			public void invoke(final Object sender, final EventArgs e) {
+				DefaultUserView.this.searchButton.setDisabled(!DefaultUserView.this.presenter.getSendCommand().canExecute(null));
 			}
 		});
 		this.searchButton.addClickHandler(new ClickHandler() {
 
-			public void onClick(ClickEvent event) {
-				presenter.getSendCommand().execute(null);
+			public void onClick(final ClickEvent event) {
+				DefaultUserView.this.presenter.getSendCommand().execute(null);
 			}
 		});
 	}
 
 	private void bindGeneralInfoGrid() {
 		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
-		for(Tuple2<String, String> t : this.presenter.getUsrInfos()) {
-			ListGridRecord lsg = new ListGridRecord();
+		for(final Tuple2<String, String> t : this.presenter.getUsrInfos()) {
+			final ListGridRecord lsg = new ListGridRecord();
 			lsg.setAttribute("Attribute", t.getItem1());
 			lsg.setAttribute("Value", t.getItem2());
 			this.generalUsrInfoGrid.addData(lsg);
@@ -305,31 +294,31 @@ public class DefaultUserView extends UserView {
 		}
 		this.presenter.getUsrInfos().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
 
-			public void invoke(Object sender, ListChangedEventArgs<Tuple2<String, String>> e) {
-				if(e.getListChangedType() == ListChangedType.ADD_REMOVE) {
+			public void invoke(final Object sender, final ListChangedEventArgs<Tuple2<String, String>> e) {
+				if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
 					if(e.getOldItems() != null) {
-						for(Tuple2<String, String> t : e.getOldItems()) {
-							generalUsrInfoGrid.removeData(recordsO.remove(t));
+						for(final Tuple2<String, String> t : e.getOldItems()) {
+							DefaultUserView.this.generalUsrInfoGrid.removeData(recordsO.remove(t));
 						}
 					}
 
 					if(e.getNewItems() != null) {
-						for(Tuple2<String, String> t : e.getNewItems()) {
-							ListGridRecord lsg = new ListGridRecord();
+						for(final Tuple2<String, String> t : e.getNewItems()) {
+							final ListGridRecord lsg = new ListGridRecord();
 							lsg.setAttribute("Attribute", t.getItem1());
 							lsg.setAttribute("Value", t.getItem2());
-							generalUsrInfoGrid.addData(lsg);
+							DefaultUserView.this.generalUsrInfoGrid.addData(lsg);
 							recordsO.put(t, lsg);
 						}
 					}
 				} else {
-					generalUsrInfoGrid.clear();
+					DefaultUserView.this.generalUsrInfoGrid.clear();
 					recordsO.clear();
 				}
 			}
 		});
 	}
-	
+
 	@Override
 	public String getName() {
 		return "User";

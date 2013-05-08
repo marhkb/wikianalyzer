@@ -18,8 +18,8 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.command.UICommand;
+import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.list.ObservableList;
@@ -149,23 +149,23 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		return this.sendCommand;
 	}
 
-	public void setUserName(String valueAsString) {
-	    // TODO Auto-generated method stub
-	    
-    }
+	public void setUserName(final String valueAsString) {
+		// TODO Auto-generated method stub
+
+	}
 
 	public Event<EventArgs> usrNameChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public String getUsrName() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public ObservableList<Tuple2<String, String>> getUsrInfos() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
