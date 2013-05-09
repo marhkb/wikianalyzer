@@ -71,13 +71,23 @@
 			<classifier>sources</classifier>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Smart GWT -->
 		<dependency>
 			<groupId>com.smartgwt</groupId>
 			<artifactId>smartgwt</artifactId>
 			<version>3.1</version>
 		</dependency>
+		
+		<!-- Guice Injector for GWT client (Gin) -->
+		<dependency>
+			<groupId>com.google.gwt.inject</groupId>
+			<artifactId>gin</artifactId>
+			<version>2.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 
-		<!-- Guice for serverside -->
+		<!-- Guice for servlets -->
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
@@ -90,14 +100,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-
-		<!-- Util -->
-		<dependency>
-			<groupId>de.behrfried.wikianalyzer</groupId>
-			<artifactId>util</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
+		
 		<!-- Charts Tools -->
 		<dependency>
 			<groupId>com.google.gwt.google-apis</groupId>
@@ -105,12 +108,11 @@
 			<version>1.0.2</version>
 		</dependency>
 
-		<!-- Guice Injector for GWT (Gin) -->
+		<!-- Util -->
 		<dependency>
-			<groupId>com.google.gwt.inject</groupId>
-			<artifactId>gin</artifactId>
-			<version>2.0.0</version>
-			<scope>provided</scope>
+			<groupId>de.behrfried.wikianalyzer</groupId>
+			<artifactId>util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -159,16 +161,6 @@
 				</executions>
 				<configuration>
 					<webappDirectory>${webappDirectory}</webappDirectory>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
 				</configuration>
 			</plugin>
 		</plugins>
