@@ -27,8 +27,8 @@
 	<!-- lib for chart vizualization -->
 	<inherits name='com.google.gwt.visualization.Visualization' />
 	
-	<!-- jquery for client side wikimedia api usage -->
-	<script src="jquery-2.0.0.js"/>
+	<!-- jquery compressed for client side wikimedia api usage -->
+	<script src="jquery-2.0.0.min.js"/>
 	
 	<!-- English language, independent of country -->
 	<extend-property name="locale" values="en" />
