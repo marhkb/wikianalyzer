@@ -58,5 +58,12 @@ public abstract class ArticleView extends View {
 
 		Event<EventArgs> suggestionsChanged();
 
+		String getSearchedArticleURL();
+		
+		Event<EventArgs> searchedArticleURLChanged();
+
+		String getSearchedArticleUser();
+
+
 	}
 }

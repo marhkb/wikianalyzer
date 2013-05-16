@@ -21,12 +21,12 @@ import java.util.Map;
 import com.google.inject.Inject;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.widgets.Button;
-import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.LinkItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
@@ -57,13 +57,13 @@ public class DefaultArticleView extends ArticleView {
 	 * has to be put in.
 	 */
 
-	private Label waLabel, yourSearchedArticleLabel, genArtInfLabel, artAnaLabel;
-	private HTMLPane wikiLink;
+	private Label waLabel, yourSearchedArticleLabel, wasCreatedOnByLabel, createdLabel, genArtInfLabel, artAnaLabel;
+	private LinkItem wikiLink, userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalInfoGrid;
 	private ListGridField attributeColumn, valueColumn;
-	private HLayout searchLayout, articleInfoAnalyzationLayout, menuURLLayout;
+	private HLayout searchLayout, articleInfoAnalyzationLayout, menuURLLayout, urlLayout;
 	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
@@ -118,12 +118,20 @@ public class DefaultArticleView extends ArticleView {
 		this.chooseSpan = new MenuItem("choose timespan");
 		this.timeSpanMenu.addItem(this.chooseSpan);
 		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
-		this.yourSearchedArticleLabel = new Label("Ihr gesuchter Artikel war: ");
-		this.wikiLink = new HTMLPane();
+		this.urlLayout = new HLayout();
+		this.yourSearchedArticleLabel = new Label();
+		this.yourSearchedArticleLabel.setHeight(10);
+		this.yourSearchedArticleLabel.setAutoWidth();
+		this.yourSearchedArticleLabel.setWrap(false);
+		this.wikiLink = new LinkItem();
+		this.wasCreatedOnByLabel = new Label();
+		this.userLink = new LinkItem();
+		this.createdLabel = new Label();
 
+		// 
 		// TODO this.wikiLink = new LinkItem("www.google.de");
 		this.menuURLLayout = new HLayout();
-		this.menuURLLayout.addMembers(this.timeMenuButton, this.yourSearchedArticleLabel, this.wikiLink);
+		this.menuURLLayout.addMembers(this.timeMenuButton, this.urlLayout);
 
 		this.attributeColumn = new ListGridField("Attribute");
 		this.attributeColumn.setCanEdit(false);
@@ -135,14 +143,14 @@ public class DefaultArticleView extends ArticleView {
 		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
 
 		this.artAnaLayout = new VLayout();
-		this.artAnaLayout.setWidth100();
+		this.artAnaLayout.setWidth("60%");
 		this.artAnaLabel = new Label("Article Analyzation");
 		this.artAnaLabel.setHeight(10);
 		this.artAnaLabel.setWidth100();
 		this.artAnaLayout.addMember(this.artAnaLabel);
 
 		this.genInfLayout = new VLayout();
-		this.genInfLayout.setWidth("33%");
+		this.genInfLayout.setWidth("40%");
 		this.genInfLayout.setHeight100();
 		this.genArtInfLabel = new Label("General Article Infos");
 		this.genArtInfLabel.setHeight(10);
@@ -150,6 +158,7 @@ public class DefaultArticleView extends ArticleView {
 		this.genInfLayout.addMembers(this.genArtInfLabel, this.generalInfoGrid);
 
 		this.articleInfoAnalyzationLayout = new HLayout();
+		this.articleInfoAnalyzationLayout.setHeight100();
 		this.articleInfoAnalyzationLayout.addMembers(this.genInfLayout, this.artAnaLayout);
 
 		this.siteLayoutContainer = new VLayout();
@@ -208,17 +217,33 @@ public class DefaultArticleView extends ArticleView {
 			}
 		});
 	}
+	
+	private void bindSearchString() {
+		this.yourSearchedArticleLabel.setTitle("");
+		this.wikiLink.setTitle("");
+		this.wasCreatedOnByLabel.setTitle("");
+		this.userLink.setTitle("");
+		this.createdLabel.setTitle("");
+		this.presenter.articleLinkChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+            public void invoke(Object sender, EventArgs e) {
+				DefaultArticleView.this.yourSearchedArticleLabel.setTitle("");
+				DefaultArticleView.this.wikiLink.setTitle(DefaultArticleView.this.presenter.getSearchedArticleURL());
+				DefaultArticleView.this.wasCreatedOnByLabel.setTitle("");
+				DefaultArticleView.this.userLink.setTitle(DefaultArticleView.this.presenter.getSearchedArticleUser());
+				DefaultArticleView.this.createdLabel.setTitle("");
+            }
+		});
+	}
 
 	private void bindSearchButton() {
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
-
 			public void invoke(final Object sender, final EventArgs e) {
 				DefaultArticleView.this.searchButton.setDisabled(!DefaultArticleView.this.presenter.getSendCommand().canExecute(null));
 			}
 		});
 		this.searchButton.addClickHandler(new ClickHandler() {
-
 			public void onClick(final ClickEvent event) {
 				DefaultArticleView.this.presenter.getSendCommand().execute(null);
 			}
@@ -329,7 +354,6 @@ public class DefaultArticleView extends ArticleView {
 					mi.setChecked(false);
 				}
 				DefaultArticleView.this.chooseSpan.setChecked(true);
-
 			}
 		});
 
