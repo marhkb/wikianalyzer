@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
@@ -85,6 +86,12 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
     }
 
     public Event<EventArgs> searchedArticleURLChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Date getDateCreated() {
 	    // TODO Auto-generated method stub
 	    return null;
     }

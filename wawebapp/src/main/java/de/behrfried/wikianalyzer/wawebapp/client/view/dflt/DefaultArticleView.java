@@ -57,7 +57,7 @@ public class DefaultArticleView extends ArticleView {
 	 * has to be put in.
 	 */
 
-	private Label waLabel, yourSearchedArticleLabel, wasCreatedOnByLabel, createdLabel, genArtInfLabel, artAnaLabel;
+	private Label waLabel, yourSearchedArticleLabel, wasCreatedOnLabel, createdLabel, dateCreatedLabel, genArtInfLabel, artAnaLabel;
 	private LinkItem wikiLink, userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
@@ -124,7 +124,8 @@ public class DefaultArticleView extends ArticleView {
 		this.yourSearchedArticleLabel.setAutoWidth();
 		this.yourSearchedArticleLabel.setWrap(false);
 		this.wikiLink = new LinkItem();
-		this.wasCreatedOnByLabel = new Label();
+		this.wasCreatedOnLabel = new Label();
+		this.dateCreatedLabel = new Label();
 		this.userLink = new LinkItem();
 		this.createdLabel = new Label();
 
@@ -221,17 +222,18 @@ public class DefaultArticleView extends ArticleView {
 	private void bindSearchString() {
 		this.yourSearchedArticleLabel.setTitle("");
 		this.wikiLink.setTitle("");
-		this.wasCreatedOnByLabel.setTitle("");
+		this.wasCreatedOnLabel.setTitle("");
 		this.userLink.setTitle("");
 		this.createdLabel.setTitle("");
 		this.presenter.articleLinkChanged().addHandler(new Handler<EventArgs>() {
 			@Override
             public void invoke(Object sender, EventArgs e) {
-				DefaultArticleView.this.yourSearchedArticleLabel.setTitle("");
-				DefaultArticleView.this.wikiLink.setTitle(DefaultArticleView.this.presenter.getSearchedArticleURL());
-				DefaultArticleView.this.wasCreatedOnByLabel.setTitle("");
-				DefaultArticleView.this.userLink.setTitle(DefaultArticleView.this.presenter.getSearchedArticleUser());
-				DefaultArticleView.this.createdLabel.setTitle("");
+				DefaultArticleView.this.yourSearchedArticleLabel.setTitle("Der von ihnen gesuchte Artikel ");
+				DefaultArticleView.this.wikiLink.setTitle(DefaultArticleView.this.presenter.getArticleLink());
+				DefaultArticleView.this.wasCreatedOnLabel.setTitle(" wurde am ");
+				DefaultArticleView.this.dateCreatedLabel.setTitle(DefaultArticleView.this.presenter.getDateCreated().toString());
+				DefaultArticleView.this.userLink.setTitle( "von "+DefaultArticleView.this.presenter.getSearchedArticleUser());
+				DefaultArticleView.this.createdLabel.setTitle(" erstellt.");
             }
 		});
 	}

@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Random;
@@ -209,6 +210,12 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	    return "MAC ";
     }
     public Event<EventArgs> searchedArticleURLChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Date getDateCreated() {
 	    // TODO Auto-generated method stub
 	    return null;
     }

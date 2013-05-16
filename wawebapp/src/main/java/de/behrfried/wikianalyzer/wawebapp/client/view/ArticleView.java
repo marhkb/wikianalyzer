@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.data.Tuple2;
@@ -63,6 +64,8 @@ public abstract class ArticleView extends View {
 		Event<EventArgs> searchedArticleURLChanged();
 
 		String getSearchedArticleUser();
+
+		Date getDateCreated();
 
 
 	}
