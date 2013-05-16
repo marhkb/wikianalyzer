@@ -82,34 +82,20 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle(), new AsyncCallback<Integer>() {
 
+						int number = 0;
+						
 						public void onSuccess(final Integer result) {
-							Window.alert(result + "");
+							this.number++;
+							setArticleLink("www." + number + ".org");
+							setFromTime(new Date());
+							setInitialAuthorLink("www.user" + number + ".org");
+							setNumberOfTranslations(number);
+							setNumberOfAuthors(number);
+							setNumberOfRevisions(number);
 						}
 
 						public void onFailure(final Throwable caught) {}
 					});
-
-					final Random r = new Random();
-					switch(r.nextInt(5)) {
-						case 0:
-							MockArticlePresenter.this.setArticleLink("http://www.google.de");
-							break;
-						case 1:
-							MockArticlePresenter.this.setArticleLink("http://www.golem.de");
-							break;
-						case 2:
-							MockArticlePresenter.this.setArticleLink("http://www.mit.de");
-							break;
-						case 3:
-							MockArticlePresenter.this.setArticleLink("http://www.yahoo.de");
-							break;
-						case 4:
-							MockArticlePresenter.this.setArticleLink("http://www.pampers.de");
-							break;
-						default:
-							MockArticlePresenter.this.setArticleLink("http://youporn.com");
-							break;
-					}
 				}
 
 				public boolean canExecute(final Object param) {
@@ -244,6 +230,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public Date getArticleCreationDate() {
 		return this.articleCreationDate;
 	}
+	
+	public void setArticleCreationDate(Date articleCreationDate) {
+		this.articleCreationDate = articleCreationDate;
+		this.articleCreationDateChanged().fire(this.initContext, this, EventArgs.EMPTY);
+	}
 
 	private Event<EventArgs> articleCreationDateChanged = new Event<EventArgs>(initContext);
 	
@@ -257,6 +248,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	@Override
 	public String getInitialAuthorLink() {
 		return this.initialAuthorLink;
+	}
+	
+	private void setInitialAuthorLink(String initialAuthorLink) {
+		this.initialAuthorLink = initialAuthorLink;
+		this.initialAuthorLinkChanged().fire(initContext, this, EventArgs.EMPTY);
 	}
 
 	private final Event<EventArgs> initialAuthorLinkChanged = new Event<EventArgs>(initContext);
@@ -272,6 +268,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public int getNumberOfTranslations() {
 		return this.numberOfTranslations;
 	}
+	
+	private void setNumberOfTranslations(int numberOfTranslations) {
+		this.numberOfTranslations = numberOfTranslations;
+		this.numberOfTranslationChanged().fire(initContext, this, EventArgs.EMPTY);
+	}
 
 	
 	private Event<EventArgs> numberOfTranslationChanged = new Event<EventArgs>(initContext);
@@ -286,6 +287,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.numberOfRevisions;
 	}
 
+	private void setNumberOfRevisions(int numberofRevisions) {
+		this.numberOfRevisions = numberofRevisions;
+		this.numberOfRevisionsChanged().fire(initContext, this, EventArgs.EMPTY);
+	}
+	
 	private final Event<EventArgs> numberOfRevisionsChanged = new Event<EventArgs>(initContext);
 	
 	@Override
@@ -301,6 +307,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.numberOfAuthors;
 	}
 
+	private void setNumberOfAuthors(int numberOfAuthors) {
+		this.numberOfAuthors = numberOfAuthors;
+		this.numberOfAuthorsChanged().fire(initContext, this, EventArgs.EMPTY);
+	}
+	
 	private final Event<EventArgs> numberOfAuthorsChanged = new Event<EventArgs>(initContext);
 	
 	@Override
