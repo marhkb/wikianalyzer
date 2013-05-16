@@ -44,15 +44,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private final Object initContext = new Object();
 
 	@Inject
-	public MockArticlePresenter(final MainServiceAsync mainService)
-			throws IllegalArgumentException {
-		if (mainService == null) {
+	public MockArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
+		if(mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
 		}
 		this.mainService = mainService;
-
-		this.articleInfos.add(Tuple.create("Ast", "Loch"));
-		this.articleInfos.add(Tuple.create("Rosa", "Schlüpfer"));
 	}
 
 	private String articleName = "";
@@ -62,17 +58,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	public void setArticleTitle(final String string) {
-		if (!string.equals(this.articleName)) {
+		if(!string.equals(this.articleName)) {
 			this.articleName = string;
-			this.articleTitleChanged().fire(this.initContext, this,
-					EventArgs.EMPTY);
+			this.articleTitleChanged().fire(this.initContext, this, EventArgs.EMPTY);
 			this.jGetArticleTitles(this.articleName, 10);
 			CommandManager.get().invalidateRequerySuggested();
 		}
 	}
 
-	private final Event<EventArgs> articleChanged = new Event<EventArgs>(
-			this.initContext);
+	private final Event<EventArgs> articleChanged = new Event<EventArgs>(this.initContext);
 
 	public Event<EventArgs> articleTitleChanged() {
 		return this.articleChanged;
@@ -81,49 +75,40 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private Command sendCommand;
 
 	public Command getSendCommand() {
-		if (this.sendCommand == null) {
+		if(this.sendCommand == null) {
 			this.sendCommand = new UICommand() {
 
 				public void execute(final Object param) {
 
-					MockArticlePresenter.this.mainService.sendArticleName(
-							MockArticlePresenter.this.getArticleTitle(),
-							new AsyncCallback<Integer>() {
+					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle(), new AsyncCallback<Integer>() {
 
-								public void onSuccess(final Integer result) {
-									Window.alert(result + "");
-								}
+						public void onSuccess(final Integer result) {
+							Window.alert(result + "");
+						}
 
-								public void onFailure(final Throwable caught) {
-								}
-							});
+						public void onFailure(final Throwable caught) {}
+					});
 
 					final Random r = new Random();
-					switch (r.nextInt(5)) {
-					case 0:
-						MockArticlePresenter.this
-								.setArticleLink("http://www.google.de");
-						break;
-					case 1:
-						MockArticlePresenter.this
-								.setArticleLink("http://www.golem.de");
-						break;
-					case 2:
-						MockArticlePresenter.this
-								.setArticleLink("http://www.mit.de");
-						break;
-					case 3:
-						MockArticlePresenter.this
-								.setArticleLink("http://www.yahoo.de");
-						break;
-					case 4:
-						MockArticlePresenter.this
-								.setArticleLink("http://www.pampers.de");
-						break;
-					default:
-						MockArticlePresenter.this
-								.setArticleLink("http://youporn.com");
-						break;
+					switch(r.nextInt(5)) {
+						case 0:
+							MockArticlePresenter.this.setArticleLink("http://www.google.de");
+							break;
+						case 1:
+							MockArticlePresenter.this.setArticleLink("http://www.golem.de");
+							break;
+						case 2:
+							MockArticlePresenter.this.setArticleLink("http://www.mit.de");
+							break;
+						case 3:
+							MockArticlePresenter.this.setArticleLink("http://www.yahoo.de");
+							break;
+						case 4:
+							MockArticlePresenter.this.setArticleLink("http://www.pampers.de");
+							break;
+						default:
+							MockArticlePresenter.this.setArticleLink("http://youporn.com");
+							break;
 					}
 				}
 
@@ -136,15 +121,12 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 					return EventArgs.EMPTY;
 				}
 			};
-			CommandManager.get().requerySuggested()
-					.addHandler(new Handler<EventArgs>() {
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
 
-						public void invoke(final Object sender,
-								final EventArgs e) {
-							MockArticlePresenter.this.getSendCommand()
-									.raiseCanExecuteChanged();
-						}
-					});
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
+				}
+			});
 		}
 		return this.sendCommand;
 	}
@@ -152,10 +134,9 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private String articleLink = "";
 
 	private void setArticleLink(final String articleLink) {
-		if (!this.articleLink.equals(articleLink)) {
+		if(!this.articleLink.equals(articleLink)) {
 			this.articleLink = articleLink;
-			this.articleLinkChanged().fire(this.initContext, this,
-					EventArgs.EMPTY);
+			this.articleLinkChanged().fire(this.initContext, this, EventArgs.EMPTY);
 
 		}
 	}
@@ -164,19 +145,12 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleLink;
 	}
 
-	private final Event<EventArgs> articleLinkChanged = new Event<EventArgs>(
-			this.initContext);
+	private final Event<EventArgs> articleLinkChanged = new Event<EventArgs>(this.initContext);
 
 	public Event<EventArgs> articleLinkChanged() {
 		return this.articleLinkChanged;
 	}
 
-	private final ObservableList<Tuple2<String, String>> articleInfos = new ObservableLinkedList<Tuple2<String, String>>(
-			new LinkedList<Tuple2<String, String>>());
-
-	public ObservableList<Tuple2<String, String>> getArticleInfos() {
-		return this.articleInfos;
-	}
 
 	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
 
@@ -184,14 +158,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.suggestions;
 	}
 
-	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(
-			this.initContext);
+	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(this.initContext);
 
 	public Event<EventArgs> articleSuggestionsChanged() {
 		return this.suggestionsChanged;
 	}
 
-	void fireSuggestionsChanged() {
+	private void fireSuggestionsChanged() {
 		this.suggestionsChanged.fire(this.initContext, this, EventArgs.EMPTY);
 	}
 
@@ -226,128 +199,141 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}-*/;
 
 	private Date fromTime = null;
-	
-	@Override
-    public Date getFromTime() {
-	    return this.fromTime;
-    }
 
 	@Override
-    public void setFromTime(Date fromTime) {
-	    this.fromTime = fromTime;
-    }
+	public Date getFromTime() {
+		return this.fromTime;
+	}
 
-	private final Event<EventArgs> fromTimeChanged = new Event<>(initContext);
-	
 	@Override
-    public Event<EventArgs> fromTimeChanged() {
-	    // TODO Auto-generated method stub
-	    return this.fromTimeChanged;
-    }
+	public void setFromTime(Date fromTime) {
+		this.fromTime = fromTime;
+	}
+
+	private final Event<EventArgs> fromTimeChanged = new Event<EventArgs>(initContext);
+
+	@Override
+	public Event<EventArgs> fromTimeChanged() {
+		return this.fromTimeChanged;
+	}
 
 	private Date toTime;
+
+	@Override
+	public Date getToTime() {
+		return this.toTime;
+	}
+
+	@Override
+	public void setToTime(Date toTime) {
+		this.toTime = toTime;
+
+	}
+
+	private final Event<EventArgs> toTimeChanged = new Event<EventArgs>(initContext);
+
+	@Override
+	public Event<EventArgs> toTimeChanged() {
+		return this.toTimeChanged;
+	}
+	
+	
+	private Date articleCreationDate = null;
+
+	@Override
+	public Date getArticleCreationDate() {
+		return this.articleCreationDate;
+	}
+
+	private Event<EventArgs> articleCreationDateChanged = new Event<EventArgs>(initContext);
 	
 	@Override
-    public Date getToTime() {
-	    return this.toTime;
-    }
+	public Event<EventArgs> articleCreationDateChanged() {
+		return this.articleCreationDateChanged;
+	}
 
-	@Override
-    public void setToTime(Date toTime) {
-	    this.toTime = toTime;
-	    
-    }
-
-	private final Event<EventArgs> toTimeChanged = new Event<>(initContext);
+	private String initialAuthorLink = "";
 	
 	@Override
-    public Event<EventArgs> toTimeChanged() {
-	    return this.toTimeChanged;
-    }
+	public String getInitialAuthorLink() {
+		return this.initialAuthorLink;
+	}
+
+	private final Event<EventArgs> initialAuthorLinkChanged = new Event<EventArgs>(initContext);
+	
+	@Override
+	public Event<EventArgs> initialAuthorLinkChanged() {
+		return this.initialAuthorLinkChanged;
+	}
+	
+	private int numberOfTranslations;
 
 	@Override
-    public Date getArticleCreationDate() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public int getNumberOfTranslations() {
+		return this.numberOfTranslations;
+	}
 
+	
+	private Event<EventArgs> numberOfTranslationChanged = new Event<EventArgs>(initContext);
 	@Override
-    public Event<EventArgs> articleCreationDateChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public Event<EventArgs> numberOfTranslationChanged() {
+		return this.numberOfTranslationChanged;
+	}
 
+	private int numberOfRevisions;
 	@Override
-    public String getInitialAuthorLink() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public int getNumberOfRevisions() {
+		return this.numberOfRevisions;
+	}
 
+	private final Event<EventArgs> numberOfRevisionsChanged = new Event<EventArgs>(initContext);
+	
 	@Override
-    public Event<EventArgs> initialAuthorLinkChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public Event<EventArgs> numberOfRevisionsChanged() {
+		return this.numberOfRevisionsChanged;
+	}
 
+	
+	private int numberOfAuthors;
+	
 	@Override
-    public int getNumberOfTranslations() {
-	    // TODO Auto-generated method stub
-	    return 0;
-    }
+	public int getNumberOfAuthors() {
+		return this.numberOfAuthors;
+	}
 
+	private final Event<EventArgs> numberOfAuthorsChanged = new Event<EventArgs>(initContext);
+	
 	@Override
-    public Event<EventArgs> numberOfTranslationChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public Event<EventArgs> numberOfAuthorsChanged() {
+		return this.numberOfAuthorsChanged;
+	}
 
+	private List<String> articleCategories = null;
+	
 	@Override
-    public int getNumberOfRevisions() {
-	    // TODO Auto-generated method stub
-	    return 0;
-    }
+	public List<String> getArticleCategories() {
+		return this.articleCategories;
+	}
 
+	private final Event<EventArgs> articleCategoriesChanged = new Event<EventArgs>(initContext);
+	
 	@Override
-    public Event<EventArgs> numberOfRevisionsChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public Event<EventArgs> articleCategoriesChanged() {
+		return this.articleCategoriesChanged;
+	}
 
+	private int numberofArticleWords;
+	
 	@Override
-    public int getNumberOfAuthors() {
-	    // TODO Auto-generated method stub
-	    return 0;
-    }
+	public int getNumberOfArticleWords() {
+		return this.numberofArticleWords;
+	}
 
+	private final Event<EventArgs> numberOfArticleWordsChanged = new Event<EventArgs>(initContext);
+	
 	@Override
-    public Event<EventArgs> numberOfAuthorsChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
-	@Override
-    public List<String> getArticleCategories() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
-	@Override
-    public Event<EventArgs> articleCategoriesChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
-	@Override
-    public int getNumberOfArticleWords() {
-	    // TODO Auto-generated method stub
-	    return 0;
-    }
-
-	@Override
-    public Event<EventArgs> numberOfArticleWordsChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
+	public Event<EventArgs> numberOfArticleWordsChanged() {
+		return this.numberOfArticleWordsChanged;
+	}
 
 }
