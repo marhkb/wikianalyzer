@@ -16,7 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+
 public interface WikiAccess {
 
+	ShortArticleInfo getShortArticleInfo(String title);
+	
 	int getPageId(String title);
 }

@@ -31,6 +31,8 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import com.google.inject.Inject;
 
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+
 public class XmlWikiAccess implements WikiAccess {
 
 	private final Logger logger = LoggerFactory.getLogger(XmlWikiAccess.class);
@@ -53,6 +55,12 @@ public class XmlWikiAccess implements WikiAccess {
 		}
 		this.builder = builder;
 		this.xPathfactory = XPathFactory.newInstance();
+	}
+	
+	@Override
+	public ShortArticleInfo getShortArticleInfo(String title) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public int getPageId(final String title) {

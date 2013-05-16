@@ -44,8 +44,9 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private final Object initContext = new Object();
 
 	@Inject
-	public MockArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
-		if(mainService == null) {
+	public MockArticlePresenter(final MainServiceAsync mainService)
+			throws IllegalArgumentException {
+		if (mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
 		}
 		this.mainService = mainService;
@@ -61,15 +62,17 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	public void setArticleTitle(final String string) {
-		if(!string.equals(this.articleName)) {
+		if (!string.equals(this.articleName)) {
 			this.articleName = string;
-			this.articleTitleChanged().fire(this.initContext, this, EventArgs.EMPTY);
+			this.articleTitleChanged().fire(this.initContext, this,
+					EventArgs.EMPTY);
 			this.jGetArticleTitles(this.articleName, 10);
 			CommandManager.get().invalidateRequerySuggested();
 		}
 	}
 
-	private final Event<EventArgs> articleChanged = new Event<EventArgs>(this.initContext);
+	private final Event<EventArgs> articleChanged = new Event<EventArgs>(
+			this.initContext);
 
 	public Event<EventArgs> articleTitleChanged() {
 		return this.articleChanged;
@@ -78,40 +81,49 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private Command sendCommand;
 
 	public Command getSendCommand() {
-		if(this.sendCommand == null) {
+		if (this.sendCommand == null) {
 			this.sendCommand = new UICommand() {
 
 				public void execute(final Object param) {
 
-					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle(), new AsyncCallback<Integer>() {
+					MockArticlePresenter.this.mainService.sendArticleName(
+							MockArticlePresenter.this.getArticleTitle(),
+							new AsyncCallback<Integer>() {
 
-						public void onSuccess(final Integer result) {
-							Window.alert(result + "");
-						}
+								public void onSuccess(final Integer result) {
+									Window.alert(result + "");
+								}
 
-						public void onFailure(final Throwable caught) {}
-					});
+								public void onFailure(final Throwable caught) {
+								}
+							});
 
 					final Random r = new Random();
-					switch(r.nextInt(5)) {
-						case 0:
-							MockArticlePresenter.this.setArticleLink("http://www.google.de");
-							break;
-						case 1:
-							MockArticlePresenter.this.setArticleLink("http://www.golem.de");
-							break;
-						case 2:
-							MockArticlePresenter.this.setArticleLink("http://www.mit.de");
-							break;
-						case 3:
-							MockArticlePresenter.this.setArticleLink("http://www.yahoo.de");
-							break;
-						case 4:
-							MockArticlePresenter.this.setArticleLink("http://www.pampers.de");
-							break;
-						default:
-							MockArticlePresenter.this.setArticleLink("http://youporn.com");
-							break;
+					switch (r.nextInt(5)) {
+					case 0:
+						MockArticlePresenter.this
+								.setArticleLink("http://www.google.de");
+						break;
+					case 1:
+						MockArticlePresenter.this
+								.setArticleLink("http://www.golem.de");
+						break;
+					case 2:
+						MockArticlePresenter.this
+								.setArticleLink("http://www.mit.de");
+						break;
+					case 3:
+						MockArticlePresenter.this
+								.setArticleLink("http://www.yahoo.de");
+						break;
+					case 4:
+						MockArticlePresenter.this
+								.setArticleLink("http://www.pampers.de");
+						break;
+					default:
+						MockArticlePresenter.this
+								.setArticleLink("http://youporn.com");
+						break;
 					}
 				}
 
@@ -124,12 +136,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 					return EventArgs.EMPTY;
 				}
 			};
-			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+			CommandManager.get().requerySuggested()
+					.addHandler(new Handler<EventArgs>() {
 
-				public void invoke(final Object sender, final EventArgs e) {
-					MockArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
-				}
-			});
+						public void invoke(final Object sender,
+								final EventArgs e) {
+							MockArticlePresenter.this.getSendCommand()
+									.raiseCanExecuteChanged();
+						}
+					});
 		}
 		return this.sendCommand;
 	}
@@ -137,9 +152,10 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private String articleLink = "";
 
 	private void setArticleLink(final String articleLink) {
-		if(!this.articleLink.equals(articleLink)) {
+		if (!this.articleLink.equals(articleLink)) {
 			this.articleLink = articleLink;
-			this.articleLinkChanged().fire(this.initContext, this, EventArgs.EMPTY);
+			this.articleLinkChanged().fire(this.initContext, this,
+					EventArgs.EMPTY);
 
 		}
 	}
@@ -148,14 +164,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleLink;
 	}
 
-	private final Event<EventArgs> articleLinkChanged = new Event<EventArgs>(this.initContext);
+	private final Event<EventArgs> articleLinkChanged = new Event<EventArgs>(
+			this.initContext);
 
 	public Event<EventArgs> articleLinkChanged() {
 		return this.articleLinkChanged;
 	}
 
 	private final ObservableList<Tuple2<String, String>> articleInfos = new ObservableLinkedList<Tuple2<String, String>>(
-	        new LinkedList<Tuple2<String, String>>());
+			new LinkedList<Tuple2<String, String>>());
 
 	public ObservableList<Tuple2<String, String>> getArticleInfos() {
 		return this.articleInfos;
@@ -167,7 +184,8 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.suggestions;
 	}
 
-	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(this.initContext);
+	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(
+			this.initContext);
 
 	public Event<EventArgs> articleSuggestionsChanged() {
 		return this.suggestionsChanged;
@@ -186,23 +204,26 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	public final native void jGetArticleTitles(String word, int maxResults) /*-{
-	                                                                        this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
-	                                                                        this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
-	                                                                        var inst = this;
-	                                                                        $wnd.$
-	                                                                        .getJSON(
-	                                                                        "http://de.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&callback=?", 
-	                                                                        {gaplimit: maxResults, gapfrom: word}, 
-	                                                                        function(data) {
-	                                                                        inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
-	                                                                        for ( var d in data["query"]["pages"]) {
-	                                                                        var title = data["query"]["pages"][d].title;
-	                                                                        inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+		var inst = this;
+		$wnd.$
+				.getJSON(
+						"http://de.wikipedia.org/w/api.php?action=query&format=json&generator=allpages&callback=?",
+						{
+							gaplimit : maxResults,
+							gapfrom : word
+						},
+						function(data) {
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+							for ( var d in data["query"]["pages"]) {
+								var title = data["query"]["pages"][d].title;
+								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
 
-	                                                                        }
-	                                                                        inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
-	                                                                        });
-	                                                                        }-*/;
+							}
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+						});
+	}-*/;
 
 	private Date fromTime = null;
 	
