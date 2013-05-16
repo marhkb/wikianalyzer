@@ -85,7 +85,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 						int number = 0;
 						
 						public void onSuccess(final Integer result) {
-							this.number++;
+							this.number = new Random().nextInt();
 							setArticleLink("www." + number + ".org");
 							setFromTime(new Date());
 							setInitialAuthorLink("www.user" + number + ".org");
