@@ -18,7 +18,10 @@ package de.behrfried.wikianalyzer.wawebapp.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.google.inject.servlet.ServletModule;
+
+import de.behrfried.wikianalyzer.wawebapp.server.servlets.ArticleInfoServiceImpl;
 import de.behrfried.wikianalyzer.wawebapp.server.servlets.MainServiceImpl;
 
 /**
@@ -40,8 +43,13 @@ public class WaServletModule extends ServletModule {
 	@Override
 	protected void configureServlets() {
 		this.logger.info("configuring servlets");
+		
+		this.logger.debug("configuring MainService");
 		this.serve("/Wawebapp/main").with(MainServiceImpl.class);
-		this.logger.info("servlets configured");
+		
+		this.logger.debug("configuring ArticleInfoService");
+		this.serve("/Wawebapp/articleInfo").with(ArticleInfoServiceImpl.class);
+		
+		this.logger.info("all servlets have been configured");
 	}
-
 }

@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+
 public class JsonWikiAccess implements WikiAccess {
 
 	private final Logger logger = LoggerFactory.getLogger(JsonWikiAccess.class);
@@ -33,13 +35,24 @@ public class JsonWikiAccess implements WikiAccess {
 	public JsonWikiAccess(final WikiApi requester) {
 		this.requester = requester;
 	}
+	
+	@Override
+	public ShortArticleInfo getShortArticleInfo(String title) {
+		final String convertedTitle = this.convertTitle(title);
+		return null;
+	}
 
 	public int getPageId(final String title) {
-		final String convertedTitle = title.replaceAll(" ", "%20");
-		this.logger.debug("Request 'pageid' for title '" + title + "' (converted to '" + convertedTitle + "')");
+		final String convertedTitle = this.convertTitle(title);
 		final String response = this.requester.getResult("http://de.wikipedia.org/w/api.php?action=query&format=json&indexpageids&titles="
 		        + convertedTitle);
 		this.logger.debug("Response: " + response);
 		return this.parser.parse(response).getAsJsonObject().getAsJsonObject("query").getAsJsonArray("pageids").get(0).getAsInt();
+	}
+	
+	private String convertTitle(String title) {
+		final String convertedTitle = title.replaceAll(" ", "%20");
+		this.logger.debug("Request 'pageid' for title '" + title + "' (converted to '" + convertedTitle + "')");
+		return convertedTitle;
 	}
 }
