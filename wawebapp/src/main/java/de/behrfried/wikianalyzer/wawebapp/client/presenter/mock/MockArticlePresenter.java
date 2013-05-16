@@ -19,6 +19,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -162,13 +163,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
 
-	public LinkedHashMap<String, String> getSuggestions() {
+	public LinkedHashMap<String, String> getArticleSuggestions() {
 		return this.suggestions;
 	}
 
 	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(this.initContext);
 
-	public Event<EventArgs> suggestionsChanged() {
+	public Event<EventArgs> articleSuggestionsChanged() {
 		return this.suggestionsChanged;
 	}
 
@@ -203,20 +204,129 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	                                                                        });
 	                                                                        }-*/;
 
-    public String getSearchedArticleURL() {
-	    return "www.google.de";
+	private Date fromTime = null;
+	
+	@Override
+    public Date getFromTime() {
+	    return this.fromTime;
     }
-    public String getSearchedArticleUser() {
-	    return "MAC ";
+
+	@Override
+    public void setFromTime(Date fromTime) {
+	    this.fromTime = fromTime;
     }
-    public Event<EventArgs> searchedArticleURLChanged() {
+
+	private final Event<EventArgs> fromTimeChanged = new Event<>(initContext);
+	
+	@Override
+    public Event<EventArgs> fromTimeChanged() {
+	    // TODO Auto-generated method stub
+	    return this.fromTimeChanged;
+    }
+
+	private Date toTime;
+	
+	@Override
+    public Date getToTime() {
+	    return this.toTime;
+    }
+
+	@Override
+    public void setToTime(Date toTime) {
+	    this.toTime = toTime;
+	    
+    }
+
+	private final Event<EventArgs> toTimeChanged = new Event<>(initContext);
+	
+	@Override
+    public Event<EventArgs> toTimeChanged() {
+	    return this.toTimeChanged;
+    }
+
+	@Override
+    public Date getArticleCreationDate() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
 
 	@Override
-    public Date getDateCreated() {
+    public Event<EventArgs> articleCreationDateChanged() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
+
+	@Override
+    public String getInitialAuthorLink() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> initialAuthorLinkChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public int getNumberOfTranslations() {
+	    // TODO Auto-generated method stub
+	    return 0;
+    }
+
+	@Override
+    public Event<EventArgs> numberOfTranslationChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public int getNumberOfRevisions() {
+	    // TODO Auto-generated method stub
+	    return 0;
+    }
+
+	@Override
+    public Event<EventArgs> numberOfRevisionsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public int getNumberOfAuthors() {
+	    // TODO Auto-generated method stub
+	    return 0;
+    }
+
+	@Override
+    public Event<EventArgs> numberOfAuthorsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public List<String> getArticleCategories() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> articleCategoriesChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public int getNumberOfArticleWords() {
+	    // TODO Auto-generated method stub
+	    return 0;
+    }
+
+	@Override
+    public Event<EventArgs> numberOfArticleWordsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+
 }
