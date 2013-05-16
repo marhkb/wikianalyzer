@@ -222,4 +222,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
 						});
 	}-*/;
+
+    public String getSearchedArticleURL() {
+	    return "www.google.de";
+    }
+    public String getSearchedArticleUser() {
+	    return "MAC ";
+    }
+    public Event<EventArgs> searchedArticleURLChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 }

@@ -39,7 +39,6 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 
 	public void setArticleTitle(final String string) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public Event<EventArgs> articleTitleChanged() {
@@ -76,5 +75,17 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 		// TODO Auto-generated method stub
 		return null;
 	}
+    public String getSearchedArticleURL() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+    public String getSearchedArticleUser() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 
+    public Event<EventArgs> searchedArticleURLChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
 }
