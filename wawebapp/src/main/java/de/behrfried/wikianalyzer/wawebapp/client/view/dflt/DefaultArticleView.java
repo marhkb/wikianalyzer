@@ -18,7 +18,9 @@ package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
@@ -51,8 +53,8 @@ public class DefaultArticleView extends ArticleView {
 	 * has to be put in.
 	 */
 
-	private Label waLabel, yourSearchedArticleLabel, wasCreatedOnLabel, createdLabel, dateCreatedLabel, genArtInfLabel, artAnaLabel;
-	private LinkItem wikiLink, userLink;
+	private Label waLabel, yourSearchedArticleLabel, createdLabel, dateCreatedLabel, genArtInfLabel, artAnaLabel;
+	private HTMLPane wikiLink, userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalInfoGrid;
@@ -118,11 +120,12 @@ public class DefaultArticleView extends ArticleView {
 		this.yourSearchedArticleLabel.setHeight(10);
 		this.yourSearchedArticleLabel.setAutoWidth();
 		this.yourSearchedArticleLabel.setWrap(false);
-		this.wikiLink = new LinkItem();
-		this.wasCreatedOnLabel = new Label();
+		this.wikiLink = new HTMLPane();
 		this.dateCreatedLabel = new Label();
-		this.userLink = new LinkItem();
+		this.userLink = new HTMLPane();
 		this.createdLabel = new Label();
+
+		this.urlLayout.addMembers(this.yourSearchedArticleLabel, this.wikiLink, this.dateCreatedLabel, this.createdLabel);
 
 		this.menuURLLayout = new HLayout();
 		this.menuURLLayout.addMembers(this.timeMenuButton, this.urlLayout);
@@ -184,12 +187,12 @@ public class DefaultArticleView extends ArticleView {
 	private void bind() {
 		this.bindSearchBox();
 		this.bindSearchButton();
-		
+
 		this.bindTimeSpanMenu();
-		this.bindWikiLink();
+		this.bindWikiLinkText();
 		this.bindArticleCreateDate();
 		this.bindInitialAuthor();
-		
+
 		this.bindArticleTranslations();
 		this.bindArticleRevisions();
 		this.bindArticleAuthor();
@@ -252,9 +255,14 @@ public class DefaultArticleView extends ArticleView {
 		});
 	}
 
-	private void bindWikiLink() {
-		// TODO link hinterlegen
-		this.wikiLink.setTitle(this.presenter.getArticleLink());
+	private void bindWikiLinkText() {
+		if(!this.presenter.getArticleLink().isEmpty()) {
+			this.yourSearchedArticleLabel.setTitle("Der von ihnen gesuchte Artikel ");
+			this.wikiLink.setTitle(this.presenter.getArticleLink());
+			this.userLink.setTitle("");
+			this.createdLabel.setTitle(" erstellt.");
+			
+		}
 		this.presenter.articleLinkChanged().addHandler(new Handler<EventArgs>() {
 
 			@Override
@@ -265,9 +273,8 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindArticleCreateDate() {
-		// TODO
 		if(this.presenter.getArticleCreationDate() != null) {
-			this.dateCreatedLabel.setTitle(this.presenter.getArticleCreationDate().toString());
+			this.dateCreatedLabel.setTitle(" wurde am " + this.presenter.getArticleCreationDate().toString() + " von ");
 		}
 		this.presenter.articleCreationDateChanged().addHandler(new Handler<EventArgs>() {
 
@@ -279,7 +286,9 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindInitialAuthor() {
-		this.userLink.setTitle(this.presenter.getInitialAuthorLink());
+		if(this.presenter.getInitialAuthorLink() != null) {
+			this.userLink.setTitle(this.presenter.getInitialAuthorLink());
+		}
 		this.presenter.initialAuthorLinkChanged().addHandler(new Handler<EventArgs>() {
 
 			@Override
@@ -296,6 +305,7 @@ public class DefaultArticleView extends ArticleView {
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				translationRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfTranslations());
+				generalInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -307,6 +317,7 @@ public class DefaultArticleView extends ArticleView {
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfTranslations());
+				generalInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -318,6 +329,7 @@ public class DefaultArticleView extends ArticleView {
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
+				generalInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -329,17 +341,19 @@ public class DefaultArticleView extends ArticleView {
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
+				generalInfoGrid.refreshFields();
 			}
 		});
 	}
-	
+
 	private void bindArticleLength() {
 		this.articleLengthRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfArticleWords());
 		this.presenter.numberOfArticleWordsChanged().addHandler(new Handler<EventArgs>() {
-			
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				articleLengthRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfArticleWords());
+				generalInfoGrid.refreshFields();
 			}
 		});
 	}
