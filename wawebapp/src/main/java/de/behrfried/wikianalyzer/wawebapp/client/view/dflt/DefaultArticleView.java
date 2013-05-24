@@ -16,9 +16,14 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.inject.Inject;
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.HTMLPane;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.ImgButton;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -57,16 +62,33 @@ public class DefaultArticleView extends ArticleView {
 	private HTMLPane wikiLink, userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
-	private ListGrid generalInfoGrid;
-	private ListGridField attributeColumn, valueColumn;
+
+	private final ListGrid generalInfoGrid = new ListGrid() {
+
+		@Override
+		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {
+			String fieldName = this.getFieldName(colNum);
+			if(fieldName.equals("buttonField")) {
+				IButton b = new IButton();
+				b.setIcon("/img/loupeIcon.png");
+				b.setShowRollOver(false);
+				b.setAlign(Alignment.CENTER);
+				b.setTitle("Zur Analyse");
+				return b;
+			}
+			return null;
+		}
+	};
+	private ListGridField attributeColumn, valueColumn, detailColumn;
 	private ListGridRecord translationRecord, revisionRecord, authorsRecord, categoriesRecord, articleLengthRecord;
 	private HLayout searchLayout, articleInfoAnalyzationLayout, menuURLLayout, urlLayout;
+	private HLayout listFieldLayout;
 	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
+	private IButton translationDetailButton, revisionDetailButton, authorsDetailButton, categoriesDetailButton, articleLengthDetailButton;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
 	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
-
 	private final Messages messages;
 
 	@Inject
@@ -94,6 +116,7 @@ public class DefaultArticleView extends ArticleView {
 		this.searchLayout = new HLayout();
 		this.searchLayout.setMembersMargin(3);
 		this.searchLayout.setHeight(30);
+
 		this.searchLayout.addMember(this.waLabel);
 		this.searchLayout.addMember(this.searchBoxContainer);
 		this.searchLayout.addMember(this.searchButton);
@@ -130,29 +153,40 @@ public class DefaultArticleView extends ArticleView {
 		this.menuURLLayout = new HLayout();
 		this.menuURLLayout.addMembers(this.timeMenuButton, this.urlLayout);
 
-		this.attributeColumn = new ListGridField("Attribute");
+		this.attributeColumn = new ListGridField("attributeField", "Attribut");
 		this.attributeColumn.setCanEdit(false);
-		this.valueColumn = new ListGridField("Value");
+		this.valueColumn = new ListGridField("valueField", "Wert");
 		this.valueColumn.setCanEdit(false);
-		this.generalInfoGrid = new ListGrid();
+		this.detailColumn = new ListGridField("buttonField", "");
+		this.detailColumn.setShowTitle(false);
+		this.detailColumn.setCanEdit(false);
 
-		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn);
 		this.translationRecord = new ListGridRecord();
 		this.translationRecord.setAttribute(this.attributeColumn.getName(), "Sprachübersetzungen");
 		this.revisionRecord = new ListGridRecord();
+		this.revisionDetailButton = new IButton();
 		this.revisionRecord.setAttribute(this.attributeColumn.getName(), "Bearbeitungen");
 		this.authorsRecord = new ListGridRecord();
+		this.authorsDetailButton = new IButton();
 		this.authorsRecord.setAttribute(this.attributeColumn.getName(), "Authoren");
 		this.categoriesRecord = new ListGridRecord();
+		this.categoriesDetailButton = new IButton();
 		this.categoriesRecord.setAttribute(this.attributeColumn.getName(), "Kategorien");
 		this.articleLengthRecord = new ListGridRecord();
+		this.articleLengthDetailButton = new IButton();
 		this.articleLengthRecord.setAttribute(this.attributeColumn.getName(), "Länge des Artikels");
+
+		this.generalInfoGrid.setShowRecordComponents(true);
+		this.generalInfoGrid.setShowRecordComponentsByCell(true);
+		this.generalInfoGrid.setShowAllRecords(true);
+		this.generalInfoGrid.setFields(this.attributeColumn, this.valueColumn, this.detailColumn);
 
 		this.generalInfoGrid.addData(this.translationRecord);
 		this.generalInfoGrid.addData(this.revisionRecord);
 		this.generalInfoGrid.addData(this.authorsRecord);
 		this.generalInfoGrid.addData(this.categoriesRecord);
 		this.generalInfoGrid.addData(this.articleLengthRecord);
+		this.generalInfoGrid.draw();
 
 		this.artAnaLayout = new VLayout();
 		this.artAnaLayout.setWidth("60%");
@@ -261,7 +295,7 @@ public class DefaultArticleView extends ArticleView {
 			this.wikiLink.setTitle(this.presenter.getArticleLink());
 			this.userLink.setTitle("");
 			this.createdLabel.setTitle(" erstellt.");
-			
+
 		}
 		this.presenter.articleLinkChanged().addHandler(new Handler<EventArgs>() {
 
@@ -308,6 +342,7 @@ public class DefaultArticleView extends ArticleView {
 				generalInfoGrid.refreshFields();
 			}
 		});
+
 	}
 
 	private void bindArticleRevisions() {
