@@ -20,10 +20,8 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
 /**
@@ -66,6 +64,37 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 
 	@Override
     public Command getSendCommand() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+
+	@Override
+    public Command getAnalyzeArticleWordsCommand() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Command getAnalyzeCategoriesCommand() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Command getAnalyzeAuthorsCommand() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Command getAnalyzeEditsCommand() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Command getAnalyzeTranslationsCommand() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
@@ -200,5 +229,11 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
     public Event<EventArgs> numberOfArticleWordsChanged() {
 	    // TODO Auto-generated method stub
 	    return null;
+    }
+
+	@Override
+    public boolean getSearchStatus() {
+	    // TODO Auto-generated method stub
+	    return false;
     }
 }

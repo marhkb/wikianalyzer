@@ -20,10 +20,8 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 
 /**
@@ -76,6 +74,36 @@ public abstract class ArticleView extends View {
 		 * returns the search command
 		 */
 		Command getSendCommand();
+
+		/**
+		 * returns the article words analyzation command
+		 * @return
+		 */
+		Command getAnalyzeArticleWordsCommand();
+
+		/**
+		 * returns the category analyzation command 
+		 * @return
+		 */
+		Command getAnalyzeCategoriesCommand();
+
+		/**
+		 * returns the authors analyzation command 
+		 * @return
+		 */
+		Command getAnalyzeAuthorsCommand();
+
+		/**
+		 * returns the article edits analyzation command 
+		 * @return
+		 */
+		Command getAnalyzeEditsCommand();
+
+		/**
+		 * returns the article translations analyzation command 
+		 * @return
+		 */
+		Command getAnalyzeTranslationsCommand();
 
 		/**
 		 * returns the time where the analyzation starts
@@ -197,5 +225,12 @@ public abstract class ArticleView extends View {
 		 * gets fired when the number of the article's words has changed
 		 */
 		Event<EventArgs> numberOfArticleWordsChanged();
+		
+		/**
+		 * 
+		 */
+		boolean getSearchStatus();
+		
+		
 	}
 }

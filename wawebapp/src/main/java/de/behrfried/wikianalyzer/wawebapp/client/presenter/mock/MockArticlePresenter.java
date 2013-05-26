@@ -18,22 +18,16 @@ package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.command.CommandManager;
 import de.behrfried.wikianalyzer.util.command.UICommand;
-import de.behrfried.wikianalyzer.util.data.Tuple;
-import de.behrfried.wikianalyzer.util.data.Tuple2;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
-import de.behrfried.wikianalyzer.util.list.ObservableLinkedList;
-import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 
@@ -57,6 +51,16 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleName;
 	}
 
+	private boolean searched = false;
+	
+	public boolean getSearchStatus() {
+		return searched;
+	}
+	
+	public void setSearchStatus(boolean searched) {
+		this.searched = searched;
+	}
+	
 	public void setArticleTitle(final String string) {
 		if(!string.equals(this.articleName)) {
 			this.articleName = string;
@@ -72,7 +76,8 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleChanged;
 	}
 
-	private Command sendCommand;
+	private Command sendCommand, analyzeTranslationsCommand, analyzeEditsCommand, analyzeAuthorsCommand, analyzeCategoriesCommand,
+	        analyzeArticleLengthCommand;
 
 	public Command getSendCommand() {
 		if(this.sendCommand == null) {
@@ -83,7 +88,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle(), new AsyncCallback<Integer>() {
 
 						int number = 0;
-						
+
 						public void onSuccess(final Integer result) {
 							this.number = new Random().nextInt();
 							setArticleLink("www." + number + ".org");
@@ -92,6 +97,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 							setNumberOfTranslations(number);
 							setNumberOfAuthors(number);
 							setNumberOfRevisions(number);
+							setSearchStatus(true);
 						}
 
 						public void onFailure(final Throwable caught) {}
@@ -101,14 +107,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				public boolean canExecute(final Object param) {
 					return MockArticlePresenter.this.getArticleTitle().length() > 0;
 				}
-
+				
 				@Override
 				protected EventArgs getEventArgs() {
 					return EventArgs.EMPTY;
 				}
 			};
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
-
 				public void invoke(final Object sender, final EventArgs e) {
 					MockArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
 				}
@@ -117,6 +122,140 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.sendCommand;
 	}
 
+	public Command getAnalyzeTranslationsCommand() {
+		if(this.analyzeTranslationsCommand == null) {
+			this.analyzeTranslationsCommand = new UICommand() {
+
+				public void execute(final Object param) {
+					//TODO
+				}
+
+				public boolean canExecute(final Object param) {
+					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfTranslations()!=0);
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getAnalyzeTranslationsCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
+		return this.analyzeTranslationsCommand;
+	}
+
+	@Override
+    public Command getAnalyzeArticleWordsCommand() {
+		if(this.analyzeArticleLengthCommand == null) {
+			this.analyzeArticleLengthCommand = new UICommand() {
+
+				public void execute(final Object param) {
+					//TODO
+				}
+
+				public boolean canExecute(final Object param) {
+					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfArticleWords()!=0);
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getAnalyzeArticleWordsCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
+		return this.analyzeArticleLengthCommand;
+    }
+
+	@Override
+    public Command getAnalyzeCategoriesCommand() {
+		if(this.analyzeCategoriesCommand == null) {
+			this.analyzeCategoriesCommand = new UICommand() {
+
+				public void execute(final Object param) {
+					//TODO
+				}
+
+				public boolean canExecute(final Object param) {
+					return (MockArticlePresenter.this.getSearchStatus() && !MockArticlePresenter.this.getArticleCategories().isEmpty());
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getAnalyzeCategoriesCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
+		return this.analyzeCategoriesCommand;
+    }
+
+	@Override
+    public Command getAnalyzeAuthorsCommand() {
+		if(this.analyzeAuthorsCommand == null) {
+			this.analyzeAuthorsCommand = new UICommand() {
+
+				public void execute(final Object param) {
+					//TODO
+				}
+
+				public boolean canExecute(final Object param) {
+					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfAuthors()!=0);
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getAnalyzeAuthorsCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
+		return this.analyzeAuthorsCommand;
+    }
+
+	@Override
+    public Command getAnalyzeEditsCommand() {
+		if(this.analyzeEditsCommand == null) {
+			this.analyzeEditsCommand = new UICommand() {
+
+				public void execute(final Object param) {
+					//TODO
+				}
+
+				public boolean canExecute(final Object param) {
+					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfRevisions()!=0);
+				}
+
+				@Override
+				protected EventArgs getEventArgs() {
+					return EventArgs.EMPTY;
+				}
+			};
+			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+				public void invoke(final Object sender, final EventArgs e) {
+					MockArticlePresenter.this.getAnalyzeEditsCommand().raiseCanExecuteChanged();
+				}
+			});
+		}
+		return this.analyzeEditsCommand;
+    }
+	
 	private String articleLink = "";
 
 	private void setArticleLink(final String articleLink) {
@@ -136,7 +275,6 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public Event<EventArgs> articleLinkChanged() {
 		return this.articleLinkChanged;
 	}
-
 
 	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
 
@@ -222,66 +360,66 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public Event<EventArgs> toTimeChanged() {
 		return this.toTimeChanged;
 	}
-	
-	
+
 	private Date articleCreationDate = null;
 
 	@Override
 	public Date getArticleCreationDate() {
 		return this.articleCreationDate;
 	}
-	
+
 	public void setArticleCreationDate(Date articleCreationDate) {
 		this.articleCreationDate = articleCreationDate;
 		this.articleCreationDateChanged().fire(this.initContext, this, EventArgs.EMPTY);
 	}
 
 	private Event<EventArgs> articleCreationDateChanged = new Event<EventArgs>(initContext);
-	
+
 	@Override
 	public Event<EventArgs> articleCreationDateChanged() {
 		return this.articleCreationDateChanged;
 	}
 
 	private String initialAuthorLink = "";
-	
+
 	@Override
 	public String getInitialAuthorLink() {
 		return this.initialAuthorLink;
 	}
-	
+
 	private void setInitialAuthorLink(String initialAuthorLink) {
 		this.initialAuthorLink = initialAuthorLink;
 		this.initialAuthorLinkChanged().fire(initContext, this, EventArgs.EMPTY);
 	}
 
 	private final Event<EventArgs> initialAuthorLinkChanged = new Event<EventArgs>(initContext);
-	
+
 	@Override
 	public Event<EventArgs> initialAuthorLinkChanged() {
 		return this.initialAuthorLinkChanged;
 	}
-	
+
 	private int numberOfTranslations;
 
 	@Override
 	public int getNumberOfTranslations() {
 		return this.numberOfTranslations;
 	}
-	
+
 	private void setNumberOfTranslations(int numberOfTranslations) {
 		this.numberOfTranslations = numberOfTranslations;
 		this.numberOfTranslationChanged().fire(initContext, this, EventArgs.EMPTY);
 	}
 
-	
 	private Event<EventArgs> numberOfTranslationChanged = new Event<EventArgs>(initContext);
+
 	@Override
 	public Event<EventArgs> numberOfTranslationChanged() {
 		return this.numberOfTranslationChanged;
 	}
 
 	private int numberOfRevisions;
+
 	@Override
 	public int getNumberOfRevisions() {
 		return this.numberOfRevisions;
@@ -291,17 +429,16 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		this.numberOfRevisions = numberofRevisions;
 		this.numberOfRevisionsChanged().fire(initContext, this, EventArgs.EMPTY);
 	}
-	
+
 	private final Event<EventArgs> numberOfRevisionsChanged = new Event<EventArgs>(initContext);
-	
+
 	@Override
 	public Event<EventArgs> numberOfRevisionsChanged() {
 		return this.numberOfRevisionsChanged;
 	}
 
-	
 	private int numberOfAuthors;
-	
+
 	@Override
 	public int getNumberOfAuthors() {
 		return this.numberOfAuthors;
@@ -311,37 +448,37 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		this.numberOfAuthors = numberOfAuthors;
 		this.numberOfAuthorsChanged().fire(initContext, this, EventArgs.EMPTY);
 	}
-	
+
 	private final Event<EventArgs> numberOfAuthorsChanged = new Event<EventArgs>(initContext);
-	
+
 	@Override
 	public Event<EventArgs> numberOfAuthorsChanged() {
 		return this.numberOfAuthorsChanged;
 	}
 
 	private List<String> articleCategories = null;
-	
+
 	@Override
 	public List<String> getArticleCategories() {
 		return this.articleCategories;
 	}
 
 	private final Event<EventArgs> articleCategoriesChanged = new Event<EventArgs>(initContext);
-	
+
 	@Override
 	public Event<EventArgs> articleCategoriesChanged() {
 		return this.articleCategoriesChanged;
 	}
 
 	private int numberofArticleWords;
-	
+
 	@Override
 	public int getNumberOfArticleWords() {
 		return this.numberofArticleWords;
 	}
 
 	private final Event<EventArgs> numberOfArticleWordsChanged = new Event<EventArgs>(initContext);
-	
+
 	@Override
 	public Event<EventArgs> numberOfArticleWordsChanged() {
 		return this.numberOfArticleWordsChanged;
