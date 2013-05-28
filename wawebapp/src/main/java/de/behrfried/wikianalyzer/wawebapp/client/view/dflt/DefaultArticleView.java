@@ -58,19 +58,45 @@ public class DefaultArticleView extends ArticleView {
 	private HTMLPane wikiLink, userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
+	private IButton translationsAnalyzationButton, revisionAnalyzationButton, authorsAnalyzationButton, categoriesAnalyzationButton,
+    articleLengthAnalyzationButton;
 
 	private final ListGrid generalInfoGrid = new ListGrid() {
-
 		@Override
 		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {
-			String fieldName = this.getFieldName(colNum);
-			if(fieldName.equals("buttonField")) {
-				IButton b = new IButton();
-				b.setIcon("/img/loupeIcon.png");
-				b.setShowRollOver(false);
-				b.setAlign(Alignment.CENTER);
-				b.setTitle("Zur Analyse");
-				return b;
+			if(this.getFieldName(colNum).equals("buttonField")) {
+				final String tmpString = record.getAttribute("attributeField");
+				if(tmpString.equals("Sprachübersetzungen")) {
+					DefaultArticleView.this.translationsAnalyzationButton = new IButton("Zur Analyse");
+					DefaultArticleView.this.translationsAnalyzationButton.setIcon("/img/loupeIcon.png");
+					DefaultArticleView.this.translationsAnalyzationButton.setAlign(Alignment.CENTER);
+					DefaultArticleView.this.bindArticleTranslationsRecord();
+					return DefaultArticleView.this.translationsAnalyzationButton;
+				} else if(tmpString.equals("Bearbeitungen")) {
+					DefaultArticleView.this.revisionAnalyzationButton = new IButton("Zur Analyse");
+					DefaultArticleView.this.revisionAnalyzationButton.setIcon("/img/loupeIcon.png");
+					DefaultArticleView.this.revisionAnalyzationButton.setAlign(Alignment.CENTER);
+					DefaultArticleView.this.bindArticleRevisionsRecord();
+					return DefaultArticleView.this.revisionAnalyzationButton;
+				} else if(tmpString.equals("Authoren")) {
+					DefaultArticleView.this.authorsAnalyzationButton = new IButton("Zur Analyse");
+					DefaultArticleView.this.authorsAnalyzationButton.setIcon("/img/loupeIcon.png");
+					DefaultArticleView.this.authorsAnalyzationButton.setAlign(Alignment.CENTER);
+					DefaultArticleView.this.bindArticleAuthorRecord();
+					return DefaultArticleView.this.authorsAnalyzationButton;
+				} else if(tmpString.equals("Kategorien")) {
+					DefaultArticleView.this.categoriesAnalyzationButton = new IButton("Zur Analyse");
+					DefaultArticleView.this.categoriesAnalyzationButton.setIcon("/img/loupeIcon.png");
+					DefaultArticleView.this.categoriesAnalyzationButton.setAlign(Alignment.CENTER);
+					DefaultArticleView.this.bindArticleCategoriesRecord();
+					return DefaultArticleView.this.categoriesAnalyzationButton;
+				} else if(tmpString.equals("Länge des Artikels")) {
+					DefaultArticleView.this.articleLengthAnalyzationButton = new IButton("Zur Analyse");
+					DefaultArticleView.this.articleLengthAnalyzationButton.setIcon("/img/loupeIcon.png");
+					DefaultArticleView.this.articleLengthAnalyzationButton.setAlign(Alignment.CENTER);
+					DefaultArticleView.this.bindArticleLengthRecord();
+					return DefaultArticleView.this.articleLengthAnalyzationButton;
+				}
 			}
 			return null;
 		}
@@ -79,8 +105,6 @@ public class DefaultArticleView extends ArticleView {
 	private ListGridRecord translationRecord, revisionRecord, authorsRecord, categoriesRecord, articleLengthRecord;
 	private HLayout searchLayout, articleInfoAnalyzationLayout, menuURLLayout, urlLayout;
 	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
-	private IButton translationsAnalyzationButton, revisionAnalyzationButton, authorsAnalyzationButton, categoriesAnalyzationButton,
-	        articleLengthAnalyzationButton;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
@@ -160,16 +184,12 @@ public class DefaultArticleView extends ArticleView {
 		this.translationRecord = new ListGridRecord();
 		this.translationRecord.setAttribute(this.attributeColumn.getName(), "Sprachübersetzungen");
 		this.revisionRecord = new ListGridRecord();
-		this.revisionAnalyzationButton = new IButton();
 		this.revisionRecord.setAttribute(this.attributeColumn.getName(), "Bearbeitungen");
 		this.authorsRecord = new ListGridRecord();
-		this.authorsAnalyzationButton = new IButton();
 		this.authorsRecord.setAttribute(this.attributeColumn.getName(), "Authoren");
 		this.categoriesRecord = new ListGridRecord();
-		this.categoriesAnalyzationButton = new IButton();
 		this.categoriesRecord.setAttribute(this.attributeColumn.getName(), "Kategorien");
 		this.articleLengthRecord = new ListGridRecord();
-		this.articleLengthAnalyzationButton = new IButton();
 		this.articleLengthRecord.setAttribute(this.attributeColumn.getName(), "Länge des Artikels");
 
 		this.generalInfoGrid.setShowRecordComponents(true);
@@ -220,12 +240,6 @@ public class DefaultArticleView extends ArticleView {
 		this.bindWikiLinkText();
 		this.bindArticleCreateDate();
 		this.bindInitialAuthor();
-
-		this.bindArticleTranslationsRecord();
-		this.bindArticleRevisionsRecord();
-		this.bindArticleAuthorRecord();
-		this.bindArticleCategoriesRecord();
-		this.bindArticleLengthRecord();
 	}
 
 	private void bindSearchBox() {
@@ -326,7 +340,7 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindArticleTranslationsRecord() {
-		this.translationsAnalyzationButton.setDisabled(this.presenter.getAnalyzeTranslationsCommand().canExecute(null));
+		this.translationsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeTranslationsCommand().canExecute(null));
 		this.translationRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfTranslations());
 		this.presenter.numberOfTranslationChanged().addHandler(new Handler<EventArgs>() {
 			@Override
@@ -345,7 +359,7 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindArticleRevisionsRecord() {
-		this.revisionAnalyzationButton.setDisabled(this.presenter.getAnalyzeEditsCommand().canExecute(null));
+		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
 		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfTranslations());
 		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
 			@Override
@@ -364,7 +378,7 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindArticleAuthorRecord() {
-		this.authorsAnalyzationButton.setDisabled(this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
+		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
 		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
 		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {	
 			@Override
@@ -383,7 +397,7 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindArticleCategoriesRecord() {
-		this.categoriesAnalyzationButton.setDisabled(this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
+		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
 		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
 		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
 			@Override
@@ -402,7 +416,7 @@ public class DefaultArticleView extends ArticleView {
 	}
 
 	private void bindArticleLengthRecord() {
-		this.articleLengthAnalyzationButton.setDisabled(this.presenter.getAnalyzeArticleWordsCommand().canExecute(null));
+		this.articleLengthAnalyzationButton.setDisabled(!this.presenter.getAnalyzeArticleWordsCommand().canExecute(null));
 		this.articleLengthRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfArticleWords());
 		this.presenter.numberOfArticleWordsChanged().addHandler(new Handler<EventArgs>() {
 			@Override

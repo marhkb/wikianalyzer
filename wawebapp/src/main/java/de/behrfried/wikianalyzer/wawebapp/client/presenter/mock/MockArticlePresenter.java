@@ -131,7 +131,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfTranslations()!=0);
+					return MockArticlePresenter.this.getSearchStatus();
 				}
 
 				@Override
@@ -158,7 +158,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfArticleWords()!=0);
+					return MockArticlePresenter.this.getSearchStatus();
 				}
 
 				@Override
@@ -185,7 +185,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return (MockArticlePresenter.this.getSearchStatus() && !MockArticlePresenter.this.getArticleCategories().isEmpty());
+					return MockArticlePresenter.this.getSearchStatus();
 				}
 
 				@Override
@@ -212,7 +212,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfAuthors()!=0);
+					return MockArticlePresenter.this.getSearchStatus();
 				}
 
 				@Override
@@ -239,7 +239,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return (MockArticlePresenter.this.getSearchStatus() && MockArticlePresenter.this.getNumberOfRevisions()!=0);
+					return MockArticlePresenter.this.getSearchStatus();
 				}
 
 				@Override
