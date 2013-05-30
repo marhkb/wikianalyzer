@@ -22,14 +22,14 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPrese
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserComparisonView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefaultArticleView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefaultShellView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefaultUserComparisonView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefaultUserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefShellView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article.DefArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefaultUserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.usercomparison.DefUserComparisonView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserComparisonView;
 
 /**
  * Main Module in the web application. Defines which implementation is chosen
@@ -60,10 +60,10 @@ public class WaGinModule extends AbstractGinModule {
 		/*
 		 * bind views
 		 */
-		this.bind(ShellView.class).to(DefaultShellView.class).in(Singleton.class);
-		this.bind(ArticleView.class).to(DefaultArticleView.class).in(Singleton.class);
+		this.bind(ShellView.class).to(DefShellView.class).in(Singleton.class);
+		this.bind(ArticleView.class).to(DefArticleView.class).in(Singleton.class);
 		this.bind(UserView.class).to(DefaultUserView.class).in(Singleton.class);
-		this.bind(UserComparisonView.class).to(DefaultUserComparisonView.class).in(Singleton.class);
+		this.bind(UserComparisonView.class).to(DefUserComparisonView.class).in(Singleton.class);
 
 	}
 

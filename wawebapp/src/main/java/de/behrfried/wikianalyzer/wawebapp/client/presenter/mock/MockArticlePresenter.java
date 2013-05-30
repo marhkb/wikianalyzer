@@ -29,7 +29,7 @@ import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
 import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
@@ -380,7 +380,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleCreationDateChanged;
 	}
 
-	private String initialAuthorLink = "";
+	private String initialAuthorLink = "www.google.com";
 
 	@Override
 	public String getInitialAuthorLink() {
@@ -483,5 +483,17 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public Event<EventArgs> numberOfArticleWordsChanged() {
 		return this.numberOfArticleWordsChanged;
 	}
+
+	private final Event<EventArgs> userLinkChanged = new Event<EventArgs>(initContext);
+	@Override
+    public Event<EventArgs> userLinkChanged() {
+	    return this.userLinkChanged;
+    }
+
+	private final Event<EventArgs> wikiLinkChanged = new Event<EventArgs>(initContext);
+	@Override
+    public Event<EventArgs> wikiLinkChanged() {
+	    return this.wikiLinkChanged;
+    }
 
 }

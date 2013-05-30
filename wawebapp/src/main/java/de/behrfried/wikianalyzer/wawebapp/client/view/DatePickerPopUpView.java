@@ -2,7 +2,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.view;
 
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefaultUserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefaultUserView;
 
 public class DatePickerPopUpView extends PopUpView {
 

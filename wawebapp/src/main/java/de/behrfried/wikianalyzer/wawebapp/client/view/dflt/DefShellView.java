@@ -38,9 +38,9 @@ import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import com.smartgwt.client.widgets.tab.events.TabSelectedEvent;
 import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**
  * Default implementation of {@link ShellView}
@@ -48,7 +48,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
  * @author marcus
  * 
  */
-public class DefaultShellView extends ShellView {
+public class DefShellView extends ShellView {
 
 	private final Presenter presenter;
 
@@ -58,7 +58,7 @@ public class DefaultShellView extends ShellView {
 	private final TabSet tabSet;
 
 	@Inject
-	public DefaultShellView(final Presenter presenter, final ArticleView articleView, final UserView userView) throws IllegalArgumentException {
+	public DefShellView(final Presenter presenter, final ArticleView articleView, final UserView userView) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
@@ -118,7 +118,7 @@ public class DefaultShellView extends ShellView {
 				if(historyToken.isEmpty()) {
 					History.back();
 				}
-				DefaultShellView.this.tabSet.selectTab(event.getValue());
+				DefShellView.this.tabSet.selectTab(event.getValue());
 			}
 		});
 		History.fireCurrentHistoryState();

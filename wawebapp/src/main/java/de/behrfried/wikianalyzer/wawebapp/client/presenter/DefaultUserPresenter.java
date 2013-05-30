@@ -26,7 +26,7 @@ import de.behrfried.wikianalyzer.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**
  * Default implementation of {@link UserView.Presenter}.

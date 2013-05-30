@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view.dflt;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +42,7 @@ import de.behrfried.wikianalyzer.util.event.Handler;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
 import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedAction;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.view.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**
  * Default implementation of {@link UserView}.

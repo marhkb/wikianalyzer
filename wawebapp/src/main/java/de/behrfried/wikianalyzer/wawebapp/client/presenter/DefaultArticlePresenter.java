@@ -22,7 +22,7 @@ import java.util.List;
 import de.behrfried.wikianalyzer.util.command.Command;
 import de.behrfried.wikianalyzer.util.event.Event;
 import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.view.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 
 /**
  * Default implementation for {@link ArticleView.Presenter}.
@@ -235,5 +235,17 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
     public boolean getSearchStatus() {
 	    // TODO Auto-generated method stub
 	    return false;
+    }
+
+	@Override
+    public Event<EventArgs> userLinkChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> wikiLinkChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
     }
 }
