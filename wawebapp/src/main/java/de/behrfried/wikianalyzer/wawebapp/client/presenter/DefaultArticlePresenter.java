@@ -68,7 +68,6 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 	    return null;
     }
 
-
 	@Override
     public Command getAnalyzeArticleWordsCommand() {
 	    // TODO Auto-generated method stub
@@ -89,12 +88,6 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 
 	@Override
     public Command getAnalyzeEditsCommand() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
-	@Override
-    public Command getAnalyzeTranslationsCommand() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
@@ -170,19 +163,7 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
 	    // TODO Auto-generated method stub
 	    return null;
     }
-
-	@Override
-    public int getNumberOfTranslations() {
-	    // TODO Auto-generated method stub
-	    return 0;
-    }
-
-	@Override
-    public Event<EventArgs> numberOfTranslationChanged() {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
+	
 	@Override
     public int getNumberOfRevisions() {
 	    // TODO Auto-generated method stub
@@ -238,13 +219,43 @@ public class DefaultArticlePresenter implements ArticleView.Presenter {
     }
 
 	@Override
-    public Event<EventArgs> userLinkChanged() {
+    public Event<EventArgs> wikiLinkChanged() {
 	    // TODO Auto-generated method stub
 	    return null;
     }
 
 	@Override
-    public Event<EventArgs> wikiLinkChanged() {
+    public boolean getHasInfoBox() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public Event<EventArgs> infoBoxChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public boolean articleNeedsEdit() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public Event<EventArgs> numberOfPicturesChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public int getNumberOfPictures() {
+	    // TODO Auto-generated method stub
+	    return 0;
+    }
+
+	@Override
+    public Event<EventArgs> articleNeedsEditsChanged() {
 	    // TODO Auto-generated method stub
 	    return null;
     }

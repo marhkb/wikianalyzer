@@ -52,15 +52,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	private boolean searched = false;
-	
+
 	public boolean getSearchStatus() {
 		return searched;
 	}
-	
+
 	public void setSearchStatus(boolean searched) {
 		this.searched = searched;
 	}
-	
+
 	public void setArticleTitle(final String string) {
 		if(!string.equals(this.articleName)) {
 			this.articleName = string;
@@ -94,7 +94,6 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 							setArticleLink("www." + number + ".org");
 							setFromTime(new Date());
 							setInitialAuthorLink("www.user" + number + ".org");
-							setNumberOfTranslations(number);
 							setNumberOfAuthors(number);
 							setNumberOfRevisions(number);
 							setSearchStatus(true);
@@ -107,13 +106,14 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				public boolean canExecute(final Object param) {
 					return MockArticlePresenter.this.getArticleTitle().length() > 0;
 				}
-				
+
 				@Override
 				protected EventArgs getEventArgs() {
 					return EventArgs.EMPTY;
 				}
 			};
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+
 				public void invoke(final Object sender, final EventArgs e) {
 					MockArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
 				}
@@ -122,39 +122,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.sendCommand;
 	}
 
-	public Command getAnalyzeTranslationsCommand() {
-		if(this.analyzeTranslationsCommand == null) {
-			this.analyzeTranslationsCommand = new UICommand() {
-
-				public void execute(final Object param) {
-					//TODO
-				}
-
-				public boolean canExecute(final Object param) {
-					return MockArticlePresenter.this.getSearchStatus();
-				}
-
-				@Override
-				protected EventArgs getEventArgs() {
-					return EventArgs.EMPTY;
-				}
-			};
-			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
-				public void invoke(final Object sender, final EventArgs e) {
-					MockArticlePresenter.this.getAnalyzeTranslationsCommand().raiseCanExecuteChanged();
-				}
-			});
-		}
-		return this.analyzeTranslationsCommand;
-	}
-
 	@Override
-    public Command getAnalyzeArticleWordsCommand() {
+	public Command getAnalyzeArticleWordsCommand() {
 		if(this.analyzeArticleLengthCommand == null) {
 			this.analyzeArticleLengthCommand = new UICommand() {
 
 				public void execute(final Object param) {
-					//TODO
+					// TODO
 				}
 
 				public boolean canExecute(final Object param) {
@@ -167,21 +141,22 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 			};
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+
 				public void invoke(final Object sender, final EventArgs e) {
 					MockArticlePresenter.this.getAnalyzeArticleWordsCommand().raiseCanExecuteChanged();
 				}
 			});
 		}
 		return this.analyzeArticleLengthCommand;
-    }
+	}
 
 	@Override
-    public Command getAnalyzeCategoriesCommand() {
+	public Command getAnalyzeCategoriesCommand() {
 		if(this.analyzeCategoriesCommand == null) {
 			this.analyzeCategoriesCommand = new UICommand() {
 
 				public void execute(final Object param) {
-					//TODO
+					// TODO
 				}
 
 				public boolean canExecute(final Object param) {
@@ -194,21 +169,22 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 			};
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+
 				public void invoke(final Object sender, final EventArgs e) {
 					MockArticlePresenter.this.getAnalyzeCategoriesCommand().raiseCanExecuteChanged();
 				}
 			});
 		}
 		return this.analyzeCategoriesCommand;
-    }
+	}
 
 	@Override
-    public Command getAnalyzeAuthorsCommand() {
+	public Command getAnalyzeAuthorsCommand() {
 		if(this.analyzeAuthorsCommand == null) {
 			this.analyzeAuthorsCommand = new UICommand() {
 
 				public void execute(final Object param) {
-					//TODO
+					// TODO
 				}
 
 				public boolean canExecute(final Object param) {
@@ -221,21 +197,22 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 			};
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+
 				public void invoke(final Object sender, final EventArgs e) {
 					MockArticlePresenter.this.getAnalyzeAuthorsCommand().raiseCanExecuteChanged();
 				}
 			});
 		}
 		return this.analyzeAuthorsCommand;
-    }
+	}
 
 	@Override
-    public Command getAnalyzeEditsCommand() {
+	public Command getAnalyzeEditsCommand() {
 		if(this.analyzeEditsCommand == null) {
 			this.analyzeEditsCommand = new UICommand() {
 
 				public void execute(final Object param) {
-					//TODO
+					// TODO
 				}
 
 				public boolean canExecute(final Object param) {
@@ -248,14 +225,15 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 			};
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
+
 				public void invoke(final Object sender, final EventArgs e) {
 					MockArticlePresenter.this.getAnalyzeEditsCommand().raiseCanExecuteChanged();
 				}
 			});
 		}
 		return this.analyzeEditsCommand;
-    }
-	
+	}
+
 	private String articleLink = "";
 
 	private void setArticleLink(final String articleLink) {
@@ -324,6 +302,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private Date fromTime = null;
 
+	private final Event<EventArgs> wikiLinkChanged = new Event<EventArgs>(initContext);
+
+	@Override
+	public Event<EventArgs> wikiLinkChanged() {
+		return this.wikiLinkChanged;
+	}
+
 	@Override
 	public Date getFromTime() {
 		return this.fromTime;
@@ -380,7 +365,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.articleCreationDateChanged;
 	}
 
-	private String initialAuthorLink = "www.google.com";
+	private String initialAuthorLink = "";
 
 	@Override
 	public String getInitialAuthorLink() {
@@ -397,25 +382,6 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	@Override
 	public Event<EventArgs> initialAuthorLinkChanged() {
 		return this.initialAuthorLinkChanged;
-	}
-
-	private int numberOfTranslations;
-
-	@Override
-	public int getNumberOfTranslations() {
-		return this.numberOfTranslations;
-	}
-
-	private void setNumberOfTranslations(int numberOfTranslations) {
-		this.numberOfTranslations = numberOfTranslations;
-		this.numberOfTranslationChanged().fire(initContext, this, EventArgs.EMPTY);
-	}
-
-	private Event<EventArgs> numberOfTranslationChanged = new Event<EventArgs>(initContext);
-
-	@Override
-	public Event<EventArgs> numberOfTranslationChanged() {
-		return this.numberOfTranslationChanged;
 	}
 
 	private int numberOfRevisions;
@@ -484,16 +450,42 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.numberOfArticleWordsChanged;
 	}
 
-	private final Event<EventArgs> userLinkChanged = new Event<EventArgs>(initContext);
 	@Override
-    public Event<EventArgs> userLinkChanged() {
-	    return this.userLinkChanged;
-    }
+	public boolean getHasInfoBox() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-	private final Event<EventArgs> wikiLinkChanged = new Event<EventArgs>(initContext);
+	private final Event<EventArgs> infoBoxChanged = new Event<EventArgs>(initContext);
+
 	@Override
-    public Event<EventArgs> wikiLinkChanged() {
-	    return this.wikiLinkChanged;
-    }
+	public Event<EventArgs> infoBoxChanged() {
+		return this.infoBoxChanged;
+	}
 
+	@Override
+	public int getNumberOfPictures() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private final Event<EventArgs> numberOfPicturesChanged = new Event<EventArgs>(initContext);
+
+	@Override
+	public Event<EventArgs> numberOfPicturesChanged() {
+		return this.numberOfPicturesChanged;
+	}
+
+	@Override
+	public boolean articleNeedsEdit() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private final Event<EventArgs> needEditsChanges = new Event<EventArgs>(initContext);
+
+	@Override
+	public Event<EventArgs> articleNeedsEditsChanged() {
+		return this.needEditsChanges;
+	}
 }

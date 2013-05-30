@@ -101,12 +101,6 @@ public abstract class ArticleView extends View {
 		Command getAnalyzeEditsCommand();
 
 		/**
-		 * returns the article translations analyzation command 
-		 * @return
-		 */
-		Command getAnalyzeTranslationsCommand();
-
-		/**
 		 * returns the time where the analyzation starts
 		 * @return
 		 */
@@ -178,16 +172,6 @@ public abstract class ArticleView extends View {
 		Event<EventArgs> initialAuthorLinkChanged();
 		
 		/**
-		 * returns the number of translations for the searched article
-		 */
-		int getNumberOfTranslations();
-		
-		/**
-		 * gets fired when the number of translations has changed 
-		 */
-		Event<EventArgs> numberOfTranslationChanged();
-		
-		/**
 		 * returns the number of revisions for the searched article
 		 */
 		int getNumberOfRevisions();
@@ -231,9 +215,19 @@ public abstract class ArticleView extends View {
 		 * 
 		 */
 		boolean getSearchStatus();
-
-		Event<EventArgs> userLinkChanged();	
 		
 		Event<EventArgs> wikiLinkChanged();
+
+		boolean getHasInfoBox();
+
+		Event<EventArgs> infoBoxChanged();
+
+		boolean articleNeedsEdit();
+
+		Event<EventArgs> numberOfPicturesChanged();
+
+		int getNumberOfPictures();
+
+		Event<EventArgs> articleNeedsEditsChanged();
 	}
 }
