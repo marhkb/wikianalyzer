@@ -21,7 +21,7 @@ import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.HTMLPane;
+import com.smartgwt.client.widgets.HTMLFlow;
 import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -66,7 +66,7 @@ public class DefArticleView extends ArticleView {
 	 */
 
 	private Label waLabel, yourSearchedArticleLabel, createdLabel, dateCreatedLabel, genArtInfLabel, artAnaLabel;
-	private HTMLPane wikiLink, userLink;
+	private HTMLFlow wikiLink, userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
 	private IButton revisionAnalyzationButton, authorsAnalyzationButton, categoriesAnalyzationButton,
@@ -95,7 +95,7 @@ public class DefArticleView extends ArticleView {
 					DefArticleView.this.authorsAnalyzationButton = new IButton("Zur Analyse");
 					DefArticleView.this.authorsAnalyzationButton.setIcon("/img/loupeIcon.png");
 					DefArticleView.this.authorsAnalyzationButton.setAlign(Alignment.CENTER);
-					DefArticleView.this.bindArticleAuthorRecord();
+					DefArticleView.this.bindArticleAuthorsRecord();
 					return DefArticleView.this.authorsAnalyzationButton;
 				} else if(tmpString.equals("Kategorien:")) {
 					DefArticleView.this.categoriesAnalyzationButton = new IButton("Zur Analyse");
@@ -113,13 +113,14 @@ public class DefArticleView extends ArticleView {
 			}
 			if(this.getFieldName(colNum).equals("valueField")) {
 				if(tmpString.equals("Link zur gesuchten Seite:")) {
-					DefArticleView.this.wikiLink = new HTMLPane();
-					DefArticleView.this.bindWikiLinkPaneRecord();
+					DefArticleView.this.wikiLink = new HTMLFlow();
+					DefArticleView.this.bindWikiLinkFlowRecord();
+					return DefArticleView.this.wikiLink;
 				} else if(tmpString.equals("Initialer Author:")) {
-					DefArticleView.this.userLink = new HTMLPane();
+					DefArticleView.this.userLink = new HTMLFlow();
 					DefArticleView.this.bindUserLinkRecord();
-				}
-				
+					return DefArticleView.this.userLink;
+				}		
 			}
 			return null;
 		}
@@ -324,142 +325,7 @@ public class DefArticleView extends ArticleView {
 			}
 		});
 	}
-
-//	private void bindArticleTranslationsRecord() {
-//		this.translationsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeTranslationsCommand().canExecute(null));
-//		this.translationRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfTranslations());
-//		this.presenter.numberOfTranslationChanged().addHandler(new Handler<EventArgs>() {
-//			@Override
-//			public void invoke(Object sender, EventArgs e) {
-//				translationRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfTranslations());
-//				generalInfoGrid.refreshFields();
-//			}
-//		});
-//		
-//		this.translationsAnalyzationButton.addClickHandler(new ClickHandler() {
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				DefArticleView.this.presenter.getAnalyzeTranslationsCommand().execute(null);
-//			}
-//		});
-//	}
-
-	private void bindArticleRevisionsRecord() {
-		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
-		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfTranslations());
-		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfTranslations());
-				generalInfoGrid.refreshFields();
-			}
-		});
-		
-		this.revisionAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-		DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);	
-			}
-		});
-	}
-
-	private void bindArticleAuthorRecord() {
-		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
-		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
-		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {	
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
-				generalInfoGrid.refreshFields();
-			}
-		});
-		
-		this.authorsAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
-			}
-		});
-	}
-
-	private void bindArticleCategoriesRecord() {
-		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
-		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
-		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
-				generalInfoGrid.refreshFields();
-			}
-		});
-		
-		this.categoriesAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
-			}
-		});
-	}
-
-	private void bindArticleLengthRecord() {
-		this.articleLengthAnalyzationButton.setDisabled(!this.presenter.getAnalyzeArticleWordsCommand().canExecute(null));
-		this.articleLengthRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfArticleWords());
-		this.presenter.numberOfArticleWordsChanged().addHandler(new Handler<EventArgs>() {
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				articleLengthRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfArticleWords());
-				generalInfoGrid.refreshFields();
-			}
-		});
-		
-		this.articleLengthAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeArticleWordsCommand().execute(null);
-			}
-		});
-	}
-
-	// private void bindGeneralInfoGrid() {
-	// final Map<Tuple2<String, String>, Record> recordsO = new
-	// HashMap<Tuple2<String, String>, Record>();
-	// for(final Tuple2<String, String> t :
-	// this.presenter.getArticleInfos()) {
-	// final ListGridRecord lsg = new ListGridRecord();
-	// lsg.setAttribute("Attribute", t.getItem1());
-	// lsg.setAttribute("Value", t.getItem2());
-	// this.generalInfoGrid.addData(lsg);
-	// recordsO.put(t, lsg);
-	// }
-	// this.presenter.getArticleInfos().listChanged().addHandler(new
-	// Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
-	//
-	// public void invoke(final Object sender, final
-	// ListChangedEventArgs<Tuple2<String, String>> e) {
-	// if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
-	// if(e.getOldItems() != null) {
-	// for(final Tuple2<String, String> t : e.getOldItems()) {
-	// DefaultArticleView.this.generalInfoGrid.removeData(recordsO.remove(t));
-	// }
-	// }
-	//
-	// if(e.getNewItems() != null) {
-	// for(final Tuple2<String, String> t : e.getNewItems()) {
-	// final ListGridRecord lsg = new ListGridRecord();
-	// lsg.setAttribute("Attribute", t.getItem1());
-	// lsg.setAttribute("Value", t.getItem2());
-	// DefaultArticleView.this.generalInfoGrid.addData(lsg);
-	// recordsO.put(t, lsg);
-	// }
-	// }
-	// } else {
-	// DefaultArticleView.this.generalInfoGrid.clear();
-	// recordsO.clear();
-	// }
-	// }
-	// });
-	// }
-
+	
 	private void bindTimeSpanMenu() {
 		this.randomSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
 
@@ -533,6 +399,74 @@ public class DefArticleView extends ArticleView {
 
 	}
 	
+	private void bindArticleRevisionsRecord() {
+		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
+		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfTranslations());
+		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfTranslations());
+				generalInfoGrid.refreshFields();
+			}
+		});
+		
+		this.revisionAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+		DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);	
+			}
+		});
+	}
+
+	private void bindArticleAuthorsRecord() {
+		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
+		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
+		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {	
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
+				generalInfoGrid.refreshFields();
+			}
+		});
+		
+		this.authorsAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
+			}
+		});
+	}
+
+	private void bindArticleCategoriesRecord() {
+		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
+		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
+		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
+				generalInfoGrid.refreshFields();
+			}
+		});
+		
+		this.categoriesAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
+			}
+		});
+	}
+
+
+	private void bindWikiLinkFlowRecord() {
+	    this.wikiLink.setContents("<a href=\"" + this.presenter.getArticleLink() + "\" target=\"_blank\">" + "Google" + "</a>");
+	    this.presenter.wikiLinkChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+	
+			}
+		});
+    }
+	
 	private void bindUserLinkRecord() {
 		if(this.presenter.getInitialAuthorLink()!=null) {
 			this.userLink.setContents("<a href=\"" + this.presenter.getInitialAuthorLink() + "\" target=\"_blank\">" + "Google" + "</a>");	
@@ -544,16 +478,83 @@ public class DefArticleView extends ArticleView {
 			}
 		});
     }
+	
+	private void bindArticleCreationDateRecord() {
+		
+	}
+	
+	private void bindInfoBoxRecord() {
+		
+	}
+	
+	private void bindPictureRecord() {
+		
+	}
 
-	private void bindWikiLinkPaneRecord() {
-	    this.wikiLink.setContents("<a href=\"" + this.presenter.getArticleLink() + "\" target=\"_blank\">" + "Google" + "</a>");
-	    this.presenter.wikiLinkChanged().addHandler(new Handler<EventArgs>() {
+	private void needsEditRecord() {
+		
+	}
+	
+	private void bindArticleLengthRecord() {
+		this.articleLengthAnalyzationButton.setDisabled(!this.presenter.getAnalyzeArticleWordsCommand().canExecute(null));
+		this.articleLengthRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfArticleWords());
+		this.presenter.numberOfArticleWordsChanged().addHandler(new Handler<EventArgs>() {
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-	
+				articleLengthRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfArticleWords());
+				generalInfoGrid.refreshFields();
 			}
 		});
-    }
+		
+		this.articleLengthAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeArticleWordsCommand().execute(null);
+			}
+		});
+	}
+
+	// private void bindGeneralInfoGrid() {
+	// final Map<Tuple2<String, String>, Record> recordsO = new
+	// HashMap<Tuple2<String, String>, Record>();
+	// for(final Tuple2<String, String> t :
+	// this.presenter.getArticleInfos()) {
+	// final ListGridRecord lsg = new ListGridRecord();
+	// lsg.setAttribute("Attribute", t.getItem1());
+	// lsg.setAttribute("Value", t.getItem2());
+	// this.generalInfoGrid.addData(lsg);
+	// recordsO.put(t, lsg);
+	// }
+	// this.presenter.getArticleInfos().listChanged().addHandler(new
+	// Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
+	//
+	// public void invoke(final Object sender, final
+	// ListChangedEventArgs<Tuple2<String, String>> e) {
+	// if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
+	// if(e.getOldItems() != null) {
+	// for(final Tuple2<String, String> t : e.getOldItems()) {
+	// DefaultArticleView.this.generalInfoGrid.removeData(recordsO.remove(t));
+	// }
+	// }
+	//
+	// if(e.getNewItems() != null) {
+	// for(final Tuple2<String, String> t : e.getNewItems()) {
+	// final ListGridRecord lsg = new ListGridRecord();
+	// lsg.setAttribute("Attribute", t.getItem1());
+	// lsg.setAttribute("Value", t.getItem2());
+	// DefaultArticleView.this.generalInfoGrid.addData(lsg);
+	// recordsO.put(t, lsg);
+	// }
+	// }
+	// } else {
+	// DefaultArticleView.this.generalInfoGrid.clear();
+	// recordsO.clear();
+	// }
+	// }
+	// });
+	// }
+	
+	
 
 	@Override
 	public String getName() {
