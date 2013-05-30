@@ -19,6 +19,7 @@ package de.behrfried.wikianalyzer.util.data;
 import org.junit.Assert;
 import org.junit.Test;
 
+
 /**
  * Various tests on {@link Tuple2}
  * 
