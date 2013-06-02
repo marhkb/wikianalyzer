@@ -40,9 +40,10 @@ import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 import com.smartgwt.client.widgets.menu.events.MenuItemClickEvent;
-import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.event.Handler;
+
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.AuthorAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.CategoryAnaView;

@@ -3,8 +3,8 @@ package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article;
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Label;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.view.article.TranslationAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView.Presenter;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.TranslationAnaView;
 
 
 public class DefTranslationAnaView extends TranslationAnaView{

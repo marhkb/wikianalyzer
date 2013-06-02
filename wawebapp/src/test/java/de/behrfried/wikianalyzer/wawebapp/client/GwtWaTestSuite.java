@@ -16,10 +16,10 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
 import com.google.gwt.junit.tools.GWTTestSuite;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.GwtTestMockArticlePresenter;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 public class GwtWaTestSuite extends GWTTestSuite {
 

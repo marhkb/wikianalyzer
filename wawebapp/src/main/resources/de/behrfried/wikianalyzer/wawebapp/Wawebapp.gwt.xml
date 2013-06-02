@@ -16,7 +16,7 @@
 	<inherits name='com.google.gwt.junit.JUnit' />
 
 	<!-- Util -->
-	<inherits name="de.behrfried.wikianalyzer.util.Util" />
+	<!--<inherits name="de.behrfried.wikianalyzer.util.Util" />-->
 
 	<!-- SmartGWT -->
 	<inherits name="com.smartgwt.SmartGwt" />

@@ -16,13 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.inject.servlet.ServletModule;
-
 import de.behrfried.wikianalyzer.wawebapp.server.servlets.ArticleInfoServiceImpl;
 import de.behrfried.wikianalyzer.wawebapp.server.servlets.MainServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Server side module for for configuring servlets.

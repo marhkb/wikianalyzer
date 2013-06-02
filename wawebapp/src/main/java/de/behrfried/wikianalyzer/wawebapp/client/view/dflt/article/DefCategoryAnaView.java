@@ -2,8 +2,8 @@ package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article;
 
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.view.article.CategoryAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView.Presenter;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.CategoryAnaView;
 
 
 public class DefCategoryAnaView extends CategoryAnaView{

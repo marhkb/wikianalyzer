@@ -20,7 +20,7 @@
 
 	<parent>
 		<groupId>de.behrfried</groupId>
-		<artifactId>parent-pom</artifactId>
+		<artifactId>wikianalyzer</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -29,7 +29,7 @@
 	<groupId>de.behrfried.wikianalyzer</groupId>
 	<artifactId>wawebapp</artifactId>
 	<packaging>war</packaging>
-	<name>de.behrfried.wikianalyzer.wawebapp</name>
+	<name>wawebapp</name>
 
 	<properties>
 		<!-- Convenience property to set the GWT version -->
@@ -44,14 +44,14 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
 			<version>${gwtVersion}</version>
-			<scope>runtime</scope>
-		</dependency>
+            <scope>runtime</scope>
+        </dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<version>${gwtVersion}</version>
-			<scope>provided</scope>
-		</dependency>
+            <scope>provided</scope>
+        </dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -102,11 +102,11 @@
 		</dependency>
 
 		<!-- Util -->
-		<dependency>
-			<groupId>de.behrfried.wikianalyzer</groupId>
-			<artifactId>util</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+       <!--<dependency>
+            <groupId>de.behrfried.wikianalyzer</groupId>
+            <artifactId>util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>         -->
 	</dependencies>
 
 	<build>

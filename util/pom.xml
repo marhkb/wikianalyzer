@@ -6,16 +6,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.behrfried</groupId>
-		<artifactId>parent-pom</artifactId>
+		<artifactId>wikianalyzer</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>de.behrfried.wikianalyzer</groupId>
 	<artifactId>util</artifactId>
-	<name>de.behrfried.wikianalyzer.util</name>
+	<name>Util</name>
 	<packaging>jar</packaging>
 
-	<build>	
+	<build>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>

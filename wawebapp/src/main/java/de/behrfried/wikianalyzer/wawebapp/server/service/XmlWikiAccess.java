@@ -16,7 +16,14 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
-import java.io.StringReader;
+import com.google.inject.Inject;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,14 +31,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-import com.google.inject.Inject;
-
-import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+import java.io.StringReader;
 
 public class XmlWikiAccess implements WikiAccess {
 

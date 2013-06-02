@@ -18,6 +18,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.google.inject.Inject;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.widgets.Button;
@@ -36,12 +37,13 @@ import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
-import de.behrfried.wikianalyzer.util.data.Tuple2;
-import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.event.Handler;
-import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs;
-import de.behrfried.wikianalyzer.util.list.ListChangedEventArgs.ListChangedAction;
+
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple2;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
+import de.behrfried.wikianalyzer.wawebapp.client.util.list.ListChangedEventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.list.ListChangedEventArgs.ListChangedAction;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**

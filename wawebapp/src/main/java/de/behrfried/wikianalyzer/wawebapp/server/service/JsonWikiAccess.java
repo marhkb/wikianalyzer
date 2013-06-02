@@ -16,12 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
-
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JsonWikiAccess implements WikiAccess {
 

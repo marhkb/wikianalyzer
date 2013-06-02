@@ -13,11 +13,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.behrfried</groupId>
-	<artifactId>parent-pom</artifactId>
+	<artifactId>wikianalyzer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Wikianalyzer Parent POM</name>
+	<name>Wikianalyzer</name>
 
 	<modules>
 		<module>util</module>

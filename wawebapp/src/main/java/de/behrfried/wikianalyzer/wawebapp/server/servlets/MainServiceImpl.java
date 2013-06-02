@@ -16,13 +16,13 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.servlets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
 import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Server side implementation of {@link MainService}

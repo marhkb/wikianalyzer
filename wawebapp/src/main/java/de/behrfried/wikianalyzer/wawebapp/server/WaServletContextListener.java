@@ -16,11 +16,11 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class whose {@code getInjector()} is invoked immediately after application

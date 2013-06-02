@@ -20,15 +20,17 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.command.CommandManager;
-import de.behrfried.wikianalyzer.util.command.UICommand;
-import de.behrfried.wikianalyzer.util.event.Event;
-import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.event.Handler;
+
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.CommandManager;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.UICommand;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 
 public class MockArticlePresenter implements ArticleView.Presenter {

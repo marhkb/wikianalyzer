@@ -17,15 +17,16 @@
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.inject.Inject;
-import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.command.UICommand;
-import de.behrfried.wikianalyzer.util.data.Tuple2;
-import de.behrfried.wikianalyzer.util.event.Event;
-import de.behrfried.wikianalyzer.util.event.EventArgs;
-import de.behrfried.wikianalyzer.util.list.ObservableList;
+
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.UICommand;
+import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple2;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**

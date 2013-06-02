@@ -14,17 +14,16 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.engine;
+package de.behrfried.wikianalyzer.wawebapp.client.util.command;
 
-import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.event.Event;
-import de.behrfried.wikianalyzer.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 
 /**
  * Abstract Command implementing {@link Command}s 'canExecuteChanged' method.
- * 
+ *
  * @author marcus
- * 
+ *
  */
 public abstract class UICommand implements Command {
 
@@ -34,22 +33,15 @@ public abstract class UICommand implements Command {
 	protected final Object initContext = new Object();
 
 	/**
-	 * 
+	 * the {@link de.behrfried.wikianalyzer.wawebapp.client.util.event.Event} returned in {@code canExecuteChanged}
 	 */
-	public UICommand() {
-		CommandManager.get().addCommand(this);
-	}
-
-	/**
-	 * the event returned in {@code canExecuteChanged}
-	 */
-	private final Event<EventArgs> canExecutedChanged = new Event<EventArgs>(this.initContext);
+	private final Event<EventArgs> canExecuteChanged = new Event<EventArgs>(this.initContext);
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Event<EventArgs> canExecuteChanged() {
-		return this.canExecutedChanged;
+		return this.canExecuteChanged;
 	}
 
 	/**
@@ -60,8 +52,11 @@ public abstract class UICommand implements Command {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Returns an {@link de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs} used when {@code canExecudeChanged()} is
+	 * raised.
+	 *
+	 * @return an {@link de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs} used when {@code canExecudeChanged()} is
+	 *         raised
 	 */
 	protected abstract EventArgs getEventArgs();
 }

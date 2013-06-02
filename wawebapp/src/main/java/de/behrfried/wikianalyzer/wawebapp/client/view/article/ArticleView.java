@@ -19,10 +19,11 @@ package de.behrfried.wikianalyzer.wawebapp.client.view.article;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-import de.behrfried.wikianalyzer.util.command.Command;
-import de.behrfried.wikianalyzer.util.event.Event;
-import de.behrfried.wikianalyzer.util.event.EventArgs;
+
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.View;
 
 /**
@@ -126,7 +127,7 @@ public abstract class ArticleView extends View {
 
 		/**
 		 * sets the time where the analyzation ends
-		 * @param fromTime
+		 * @param toTime
 		 */
 		void setToTime(Date toTime);
 
