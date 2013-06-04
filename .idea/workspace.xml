@@ -2,74 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/command/Command.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/command/CommandManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/DataContainer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/DefaultObservableList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/Delegates.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/Event.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/EventArgs.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/Handler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/ListChangedEventArgs.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/ObservableArrayList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/ObservableLinkedList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/ObservableList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple2.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple3.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple4.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple5.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple6.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple7.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/data/Tuple8.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/command/UICommand.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/util/util.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wawebapp/wawebapp.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wikianalyzer.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/engine/CommandManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/engine/UICommand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultArticlePresenter.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/service/ArticleInfoService.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/service/ArticleInfoService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/servlets/ArticleInfoServiceImpl.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/servlets/ArticleInfoServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefAuthorAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefAuthorAnaView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefCategoryAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefCategoryAnaView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefNumberOfWordsAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefNumberOfWordsAnaView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefRevisionAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefRevisionAnaView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefTranslationAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefTranslationAnaView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultShellViewPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultShellViewPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultUserComparisonPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultUserComparisonPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultUserPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultUserPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefaultUserView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefaultUserView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/event/FieldChangedEventArgs.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/event/FieldChangedEventArgs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/event/GenericEventArgs.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/event/GenericEventArgs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/client/GwtWaTestSuite.java" afterPath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/client/GwtWaTestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/HttpWikiApi.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/HttpWikiApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java" afterPath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/servlets/MainServiceImpl.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/servlets/MainServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/UserView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/UserView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/WaModule.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/WaModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/WaServletContextListener.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/WaServletContextListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/WaServletModule.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/WaServletModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/resources/de/behrfried/wikianalyzer/wawebapp/Wawebapp.gwt.xml" afterPath="$PROJECT_DIR$/wawebapp/src/main/resources/de/behrfried/wikianalyzer/wawebapp/Wawebapp.gwt.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/XmlWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/XmlWikiAccess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/XmlWikiAccessTest.java" afterPath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/XmlWikiAccessTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/pom.xml" afterPath="$PROJECT_DIR$/util/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/pom.xml" afterPath="$PROJECT_DIR$/wawebapp/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370199066228" ignored="false" />
-    <file path="/fragment.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370191228265" ignored="false" />
+    <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370370861918" ignored="false" />
+    <file path="/fragment.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374614541" ignored="false" />
     <file path="/pom.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370197226949" ignored="false" />
-    <file path="/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370190978294" ignored="false" />
-    <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/java/de/transportsystems/vrp/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370190978294" ignored="false" />
+    <file path="/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374027797" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/java/de/transportsystems/vrp/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
     <file path="/Util.gwt.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370196133307" ignored="false" />
     <file path="/ArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370198159935" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/Event.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371187627" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/Handler.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371110650" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/FileSystemWatcher.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/EventArgs.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371082124" ignored="false" />
+    <file path="/EventArgs.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371080250" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/event/Handler.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371250183" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/event/EventArgs.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371227220" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/event/Event.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371242078" ignored="false" />
+    <file path="/FileSystemWatcher.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370372767435" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/def/DefFileSystemWatcher.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
+    <file path="/DefFileSystemWatcher.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370372795647" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/java/de/transportsystems/vrp/VrpModule.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374281910" ignored="false" />
+    <file path="/VrpModule.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370373346047" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/resources/bindings.conf" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370373485112" ignored="false" />
+    <file path="/bindings.conf" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370373480164" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/specific/Scheduler.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374249497" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/java/de/transportsystems/vrp/service/specific/def/NonBlockingFifoScheduler.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374274862" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/event/Handler.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/event/Event.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/event/EventArgs.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/common/def/DefResourceReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374539174" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/common/def/DefFileContentReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374539759" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/common/def/DefFileContentWriterTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374539174" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefResourceReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
+    <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentWriterTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +56,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -120,7 +93,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -129,7 +101,44 @@
     <favorites_list name="parent-pom" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="DefaultUserPresenter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultUserPresenter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="91" column="61" selection-start="3351" selection-end="3351" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/Event.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="0" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.33333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Handler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/Handler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="0" selection-start="684" selection-end="1319" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventArgs.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/EventArgs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="0" selection-start="684" selection-end="998" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -137,6 +146,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
@@ -177,9 +187,20 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1600" />
-    <option name="height" value="875" />
+    <option name="x" value="-1" />
+    <option name="width" value="1602" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -195,7 +216,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="Scope" currentSubView="Tests" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -207,6 +228,74 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -239,354 +328,270 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Production">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+          </PATH>
+        </subPane>
+        <subPane subId="Tests">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="resources">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="src/test">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="server/service">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="src/test">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="client">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="article" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="event" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="client">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="client">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="presenter">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -597,7 +602,7 @@
     <property name="options.lastSelected" value="editor.preferences.import" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/wawebapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -614,7 +619,7 @@
       <recent name="$PROJECT_DIR$/wawebapp/src/main/resources/de/behrfried/wikianalyzer/util" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.dev">
+  <component name="RunManager" selected="Maven.Wawebapp.html">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -725,25 +730,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="Wawebapp.html" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.google.gwt.dev.DevMode" />
-      <option name="VM_PARAMETERS" value="-Xmx512M" />
-      <option name="PROGRAM_PARAMETERS" value="-war $PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT -startupUrl Wawebapp.html -logLevel INFO -codeServerPort 9997 -port 8888 de.behrfried.wikianalyzer.wawebapp.Wawebapp" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/jdk1.7.0_21" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="false" />
-      <module name="wawebapp" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="false" name="dev" type="MavenRunConfiguration" factoryName="Maven">
+    <configuration default="false" name="Wawebapp.html" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -770,9 +757,8 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.Wawebapp.html" />
-      <item index="1" class="java.lang.String" itemvalue="Maven.dev" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Maven.Wawebapp.html" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -806,19 +792,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1600" height="875" extended-state="1" />
+    <frame x="-1" y="0" width="1602" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32831737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23131444" sideWeight="0.6712329" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20355104" sideWeight="0.67168266" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.43032786" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4297408" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -896,18 +882,9 @@
         <state line="18" column="0" selection-start="683" selection-end="683" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="24" selection-start="892" selection-end="892" vertical-scroll-proportion="0.6818182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="57" selection-start="1666" selection-end="1666" vertical-scroll-proportion="1.0014205">
-          <folding />
-        </state>
+        <state line="47" column="57" selection-start="1666" selection-end="1666" vertical-scroll-proportion="1.0014205" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/command/UICommand.java">
@@ -917,73 +894,74 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="36" selection-start="3409" selection-end="3409" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/src/main/resources/de/behrfried/wikianalyzer/util/Util.gwt.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="18" selection-start="126" selection-end="126" vertical-scroll-proportion="0.063739374">
-          <folding />
-        </state>
+        <state line="109" column="36" selection-start="3409" selection-end="3409" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/Wawebapp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="49" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="36" column="49" selection-start="1240" selection-end="1240" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/ListChangedEventArgs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="16" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.8023256">
-          <folding />
-        </state>
+        <state line="40" column="16" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.8023256" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/event/FieldChangedEventArgs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="46" selection-start="901" selection-end="901" vertical-scroll-proportion="0.25637394">
-          <folding />
-        </state>
+        <state line="27" column="46" selection-start="901" selection-end="901" vertical-scroll-proportion="0.25637394" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/event/GenericEventArgs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="46" selection-start="971" selection-end="971" vertical-scroll-proportion="0.3201133">
-          <folding />
-        </state>
+        <state line="29" column="46" selection-start="971" selection-end="971" vertical-scroll-proportion="0.3201133" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/list/DefaultObservableList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="63" selection-start="746" selection-end="746" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="18" column="63" selection-start="746" selection-end="746" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/UserView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="20" selection-start="1963" selection-end="1963" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="61" column="20" selection-start="1963" selection-end="1963" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="20" selection-start="2992" selection-end="2992" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="130" column="20" selection-start="2992" selection-end="2992" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefaultUserView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="269" column="48" selection-start="10236" selection-end="10236" vertical-scroll-proportion="0.23371105">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="269" column="48" selection-start="10236" selection-end="10236" vertical-scroll-proportion="0.23371105" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultUserPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="61" selection-start="3351" selection-end="3351" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/EventArgs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="684" selection-end="998" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="684" selection-end="1319" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.33333334">
+          <folding />
         </state>
       </provider>
     </entry>
