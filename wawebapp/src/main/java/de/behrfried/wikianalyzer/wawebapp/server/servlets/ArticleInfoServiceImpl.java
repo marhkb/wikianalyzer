@@ -41,5 +41,4 @@ public class ArticleInfoServiceImpl  extends RemoteServiceServlet implements Art
 		this.logger.debug("");
 		return null;
 	}
-
 }

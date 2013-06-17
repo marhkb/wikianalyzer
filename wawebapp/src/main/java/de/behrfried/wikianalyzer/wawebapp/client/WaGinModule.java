@@ -41,7 +41,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserCompari
 public class WaGinModule extends AbstractGinModule {
 
 	/**
-	 * Configures the Module by defining implementations forinterfaces.
+	 * Configures the Module by defining implementations for interfaces.
 	 */
 	@Override
 	protected void configure() {
