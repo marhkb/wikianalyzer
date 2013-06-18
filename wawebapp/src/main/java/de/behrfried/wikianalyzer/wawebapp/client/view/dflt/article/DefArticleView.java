@@ -417,6 +417,12 @@ public class DefArticleView extends ArticleView {
 				DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);
 			}
 		});
+		this.presenter.getAnalyzeEditsCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				revisionAnalyzationButton.setDisabled(!DefArticleView.this.presenter.getAnalyzeEditsCommand()																					 .canExecute(null));
+			}
+		});
 	}
 
 	private void bindArticleAuthorsRecord() {

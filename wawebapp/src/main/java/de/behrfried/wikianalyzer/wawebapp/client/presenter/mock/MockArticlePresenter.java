@@ -55,7 +55,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private boolean searched = false;
 
 	public boolean getSearchStatus() {
-		return searched;
+		return this.searched;
 	}
 
 	public void setSearchStatus(boolean searched) {
