@@ -20,7 +20,6 @@
 	<name>Wikianalyzer</name>
 
 	<modules>
-		<module>util</module>
 		<module>wawebapp</module>
 	</modules>
 

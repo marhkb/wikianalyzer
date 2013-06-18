@@ -401,6 +401,97 @@ public class DefArticleView extends ArticleView {
 
 	}
 
+	private void bindArticleRevisionsRecord() {
+		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
+		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfRevisions());
+		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfRevisions());
+				generalInfoGrid.refreshFields();
+			}
+		});
+
+		this.revisionAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefRevisionAnaView(presenter, messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+			}
+		});
+		this.presenter.getAnalyzeEditsCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				revisionAnalyzationButton.setDisabled(!DefArticleView.this.presenter.getAnalyzeEditsCommand()																					 .canExecute(null));
+			}
+		});
+	}
+
+	private void bindArticleAuthorsRecord() {
+		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
+		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
+		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
+				generalInfoGrid.refreshFields();
+			}
+		});
+
+		this.authorsAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefAuthorAnaView(presenter, messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+			}
+		});
+		
+		this.presenter.getAnalyzeAuthorsCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+			public void invoke(final Object sender, final EventArgs e) {
+				authorsAnalyzationButton.setDisabled(!DefArticleView.this.presenter.getAnalyzeAuthorsCommand()																					 .canExecute(null));
+			}
+		});
+	}
+
+	private void bindArticleCategoriesRecord() {
+		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
+		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
+		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
+				generalInfoGrid.refreshFields();
+			}
+		});
+
+		this.categoriesAnalyzationButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefCategoryAnaView(presenter, messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+			}
+		});
+		
+		this.presenter.getAnalyzeCategoriesCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+			public void invoke(final Object sender, final EventArgs e) {
+				categoriesAnalyzationButton.setDisabled(!DefArticleView.this.presenter.getAnalyzeCategoriesCommand()																					 .canExecute(null));
+			}
+		});
+	}
+
 	private void bindWikiLinkFlowRecord() {
 		this.wikiLink.setContents("<a href=\"" + this.presenter.getArticleLink() + "\" target=\"_blank\">" + "" + "</a>");
 		this.presenter.wikiLinkChanged().addHandler(new Handler<EventArgs>() {
@@ -489,94 +580,6 @@ public class DefArticleView extends ArticleView {
 		});
 	}
 
-	/**
- * 
- */
-	private void bindArticleRevisionsRecord() {
-		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
-		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfRevisions());
-		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfRevisions());
-				generalInfoGrid.refreshFields();
-			}
-		});
-
-		this.revisionAnalyzationButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);
-				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
-				}
-				DefArticleView.this.currentAnaView = new DefRevisionAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
-				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
-			}
-		});
-	}
-
-	/**
- * 
- */
-	private void bindArticleAuthorsRecord() {
-		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
-		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
-		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
-				generalInfoGrid.refreshFields();
-			}
-		});
-
-		this.authorsAnalyzationButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
-				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
-				}
-				DefArticleView.this.currentAnaView = new DefAuthorAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
-				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
-
-			}
-		});
-	}
-
-	/**
- * 
- */
-	private void bindArticleCategoriesRecord() {
-		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
-		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
-		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
-				generalInfoGrid.refreshFields();
-			}
-		});
-
-		this.categoriesAnalyzationButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
-				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
-				}
-				DefArticleView.this.currentAnaView = new DefCategoryAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
-				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
-			}
-		});
-	}
-
 	private void bindArticleLengthRecord() {
 		this.articleLengthAnalyzationButton.setDisabled(!this.presenter.getAnalyzeArticleWordsCommand().canExecute(null));
 		this.articleLengthRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfArticleWords());
@@ -599,6 +602,12 @@ public class DefArticleView extends ArticleView {
 				}
 				DefArticleView.this.currentAnaView = new DefNumberOfWordsAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
 				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+			}
+		});
+		
+		this.presenter.getAnalyzeArticleWordsCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+			public void invoke(final Object sender, final EventArgs e) {
+				articleLengthAnalyzationButton.setDisabled(!DefArticleView.this.presenter.getAnalyzeArticleWordsCommand()																					 .canExecute(null));
 			}
 		});
 	}
