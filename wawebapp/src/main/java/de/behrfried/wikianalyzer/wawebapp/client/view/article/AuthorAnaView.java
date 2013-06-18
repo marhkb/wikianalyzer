@@ -7,7 +7,6 @@ public class AuthorAnaView extends View {
 
 	@Override
     public String getName() {
-	    // TODO Auto-generated method stub
 	    return null;
     }
 

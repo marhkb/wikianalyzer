@@ -11,7 +11,7 @@ public class DefTranslationAnaView extends TranslationAnaView{
 	private final Presenter presenter;
 	private final Messages messages;
 	
-	private Label todo;
+	private Label test2;
 	
 	@Inject
 	public DefTranslationAnaView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
@@ -25,6 +25,8 @@ public class DefTranslationAnaView extends TranslationAnaView{
 	}
 
 	private void init() {
-		
+
+		this.test2 = new Label("test2");
+		this.addChild(test2);
 	}
 }

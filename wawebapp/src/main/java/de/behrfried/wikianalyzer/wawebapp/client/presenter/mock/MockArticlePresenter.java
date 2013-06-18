@@ -490,4 +490,34 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	public Event<EventArgs> articleNeedsEditsChanged() {
 		return this.needEditsChanges;
 	}
+
+	@Override
+    public boolean isAuthorsShowing() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public boolean isCategoriesShowing() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public boolean isNumbersOfWordsShowing() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public boolean isRevisionsShowing() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public boolean isTranslationsShowing() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 }

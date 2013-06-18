@@ -40,7 +40,6 @@ import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 import com.smartgwt.client.widgets.menu.events.MenuItemClickEvent;
-
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
@@ -76,7 +75,7 @@ public class DefArticleView extends ArticleView {
 		@Override
 		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {
 			final String tmpString = record.getAttribute("attributeField");
-			
+
 			if(this.getFieldName(colNum).equals("buttonField")) {
 				if(tmpString.equals("Bearbeitungen:")) {
 					DefArticleView.this.revisionAnalyzationButton = new IButton("Zur Analyse");
@@ -127,6 +126,7 @@ public class DefArticleView extends ArticleView {
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
 	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
+	private Canvas currentAnaView;
 
 	@Inject
 	public DefArticleView(final Presenter presenter, final Messages messages, final AuthorAnaView authorAnaView,
@@ -311,6 +311,7 @@ public class DefArticleView extends ArticleView {
 			}
 		});
 	}
+
 	private void bindSearchButton() {
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
@@ -400,70 +401,12 @@ public class DefArticleView extends ArticleView {
 
 	}
 
-	private void bindArticleRevisionsRecord() {
-		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
-		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfRevisions());
-		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfRevisions());
-				generalInfoGrid.refreshFields();
-			}
-		});
-
-		this.revisionAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);
-			}
-		});
-	}
-
-	private void bindArticleAuthorsRecord() {
-		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
-		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
-		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
-				generalInfoGrid.refreshFields();
-			}
-		});
-
-		this.authorsAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
-			}
-		});
-	}
-
-	private void bindArticleCategoriesRecord() {
-		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
-		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
-		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
-				generalInfoGrid.refreshFields();
-			}
-		});
-
-		this.categoriesAnalyzationButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
-			}
-		});
-	}
-
 	private void bindWikiLinkFlowRecord() {
 		this.wikiLink.setContents("<a href=\"" + this.presenter.getArticleLink() + "\" target=\"_blank\">" + "" + "</a>");
 		this.presenter.wikiLinkChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
-			public void invoke(Object sender, EventArgs e) {
-			}
+			public void invoke(Object sender, EventArgs e) {}
 		});
 	}
 
@@ -472,6 +415,7 @@ public class DefArticleView extends ArticleView {
 			this.userLink.setContents("<a href=\"" + this.presenter.getInitialAuthorLink() + "\" target=\"_blank\">" + "" + "</a>");
 		}
 		this.presenter.initialAuthorLinkChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				userLink.setContents("<a href=\"" + presenter.getInitialAuthorLink() + "\" target=\"_blank\">" + "" + "</a>");
@@ -481,9 +425,10 @@ public class DefArticleView extends ArticleView {
 	}
 
 	private void bindArticleCreationDateRecord() {
-		if(this.presenter.getArticleCreationDate()!=null)
-		this.creationDateRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCreationDate().toString());
+		if(this.presenter.getArticleCreationDate() != null)
+			this.creationDateRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCreationDate().toString());
 		this.presenter.articleCreationDateChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				creationDateRecord.setAttribute(valueColumn.getName(), presenter.getArticleCreationDate().toString());
@@ -499,6 +444,7 @@ public class DefArticleView extends ArticleView {
 			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
 		}
 		this.presenter.infoBoxChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				if(presenter.getHasInfoBox()) {
@@ -514,6 +460,7 @@ public class DefArticleView extends ArticleView {
 	private void bindPictureRecord() {
 		this.pictureRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfPictures());
 		this.presenter.numberOfPicturesChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				pictureRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfPictures());
@@ -529,6 +476,7 @@ public class DefArticleView extends ArticleView {
 			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
 		}
 		this.presenter.articleNeedsEditsChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				if(presenter.articleNeedsEdit()) {
@@ -541,10 +489,99 @@ public class DefArticleView extends ArticleView {
 		});
 	}
 
+	/**
+ * 
+ */
+	private void bindArticleRevisionsRecord() {
+		this.revisionAnalyzationButton.setDisabled(!this.presenter.getAnalyzeEditsCommand().canExecute(null));
+		this.revisionRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfRevisions());
+		this.presenter.numberOfRevisionsChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				revisionRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfRevisions());
+				generalInfoGrid.refreshFields();
+			}
+		});
+
+		this.revisionAnalyzationButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefRevisionAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+			}
+		});
+	}
+
+	/**
+ * 
+ */
+	private void bindArticleAuthorsRecord() {
+		this.authorsAnalyzationButton.setDisabled(!this.presenter.getAnalyzeAuthorsCommand().canExecute(null));
+		this.authorsRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfAuthors());
+		this.presenter.numberOfAuthorsChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				authorsRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfAuthors());
+				generalInfoGrid.refreshFields();
+			}
+		});
+
+		this.authorsAnalyzationButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefAuthorAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+
+			}
+		});
+	}
+
+	/**
+ * 
+ */
+	private void bindArticleCategoriesRecord() {
+		this.categoriesAnalyzationButton.setDisabled(!this.presenter.getAnalyzeCategoriesCommand().canExecute(null));
+		this.categoriesRecord.setAttribute(this.valueColumn.getName(), this.presenter.getArticleCategories());
+		this.presenter.articleCategoriesChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				categoriesRecord.setAttribute(valueColumn.getName(), presenter.getArticleCategories());
+				generalInfoGrid.refreshFields();
+			}
+		});
+
+		this.categoriesAnalyzationButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefCategoryAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
+			}
+		});
+	}
+
 	private void bindArticleLengthRecord() {
 		this.articleLengthAnalyzationButton.setDisabled(!this.presenter.getAnalyzeArticleWordsCommand().canExecute(null));
 		this.articleLengthRecord.setAttribute(this.valueColumn.getName(), this.presenter.getNumberOfArticleWords());
 		this.presenter.numberOfArticleWordsChanged().addHandler(new Handler<EventArgs>() {
+
 			@Override
 			public void invoke(Object sender, EventArgs e) {
 				articleLengthRecord.setAttribute(valueColumn.getName(), presenter.getNumberOfArticleWords());
@@ -553,9 +590,15 @@ public class DefArticleView extends ArticleView {
 		});
 
 		this.articleLengthAnalyzationButton.addClickHandler(new ClickHandler() {
+
 			@Override
 			public void onClick(ClickEvent event) {
 				DefArticleView.this.presenter.getAnalyzeArticleWordsCommand().execute(null);
+				if(DefArticleView.this.currentAnaView != null) {
+					DefArticleView.this.currentAnaView.removeFromParent();
+				}
+				DefArticleView.this.currentAnaView = new DefNumberOfWordsAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
+				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
 			}
 		});
 	}

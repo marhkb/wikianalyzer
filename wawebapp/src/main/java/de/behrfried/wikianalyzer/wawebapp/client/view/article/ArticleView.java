@@ -230,5 +230,15 @@ public abstract class ArticleView extends View {
 		int getNumberOfPictures();
 
 		Event<EventArgs> articleNeedsEditsChanged();
+		
+		boolean isAuthorsShowing();
+		
+		boolean isCategoriesShowing();
+		
+		boolean isNumbersOfWordsShowing();
+		
+		boolean isRevisionsShowing();
+		
+		boolean isTranslationsShowing();
 	}
 }
