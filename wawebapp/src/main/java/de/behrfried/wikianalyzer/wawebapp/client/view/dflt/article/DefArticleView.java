@@ -417,7 +417,7 @@ public class DefArticleView extends ArticleView {
 			public void onClick(ClickEvent event) {
 				DefArticleView.this.presenter.getAnalyzeEditsCommand().execute(null);
 				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
+					artAnaLayout.removeChild(currentAnaView);
 				}
 				DefArticleView.this.currentAnaView = new DefRevisionAnaView(presenter, messages);
 				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
@@ -447,7 +447,7 @@ public class DefArticleView extends ArticleView {
 			public void onClick(ClickEvent event) {
 				DefArticleView.this.presenter.getAnalyzeAuthorsCommand().execute(null);
 				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
+					artAnaLayout.removeChild(currentAnaView);
 				}
 				DefArticleView.this.currentAnaView = new DefAuthorAnaView(presenter, messages);
 				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
@@ -478,7 +478,7 @@ public class DefArticleView extends ArticleView {
 			public void onClick(ClickEvent event) {
 				DefArticleView.this.presenter.getAnalyzeCategoriesCommand().execute(null);
 				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
+					artAnaLayout.removeChild(currentAnaView);
 				}
 				DefArticleView.this.currentAnaView = new DefCategoryAnaView(presenter, messages);
 				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
@@ -598,7 +598,7 @@ public class DefArticleView extends ArticleView {
 			public void onClick(ClickEvent event) {
 				DefArticleView.this.presenter.getAnalyzeArticleWordsCommand().execute(null);
 				if(DefArticleView.this.currentAnaView != null) {
-					DefArticleView.this.currentAnaView.removeFromParent();
+					artAnaLayout.removeChild(currentAnaView);
 				}
 				DefArticleView.this.currentAnaView = new DefNumberOfWordsAnaView(DefArticleView.this.presenter, DefArticleView.this.messages);
 				DefArticleView.this.artAnaLayout.addChild(DefArticleView.this.currentAnaView);
