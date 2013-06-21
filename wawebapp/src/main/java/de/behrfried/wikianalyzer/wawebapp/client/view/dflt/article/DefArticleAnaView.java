@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
+import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
@@ -20,6 +21,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 
 	private final Presenter presenter;
 	private final Messages messages;
+	private final HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
 	private Label authorAnaLabel, articleAnaLabel, categoryAnaLabel;
 	private VLayout articleAnaContainer;
 	private HLayout authorAnaLayout, articleAnaLayout, categoryAnaLayout;
@@ -44,30 +46,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorAnaLabel = new Label("Analyse der am Artikel mitwirkenden Authoren");
 		this.authorAnaLabel.setAlign(Alignment.CENTER);
 		this.authorAnaLabel.setHeight(10);
-		final HTMLPanel html = new HTMLPanel("");
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				DataTable data = DataTable.create();
-				data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
-				data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
-				data.addRows(2);
-				data.setValue(0, 0, "Work");
-				data.setValue(0, 1, 14);
-				data.setValue(1, 0, "Sleep");
-				data.setValue(1, 1, 10);
-				PieChart.Options options = PieChart.Options.create();
-				options.setWidth(400);
-				options.setHeight(240);
-				options.set3D(true);
-				options.setTitle("My Daily Activities");
-				PieChart chart = new PieChart(data, options);
-				chart.setWidth("100px");
-				chart.setHeight("100px");
-				html.add(chart);
-			}
-		};
-		VisualizationUtils.loadVisualizationApi(r, PieChart.PACKAGE);
+		this.authorAnaChartContainer = new HTMLPanel("");
+		this.createAuthorAnaChart();
 		this.authorGridAuthor = new ListGridField("authorAuthor", "Author");
 		this.authorGridCommits = new ListGridField("authorCommits", "Einsendungen");
 		this.authorGridQuantity = new ListGridField("authorQuantity", "Verhältnis Einsendungen/Text");
@@ -75,8 +55,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorGrid.setFields(this.authorGridAuthor, this.authorGridCommits, this.authorGridQuantity);
 		this.authorGrid.setWidth("50%");
 		this.authorAnaLayout = new HLayout();
+		this.authorAnaLayout.addMember(this.authorAnaChartContainer);
 		this.authorAnaLayout.addMember(this.authorGrid);
-		this.authorAnaLayout.addMember(html);
 		this.authorAnaLayout.setMargin(5);
 		this.authorAnaLayout.setHeight("30%");
 
@@ -126,5 +106,29 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaContainer.setWidth100();
 
 		this.addChild(this.articleAnaContainer);
+	}
+	
+	private void createAuthorAnaChart() {
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				DataTable data = DataTable.create();
+				data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
+				data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
+				data.addRows(2);
+				data.setValue(0, 0, "Work");
+				data.setValue(0, 1, 14);
+				data.setValue(1, 0, "Sleep");
+				data.setValue(1, 1, 10);
+				ColumnChart.Options options = ColumnChart.Options.create();
+				options.setWidth(400);
+				options.setHeight(240);
+				options.set3D(true);
+				options.setTitle("My Daily Activities");
+				ColumnChart chart = new ColumnChart(data, options);
+				authorAnaChartContainer.add(chart);
+			}
+		};
+		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
 	}
 }
