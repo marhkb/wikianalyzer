@@ -192,11 +192,11 @@ public class DefArticleView extends ArticleView {
 		this.artAnaLabel.setHeight(10);
 		this.artAnaLabel.setWidth100();
 		this.artAnaLayout = new VLayout();
-		this.artAnaLayout.setWidth("60%");
+		this.artAnaLayout.setWidth("75%");
 		this.artAnaLayout.addMembers(this.artAnaLabel, new DefArticleAnaView(presenter, messages));
 
 		this.genInfLayout = new VLayout();
-		this.genInfLayout.setWidth("40%");
+		this.genInfLayout.setWidth("25%");
 		this.genInfLayout.setHeight100();
 		this.genArtInfLabel = new Label("General Article Infos");
 		this.genArtInfLabel.setHeight(10);

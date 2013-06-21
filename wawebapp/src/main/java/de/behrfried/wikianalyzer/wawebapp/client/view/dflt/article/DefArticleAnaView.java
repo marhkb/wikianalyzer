@@ -6,6 +6,7 @@ import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.gwt.visualization.client.visualizations.PieChart;
+import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Label;
@@ -21,7 +22,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 
 	private final Presenter presenter;
 	private final Messages messages;
-	private final HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
+	private HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
 	private Label authorAnaLabel, articleAnaLabel, categoryAnaLabel;
 	private VLayout articleAnaContainer;
 	private HLayout authorAnaLayout, articleAnaLayout, categoryAnaLayout;
@@ -47,6 +48,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorAnaLabel.setAlign(Alignment.CENTER);
 		this.authorAnaLabel.setHeight(10);
 		this.authorAnaChartContainer = new HTMLPanel("");
+		this.authorAnaChartContainer.setWidth("50%");
+		this.authorAnaChartContainer.setHeight("50%");
 		this.createAuthorAnaChart();
 		this.authorGridAuthor = new ListGridField("authorAuthor", "Author");
 		this.authorGridCommits = new ListGridField("authorCommits", "Einsendungen");
@@ -63,6 +66,10 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaLabel = new Label("Analyse zum Artikel");
 		this.articleAnaLabel.setAlign(Alignment.CENTER);
 		this.articleAnaLabel.setHeight(10);
+		this.articleAnaChartContainer = new HTMLPanel("");
+		this.articleAnaChartContainer.setWidth("50%");
+		this.articleAnaChartContainer.setHeight("50%");
+		this.createArticleAnaChart();
 		this.articleGridRevision = new ListGridField("articleRevision", "Revision");
 		this.articleGridDate = new ListGridField("articleDate", "Änderungsdatum");
 		this.articleGridAuthor = new ListGridField("articleAuthor", "Author");
@@ -74,6 +81,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 		        this.articleGridAmount, this.articleGridEditType);
 		this.articleGrid.setWidth("50%");
 		this.articleAnaLayout = new HLayout();
+		this.articleAnaLayout.addMember(this.articleAnaChartContainer);
 		this.articleAnaLayout.addMember(this.articleGrid);
 		this.articleAnaLayout.setMargin(5);
 		this.articleAnaLayout.setHeight("30%");
@@ -109,6 +117,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 	
 	private void createAuthorAnaChart() {
+		final HTMLPanel panel = this.authorAnaChartContainer;
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -121,8 +130,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 				data.setValue(1, 0, "Sleep");
 				data.setValue(1, 1, 10);
 				ColumnChart.Options options = ColumnChart.Options.create();
-				options.setWidth(400);
-				options.setHeight(240);
+				options.setWidth(500);
+				options.setHeight(150);
 				options.set3D(true);
 				options.setTitle("My Daily Activities");
 				ColumnChart chart = new ColumnChart(data, options);
@@ -130,5 +139,29 @@ public class DefArticleAnaView extends ArticleAnaView {
 			}
 		};
 		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
+	}
+	
+	private void createArticleAnaChart() {
+		final HTMLPanel panel = this.authorAnaChartContainer;
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				DataTable data = DataTable.create();
+				data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
+				data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
+				data.addRows(2);
+				data.setValue(0, 0, "Work");
+				data.setValue(0, 1, 14);
+				data.setValue(1, 0, "Sleep");
+				data.setValue(1, 1, 10);
+				ScatterChart.Options options = ScatterChart.Options.create();
+				options.setWidth(500);
+				options.setHeight(150);
+				options.setTitle("My Daily Activities");
+				ScatterChart chart = new ScatterChart(data, options);
+				authorAnaChartContainer.add(chart);
+			}
+		};
+		VisualizationUtils.loadVisualizationApi(r, ScatterChart.PACKAGE);
 	}
 }
