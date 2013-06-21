@@ -21,6 +21,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
 import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,8 +48,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
 		this.wikiAccess = wikiAccess;
 	}
 
-	public int sendArticleName(final String articleName) {
-		return this.wikiAccess.getPageId(articleName);
+	public ArticleInfo sendArticleName(final String articleName) {
+		return new ArticleInfo();//this.wikiAccess.getPageId(articleName);
 	}
 
 }

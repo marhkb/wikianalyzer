@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
@@ -26,6 +27,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -87,11 +89,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 				public void execute(final Object param) {
 
-					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle(), new AsyncCallback<Integer>() {
+					MockArticlePresenter.this.mainService.sendArticleName(MockArticlePresenter.this.getArticleTitle()
+							, new AsyncCallback<ArticleInfo>() {
 
 						int number = 0;
 
-						public void onSuccess(final Integer result) {
+						public void onSuccess(final ArticleInfo result) {
+							Window.alert(result.toString());
 							this.number = new Random().nextInt();
 							setArticleLink("www." + number + ".org");
 							setFromTime(new Date());

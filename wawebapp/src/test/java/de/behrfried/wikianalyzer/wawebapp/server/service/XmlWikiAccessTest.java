@@ -37,6 +37,21 @@ public class XmlWikiAccessTest {
 	public void tearDown() throws Exception {}
 
 	@Test
+	public void testGetShortArticleInfo() {
+		int expected = 88112;
+		int actual = this.wikiAccess.getPageId("Hamster");
+		Assert.assertEquals(expected, actual);
+
+		expected = 105066;
+		actual = this.wikiAccess.getPageId("Ratte");
+		Assert.assertEquals(expected, actual);
+
+		expected = 2578216;
+		actual = this.wikiAccess.getPageId("Hans Wurst");
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
 	public void testGetPageId() {
 		int expected = 88112;
 		int actual = this.wikiAccess.getPageId("Hamster");
