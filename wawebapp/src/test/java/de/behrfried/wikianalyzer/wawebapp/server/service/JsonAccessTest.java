@@ -39,7 +39,7 @@ public class JsonAccessTest {
 
 	@Test
 	public void testGetShortArticleInfo() {
-		final ArticleInfo articleInfo = this.wikiAccess.getShortArticleInfo("Maus");
+		final ArticleInfo articleInfo = this.wikiAccess.getArticleInfo("Maus");
 		Assert.assertNotNull(articleInfo);
 	}
 

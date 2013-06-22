@@ -20,7 +20,7 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
 public interface WikiAccess {
 
-	ArticleInfo getShortArticleInfo(String title);
+	ArticleInfo getArticleInfo(String title);
 	
 	int getPageId(String title);
 }

@@ -75,19 +75,19 @@ public class DefShellView extends ShellView {
 
 		/* init other tabs */
 		final Tab tabArticle = new Tab(this.articleView.getName());
-		tabArticle.setID(this.articleView.getName());
+		tabArticle.setID(this.articleView.getName().replace(" ", ""));
 		tabArticle.setPane(this.articleView);
 
 		final Tab tabUser = new Tab(this.userView.getName());
-		tabUser.setID(this.userView.getName());
+		tabUser.setID(this.userView.getName().replace(" ", ""));
 		tabUser.setPane(this.userView);
 		
 		final Tab tabUserComparison = new Tab(this.userComparisonView.getName());
-		tabUserComparison.setID(this.userComparisonView.getName());
+		tabUserComparison.setID(this.userComparisonView.getName().replace(" ", ""));
 		tabUserComparison.setPane(this.userComparisonView);
 
 		final Tab tabExpertSearch = new Tab(this.expertSearchView.getName());
-		tabExpertSearch.setID(this.expertSearchView.getName());
+		tabExpertSearch.setID(this.expertSearchView.getName().replace(" ", ""));
 		tabExpertSearch.setPane(this.expertSearchView);
 		
 		this.tabSet = new TabSet();

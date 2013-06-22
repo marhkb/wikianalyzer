@@ -82,6 +82,54 @@ public class ArticleInfo implements Serializable {
 		this.creationDate = creationDate;
 	}
 
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public int getPageid() {
+		return pageid;
+	}
+
+	public void setPageid(int pageid) {
+		this.pageid = pageid;
+	}
+
+	public String getInitialAuthor() {
+		return initialAuthor;
+	}
+
+	public List<Revision> getRevisions() {
+		return revisions;
+	}
+
+	public void setRevisions(List<Revision> revisions) {
+		this.revisions = revisions;
+	}
+
+	public List<AuthorAndCommits> getAuthorsAndCommits() {
+		return authorsAndCommits;
+	}
+
+	public void setAuthorsAndCommits(List<AuthorAndCommits> authorsAndCommits) {
+		this.authorsAndCommits = authorsAndCommits;
+	}
+
+	public List<SimilarArticle> getSimilarArticles() {
+		return similarArticles;
+	}
+
+	public void setSimilarArticles(List<SimilarArticle> similarArticles) {
+		this.similarArticles = similarArticles;
+	}
+
+	public List<Categories> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Categories> categories) {
+		this.categories = categories;
+	}
+
 	/**
 	 *
 	 */
@@ -92,7 +140,6 @@ public class ArticleInfo implements Serializable {
 		private int numOfCommits;
 
 		public AuthorAndCommits() { }
-
 
 		public AuthorAndCommits(String author, int numOfCommits) {
 			this.author = author;
@@ -121,7 +168,76 @@ public class ArticleInfo implements Serializable {
 	 */
 	public final static class Revision implements Serializable {
 
+		private int revid;
+
+		private int parentid;
+
+		private Date timestamp;
+
+		private String author;
+
+		private int diff;
+
+		private String changeType;
+
 		public Revision() { }
+
+		public Revision(int revid, int parentid, Date timestamp, String author, int diff, String changeType) {
+			this.revid = revid;
+			this.parentid = parentid;
+			this.timestamp = timestamp;
+			this.author = author;
+			this.diff = diff;
+			this.changeType = changeType;
+		}
+
+		public int getRevid() {
+			return revid;
+		}
+
+		public void setRevid(int revid) {
+			this.revid = revid;
+		}
+
+		public int getParentid() {
+			return parentid;
+		}
+
+		public void setParentid(int parentid) {
+			this.parentid = parentid;
+		}
+
+		public Date getTimestamp() {
+			return timestamp;
+		}
+
+		public void setTimestamp(Date timestamp) {
+			this.timestamp = timestamp;
+		}
+
+		public String getAuthor() {
+			return author;
+		}
+
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+
+		public int getDiff() {
+			return diff;
+		}
+
+		public void setDiff(int diff) {
+			this.diff = diff;
+		}
+
+		public String getChangeType() {
+			return changeType;
+		}
+
+		public void setChangeType(String changeType) {
+			this.changeType = changeType;
+		}
 	}
 
 	/**

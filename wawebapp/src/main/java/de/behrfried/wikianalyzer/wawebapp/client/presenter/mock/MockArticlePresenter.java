@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainServiceAsync;
@@ -29,16 +28,48 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private final MainServiceAsync mainService;
 
 	private final Object initContext = new Object();
+
+	private List<ArticleInfo.AuthorAndCommits> authorAndCommits;
+
+	@Override
+	public List<ArticleInfo.AuthorAndCommits> getAuthorAndCommits() {
+		return new ArrayList<ArticleInfo.AuthorAndCommits>(this.authorAndCommits);
+	}
+
+	public void setAuthorAndCommits(List<ArticleInfo.AuthorAndCommits> authorAndCommits) {
+		this.authorAndCommits = authorAndCommits;
+		this.authorsAndCommitsChanged().fire(this.initContext, this, EventArgs.EMPTY);
+	}
+
+	private final Event<EventArgs> authorsAndCommitsChanged = new Event<EventArgs>(this.initContext);
+	@Override
+	public Event<EventArgs> authorsAndCommitsChanged() {
+		return this.authorsAndCommitsChanged;
+	}
+
+	private List<ArticleInfo.Revision> revisions;
+	@Override
+	public List<ArticleInfo.Revision> getRevisions() {
+		return null;
+	}
+
+	public void setRevisions(List<ArticleInfo.Revision> revisions) {
+		this.revisions = new ArrayList<ArticleInfo.Revision>(revisions);
+		this.revisionsChanged().fire(this.initContext, this, EventArgs.EMPTY);
+	}
+
+	private Event<EventArgs> revisionsChanged = new Event<EventArgs>(this.initContext);
+	@Override
+	public Event<EventArgs> revisionsChanged() {
+		return this.revisionsChanged;
+	}
 
 	@Inject
 	public MockArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
@@ -95,7 +126,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 						int number = 0;
 
 						public void onSuccess(final ArticleInfo result) {
-							Window.alert(result.toString());
+							// TODO
+							//Window.alert(result.getInitialAuthor() + "");
+							setAuthorAndCommits(result.getAuthorsAndCommits());
+							setRevisions(result.getRevisions());
+
 							this.number = new Random().nextInt();
 							setArticleLink("www." + number + ".org");
 							setFromTime(new Date());

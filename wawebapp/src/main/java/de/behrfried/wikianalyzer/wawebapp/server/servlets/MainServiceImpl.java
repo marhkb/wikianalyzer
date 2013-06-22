@@ -49,7 +49,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
 	}
 
 	public ArticleInfo sendArticleName(final String articleName) {
-		return new ArticleInfo();//this.wikiAccess.getPageId(articleName);
+		return this.wikiAccess.getArticleInfo(articleName);
 	}
 
 }

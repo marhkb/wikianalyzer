@@ -16,15 +16,16 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.article;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.View;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Base interface for article view.
@@ -41,6 +42,23 @@ public abstract class ArticleView extends View {
 	 * 
 	 */
 	public interface Presenter extends PresenterBase {
+
+
+		List<ArticleInfo.AuthorAndCommits> getAuthorAndCommits();
+
+		/**
+		 *
+		 */
+		Event<EventArgs> authorsAndCommitsChanged();
+
+
+		List<ArticleInfo.Revision> getRevisions();
+
+		/**
+		 *
+		 */
+		Event<EventArgs> revisionsChanged();
+
 
 		/**
 		 * contains the search suggestions for articles

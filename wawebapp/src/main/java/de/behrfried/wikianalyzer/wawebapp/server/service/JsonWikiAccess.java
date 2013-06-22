@@ -18,6 +18,7 @@ package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
@@ -39,12 +40,12 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	@Override
-	public ArticleInfo getShortArticleInfo(String title) {
+	public ArticleInfo getArticleInfo(String title) {
 		final int pageid = this.getPageId(title);
 
 		/* get revisions of an article (max 500 are allowed?) */
 		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
-		final String revisions =
+		final String response1 =
 				this.requester.getResult(
 						API + "action=query&format=json&prop=revisions&rvprop=user|ids" +
 						"|timestamp&rvlimit=10000&rvdiffto=next&pageids=" + pageid
@@ -59,24 +60,37 @@ public class JsonWikiAccess implements WikiAccess {
 				+ title
 		);
 
-		List<ArticleInfo.AuthorAndCommits> authorsAndCommits = new ArrayList<ArticleInfo.AuthorAndCommits>();
-		JsonArray w = this.parser.parse(revisions)
+		JsonArray w = this.parser.parse(response1)
 								 .getAsJsonObject()
 								 .getAsJsonObject("query")
 								 .getAsJsonObject("pages")
 								 .getAsJsonObject(pageid + "")
 								 .getAsJsonArray("revisions");
 
+
+		final List<ArticleInfo.AuthorAndCommits> authorsAndCommits = new ArrayList<ArticleInfo.AuthorAndCommits>();
+		final List<ArticleInfo.Revision> revisions = new ArrayList<ArticleInfo.Revision>();
+
 		final Map<String, Integer> tmp = new HashMap<String, Integer>();
 		for(JsonElement obj : w) {
 
 			//{"revid":69797531,"parentid":69352711,"user":"80.143.242.119","anon":"","timestamp":"2010-01-25T18:38:06Z","diff":{"notcached":""}}
-			final String author = obj.getAsJsonObject().getAsJsonPrimitive("user").getAsString();
+			final JsonObject jsonObj = obj.getAsJsonObject();
+			final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
 			if(!tmp.containsKey(author)) {
 				tmp.put(author, 1);
 			} else {
 				tmp.put(author, tmp.get(author) + 1);
 			}
+
+			revisions.add(new ArticleInfo.Revision(
+					jsonObj.getAsJsonPrimitive("revid").getAsInt(),
+					jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
+					null, author,
+					0,
+					""
+			));
+
 			this.logger.info(author);
 		}
 
@@ -87,7 +101,11 @@ public class JsonWikiAccess implements WikiAccess {
 		final Date creationDate;
 		final String initialAuthor = "";
 
-		return new ArticleInfo(null, pageid, "", authorsAndCommits, null, null, null);
+		ArticleInfo result = new ArticleInfo();
+		result.setAuthorsAndCommits(authorsAndCommits);
+		result.setRevisions(revisions);
+		result.setInitialAuthor("root");
+		return result;//new ArticleInfo(null, pageid, "", authorsAndCommits, null, null, null);
 	}
 
 	public int getPageId(final String title) {

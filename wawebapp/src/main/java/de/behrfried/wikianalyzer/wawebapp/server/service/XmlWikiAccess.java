@@ -58,7 +58,7 @@ public class XmlWikiAccess implements WikiAccess {
 	}
 	
 	@Override
-	public ArticleInfo getShortArticleInfo(String title) {
+	public ArticleInfo getArticleInfo(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -17,7 +17,7 @@ public abstract class ExpertSearchView extends View {
 	@Override
     public String getName() {
 	    // TODO Auto-generated method stub
-	    return null;
+	    return "Experten Suche";
     }
 
 }

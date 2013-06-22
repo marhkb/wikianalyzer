@@ -5,7 +5,6 @@ import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
-import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
@@ -117,6 +116,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 	
 	private void createAuthorAnaChart() {
+		final HTMLPanel panel = this.authorAnaChartContainer;
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -141,6 +141,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 	
 	private void createArticleAnaChart() {
+		final HTMLPanel panel = this.authorAnaChartContainer;
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
