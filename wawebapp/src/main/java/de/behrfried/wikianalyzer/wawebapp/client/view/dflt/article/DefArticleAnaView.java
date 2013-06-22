@@ -1,5 +1,6 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article;
 
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.DataTable;
@@ -11,13 +12,32 @@ import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView.Presenter;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class DefArticleAnaView extends ArticleAnaView {
+
+	private final static String AUTHOR_GRID_AUTHOR = "authorGridAuthor";
+	private final static String AUTHOR_GRID_COMMITS = "authorGridCommits";
+	private final static String AUTHOR_GRID_QUANTITY = "authorGridQuantity";
+
+	private final static String ARTICLE_GRID_REVISION = "articleGridRevision";
+	private final static String ARTICLE_GRID_DATE = "articleGridDate";
+	private final static String ARTICLE_GRID_AUTHOR = "articleGridAuthor";
+	private final static String ARTICLE_GRID_QUANTITY = "articleGridQuantity";
+	private final static String ARTICLE_GRID_AMOUNT = "articleGridAmount";
+	private final static String ARTICLE_GRID_EDIT_TYPE = "articleGridEditType";
 
 	private final Presenter presenter;
 	private final Messages messages;
@@ -49,10 +69,10 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorAnaChartContainer = new HTMLPanel("");
 		this.authorAnaChartContainer.setWidth("50%");
 		this.authorAnaChartContainer.setHeight("50%");
-		this.createAuthorAnaChart();
-		this.authorGridAuthor = new ListGridField("authorAuthor", "Author");
-		this.authorGridCommits = new ListGridField("authorCommits", "Einsendungen");
-		this.authorGridQuantity = new ListGridField("authorQuantity", "Verhältnis Einsendungen/Text");
+
+		this.authorGridAuthor = new ListGridField(AUTHOR_GRID_AUTHOR, "Author");
+		this.authorGridCommits = new ListGridField(AUTHOR_GRID_COMMITS, "Einsendungen");
+		this.authorGridQuantity = new ListGridField(AUTHOR_GRID_QUANTITY, "Verhältnis Einsendungen/Text");
 		this.authorGrid = new ListGrid();
 		this.authorGrid.setFields(this.authorGridAuthor, this.authorGridCommits, this.authorGridQuantity);
 		this.authorGrid.setWidth("50%");
@@ -68,13 +88,13 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaChartContainer = new HTMLPanel("");
 		this.articleAnaChartContainer.setWidth("50%");
 		this.articleAnaChartContainer.setHeight("50%");
-		this.createArticleAnaChart();
-		this.articleGridRevision = new ListGridField("articleRevision", "Revision");
-		this.articleGridDate = new ListGridField("articleDate", "Änderungsdatum");
-		this.articleGridAuthor = new ListGridField("articleAuthor", "Author");
-		this.articleGridQuantity = new ListGridField("articleQuantity", "Verhältnis Einsendung/Text");
-		this.articleGridAmount = new ListGridField("articleAmount", "Anzahl Einsendungen");
-		this.articleGridEditType = new ListGridField("articleEditType", "Änderungsart");
+
+		this.articleGridRevision = new ListGridField(ARTICLE_GRID_REVISION, "Revision");
+		this.articleGridDate = new ListGridField(ARTICLE_GRID_DATE, "Änderungsdatum");
+		this.articleGridAuthor = new ListGridField(ARTICLE_GRID_AUTHOR, "Author");
+		this.articleGridQuantity = new ListGridField(ARTICLE_GRID_QUANTITY, "Verhältnis Einsendung/Text");
+		this.articleGridAmount = new ListGridField(ARTICLE_GRID_AMOUNT, "Anzahl Einsendungen");
+		this.articleGridEditType = new ListGridField(ARTICLE_GRID_EDIT_TYPE, "Änderungsart");
 		this.articleGrid = new ListGrid();
 		this.articleGrid.setFields(this.articleGridRevision, this.articleGridDate, this.articleGridAuthor, this.articleGridQuantity,
 		        this.articleGridAmount, this.articleGridEditType);
@@ -113,32 +133,79 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaContainer.setWidth100();
 
 		this.addChild(this.articleAnaContainer);
+
+		this.bind();
 	}
-	
-	private void createAuthorAnaChart() {
-		final HTMLPanel panel = this.authorAnaChartContainer;
-		Runnable r = new Runnable() {
+
+	private void bind() {
+		this.bindAuthorChart();
+		this.bindAuthorGrid();
+	}
+
+	private void bindAuthorChart() {
+		this.presenter.authorsAndCommitsChanged().addHandler(new Handler<EventArgs>() {
 			@Override
-			public void run() {
-				DataTable data = DataTable.create();
-				data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
-				data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
-				data.addRows(2);
-				data.setValue(0, 0, "Work");
-				data.setValue(0, 1, 14);
-				data.setValue(1, 0, "Sleep");
-				data.setValue(1, 1, 10);
-				ColumnChart.Options options = ColumnChart.Options.create();
-				options.setWidth(500);
-				options.setHeight(150);
-				options.set3D(true);
-				options.setTitle("My Daily Activities");
-				ColumnChart chart = new ColumnChart(data, options);
-				authorAnaChartContainer.add(chart);
+			public void invoke(Object sender, EventArgs eventArgs) {
+				final HTMLPanel panel = authorAnaChartContainer;
+				panel.clear();
+				Runnable r = new Runnable() {
+					@Override
+					public void run() {
+						DataTable data = DataTable.create();
+						data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
+						data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
+
+						final List<ArticleInfo.AuthorAndCommits> authorAndCommits = presenter.getAuthorAndCommits();
+						Collections.sort(authorAndCommits, new Comparator<ArticleInfo.AuthorAndCommits>() {
+							@Override
+							public int compare(ArticleInfo.AuthorAndCommits authorAndCommits,
+											   ArticleInfo.AuthorAndCommits authorAndCommits2) {
+								return authorAndCommits2.getNumOfCommits() - authorAndCommits.getNumOfCommits();
+							}
+						});
+
+						data.addRows(10);
+
+						for(int i = 0; i < 10; i++) {
+							data.setValue(i, 0, authorAndCommits.get(i).getAuthor());
+							data.setValue(i, 1, authorAndCommits.get(i).getNumOfCommits());
+						}
+						ColumnChart.Options options = ColumnChart.Options.create();
+						options.setWidth(500);
+						options.setHeight(150);
+						options.set3D(true);
+						options.setTitle("My Daily Activities");
+						ColumnChart chart = new ColumnChart(data, options);
+						authorAnaChartContainer.add(chart);
+					}
+				};
+				VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
 			}
-		};
-		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
+		});
 	}
+
+	private void bindAuthorGrid() {
+		this.presenter.authorsAndCommitsChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				while(authorGrid.getRecordList().getLength() > 0) {
+					authorGrid.removeData(authorGrid.getRecord(0));
+				}
+				for(final ArticleInfo.AuthorAndCommits aac : presenter.getAuthorAndCommits()) {
+					final ListGridRecord lgr = new ListGridRecord();
+					lgr.setAttribute(AUTHOR_GRID_AUTHOR, aac.getAuthor());
+					lgr.setAttribute(AUTHOR_GRID_COMMITS, aac.getNumOfCommits());
+					lgr.setAttribute(AUTHOR_GRID_QUANTITY,
+									 NumberFormat.getPercentFormat().format(
+											 aac.getNumOfCommits() / (double)presenter.getAuthorAndCommits().size()
+									 ));
+					authorGrid.addData(lgr);
+				}
+			}
+		});
+	}
+
+
 	
 	private void createArticleAnaChart() {
 		final HTMLPanel panel = this.authorAnaChartContainer;
