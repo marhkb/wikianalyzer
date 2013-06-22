@@ -17,7 +17,7 @@
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import com.google.inject.Inject;
-import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -58,7 +58,7 @@ public class XmlWikiAccess implements WikiAccess {
 	}
 	
 	@Override
-	public ShortArticleInfo getShortArticleInfo(String title) {
+	public ArticleInfo getShortArticleInfo(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}

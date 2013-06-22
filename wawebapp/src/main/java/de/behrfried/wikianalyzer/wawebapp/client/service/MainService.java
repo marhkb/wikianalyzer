@@ -18,6 +18,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.service;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
 /**
  * Test service
@@ -28,5 +29,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("main")
 public interface MainService extends RemoteService {
 
-	int sendArticleName(String articleName);
+	ArticleInfo sendArticleName(String articleName);
 }

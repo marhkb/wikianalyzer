@@ -5,7 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.service.ArticleInfoService;
 import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
-import de.behrfried.wikianalyzer.wawebapp.shared.article.ShortArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +37,7 @@ public class ArticleInfoServiceImpl  extends RemoteServiceServlet implements Art
 	}
 
 	@Override
-	public ShortArticleInfo getArticleInfo(String title) {
-		this.logger.debug("");
-		return null;
+	public ArticleInfo getArticleInfo(String title) {
+		return new ArticleInfo();
 	}
 }

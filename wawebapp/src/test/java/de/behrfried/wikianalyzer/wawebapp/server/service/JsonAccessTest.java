@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.junit.*;
 
 public class JsonAccessTest {
@@ -35,6 +36,12 @@ public class JsonAccessTest {
 
 	@After
 	public void tearDown() throws Exception {}
+
+	@Test
+	public void testGetShortArticleInfo() {
+		final ArticleInfo articleInfo = this.wikiAccess.getShortArticleInfo("Maus");
+		Assert.assertNotNull(articleInfo);
+	}
 
 	@Test
 	public void testGetPageId() {
