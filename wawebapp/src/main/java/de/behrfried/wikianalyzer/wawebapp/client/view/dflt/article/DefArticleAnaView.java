@@ -117,7 +117,6 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 	
 	private void createAuthorAnaChart() {
-		final HTMLPanel panel = this.authorAnaChartContainer;
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
@@ -142,7 +141,6 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 	
 	private void createArticleAnaChart() {
-		final HTMLPanel panel = this.authorAnaChartContainer;
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {

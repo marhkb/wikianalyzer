@@ -40,7 +40,9 @@ import com.smartgwt.client.widgets.tab.events.TabSelectedEvent;
 import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.ExpertSearchView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserComparisonView;
 
 /**
  * Default implementation of {@link ShellView}
@@ -54,11 +56,13 @@ public class DefShellView extends ShellView {
 
 	private final ArticleView articleView;
 	private final UserView userView;
+	private final UserComparisonView userComparisonView;
+	private final ExpertSearchView expertSearchView;
 
 	private final TabSet tabSet;
 
 	@Inject
-	public DefShellView(final Presenter presenter, final ArticleView articleView, final UserView userView) throws IllegalArgumentException {
+	public DefShellView(final Presenter presenter, final ArticleView articleView, final UserView userView, final UserComparisonView userComparisonView, final ExpertSearchView expertSearchView) throws IllegalArgumentException {
 		if(presenter == null) {
 			throw new IllegalArgumentException("presenter == null");
 		}
@@ -66,6 +70,8 @@ public class DefShellView extends ShellView {
 		this.presenter = presenter;
 		this.articleView = articleView;
 		this.userView = userView;
+		this.userComparisonView = userComparisonView; 
+		this.expertSearchView = expertSearchView;
 
 		/* init other tabs */
 		final Tab tabArticle = new Tab(this.articleView.getName());
@@ -75,11 +81,21 @@ public class DefShellView extends ShellView {
 		final Tab tabUser = new Tab(this.userView.getName());
 		tabUser.setID(this.userView.getName());
 		tabUser.setPane(this.userView);
+		
+		final Tab tabUserComparison = new Tab(this.userComparisonView.getName());
+		tabUserComparison.setID(this.userComparisonView.getName());
+		tabUserComparison.setPane(this.userComparisonView);
 
+		final Tab tabExpertSearch = new Tab(this.expertSearchView.getName());
+		tabExpertSearch.setID(this.expertSearchView.getName());
+		tabExpertSearch.setPane(this.expertSearchView);
+		
 		this.tabSet = new TabSet();
 
 		this.tabSet.addTab(tabArticle);
 		this.tabSet.addTab(tabUser);
+		this.tabSet.addTab(tabUserComparison);
+		this.tabSet.addTab(tabExpertSearch);
 
 		this.tabSet.setWidth100();
 		this.tabSet.setHeight100();

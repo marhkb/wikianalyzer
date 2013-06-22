@@ -18,6 +18,7 @@ package de.behrfried.wikianalyzer.wawebapp.client;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
@@ -26,8 +27,10 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article.DefArticleView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefaultUserView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefExpertSearchView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefUserView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.usercomparison.DefUserComparisonView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.ExpertSearchView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserComparisonView;
 
@@ -46,25 +49,21 @@ public class WaGinModule extends AbstractGinModule {
 	@Override
 	protected void configure() {
 		/*
-		 * bind services
-		 */
-
-		/*
 		 * bind presenters
 		 */
 		this.bind(ShellView.Presenter.class).to(DefaultShellViewPresenter.class).in(Singleton.class);
 		this.bind(ArticleView.Presenter.class).to(MockArticlePresenter.class).in(Singleton.class);
 		this.bind(UserView.Presenter.class).to(DefaultUserPresenter.class).in(Singleton.class);
 		this.bind(UserComparisonView.Presenter.class).to(DefaultUserComparisonPresenter.class).in(Singleton.class);
+		this.bind(ExpertSearchView.Presenter.class).to(DefaultExpertSearchPresenter.class).in(Singleton.class);
 
 		/*
 		 * bind views
 		 */
 		this.bind(ShellView.class).to(DefShellView.class).in(Singleton.class);
 		this.bind(ArticleView.class).to(DefArticleView.class).in(Singleton.class);
-		this.bind(UserView.class).to(DefaultUserView.class).in(Singleton.class);
+		this.bind(UserView.class).to(DefUserView.class).in(Singleton.class);
 		this.bind(UserComparisonView.class).to(DefUserComparisonView.class).in(Singleton.class);
-
+		this.bind(ExpertSearchView.class).to(DefExpertSearchView.class).in(Singleton.class);
 	}
-
 }
