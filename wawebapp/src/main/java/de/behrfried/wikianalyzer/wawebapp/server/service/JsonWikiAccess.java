@@ -25,6 +25,8 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class JsonWikiAccess implements WikiAccess {
@@ -83,13 +85,20 @@ public class JsonWikiAccess implements WikiAccess {
 				tmp.put(author, tmp.get(author) + 1);
 			}
 
-			revisions.add(new ArticleInfo.Revision(
-					jsonObj.getAsJsonPrimitive("revid").getAsInt(),
-					jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
-					null, author,
-					0,
-					""
-			));
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
+			try {
+				revisions.add(new ArticleInfo.Revision(
+						jsonObj.getAsJsonPrimitive("revid").getAsInt(),
+						jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
+						formatter.parse(jsonObj.getAsJsonPrimitive("timestamp").getAsString()
+											   .replace('T', ',').replace('Z', '\0')),
+						author,
+						0,
+						""
+				));
+			} catch(ParseException e) {
+				this.logger.error("WUWUWUWUWUWU");
+			}
 
 			this.logger.info(author);
 		}
