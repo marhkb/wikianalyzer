@@ -283,11 +283,10 @@ public class DefArticleView extends ArticleView {
 			public void onClick(final ClickEvent event) {
 				presenter.getSendCommand().execute(null);
 				if(defArticleAnaView != null) {
-					defArticleAnaView.removeFromParent();
+					artAnaLayout.removeMember(defArticleAnaView);
 				}
 				defArticleAnaView = new DefArticleAnaView(presenter, messages);
 				artAnaLayout.addMember(defArticleAnaView);
-				artAnaLayout.removeMember(defArticleAnaView);
 			}
 		});
 	}
