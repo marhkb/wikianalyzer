@@ -26,6 +26,14 @@ public class ArticleInfo implements Serializable {
 	 */
 	private String initialAuthor;
 
+	private String link;
+
+	private int images;
+
+	private String categories;
+
+	private int bytes;
+
 	/**
 	 *
 	 */
@@ -44,42 +52,31 @@ public class ArticleInfo implements Serializable {
 	/**
 	 *
 	 */
-	private List<Categories> categories;
+	//private List<Categories> categories;
 
 
 	public ArticleInfo() { }
 
-	public ArticleInfo(Date creationDate,
-					   int pageid,
+	public ArticleInfo(int pageid,
+					   Date creationDate,
 					   String initialAuthor,
+					   String link,
+					   int images,
+					   String categories,
+					   int bytes,
 					   List<AuthorAndCommits> authorsAndCommits,
 					   List<Revision> revisions,
-					   List<SimilarArticle> similarArticles,
-					   List<Categories> categories) {
-
-		this.creationDate = creationDate;
+					   List<SimilarArticle> similarArticles) {
 		this.pageid = pageid;
+		this.creationDate = creationDate;
 		this.initialAuthor = initialAuthor;
+		this.link = link;
+		this.images = images;
+		this.categories = categories;
+		this.bytes = bytes;
 		this.authorsAndCommits = authorsAndCommits;
 		this.revisions = revisions;
 		this.similarArticles = similarArticles;
-		this.categories = categories;
-	}
-
-	public String getUser() {
-		return initialAuthor;
-	}
-
-	public void setInitialAuthor(String initialAuthor) {
-		this.initialAuthor = initialAuthor;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public static long getSerialVersionUID() {
@@ -94,16 +91,52 @@ public class ArticleInfo implements Serializable {
 		this.pageid = pageid;
 	}
 
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	public String getInitialAuthor() {
 		return initialAuthor;
 	}
 
-	public List<Revision> getRevisions() {
-		return revisions;
+	public void setInitialAuthor(String initialAuthor) {
+		this.initialAuthor = initialAuthor;
 	}
 
-	public void setRevisions(List<Revision> revisions) {
-		this.revisions = revisions;
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public int getImages() {
+		return images;
+	}
+
+	public void setImages(int images) {
+		this.images = images;
+	}
+
+	public String getCategories() {
+		return categories;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}
+
+	public int getBytes() {
+		return bytes;
+	}
+
+	public void setBytes(int bytes) {
+		this.bytes = bytes;
 	}
 
 	public List<AuthorAndCommits> getAuthorsAndCommits() {
@@ -114,20 +147,20 @@ public class ArticleInfo implements Serializable {
 		this.authorsAndCommits = authorsAndCommits;
 	}
 
+	public List<Revision> getRevisions() {
+		return revisions;
+	}
+
+	public void setRevisions(List<Revision> revisions) {
+		this.revisions = revisions;
+	}
+
 	public List<SimilarArticle> getSimilarArticles() {
 		return similarArticles;
 	}
 
 	public void setSimilarArticles(List<SimilarArticle> similarArticles) {
 		this.similarArticles = similarArticles;
-	}
-
-	public List<Categories> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(List<Categories> categories) {
-		this.categories = categories;
 	}
 
 	/**
@@ -176,19 +209,28 @@ public class ArticleInfo implements Serializable {
 
 		private String author;
 
-		private int diff;
+		private String comment;
 
-		private String changeType;
+		private int bytes;
+
+		private int diff;
 
 		public Revision() { }
 
-		public Revision(int revid, int parentid, Date timestamp, String author, int diff, String changeType) {
+		public Revision(int revid,
+						int parentid,
+						Date timestamp,
+						String author,
+						String comment,
+						int bytes,
+						int diff) {
 			this.revid = revid;
 			this.parentid = parentid;
 			this.timestamp = timestamp;
 			this.author = author;
+			this.comment = comment;
+			this.bytes = bytes;
 			this.diff = diff;
-			this.changeType = changeType;
 		}
 
 		public int getRevid() {
@@ -223,20 +265,28 @@ public class ArticleInfo implements Serializable {
 			this.author = author;
 		}
 
+		public String getComment() {
+			return comment;
+		}
+
+		public void setComment(String comment) {
+			this.comment = comment;
+		}
+
+		public int getBytes() {
+			return bytes;
+		}
+
+		public void setBytes(int bytes) {
+			this.bytes = bytes;
+		}
+
 		public int getDiff() {
 			return diff;
 		}
 
 		public void setDiff(int diff) {
 			this.diff = diff;
-		}
-
-		public String getChangeType() {
-			return changeType;
-		}
-
-		public void setChangeType(String changeType) {
-			this.changeType = changeType;
 		}
 	}
 
@@ -245,7 +295,43 @@ public class ArticleInfo implements Serializable {
 	 */
 	public final static class SimilarArticle implements Serializable {
 
+		private String title;
+
+		private String categories;
+
+		private Date timestamp;
+
 		public SimilarArticle() { }
+
+		public SimilarArticle(String title, String categories, Date timestamp) {
+			this.title = title;
+			this.categories = categories;
+			this.timestamp = timestamp;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getCategories() {
+			return categories;
+		}
+
+		public void setCategories(String categories) {
+			this.categories = categories;
+		}
+
+		public Date getTimestamp() {
+			return timestamp;
+		}
+
+		public void setTimestamp(Date timestamp) {
+			this.timestamp = timestamp;
+		}
 	}
 
 	/**

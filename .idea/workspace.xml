@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" line="145" />
+    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" line="149" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/wawebapp.iml" afterPath="$PROJECT_DIR$/wawebapp/wawebapp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371978127188" ignored="false" />
+    <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371996713934" ignored="false" />
     <file path="/fragment.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371586805468" ignored="false" />
     <file path="/pom.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370197226949" ignored="false" />
     <file path="/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374027797" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/java/de/transportsystems/vrp/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
     <file path="/Util.gwt.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370196133307" ignored="false" />
-    <file path="/ArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371913563535" ignored="false" />
+    <file path="/ArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372003156253" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/Event.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371187627" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/Handler.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370371110650" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/main/java/de/transportsystems/shared/service/common/FileSystemWatcher.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
@@ -42,17 +49,17 @@
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefResourceReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentWriterTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
-    <file path="/MockArticlePresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371919258772" ignored="false" />
-    <file path="/DefArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371586841099" ignored="false" />
+    <file path="/MockArticlePresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372003288892" ignored="false" />
+    <file path="/DefArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372013298911" ignored="false" />
     <file path="/a.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371585971174" ignored="false" />
     <file path="/a.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371585984473" ignored="false" />
-    <file path="/DefArticleAnaView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371991890121" ignored="false" />
+    <file path="/DefArticleAnaView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372010828441" ignored="false" />
     <file path="/MainService.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371809686179" ignored="false" />
     <file path="/MainServiceImpl.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371908259556" ignored="false" />
-    <file path="/ArticleInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371913460770" ignored="false" />
+    <file path="/ArticleInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372011544718" ignored="false" />
     <file path="/ArticleInfoServiceImpl.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371811057016" ignored="false" />
     <file path="/WikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371811628227" ignored="false" />
-    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371986511747" ignored="false" />
+    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372012669248" ignored="false" />
     <file path="/XmlWikiAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371817492494" ignored="false" />
     <file path="/JsonAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371818356571" ignored="false" />
     <file path="/DefShellView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371915190292" ignored="false" />
@@ -117,36 +124,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DefArticleAnaView.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DefArticleAnaView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="263" column="39" selection-start="11533" selection-end="11533" vertical-scroll-proportion="0.7443182">
+            <state line="183" column="55" selection-start="8616" selection-end="8616" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7398#8922#0" expanded="true" />
-                <element signature="e#7560#8837#0" expanded="true" />
-                <element signature="e#7963#8283#0" expanded="true" />
-                <element signature="e#8272#8273#0" expanded="true" />
-                <element signature="e#8828#8829#0" expanded="true" />
-                <element signature="e#8915#8916#0" expanded="true" />
-                <element signature="e#9025#9789#0" expanded="true" />
-                <element signature="e#9782#9783#0" expanded="true" />
-                <element signature="e#9894#10867#0" expanded="true" />
-                <element signature="e#10057#10781#0" expanded="true" />
-                <element signature="e#10772#10773#0" expanded="true" />
-                <element signature="e#10860#10861#0" expanded="true" />
-                <element signature="e#10963#11568#0" expanded="true" />
-                <element signature="e#11561#11562#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefArticleView.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DefArticleView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="0" selection-start="7680" selection-end="7680" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="400" column="111" selection-start="15913" selection-end="15913" vertical-scroll-proportion="0.592219">
+              <folding>
+                <element signature="e#16058#16385#0" expanded="true" />
+                <element signature="e#16380#16381#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -154,7 +150,7 @@
       <file leaf-file-name="MockArticlePresenter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="14" selection-start="2377" selection-end="2377" vertical-scroll-proportion="0.0">
+            <state line="110" column="45" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -163,7 +159,7 @@
       <file leaf-file-name="ArticleView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="38" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.0">
+            <state line="48" column="46" selection-start="1518" selection-end="1518" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -172,16 +168,18 @@
       <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="51" selection-start="3382" selection-end="3382" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="194" column="22" selection-start="6410" selection-end="6410" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#5053#5081#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="log4j.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/resources/log4j.properties">
+      <file leaf-file-name="ArticleInfo.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="35" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
+            <state line="87" column="5" selection-start="1481" selection-end="1481" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -212,16 +210,16 @@
         <option value="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/AuthorAndCommits.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/servlets/MainServiceImpl.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultExpertSearchPresenter.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/ExpertSearchView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/DefShellView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/usercomparison/DefUserComparisonView.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
       </list>
     </option>
   </component>
@@ -247,8 +245,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1600" />
-    <option name="height" value="875" />
+    <option name="x" value="-1" />
+    <option name="width" value="1602" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -278,14 +277,6 @@
     <panes>
       <pane id="Scope">
         <subPane subId="Problems" />
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
         <subPane subId="Tests">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
@@ -315,6 +306,14 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -639,6 +638,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="article" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane">
@@ -758,14 +787,14 @@
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="183" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="184" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="184" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="183" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="183" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../transportsystems" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="188" />
@@ -779,8 +808,8 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
@@ -788,8 +817,8 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -856,19 +885,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -894,6 +910,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1038,7 +1067,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1600" height="875" extended-state="0" />
+    <frame x="-1" y="0" width="1602" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32831737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1047,11 +1076,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30920634" sideWeight="0.5479452" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31198478" sideWeight="0.5511596" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4520548" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44884038" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32465753" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="100" y="100" width="1400" height="675" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1126,13 +1155,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="34" selection-start="3678" selection-end="3678" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="27" selection-start="864" selection-end="864" vertical-scroll-proportion="0.30656934" />
@@ -1173,25 +1195,6 @@
         <state line="123" column="21" selection-start="4679" selection-end="4679" vertical-scroll-proportion="1.3866856" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleAnaView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="140" selection-end="140" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="38" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="14" selection-start="2377" selection-end="2377" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="35" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
@@ -1199,39 +1202,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="51" selection-start="3382" selection-end="3382" vertical-scroll-proportion="0.0">
+        <state line="48" column="46" selection-start="1518" selection-end="1518" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="0" selection-start="7680" selection-end="7680" vertical-scroll-proportion="0.0">
+        <state line="110" column="45" selection-start="3660" selection-end="3660" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleAnaView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="140" selection-end="140" vertical-scroll-proportion="0.10608204">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="39" selection-start="11533" selection-end="11533" vertical-scroll-proportion="0.7443182">
+        <state line="183" column="55" selection-start="8616" selection-end="8616" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7398#8922#0" expanded="true" />
-            <element signature="e#7560#8837#0" expanded="true" />
-            <element signature="e#7963#8283#0" expanded="true" />
-            <element signature="e#8272#8273#0" expanded="true" />
-            <element signature="e#8828#8829#0" expanded="true" />
-            <element signature="e#8915#8916#0" expanded="true" />
-            <element signature="e#9025#9789#0" expanded="true" />
-            <element signature="e#9782#9783#0" expanded="true" />
-            <element signature="e#9894#10867#0" expanded="true" />
-            <element signature="e#10057#10781#0" expanded="true" />
-            <element signature="e#10772#10773#0" expanded="true" />
-            <element signature="e#10860#10861#0" expanded="true" />
-            <element signature="e#10963#11568#0" expanded="true" />
-            <element signature="e#11561#11562#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="5" selection-start="1481" selection-end="1481" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="22" selection-start="6410" selection-end="6410" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#5053#5081#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="400" column="111" selection-start="15913" selection-end="15913" vertical-scroll-proportion="0.592219">
+          <folding>
+            <element signature="e#16058#16385#0" expanded="true" />
+            <element signature="e#16380#16381#0" expanded="true" />
           </folding>
         </state>
       </provider>

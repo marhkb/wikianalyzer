@@ -44,20 +44,9 @@ public abstract class ArticleView extends View {
 	public interface Presenter extends PresenterBase {
 
 
-		List<ArticleInfo.AuthorAndCommits> getAuthorAndCommits();
+		ArticleInfo getArticleInfo();
 
-		/**
-		 *
-		 */
-		Event<EventArgs> authorsAndCommitsChanged();
-
-
-		List<ArticleInfo.Revision> getRevisions();
-
-		/**
-		 *
-		 */
-		Event<EventArgs> revisionsChanged();
+		Event<EventArgs> articleInfoChanged();
 
 
 		/**

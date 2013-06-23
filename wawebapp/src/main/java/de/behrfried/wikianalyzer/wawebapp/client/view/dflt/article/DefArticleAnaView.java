@@ -32,11 +32,12 @@ public class DefArticleAnaView extends ArticleAnaView {
 	private final static String AUTHOR_GRID_COMMITS = "authorGridCommits";
 	private final static String AUTHOR_GRID_QUANTITY = "authorGridQuantity";
 	private final static String ARTICLE_GRID_REVISION = "articleGridRevision";
+	private final static String ARTICLE_GRID_PARENT = "articleGridParent";
 	private final static String ARTICLE_GRID_DATE = "articleGridDate";
 	private final static String ARTICLE_GRID_AUTHOR = "articleGridAuthor";
-	private final static String ARTICLE_GRID_QUANTITY = "articleGridQuantity";
-	private final static String ARTICLE_GRID_AMOUNT = "articleGridAmount";
-	private final static String ARTICLE_GRID_EDIT_TYPE = "articleGridEditType";
+	private final static String ARTICLE_GRID_BYTES = "articleGridQuantity";
+	private final static String ARTICLE_GRID_DIFF = "articleGridAmount";
+	private final static String ARTICLE_GRID_COMMENT = "articleGridEditType";
 	private final Presenter presenter;
 	private final Messages messages;
 	private HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
@@ -44,7 +45,9 @@ public class DefArticleAnaView extends ArticleAnaView {
 	private VLayout articleAnaContainer;
 	private HLayout authorAnaLayout, articleAnaLayout, categoryAnaLayout;
 	private ListGrid authorGrid, articleGrid, categoryGrid, similarCategoryGrid;
-	private ListGridField authorGridAuthor, authorGridCommits, authorGridQuantity, articleGridRevision, articleGridDate, articleGridAuthor,
+	private ListGridField authorGridAuthor, authorGridCommits, authorGridQuantity, articleGridRevision,
+			articleGridParent,
+			articleGridDate, articleGridAuthor,
 			articleGridQuantity, articleGridAmount, articleGridEditType, categoryGridFrom, categoryGridTill, categoryGridCategory,
 			simCatGridSimilarArticle, simCatGridCategory, simCatGridCreationDate;
 	private HTMLPanel chartContainer;
@@ -78,7 +81,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorAnaLayout.addMember(this.authorAnaChartContainer);
 		this.authorAnaLayout.addMember(this.authorGrid);
 		this.authorAnaLayout.setMargin(5);
-		this.authorAnaLayout.setHeight(300);
+		this.authorAnaLayout.setHeight(200);
 
 		this.articleAnaLabel = new Label("Analyse zum Artikel");
 		this.articleAnaLabel.setAlign(Alignment.CENTER);
@@ -88,22 +91,23 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaChartContainer.setHeight("50%");
 
 		this.articleGridRevision = new ListGridField(ARTICLE_GRID_REVISION, "Revision");
+		this.articleGridParent = new ListGridField(ARTICLE_GRID_PARENT, "Parent");
 		this.articleGridDate = new ListGridField(ARTICLE_GRID_DATE, "Änderungsdatum");
 		this.articleGridAuthor = new ListGridField(ARTICLE_GRID_AUTHOR, "Author");
-		this.articleGridQuantity = new ListGridField(ARTICLE_GRID_QUANTITY, "Verhältnis Einsendung/Text");
-		this.articleGridAmount = new ListGridField(ARTICLE_GRID_AMOUNT, "Anzahl Einsendungen");
-		this.articleGridEditType = new ListGridField(ARTICLE_GRID_EDIT_TYPE, "Änderungsart");
+		this.articleGridQuantity = new ListGridField(ARTICLE_GRID_BYTES, "Bytes");
+		this.articleGridAmount = new ListGridField(ARTICLE_GRID_DIFF, "Diff");
+		this.articleGridEditType = new ListGridField(ARTICLE_GRID_COMMENT, "Comment");
 		this.articleGrid = new ListGrid();
 		this.articleGrid.setFields(
-				this.articleGridRevision, this.articleGridDate, this.articleGridAuthor, this.articleGridQuantity,
-				this.articleGridAmount, this.articleGridEditType
+				this.articleGridRevision, this.articleGridParent, this.articleGridDate, this.articleGridAuthor,
+				this.articleGridQuantity, this.articleGridAmount, this.articleGridEditType
 		);
 		this.articleGrid.setWidth("50%");
 		this.articleAnaLayout = new HLayout();
 		this.articleAnaLayout.addMember(this.articleAnaChartContainer);
 		this.articleAnaLayout.addMember(this.articleGrid);
 		this.articleAnaLayout.setMargin(5);
-		this.articleAnaLayout.setHeight(300);
+		this.articleAnaLayout.setHeight(200);
 
 		this.categoryAnaLabel = new Label("Analyse zur Artikelkategorie");
 		this.categoryAnaLabel.setAlign(Alignment.CENTER);
@@ -141,14 +145,16 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 
 	private void bind() {
-		//this.bindAuthorChart();
+		this.bindAuthorChart();
 		this.bindAuthorGrid();
-		//this.bindArticleChart();
+		this.bindArticleChart();
 		this.bindArticleGrid();
+
+		this.bindSimilarCategoryGrid();
 	}
 
 	private void bindAuthorChart() {
-		this.presenter.authorsAndCommitsChanged().addHandler(
+		this.presenter.articleInfoChanged().addHandler(
 				new Handler<EventArgs>() {
 					@Override
 					public void invoke(Object sender, EventArgs eventArgs) {
@@ -160,7 +166,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 								data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
 								data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Commits");
 
-								final List<ArticleInfo.AuthorAndCommits> authorAndCommits = presenter.getAuthorAndCommits();
+								final List<ArticleInfo.AuthorAndCommits> authorAndCommits =
+										presenter.getArticleInfo().getAuthorsAndCommits();
 								Collections.sort(
 										authorAndCommits, new Comparator<ArticleInfo.AuthorAndCommits>() {
 									@Override
@@ -171,9 +178,10 @@ public class DefArticleAnaView extends ArticleAnaView {
 								}
 								);
 
-								data.addRows(10);
+								final int rows = Math.min(10, authorAndCommits.size());
+								data.addRows(rows);
 
-								for(int i = 0; i < 10; i++) {
+								for(int i = 0; i < rows; i++) {
 									data.setValue(i, 0, authorAndCommits.get(i).getAuthor());
 									data.setValue(i, 1, authorAndCommits.get(i).getNumOfCommits());
 								}
@@ -193,23 +201,25 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 
 	private void bindAuthorGrid() {
-		this.presenter.authorsAndCommitsChanged().addHandler(
+		this.presenter.articleInfoChanged().addHandler(
 				new Handler<EventArgs>() {
 					@Override
 					public void invoke(Object sender, EventArgs eventArgs) {
-//						while(authorGrid.getRecordList().getLength() > 0) {
-//							authorGrid.removeData(authorGrid.getRecord(0));
-//						}
-						for(final ArticleInfo.AuthorAndCommits aac : presenter.getAuthorAndCommits()) {
+						while(authorGrid.getRecordList().getLength() > 0) {
+							authorGrid.removeData(authorGrid.getRecord(0));
+						}
+						for(final ArticleInfo.AuthorAndCommits aac : presenter.getArticleInfo().getAuthorsAndCommits()) {
 							final ListGridRecord lgr = new ListGridRecord();
 							lgr.setAttribute(AUTHOR_GRID_AUTHOR, aac.getAuthor());
 							lgr.setAttribute(AUTHOR_GRID_COMMITS, aac.getNumOfCommits());
 							lgr.setAttribute(
 									AUTHOR_GRID_QUANTITY,
 									NumberFormat.getPercentFormat().format(
-											aac.getNumOfCommits() / (double)presenter.getAuthorAndCommits().size()
+											aac.getNumOfCommits() / (double)presenter.getArticleInfo()
+																					 .getAuthorsAndCommits().size()
 									)
 							);
+
 							authorGrid.addData(lgr);
 						}
 					}
@@ -218,7 +228,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 
 	private void bindArticleChart() {
-		this.presenter.authorsAndCommitsChanged().addHandler(
+		this.presenter.articleInfoChanged().addHandler(
 				new Handler<EventArgs>() {
 					@Override
 					public void invoke(Object sender, EventArgs eventArgs) {
@@ -249,19 +259,42 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 
 	private void bindArticleGrid() {
-		this.presenter.revisionsChanged().addHandler(
+		this.presenter.articleInfoChanged().addHandler(
 				new Handler<EventArgs>() {
 					@Override
 					public void invoke(Object sender, EventArgs eventArgs) {
-//						while(articleGrid.getRecordList().getLength() > 0) {
-//							articleGrid.removeData(articleGrid.getRecord(0));
-//						}
-						for(final ArticleInfo.Revision rev : presenter.getRevisions()) {
+						while(articleGrid.getRecordList().getLength() > 0) {
+							articleGrid.removeData(articleGrid.getRecord(0));
+						}
+
+						for(final ArticleInfo.Revision rev : presenter.getArticleInfo().getRevisions()) {
 							final ListGridRecord lgr = new ListGridRecord();
 							lgr.setAttribute(ARTICLE_GRID_REVISION, rev.getRevid());
+							lgr.setAttribute(ARTICLE_GRID_PARENT, rev.getParentid());
 							lgr.setAttribute(ARTICLE_GRID_DATE, rev.getTimestamp());
-							lgr.setAttribute(ARTICLE_GRID_AUTHOR, rev.getAuthor());
 							articleGrid.addData(lgr);
+						}
+					}
+				}
+		);
+	}
+
+	private void bindSimilarCategoryGrid() {
+		this.presenter.articleInfoChanged().addHandler(
+				new Handler<EventArgs>() {
+					@Override
+					public void invoke(Object sender, EventArgs eventArgs) {
+						while(similarCategoryGrid.getRecordList().getLength() > 0) {
+							similarCategoryGrid.removeData(similarCategoryGrid.getRecord(0));
+						}
+
+						for(final ArticleInfo.SimilarArticle rev : presenter.getArticleInfo().getSimilarArticles()) {
+							final ListGridRecord lgr = new ListGridRecord();
+							lgr.setAttribute(simCatGridSimilarArticle.getName(), rev.getTitle());
+							lgr.setAttribute(simCatGridCreationDate.getName(), rev.getTimestamp());
+							lgr.setAttribute(simCatGridCategory.getName(), rev.getCategories());
+
+							similarCategoryGrid.addData(lgr);
 						}
 					}
 				}

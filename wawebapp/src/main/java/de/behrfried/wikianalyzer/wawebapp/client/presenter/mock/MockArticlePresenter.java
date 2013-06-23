@@ -36,39 +36,22 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 	private final Object initContext = new Object();
 
-	private List<ArticleInfo.AuthorAndCommits> authorAndCommits;
+	private ArticleInfo articleInfo;
 
 	@Override
-	public List<ArticleInfo.AuthorAndCommits> getAuthorAndCommits() {
-		return new ArrayList<ArticleInfo.AuthorAndCommits>(this.authorAndCommits);
+	public ArticleInfo getArticleInfo() {
+		return this.articleInfo;
 	}
 
-	public void setAuthorAndCommits(List<ArticleInfo.AuthorAndCommits> authorAndCommits) {
-		this.authorAndCommits = authorAndCommits;
-		this.authorsAndCommitsChanged().fire(this.initContext, this, EventArgs.EMPTY);
+	public void setArticleInfo(ArticleInfo articleInfo) {
+		this.articleInfo = articleInfo;
+		this.articleInfoChanged().fire(this.initContext, this, EventArgs.EMPTY);
 	}
 
-	private final Event<EventArgs> authorsAndCommitsChanged = new Event<EventArgs>(this.initContext);
+	private Event<EventArgs> articleInfoChanged = new Event<EventArgs>(this.initContext);
 	@Override
-	public Event<EventArgs> authorsAndCommitsChanged() {
-		return this.authorsAndCommitsChanged;
-	}
-
-	private List<ArticleInfo.Revision> revisions;
-	@Override
-	public List<ArticleInfo.Revision> getRevisions() {
-		return new ArrayList<ArticleInfo.Revision>(this.revisions);
-	}
-
-	public void setRevisions(List<ArticleInfo.Revision> revisions) {
-		this.revisions = new ArrayList<ArticleInfo.Revision>(revisions);
-		this.revisionsChanged().fire(this.initContext, this, EventArgs.EMPTY);
-	}
-
-	private Event<EventArgs> revisionsChanged = new Event<EventArgs>(this.initContext);
-	@Override
-	public Event<EventArgs> revisionsChanged() {
-		return this.revisionsChanged;
+	public Event<EventArgs> articleInfoChanged() {
+		return this.articleInfoChanged;
 	}
 
 	@Inject
@@ -128,8 +111,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 						public void onSuccess(final ArticleInfo result) {
 							// TODO
 							//Window.alert(result.getInitialAuthor() + "");
-							setAuthorAndCommits(result.getAuthorsAndCommits());
-							setRevisions(result.getRevisions());
+							setArticleInfo(result);
 
 							this.number = new Random().nextInt();
 							setArticleLink("www." + number + ".org");
