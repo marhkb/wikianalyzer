@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -123,7 +120,7 @@
       <file leaf-file-name="DefArticleAnaView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="264" column="25" selection-start="11560" selection-end="11560" vertical-scroll-proportion="0.765625">
+            <state line="263" column="39" selection-start="11533" selection-end="11533" vertical-scroll-proportion="0.7443182">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7398#8922#0" expanded="true" />
@@ -138,8 +135,8 @@
                 <element signature="e#10057#10781#0" expanded="true" />
                 <element signature="e#10772#10773#0" expanded="true" />
                 <element signature="e#10860#10861#0" expanded="true" />
-                <element signature="e#10963#11573#0" expanded="true" />
-                <element signature="e#11566#11567#0" expanded="true" />
+                <element signature="e#10963#11568#0" expanded="true" />
+                <element signature="e#11561#11562#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1218,7 +1215,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="264" column="25" selection-start="11560" selection-end="11560" vertical-scroll-proportion="0.765625">
+        <state line="263" column="39" selection-start="11533" selection-end="11533" vertical-scroll-proportion="0.7443182">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7398#8922#0" expanded="true" />
@@ -1233,8 +1230,8 @@
             <element signature="e#10057#10781#0" expanded="true" />
             <element signature="e#10772#10773#0" expanded="true" />
             <element signature="e#10860#10861#0" expanded="true" />
-            <element signature="e#10963#11573#0" expanded="true" />
-            <element signature="e#11566#11567#0" expanded="true" />
+            <element signature="e#10963#11568#0" expanded="true" />
+            <element signature="e#11561#11562#0" expanded="true" />
           </folding>
         </state>
       </provider>

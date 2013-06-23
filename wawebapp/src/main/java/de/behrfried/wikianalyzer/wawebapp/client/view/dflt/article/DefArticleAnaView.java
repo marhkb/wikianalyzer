@@ -261,7 +261,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 							lgr.setAttribute(ARTICLE_GRID_REVISION, rev.getRevid());
 							lgr.setAttribute(ARTICLE_GRID_DATE, rev.getTimestamp());
 							lgr.setAttribute(ARTICLE_GRID_AUTHOR, rev.getAuthor());
-							articleGrid.addd.addData(lgr);
+							articleGrid.addData(lgr);
 						}
 					}
 				}
