@@ -287,6 +287,7 @@ public class DefArticleView extends ArticleView {
 				}
 				defArticleAnaView = new DefArticleAnaView(presenter, messages);
 				artAnaLayout.addMember(defArticleAnaView);
+				artAnaLayout.removeMember(defArticleAnaView);
 			}
 		});
 	}
