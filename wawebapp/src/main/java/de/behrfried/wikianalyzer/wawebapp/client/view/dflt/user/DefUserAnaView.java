@@ -62,7 +62,7 @@ public class DefUserAnaView extends UserAnaView {
 		this.userArticleGrid.setFields(this.articleArticleColumn, this.articleCategoryColumn, this.articleCommitsColumn, this.articleQuantityColumn);
 		this.userArticleAnaContainer = new HLayout();
 		this.userArticleAnaContainer.addMember(this.userArticleChartContainer);
-		this.userArticleAnaContainer.addMember(userArticleGrid);
+		this.userArticleAnaContainer.addMember(this.userArticleGrid);
 
 		this.userEditTypeLabel = new Label();
 		this.userEditTypeChartContainer = new HTMLPanel("");
@@ -77,9 +77,7 @@ public class DefUserAnaView extends UserAnaView {
 		this.userEditTypeContainer.addMember(this.userEditTypeGrid);
 
 		this.userAnaContainer = new VLayout();
-		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer);// ,
-																							  // this.userEditTypeLabel,
-																							  // this.userEditTypeContainer);
+		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer, this.userEditTypeContainer);
 		this.addChild(this.userAnaContainer);
 	}
 
