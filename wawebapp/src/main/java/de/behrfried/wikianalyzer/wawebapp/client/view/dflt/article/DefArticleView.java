@@ -220,15 +220,15 @@ public class DefArticleView extends ArticleView {
 	private void bind() {
 		this.bindSearchBox();
 		this.bindSearchButton();
-		this.bindTimeSpanMenu();
-		this.bindNeedsEditRecord();
-		this.bindInfoBoxRecord();
-		this.bindPictureRecord();
-		this.bindArticleCreationDateRecord();
-		this.bindArticleRevisionsRecord();
-		this.bindArticleAuthorsRecord();
-		this.bindArticleCategoriesRecord();
-		this.bindArticleLengthRecord();
+//		this.bindTimeSpanMenu();
+//		this.bindNeedsEditRecord();
+//		this.bindInfoBoxRecord();
+//		this.bindPictureRecord();
+//		this.bindArticleCreationDateRecord();
+//		this.bindArticleRevisionsRecord();
+//		this.bindArticleAuthorsRecord();
+//		this.bindArticleCategoriesRecord();
+//		this.bindArticleLengthRecord();
 	}
 
 	private void bindSearchBox() {

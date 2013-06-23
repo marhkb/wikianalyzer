@@ -44,64 +44,76 @@ public class JsonWikiAccess implements WikiAccess {
 	@Override
 	public ArticleInfo getArticleInfo(String title) {
 		final int pageid = this.getPageId(title);
-
-		/* get revisions of an article (max 500 are allowed?) */
-		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
-		final String response1 =
-				this.requester.getResult(
-						API + "action=query&format=json&prop=revisions&rvprop=user|ids" +
-						"|timestamp&rvlimit=10000&rvdiffto=next&pageids=" + pageid
-				);
-
-
-		/* get similiar articles */
-		// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
-		final String similiar = this.requester.getResult(
-				API +
-				"action=query&format=json&list=search&srlimit=500&srsearch="
-				+ title
-		);
-
-		JsonArray w = this.parser.parse(response1)
-								 .getAsJsonObject()
-								 .getAsJsonObject("query")
-								 .getAsJsonObject("pages")
-								 .getAsJsonObject(pageid + "")
-								 .getAsJsonArray("revisions");
-
-
 		final List<ArticleInfo.AuthorAndCommits> authorsAndCommits = new ArrayList<ArticleInfo.AuthorAndCommits>();
 		final List<ArticleInfo.Revision> revisions = new ArrayList<ArticleInfo.Revision>();
 
+		int lastRev = 0;
+
+		/* get revisions of an article (max 500 are allowed) */
+		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
 		final Map<String, Integer> tmp = new HashMap<String, Integer>();
-		for(JsonElement obj : w) {
+		while(true) {
+			final String response1 =
+					this.requester.getResult(
+							API + "action=query&format=json&prop=revisions&rvprop=user|ids" +
+							"|timestamp&rvlimit=500&rvdir=newer&pageids=" + pageid + "&rvstartid=" + lastRev
+					);
 
-			//{"revid":69797531,"parentid":69352711,"user":"80.143.242.119","anon":"","timestamp":"2010-01-25T18:38:06Z","diff":{"notcached":""}}
-			final JsonObject jsonObj = obj.getAsJsonObject();
-			final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
-			if(!tmp.containsKey(author)) {
-				tmp.put(author, 1);
-			} else {
-				tmp.put(author, tmp.get(author) + 1);
+
+		/* get similiar articles */
+			// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
+//		final String similiar = this.requester.getResult(
+//				API +
+//				"action=query&format=json&list=search&srlimit=500&srsearch="
+//				+ title
+//		);
+
+			final JsonObject page = this.parser.parse(response1)
+											   .getAsJsonObject()
+											   .getAsJsonObject("query")
+											   .getAsJsonObject("pages")
+											   .getAsJsonObject(pageid + "");
+
+			if(!page.has("revisions")) {
+				break;
 			}
 
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
-			try {
-				revisions.add(new ArticleInfo.Revision(
-						jsonObj.getAsJsonPrimitive("revid").getAsInt(),
-						jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
-						formatter.parse(jsonObj.getAsJsonPrimitive("timestamp").getAsString()
-											   .replace('T', ',').replace('Z', '\0')),
-						author,
-						0,
-						""
-				));
-			} catch(ParseException e) {
-				this.logger.error("WUWUWUWUWUWU");
+			final JsonArray w = page.getAsJsonArray("revisions");
+			for(JsonElement obj : w) {
+
+				//{"revid":69797531,"parentid":69352711,"user":"80.143.242.119","anon":"","timestamp":"2010-01-25T18:38:06Z","diff":{"notcached":""}}
+				final JsonObject jsonObj = obj.getAsJsonObject();
+				final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
+				if(!tmp.containsKey(author)) {
+					tmp.put(author, 1);
+				} else {
+					tmp.put(author, tmp.get(author) + 1);
+				}
+
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,hh:mm:ss");
+				try {
+					revisions.add(
+							new ArticleInfo.Revision(
+									jsonObj.getAsJsonPrimitive("revid").getAsInt(),
+									jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
+									formatter.parse(
+											jsonObj.getAsJsonPrimitive("timestamp").getAsString()
+												   .replace('T', ',').replace('Z', '\0')
+									),
+									author,
+									0,
+									""
+							)
+					);
+				} catch(ParseException e) {
+					this.logger.error("WUWUWUWUWUWU");
+				}
 			}
 
-			this.logger.info(author);
+			lastRev = w.get(w.size() - 1).getAsJsonObject().getAsJsonPrimitive("revid").getAsInt() + 1;
+
 		}
+
 
 		for(Map.Entry<String, Integer> entry : tmp.entrySet()) {
 			authorsAndCommits.add(new ArticleInfo.AuthorAndCommits(entry.getKey(), entry.getValue()));

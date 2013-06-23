@@ -78,7 +78,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorAnaLayout.addMember(this.authorAnaChartContainer);
 		this.authorAnaLayout.addMember(this.authorGrid);
 		this.authorAnaLayout.setMargin(5);
-		this.authorAnaLayout.setHeight("30%");
+		this.authorAnaLayout.setHeight(300);
 
 		this.articleAnaLabel = new Label("Analyse zum Artikel");
 		this.articleAnaLabel.setAlign(Alignment.CENTER);
@@ -103,7 +103,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaLayout.addMember(this.articleAnaChartContainer);
 		this.articleAnaLayout.addMember(this.articleGrid);
 		this.articleAnaLayout.setMargin(5);
-		this.articleAnaLayout.setHeight("30%");
+		this.articleAnaLayout.setHeight(300);
 
 		this.categoryAnaLabel = new Label("Analyse zur Artikelkategorie");
 		this.categoryAnaLabel.setAlign(Alignment.CENTER);
@@ -141,9 +141,9 @@ public class DefArticleAnaView extends ArticleAnaView {
 	}
 
 	private void bind() {
-		this.bindAuthorChart();
+		//this.bindAuthorChart();
 		this.bindAuthorGrid();
-		this.bindArticleChart();
+		//this.bindArticleChart();
 		this.bindArticleGrid();
 	}
 
@@ -179,9 +179,9 @@ public class DefArticleAnaView extends ArticleAnaView {
 								}
 								ColumnChart.Options options = ColumnChart.Options.create();
 								options.setWidth(500);
-								options.setHeight(150);
+								options.setHeight(250);
 								options.set3D(true);
-								options.setTitle("FOO");
+								options.setTitle("Top 10 Committer");
 								ColumnChart chart = new ColumnChart(data, options);
 								authorAnaChartContainer.add(chart);
 							}
@@ -197,9 +197,9 @@ public class DefArticleAnaView extends ArticleAnaView {
 				new Handler<EventArgs>() {
 					@Override
 					public void invoke(Object sender, EventArgs eventArgs) {
-						while(authorGrid.getRecordList().getLength() > 0) {
-							authorGrid.removeData(authorGrid.getRecord(0));
-						}
+//						while(authorGrid.getRecordList().getLength() > 0) {
+//							authorGrid.removeData(authorGrid.getRecord(0));
+//						}
 						for(final ArticleInfo.AuthorAndCommits aac : presenter.getAuthorAndCommits()) {
 							final ListGridRecord lgr = new ListGridRecord();
 							lgr.setAttribute(AUTHOR_GRID_AUTHOR, aac.getAuthor());
@@ -236,7 +236,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 								data.setValue(1, 1, 10);
 								ScatterChart.Options options = ScatterChart.Options.create();
 								options.setWidth(500);
-								options.setHeight(150);
+								options.setHeight(250);
 								options.setTitle("My Daily Activities");
 								ScatterChart chart = new ScatterChart(data, options);
 								articleAnaChartContainer.add(chart);
@@ -253,15 +253,15 @@ public class DefArticleAnaView extends ArticleAnaView {
 				new Handler<EventArgs>() {
 					@Override
 					public void invoke(Object sender, EventArgs eventArgs) {
-						while(articleGrid.getRecordList().getLength() > 0) {
-							articleGrid.removeData(authorGrid.getRecord(0));
-						}
+//						while(articleGrid.getRecordList().getLength() > 0) {
+//							articleGrid.removeData(articleGrid.getRecord(0));
+//						}
 						for(final ArticleInfo.Revision rev : presenter.getRevisions()) {
 							final ListGridRecord lgr = new ListGridRecord();
 							lgr.setAttribute(ARTICLE_GRID_REVISION, rev.getRevid());
 							lgr.setAttribute(ARTICLE_GRID_DATE, rev.getTimestamp());
 							lgr.setAttribute(ARTICLE_GRID_AUTHOR, rev.getAuthor());
-							articleGrid.addData(lgr);
+							articleGrid.addd.addData(lgr);
 						}
 					}
 				}
