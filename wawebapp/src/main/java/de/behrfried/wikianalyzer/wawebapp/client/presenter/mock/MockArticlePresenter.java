@@ -57,7 +57,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private List<ArticleInfo.Revision> revisions;
 	@Override
 	public List<ArticleInfo.Revision> getRevisions() {
-		return null;
+		return new ArrayList<ArticleInfo.Revision>(this.revisions);
 	}
 
 	public void setRevisions(List<ArticleInfo.Revision> revisions) {
