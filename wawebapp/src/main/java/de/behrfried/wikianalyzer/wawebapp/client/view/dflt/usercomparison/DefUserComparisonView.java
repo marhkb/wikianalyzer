@@ -17,6 +17,7 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.usercomparison;
 
 import com.google.inject.Inject;
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.form.DynamicForm;
@@ -39,9 +40,9 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserCompari
  * 
  */
 public class DefUserComparisonView extends UserComparisonView {
-	private Label waLabel, genUsrInfLabel, usrAnaLabel;
+	private Label waLabel, genUsrInfLabel, usrAnaLabel, userOneLabel, userTwoLabel;
 	private ComboBoxItem searchBox1, searchBox2;
-	private DynamicForm searchBoxContainer;
+	private DynamicForm searchBoxOneContainer, searchBoxTwoContainer;
 	private ListGrid generalUsrInfoGrid;
 	private ListGridField usrAttributeColumn, usrValueColumn;
 	private HLayout searchLayout, usrInfoAnalyzationLayout, searchInfoLayout;
@@ -82,23 +83,33 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.waLabel = new Label("WIKIAnalyzer");
 		this.waLabel.setHeight100();
 		this.waLabel.setMargin(10);
+		
+		this.userOneLabel = new Label("1. Usernamen:");
+		this.userOneLabel.setWidth(100);
+		this.userOneLabel.setAlign(Alignment.RIGHT);
 		this.searchBox1 = new ComboBoxItem();
-		this.searchBox1.setWidth(200);
+		this.searchBox1.setWidth(150);
 		this.searchBox1.setShowTitle(false);
+		this.searchBoxOneContainer = new DynamicForm();
+		this.searchBoxOneContainer.setBackgroundColor("white");
+		this.searchBoxOneContainer.setItems(this.searchBox1);
+
+		this.userTwoLabel = new Label(" vergleichen mit 2. Usernamen: ");
+		this.userTwoLabel.setWidth(150);
 		this.searchBox2 = new ComboBoxItem();
-		this.searchBox2.setWidth(200);
+		this.searchBox2.setWidth(150);
 		this.searchBox2.setShowTitle(false);
-		this.searchBoxContainer = new DynamicForm();
-		this.searchBoxContainer.setBackgroundColor("white");
-		this.searchBoxContainer.setItems(this.searchBox1, this.searchBox2);
+		this.searchBoxTwoContainer = new DynamicForm();
+		this.searchBoxTwoContainer.setBackgroundColor("white");
+		this.searchBoxTwoContainer.setItems(this.searchBox2);
+		
 		this.searchButton = new Button(this.messages.searchButton());
 		this.searchLayout = new HLayout();
 		this.searchLayout.setMembersMargin(3);
 		this.searchLayout.setHeight(30);
 
-		this.searchLayout.addMember(this.waLabel);
-		this.searchLayout.addMember(this.searchBoxContainer);
-		this.searchLayout.addMember(this.searchButton);
+		this.searchLayout.addMembers(this.waLabel, this.userOneLabel, this.searchBoxOneContainer, this.userTwoLabel, this.searchBoxTwoContainer, this.searchButton);
+		this.searchLayout.setMembersMargin(10);
 
 		this.timeSpanMenu = new Menu();
 		this.randomSpan = new MenuItem("random time");
@@ -117,6 +128,12 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.chooseSpan = new MenuItem("choose timespan");
 		this.timeSpanMenu.addItem(this.chooseSpan);
 		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
+		
+		
+		
+		this.siteLayoutContainer = new VLayout();
+		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton);
+		this.addChild(this.siteLayoutContainer);
 	}
 
 	@Override

@@ -15,9 +15,8 @@ import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView.Presenter;
 
-
 public class DefUserAnaView extends UserAnaView {
-	
+
 	private final Presenter presenter;
 
 	/**
@@ -32,9 +31,10 @@ public class DefUserAnaView extends UserAnaView {
 	private ListGrid userArticleGrid, userEditTypeGrid;
 	private ListGridField articleArticleColumn, articleCategoryColumn, articleCommitsColumn, articleQuantityColumn, editTypeEditTypeColumn,
 	        editTypeCommitsColumn, editTypeQuantityColumn;;
+
 	/**
-	 * Creates an instance of {@link DefUserView}. All arguments are
-	 * injected by Gin.
+	 * Creates an instance of {@link DefUserView}. All arguments are injected by
+	 * Gin.
 	 * 
 	 * @param parentView
 	 */
@@ -47,39 +47,50 @@ public class DefUserAnaView extends UserAnaView {
 		this.messages = messages;
 		this.init();
 	}
-	
+
 	private void init() {
 		this.userArticleLabel = new Label("Vom Benutzer bearbeitete Artikel");
 		this.userArticleChartContainer = new HTMLPanel("");
 		this.userArticleChartContainer.setWidth("50%");
 		this.createArticleChart();
-		this.articleArticleColumn = new ListGridField("articleColumn", "Artikel");
-		this.articleCategoryColumn = new ListGridField("categoryColumn", "Kategorie");
-		this.articleCommitsColumn = new ListGridField("commitsColumn", "Commits");
-		this.articleQuantityColumn = new ListGridField("quantityColumn", "Quantität");
-		this.userArticleGrid = new ListGrid();
-		this.userArticleGrid.setWidth("50%");
-		this.userArticleGrid.setFields(this.articleArticleColumn, this.articleCategoryColumn, this.articleCommitsColumn, this.articleQuantityColumn);
+		// this.articleArticleColumn = new ListGridField("articleColumn",
+		// "Artikel");
+		// this.articleCategoryColumn = new ListGridField("categoryColumn",
+		// "Kategorie");
+		// this.articleCommitsColumn = new ListGridField("commitsColumn",
+		// "Commits");
+		// this.articleQuantityColumn = new ListGridField("quantityColumn",
+		// "Quantität");
+		// this.userArticleGrid = new ListGrid();
+		// this.userArticleGrid.setWidth("50%");
+		// this.userArticleGrid.setFields(this.articleArticleColumn,
+		// this.articleCategoryColumn, this.articleCommitsColumn,
+		// this.articleQuantityColumn);
 		this.userArticleAnaContainer = new HLayout();
 		this.userArticleAnaContainer.addMember(this.userArticleChartContainer);
-		this.userArticleAnaContainer.addMember(userArticleGrid);
-
-		this.userEditTypeLabel = new Label();
+		// this.userArticleAnaContainer.addMember(userArticleGrid);
+		//
+//		this.userEditTypeLabel = new Label();
 		this.userEditTypeChartContainer = new HTMLPanel("");
 		this.createEditTypeChart();
-		this.editTypeEditTypeColumn = new ListGridField("yypeColumn", "Art der Änderung");
-		this.editTypeCommitsColumn = new ListGridField("commitsColumn", "Commits");
-		this.editTypeQuantityColumn = new ListGridField("quantityColumn", "Quantität");
-		this.userEditTypeGrid = new ListGrid();
-		this.userEditTypeGrid.setFields(this.editTypeEditTypeColumn, this.editTypeCommitsColumn, this.editTypeQuantityColumn);
-		this.userEditTypeContainer = new HLayout();
-		this.userEditTypeContainer.addMember(this.userEditTypeChartContainer);
-		this.userEditTypeContainer.addMember(this.userEditTypeGrid);
-		
+		// this.editTypeEditTypeColumn = new ListGridField("typeColumn",
+		// "Art der Änderung");
+		// this.editTypeCommitsColumn = new ListGridField("commitsColumn",
+		// "Commits");
+		// this.editTypeQuantityColumn = new ListGridField("quantityColumn",
+		// "Quantität");
+		// this.userEditTypeGrid = new ListGrid();
+		// this.userEditTypeGrid.setFields(this.editTypeEditTypeColumn,
+		// this.editTypeCommitsColumn, this.editTypeQuantityColumn);
+//		this.userEditTypeContainer = new HLayout();
+		// this.userEditTypeContainer.addMember(this.userEditTypeChartContainer);
+		// this.userEditTypeContainer.addMember(this.userEditTypeGrid);
+
 		this.userAnaContainer = new VLayout();
-		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer, this.userEditTypeLabel, this.userEditTypeContainer);
+		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer);//, this.userEditTypeLabel, this.userEditTypeContainer);
+		this.addChild(this.userAnaContainer);
 	}
-	
+
 	private void createArticleChart() {
 		Runnable r = new Runnable() {
 

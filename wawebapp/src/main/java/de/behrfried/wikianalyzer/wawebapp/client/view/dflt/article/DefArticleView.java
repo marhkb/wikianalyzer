@@ -89,6 +89,7 @@ public class DefArticleView extends ArticleView {
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
 	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
+	private DefArticleAnaView defArticleAnaView;
 
 	@Inject
 	public DefArticleView(final Presenter presenter, final Messages messages, final ArticleAnaView articleAnaView)
@@ -193,7 +194,7 @@ public class DefArticleView extends ArticleView {
 		this.artAnaLabel.setWidth100();
 		this.artAnaLayout = new VLayout();
 		this.artAnaLayout.setWidth("75%");
-		this.artAnaLayout.addMembers(this.artAnaLabel, new DefArticleAnaView(presenter, messages));
+		this.artAnaLayout.addMember(this.artAnaLabel);
 
 		this.genInfLayout = new VLayout();
 		this.genInfLayout.setWidth("25%");
@@ -281,7 +282,11 @@ public class DefArticleView extends ArticleView {
 
 			public void onClick(final ClickEvent event) {
 				presenter.getSendCommand().execute(null);
-				DefArticleView.this.artAnaLayout.addMember(new DefArticleAnaView(presenter, messages));
+				if(defArticleAnaView != null) {
+					defArticleAnaView.removeFromParent();
+				}
+				defArticleAnaView = new DefArticleAnaView(presenter, messages);
+				artAnaLayout.addMember(defArticleAnaView);
 			}
 		});
 	}

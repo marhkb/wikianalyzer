@@ -112,20 +112,21 @@ public class DefUserView extends UserView {
 		this.generalUsrInfoGrid = new ListGrid();
 		this.generalUsrInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
 
-		this.genUsrInfLayout = new VLayout();
-		this.genUsrInfLayout.setWidth("25%");
-		this.genUsrInfLayout.setHeight100();
+		
 		this.genUsrInfLabel = new Label("Allgemeine User Infos");
 		this.genUsrInfLabel.setHeight(10);
 		this.genUsrInfLabel.setWidth100();
+		this.genUsrInfLayout = new VLayout();
+		this.genUsrInfLayout.setWidth("25%");
+		this.genUsrInfLayout.setHeight100();
 		this.genUsrInfLayout.addMembers(this.genUsrInfLabel, this.generalUsrInfoGrid);
 
-		this.usrAnaLayout = new VLayout();
-		this.usrAnaLayout.setWidth100();
 		this.usrAnaLabel = new Label("User Analysen");
 		this.usrAnaLabel.setHeight(10);
 		this.usrAnaLabel.setWidth100();
-		this.usrAnaLayout.addMember(this.usrAnaLabel);
+		this.usrAnaLayout = new VLayout();
+		this.usrAnaLayout.setWidth("75%");
+		this.usrAnaLayout.addMembers(this.usrAnaLabel, new DefUserAnaView(presenter, messages));
 
 		this.usrInfoAnalyzationLayout = new HLayout();
 		this.usrInfoAnalyzationLayout.addMembers(this.genUsrInfLayout, this.usrAnaLayout);
