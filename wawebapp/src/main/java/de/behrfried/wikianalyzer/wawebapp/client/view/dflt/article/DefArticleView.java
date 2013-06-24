@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article;
 
-import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Canvas;
@@ -42,8 +41,8 @@ import com.smartgwt.client.widgets.menu.events.MenuItemClickEvent;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
-import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleAnaView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 
 public class DefArticleView extends ArticleView {
 
@@ -236,7 +235,19 @@ public class DefArticleView extends ArticleView {
 		this.bindArticleAuthorsRecord();
 		this.bindArticleCategoriesRecord();
 		this.bindArticleLengthRecord();
+		this.bindArticleInfoAnalyzationLayout();
 	}
+
+	private void bindArticleInfoAnalyzationLayout() {
+		//articleInfoAnalyzationLayout.setVisible(presenter.getSearchStatus());
+		this.presenter.searchStatusChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				articleInfoAnalyzationLayout.setVisible(presenter.getSearchStatus());
+			}
+		});
+	}
+
 
 	private void bindSearchBox() {
 		this.searchBox.setValue(this.presenter.getArticleTitle());
@@ -288,9 +299,8 @@ public class DefArticleView extends ArticleView {
 
 			public void onClick(final ClickEvent event) {
 				presenter.getSendCommand().execute(null);
-//				if(defArticleAnaView != null) {
-//					artAnaLayout.removeMember(defArticleAnaView);
-//				}
+				if(articleInfoAnalyzationLayout.getParent() == null) {
+				}
 			}
 		});
 	}
@@ -408,9 +418,8 @@ public class DefArticleView extends ArticleView {
 		this.presenter.articleInfoChanged().addHandler(new Handler<EventArgs>() {
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				wikiLink.setContents("<a href=\"" + presenter.getArticleInfo().getLink() + "\" target=\"_blank\">" + "" +
-									 "</a>");
-				wikiLink.setTitle(presenter.getArticleInfo().getLink());
+				wikiLink.setContents("<a href='" + presenter.getArticleInfo().getArticleLink() + "' target='_blank'>" +
+									 presenter.getArticleInfo().getTitle() +  "</a>");
 				generalInfoGrid.refreshFields();
 			}
 		});
@@ -421,11 +430,12 @@ public class DefArticleView extends ArticleView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				userLink.setContents("<a href=\"" + presenter.getArticleInfo().getInitialAuthor() + "\" target=\"_blank\">" + ""
-				+ "</a>");
-				userLink.setTitle(presenter.getArticleInfo().getInitialAuthor());
+				userLink.setContents(
+						"<a href=\"" + presenter.getArticleInfo().getInitialAuthorLink() + "\" target=\"_blank\">" +
+						presenter.getArticleInfo().getInitialAuthor() + "</a>"
+				);
+				userLink.setTitle(presenter.getArticleInfo().getInitialAuthorLink());
 				generalInfoGrid.refreshFields();
-				Window.alert(presenter.getArticleInfo().getInitialAuthor());
 			}
 		});
 	}
@@ -442,23 +452,23 @@ public class DefArticleView extends ArticleView {
 	}
 
 	private void bindInfoBoxRecord() {
-		if(this.presenter.getHasInfoBox()) {
-			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Ja");
-		} else {
-			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
-		}
-		this.presenter.infoBoxChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				if(presenter.getHasInfoBox()) {
-					infoBoxRecord.setAttribute(valueColumn.getName(), "Ja");
-				} else {
-					infoBoxRecord.setAttribute(valueColumn.getName(), "Nein");
-				}
-				generalInfoGrid.refreshFields();
-			}
-		});
+//		if(this.presenter.getHasInfoBox()) {
+//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Ja");
+//		} else {
+//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
+//		}
+//		this.presenter.infoBoxChanged().addHandler(new Handler<EventArgs>() {
+//
+//			@Override
+//			public void invoke(Object sender, EventArgs e) {
+//				if(presenter.getHasInfoBox()) {
+//					infoBoxRecord.setAttribute(valueColumn.getName(), "Ja");
+//				} else {
+//					infoBoxRecord.setAttribute(valueColumn.getName(), "Nein");
+//				}
+//				generalInfoGrid.refreshFields();
+//			}
+//		});
 	}
 
 	private void bindPictureRecord() {
@@ -473,23 +483,23 @@ public class DefArticleView extends ArticleView {
 	}
 
 	private void bindNeedsEditRecord() {
-		if(this.presenter.articleNeedsEdit()) {
-			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Ja");
-		} else {
-			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
-		}
-		this.presenter.articleNeedsEditsChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs e) {
-				if(presenter.articleNeedsEdit()) {
-					infoBoxRecord.setAttribute(valueColumn.getName(), "Ja");
-				} else {
-					infoBoxRecord.setAttribute(valueColumn.getName(), "Nein");
-				}
-				generalInfoGrid.refreshFields();
-			}
-		});
+//		if(this.presenter.articleNeedsEdit()) {
+//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Ja");
+//		} else {
+//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
+//		}
+//		this.presenter.articleNeedsEditsChanged().addHandler(new Handler<EventArgs>() {
+//
+//			@Override
+//			public void invoke(Object sender, EventArgs e) {
+//				if(presenter.articleNeedsEdit()) {
+//					infoBoxRecord.setAttribute(valueColumn.getName(), "Ja");
+//				} else {
+//					infoBoxRecord.setAttribute(valueColumn.getName(), "Nein");
+//				}
+//				generalInfoGrid.refreshFields();
+//			}
+//		});
 	}
 
 	private void bindArticleLengthRecord() {

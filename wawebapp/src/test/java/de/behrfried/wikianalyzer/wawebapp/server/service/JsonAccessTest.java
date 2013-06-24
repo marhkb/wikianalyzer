@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
+import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.junit.*;
 
@@ -38,7 +39,7 @@ public class JsonAccessTest {
 	public void tearDown() throws Exception {}
 
 	@Test
-	public void testGetShortArticleInfo() {
+	public void testGetShortArticleInfo() throws ArticleNotExistException {
 		final ArticleInfo articleInfo = this.wikiAccess.getArticleInfo("Maus");
 		Assert.assertNotNull(articleInfo);
 	}

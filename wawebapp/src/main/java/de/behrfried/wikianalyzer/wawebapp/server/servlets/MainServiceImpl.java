@@ -19,6 +19,7 @@ package de.behrfried.wikianalyzer.wawebapp.server.servlets;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
 import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
@@ -48,8 +49,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
 		this.wikiAccess = wikiAccess;
 	}
 
-	public ArticleInfo sendArticleName(final String articleName) {
+	public ArticleInfo sendArticleName(final String articleName) throws ArticleNotExistException {
 		return this.wikiAccess.getArticleInfo(articleName);
 	}
-
 }

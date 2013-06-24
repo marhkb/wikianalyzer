@@ -16,17 +16,22 @@ public class ArticleInfo implements Serializable {
 	 */
 	private int pageid;
 
+	private String title;
+
+	private String initialAuthor;
+
+
 	/**
 	 *
 	 */
 	private Date creationDate;
 
+	private String articleLink;
+
 	/**
 	 *
 	 */
-	private String initialAuthor;
-
-	private String link;
+	private String initialAuthorLink;
 
 	private int images;
 
@@ -57,28 +62,6 @@ public class ArticleInfo implements Serializable {
 
 	public ArticleInfo() { }
 
-	public ArticleInfo(int pageid,
-					   Date creationDate,
-					   String initialAuthor,
-					   String link,
-					   int images,
-					   String categories,
-					   int bytes,
-					   List<AuthorAndCommits> authorsAndCommits,
-					   List<Revision> revisions,
-					   List<SimilarArticle> similarArticles) {
-		this.pageid = pageid;
-		this.creationDate = creationDate;
-		this.initialAuthor = initialAuthor;
-		this.link = link;
-		this.images = images;
-		this.categories = categories;
-		this.bytes = bytes;
-		this.authorsAndCommits = authorsAndCommits;
-		this.revisions = revisions;
-		this.similarArticles = similarArticles;
-	}
-
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
@@ -91,12 +74,12 @@ public class ArticleInfo implements Serializable {
 		this.pageid = pageid;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getInitialAuthor() {
@@ -107,12 +90,28 @@ public class ArticleInfo implements Serializable {
 		this.initialAuthor = initialAuthor;
 	}
 
-	public String getLink() {
-		return link;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public String getArticleLink() {
+		return articleLink;
+	}
+
+	public void setArticleLink(String articleLink) {
+		this.articleLink = articleLink;
+	}
+
+	public String getInitialAuthorLink() {
+		return initialAuthorLink;
+	}
+
+	public void setInitialAuthorLink(String initialAuthorLink) {
+		this.initialAuthorLink = initialAuthorLink;
 	}
 
 	public int getImages() {
@@ -161,6 +160,35 @@ public class ArticleInfo implements Serializable {
 
 	public void setSimilarArticles(List<SimilarArticle> similarArticles) {
 		this.similarArticles = similarArticles;
+	}
+
+	public ArticleInfo(int pageid,
+					   String title,
+					   String initialAuthor,
+					   Date creationDate,
+					   String articleLink,
+					   String initialAuthorLink,
+					   int images,
+					   String categories,
+					   int bytes,
+					   List<AuthorAndCommits> authorsAndCommits,
+					   List<Revision> revisions,
+					   List<SimilarArticle> similarArticles) {
+		this.pageid = pageid;
+		this.title = title;
+		this.initialAuthor = initialAuthor;
+		this.creationDate = creationDate;
+		this.articleLink = articleLink;
+		this.initialAuthorLink = initialAuthorLink;
+		this.images = images;
+		this.categories = categories;
+		this.bytes = bytes;
+		this.authorsAndCommits = authorsAndCommits;
+		this.revisions = revisions;
+		this.similarArticles = similarArticles;
+
+
+
 	}
 
 	/**
@@ -215,6 +243,8 @@ public class ArticleInfo implements Serializable {
 
 		private int diff;
 
+		private boolean isPartOfEditWar;
+
 		public Revision() { }
 
 		public Revision(int revid,
@@ -223,7 +253,8 @@ public class ArticleInfo implements Serializable {
 						String author,
 						String comment,
 						int bytes,
-						int diff) {
+						int diff,
+						boolean partOfEditWar) {
 			this.revid = revid;
 			this.parentid = parentid;
 			this.timestamp = timestamp;
@@ -231,6 +262,7 @@ public class ArticleInfo implements Serializable {
 			this.comment = comment;
 			this.bytes = bytes;
 			this.diff = diff;
+			isPartOfEditWar = partOfEditWar;
 		}
 
 		public int getRevid() {
@@ -287,6 +319,14 @@ public class ArticleInfo implements Serializable {
 
 		public void setDiff(int diff) {
 			this.diff = diff;
+		}
+
+		public boolean isPartOfEditWar() {
+			return isPartOfEditWar;
+		}
+
+		public void setPartOfEditWar(boolean partOfEditWar) {
+			isPartOfEditWar = partOfEditWar;
 		}
 	}
 

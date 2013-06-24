@@ -18,6 +18,7 @@ package de.behrfried.wikianalyzer.wawebapp.client.service;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
 /**
@@ -29,5 +30,5 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 @RemoteServiceRelativePath("main")
 public interface MainService extends RemoteService {
 
-	ArticleInfo sendArticleName(String articleName);
+	ArticleInfo sendArticleName(String articleName) throws ArticleNotExistException;
 }

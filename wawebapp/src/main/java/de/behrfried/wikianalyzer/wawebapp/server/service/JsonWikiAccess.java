@@ -21,6 +21,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,8 +45,14 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	@Override
-	public ArticleInfo getArticleInfo(String title) {
+	public ArticleInfo getArticleInfo(String title) throws ArticleNotExistException {
 		final int pageid = this.getPageId(title);
+
+		if(pageid == -1) {
+			/* article does not exist */
+			throw new ArticleNotExistException("Artikel \"" + title + "\" existiert nicht!");
+		}
+
 		final List<ArticleInfo.AuthorAndCommits> authorsAndCommits = new ArrayList<ArticleInfo.AuthorAndCommits>();
 		final List<ArticleInfo.Revision> revisions = new ArrayList<ArticleInfo.Revision>();
 
@@ -57,19 +64,20 @@ public class JsonWikiAccess implements WikiAccess {
 		/* get revisions of an article (max 500 are allowed) */
 		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
 		final Map<String, Integer> tmp = new HashMap<String, Integer>();
-		while(true) {
+		while(lastRev != -1) {
 			final String response1 =
 					this.requester.getResult(
 							API + "action=query&format=json&prop=revisions&rvprop=user|ids" +
 							"|timestamp|comment|size&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" +
-							pageid + "&rvstartid=" + lastRev
+							pageid + "&rvstartid=" + lastRev + "&continue="
 					);
 
-			final JsonObject page = this.parser.parse(response1)
-											   .getAsJsonObject()
-											   .getAsJsonObject("query")
-											   .getAsJsonObject("pages")
-											   .getAsJsonObject(pageid + "");
+			final JsonObject root = this.parser.parse(response1)
+											   .getAsJsonObject();
+			final JsonObject page = root
+					.getAsJsonObject("query")
+					.getAsJsonObject("pages")
+					.getAsJsonObject(pageid + "");
 
 			if(!page.has("revisions")) {
 				break;
@@ -78,7 +86,6 @@ public class JsonWikiAccess implements WikiAccess {
 			final JsonArray w = page.getAsJsonArray("revisions");
 			for(JsonElement obj : w) {
 
-				//{"revid":69797531,"parentid":69352711,"user":"80.143.242.119","anon":"","timestamp":"2010-01-25T18:38:06Z","diff":{"notcached":""}}
 				final JsonObject jsonObj = obj.getAsJsonObject();
 				final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
 				if(!tmp.containsKey(author)) {
@@ -98,7 +105,8 @@ public class JsonWikiAccess implements WikiAccess {
 									author,
 									jsonObj.getAsJsonPrimitive("comment").getAsString(),
 									jsonObj.getAsJsonPrimitive("size").getAsInt(),
-									0
+									0,
+									false
 							)
 					);
 				} catch(ParseException e) {
@@ -115,7 +123,15 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 				initialAuthor = w.get(0).getAsJsonObject().getAsJsonPrimitive("user").getAsString();
 			}
-			lastRev = w.get(w.size() - 1).getAsJsonObject().getAsJsonPrimitive("revid").getAsInt() + 1;
+			//lastRev = w.get(w.size() - 1).getAsJsonObject().getAsJsonPrimitive("revid").getAsInt() + 1;
+			lastRev = root.has("continue") ? root
+					.getAsJsonObject("continue")
+					.getAsJsonPrimitive("rvcontinue")
+					.getAsInt()
+
+					:
+
+					-1;
 		}
 
 
@@ -123,16 +139,24 @@ public class JsonWikiAccess implements WikiAccess {
 			authorsAndCommits.add(new ArticleInfo.AuthorAndCommits(entry.getKey(), entry.getValue()));
 		}
 
-		/* set diffs in revisions */
+		/* set diffs in revisions and look for edit wars */
 		for(int i = 1; i < revisions.size(); i++) {
 			revisions.get(i).setDiff(revisions.get(i).getBytes() - revisions.get(i - 1).getBytes());
+		}
+		Date lastRevert;
+		final List<ArticleInfo.Revision> revTmp = new ArrayList<ArticleInfo.Revision>();
+		for(int i = 0; i < revisions.size(); i++) {
+			final String comment = revisions.get(i).getComment();
+			if(comment.startsWith("Änderungen von ") && comment.contains(" auf die letzte Version von ")) {
+
+			}
 		}
 
 		/* get similiar articles */
 		// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
 		final String similar = this.requester.getResult(
 				API +
-				"action=query&format=json&list=search&srlimit=500&srsearch=" + title
+				"action=query&format=json&list=search&srlimit=500&srsearch=" + this.convertTitle(title)
 		);
 		final JsonArray search = this.parser.parse(similar)
 											.getAsJsonObject()
@@ -142,74 +166,76 @@ public class JsonWikiAccess implements WikiAccess {
 		final List<ArticleInfo.SimilarArticle> similarArticles =
 				new ArrayList<ArticleInfo.SimilarArticle>(search.size());
 
-		for(final JsonElement obj : search) {
-			final JsonObject jsonObj = obj.getAsJsonObject();
-			final String simTitle = jsonObj.getAsJsonPrimitive("title").getAsString();
-			final int simPageid = this.getPageId(simTitle);
-
-			if(simPageid == pageid) {
-				continue;
-			}
-
-			/* get categories */
-			final String categories = this.getCategories(simPageid);
-
-			/* get creation date */
-			Date simCreationDate = null;
-			final String creationDateStr = this.requester.getResult(
-					API + "action=query&format=json&prop=revisions&rvprop=timestamp&rvlimit=1&rvdir=newer&pageids="
-					+ simPageid
-			);
-			try {
-				simCreationDate = this.formatter.parse(
-						this.parser
-								.parse(creationDateStr)
-								.getAsJsonObject()
-								.getAsJsonObject("query")
-								.getAsJsonObject("pages")
-								.getAsJsonObject(simPageid + "")
-								.getAsJsonArray
-										("revisions")
-								.get(0)
-								.getAsJsonObject()
-								.getAsJsonPrimitive("timestamp")
-								.getAsString()
-				);
-			} catch(ParseException e) {
-				this.logger.error(e.getMessage(), e);
-			}
-
-
-			similarArticles.add(
-					new ArticleInfo.SimilarArticle(
-							simTitle,
-							categories,
-							simCreationDate
-					)
-			);
-
-		}
+//		for(final JsonElement obj : search) {
+//			final JsonObject jsonObj = obj.getAsJsonObject();
+//			final String simTitle = jsonObj.getAsJsonPrimitive("title").getAsString();
+//			final int simPageid = this.getPageId(simTitle);
+//
+//			if(simPageid == pageid) {
+//				continue;
+//			}
+//
+//			/* get categories */
+//			final String categories = this.getCategories(simPageid);
+//
+//			/* get creation date */
+//			Date simCreationDate = null;
+//			final String creationDateStr = this.requester.getResult(
+//					API + "action=query&format=json&prop=revisions&rvprop=timestamp&rvlimit=1&rvdir=newer&pageids="
+//					+ simPageid
+//			);
+//			try {
+//				simCreationDate = this.formatter.parse(
+//						this.parser
+//								.parse(creationDateStr)
+//								.getAsJsonObject()
+//								.getAsJsonObject("query")
+//								.getAsJsonObject("pages")
+//								.getAsJsonObject(simPageid + "")
+//								.getAsJsonArray
+//										("revisions")
+//								.get(0)
+//								.getAsJsonObject()
+//								.getAsJsonPrimitive("timestamp")
+//								.getAsString()
+//				);
+//			} catch(ParseException e) {
+//				this.logger.error(e.getMessage(), e);
+//			}
+//
+//
+//			similarArticles.add(
+//					new ArticleInfo.SimilarArticle(
+//							simTitle,
+//							categories,
+//							simCreationDate
+//					)
+//			);
+//
+//		}
 
 		/* get number of images */
 		final String imageStr = this.requester.getResult(
 				API + "action=query&format=json&prop=images&pageids=" + pageid
 		);
 		int numOfImages = this.parser.parse(imageStr)
-				.getAsJsonObject()
-				.getAsJsonObject("query")
-				.getAsJsonObject("pages")
-				.getAsJsonObject(pageid + "")
-				.getAsJsonArray("images")
-				.size();
+									 .getAsJsonObject()
+									 .getAsJsonObject("query")
+									 .getAsJsonObject("pages")
+									 .getAsJsonObject(pageid + "")
+									 .getAsJsonArray("images")
+									 .size();
 
 		return new ArticleInfo(
 				pageid,
-				creationDate,
+				title,
 				initialAuthor,
+				creationDate,
 				"http://de.wikipedia.org/wiki/" + title.replaceAll(" ", "_"),
+				"http://de.wikipedia.org/wiki/Benutzer:" + initialAuthor,
 				numOfImages,
 				this.getCategories(pageid),
-				revisions.get(0).getBytes(),
+				revisions.get(revisions.size() - 1).getBytes(),
 				authorsAndCommits,
 				revisions,
 				similarArticles
@@ -254,6 +280,10 @@ public class JsonWikiAccess implements WikiAccess {
 			stringBuilder.append(inner.getAsJsonObject().getAsJsonPrimitive("title").getAsString());
 			stringBuilder.append("; ");
 		}
-		return stringBuilder.toString();
+		final String result = stringBuilder.toString().replaceAll("Kategorie:", "");
+		if(result.length() == 0) {
+			return result;
+		}
+		return result.substring(0, result.length() - 2);
 	}
 }

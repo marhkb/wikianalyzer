@@ -35,9 +35,9 @@ public class DefArticleAnaView extends ArticleAnaView {
 	private final static String ARTICLE_GRID_PARENT = "articleGridParent";
 	private final static String ARTICLE_GRID_DATE = "articleGridDate";
 	private final static String ARTICLE_GRID_AUTHOR = "articleGridAuthor";
-	private final static String ARTICLE_GRID_BYTES = "articleGridQuantity";
-	private final static String ARTICLE_GRID_DIFF = "articleGridAmount";
-	private final static String ARTICLE_GRID_COMMENT = "articleGridEditType";
+	private final static String ARTICLE_GRID_BYTES = "articleGridBytes";
+	private final static String ARTICLE_GRID_DIFF = "articleGridDiff";
+	private final static String ARTICLE_GRID_COMMENT = "articleGridComment";
 	private final Presenter presenter;
 	private final Messages messages;
 	private HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
@@ -48,7 +48,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 	private ListGridField authorGridAuthor, authorGridCommits, authorGridQuantity, articleGridRevision,
 			articleGridParent,
 			articleGridDate, articleGridAuthor,
-			articleGridQuantity, articleGridAmount, articleGridEditType, categoryGridFrom, categoryGridTill, categoryGridCategory,
+			articleGridBytes, articleGridDiff, articleGridComment, categoryGridFrom, categoryGridTill, categoryGridCategory,
 			simCatGridSimilarArticle, simCatGridCategory, simCatGridCreationDate;
 	private HTMLPanel chartContainer;
 
@@ -94,13 +94,13 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleGridParent = new ListGridField(ARTICLE_GRID_PARENT, "Parent");
 		this.articleGridDate = new ListGridField(ARTICLE_GRID_DATE, "Änderungsdatum");
 		this.articleGridAuthor = new ListGridField(ARTICLE_GRID_AUTHOR, "Author");
-		this.articleGridQuantity = new ListGridField(ARTICLE_GRID_BYTES, "Bytes");
-		this.articleGridAmount = new ListGridField(ARTICLE_GRID_DIFF, "Diff");
-		this.articleGridEditType = new ListGridField(ARTICLE_GRID_COMMENT, "Comment");
+		this.articleGridBytes = new ListGridField(ARTICLE_GRID_BYTES, "Bytes");
+		this.articleGridDiff = new ListGridField(ARTICLE_GRID_DIFF, "Diff");
+		this.articleGridComment = new ListGridField(ARTICLE_GRID_COMMENT, "Comment");
 		this.articleGrid = new ListGrid();
 		this.articleGrid.setFields(
 				this.articleGridRevision, this.articleGridParent, this.articleGridDate, this.articleGridAuthor,
-				this.articleGridQuantity, this.articleGridAmount, this.articleGridEditType
+				this.articleGridBytes, this.articleGridDiff, this.articleGridComment
 		);
 		this.articleGrid.setWidth("50%");
 		this.articleAnaLayout = new HLayout();
@@ -210,10 +210,10 @@ public class DefArticleAnaView extends ArticleAnaView {
 						}
 						for(final ArticleInfo.AuthorAndCommits aac : presenter.getArticleInfo().getAuthorsAndCommits()) {
 							final ListGridRecord lgr = new ListGridRecord();
-							lgr.setAttribute(AUTHOR_GRID_AUTHOR, aac.getAuthor());
-							lgr.setAttribute(AUTHOR_GRID_COMMITS, aac.getNumOfCommits());
+							lgr.setAttribute(authorGridAuthor.getName(), aac.getAuthor());
+							lgr.setAttribute(authorGridCommits.getName(), aac.getNumOfCommits());
 							lgr.setAttribute(
-									AUTHOR_GRID_QUANTITY,
+									authorGridQuantity.getName(),
 									NumberFormat.getPercentFormat().format(
 											aac.getNumOfCommits() / (double)presenter.getArticleInfo()
 																					 .getAuthorsAndCommits().size()
@@ -269,9 +269,13 @@ public class DefArticleAnaView extends ArticleAnaView {
 
 						for(final ArticleInfo.Revision rev : presenter.getArticleInfo().getRevisions()) {
 							final ListGridRecord lgr = new ListGridRecord();
-							lgr.setAttribute(ARTICLE_GRID_REVISION, rev.getRevid());
-							lgr.setAttribute(ARTICLE_GRID_PARENT, rev.getParentid());
-							lgr.setAttribute(ARTICLE_GRID_DATE, rev.getTimestamp());
+							lgr.setAttribute(articleGridRevision.getName(), rev.getRevid());
+							lgr.setAttribute(articleGridParent.getName(), rev.getParentid());
+							lgr.setAttribute(articleGridDate.getName(), rev.getTimestamp());
+							lgr.setAttribute(articleGridAuthor.getName(), rev.getAuthor());
+							lgr.setAttribute(articleGridBytes.getName(), rev.getBytes());
+							lgr.setAttribute(articleGridDiff.getName(), rev.getDiff());
+							lgr.setAttribute(articleGridComment.getName(), rev.getComment());
 							articleGrid.addData(lgr);
 						}
 					}

@@ -16,11 +16,12 @@
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
+import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
 public interface WikiAccess {
 
-	ArticleInfo getArticleInfo(String title);
+	ArticleInfo getArticleInfo(String title) throws ArticleNotExistException;
 	
 	int getPageId(String title);
 }
