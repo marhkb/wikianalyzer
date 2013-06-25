@@ -28,11 +28,11 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article.DefArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefExpertSearchView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefUserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefUserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.usercomparison.DefUserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.ExpertSearchView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserComparisonView;
 
 /**
  * Main Module in the web application. Defines which implementation is chosen

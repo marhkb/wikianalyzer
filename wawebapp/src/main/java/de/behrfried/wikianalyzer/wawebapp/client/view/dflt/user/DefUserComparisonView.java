@@ -14,8 +14,9 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.usercomparison;
+package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Button;
@@ -30,8 +31,7 @@ import com.smartgwt.client.widgets.menu.IMenuButton;
 import com.smartgwt.client.widgets.menu.Menu;
 import com.smartgwt.client.widgets.menu.MenuItem;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user.DefUserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserComparisonView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
 
 /**
  * Default implementation for {@link UserComparisonView}.
@@ -43,14 +43,16 @@ public class DefUserComparisonView extends UserComparisonView {
 	private Label waLabel, genUsrInfLabel, usrAnaLabel, userOneLabel, userTwoLabel;
 	private ComboBoxItem searchBox1, searchBox2;
 	private DynamicForm searchBoxOneContainer, searchBoxTwoContainer;
-	private ListGrid generalUsrInfoGrid;
-	private ListGridField usrAttributeColumn, usrValueColumn;
+	private ListGrid userComparisonGrid;
+	private ListGridField comparisonAttribute, userOneValue, userTwoValue;
+	private HTMLPanel userOneChart, userTwoChart;
 	private HLayout searchLayout, usrInfoAnalyzationLayout, searchInfoLayout;
 	private VLayout siteLayoutContainer, genUsrInfLayout, usrAnaLayout;
 	private Button searchButton;
 	private IMenuButton timeMenuButton;
 	private Menu timeSpanMenu;
 	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
+	private DefUserComparisonAnaView userComparisonAnaView;
 	/**
 	 * parent view of this {@link DefUserComparisonView}
 	 */
@@ -84,7 +86,7 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.waLabel.setHeight100();
 		this.waLabel.setMargin(10);
 		
-		this.userOneLabel = new Label("1. Usernamen:");
+		this.userOneLabel = new Label("Nutzer 1:");
 		this.userOneLabel.setWidth(100);
 		this.userOneLabel.setAlign(Alignment.RIGHT);
 		this.searchBox1 = new ComboBoxItem();
@@ -94,7 +96,7 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.searchBoxOneContainer.setBackgroundColor("white");
 		this.searchBoxOneContainer.setItems(this.searchBox1);
 
-		this.userTwoLabel = new Label(" vergleichen mit 2. Usernamen: ");
+		this.userTwoLabel = new Label(" vergleichen mit 2. Nutzer: ");
 		this.userTwoLabel.setWidth(150);
 		this.searchBox2 = new ComboBoxItem();
 		this.searchBox2.setWidth(150);
@@ -111,28 +113,33 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.searchLayout.addMembers(this.waLabel, this.userOneLabel, this.searchBoxOneContainer, this.userTwoLabel, this.searchBoxTwoContainer, this.searchButton);
 		this.searchLayout.setMembersMargin(10);
 
-		this.timeSpanMenu = new Menu();
-		this.randomSpan = new MenuItem("random time");
-		this.randomSpan.setChecked(true);
-		this.timeSpanMenu.addItem(this.randomSpan);
-		this.hourSpan = new MenuItem("last hour");
-		this.timeSpanMenu.addItem(this.hourSpan);
-		this.daySpan = new MenuItem("last day");
-		this.timeSpanMenu.addItem(this.daySpan);
-		this.weekSpan = new MenuItem("last week");
-		this.timeSpanMenu.addItem(this.weekSpan);
-		this.monthSpan = new MenuItem("last month");
-		this.timeSpanMenu.addItem(this.monthSpan);
-		this.yearSpan = new MenuItem("last year");
-		this.timeSpanMenu.addItem(this.yearSpan);
-		this.chooseSpan = new MenuItem("choose timespan");
-		this.timeSpanMenu.addItem(this.chooseSpan);
-		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
-		
-		
+//		this.timeSpanMenu = new Menu();
+//		this.randomSpan = new MenuItem("random time");
+//		this.randomSpan.setChecked(true);
+//		this.timeSpanMenu.addItem(this.randomSpan);
+//		this.hourSpan = new MenuItem("last hour");
+//		this.timeSpanMenu.addItem(this.hourSpan);
+//		this.daySpan = new MenuItem("last day");
+//		this.timeSpanMenu.addItem(this.daySpan);
+//		this.weekSpan = new MenuItem("last week");
+//		this.timeSpanMenu.addItem(this.weekSpan);
+//		this.monthSpan = new MenuItem("last month");
+//		this.timeSpanMenu.addItem(this.monthSpan);
+//		this.yearSpan = new MenuItem("last year");
+//		this.timeSpanMenu.addItem(this.yearSpan);
+//		this.chooseSpan = new MenuItem("choose timespan");
+//		this.timeSpanMenu.addItem(this.chooseSpan);
+//		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);		
 		
 		this.siteLayoutContainer = new VLayout();
-		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton);
+		this.userComparisonAnaView = new DefUserComparisonAnaView(this.presenter, this.messages);
+		this.userComparisonAnaView.setAlign(Alignment.CENTER);
+		this.userComparisonAnaView.setWidth("80%");
+		this.siteLayoutContainer.addMember(this.searchLayout);
+		//this.siteLayoutContainer.addMember(this.timeMenuButton);
+		this.siteLayoutContainer.addMember(this.userComparisonAnaView);
+		this.siteLayoutContainer.setWidth100();
+		this.siteLayoutContainer.setHeight100();
 		this.addChild(this.siteLayoutContainer);
 	}
 
