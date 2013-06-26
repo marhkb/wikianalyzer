@@ -6,6 +6,7 @@ import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
 import com.google.inject.Inject;
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
@@ -50,6 +51,8 @@ public class DefUserAnaView extends UserAnaView {
 
 	private void init() {
 		this.userArticleLabel = new Label("Vom Benutzer bearbeitete Artikel");
+		this.userArticleLabel.setHeight("15px");
+		this.userArticleLabel.setAlign(Alignment.CENTER);
 		this.userArticleChartContainer = new HTMLPanel("");
 		this.userArticleChartContainer.setWidth("50%");
 		this.createArticleChart();
@@ -61,23 +64,31 @@ public class DefUserAnaView extends UserAnaView {
 		this.userArticleGrid.setWidth("50%");
 		this.userArticleGrid.setFields(this.articleArticleColumn, this.articleCategoryColumn, this.articleCommitsColumn, this.articleQuantityColumn);
 		this.userArticleAnaContainer = new HLayout();
-		this.userArticleAnaContainer.addMember(this.userArticleChartContainer);
+		// this.userArticleAnaContainer.addMember(this.userArticleChartContainer);
 		this.userArticleAnaContainer.addMember(this.userArticleGrid);
+		this.userArticleAnaContainer.setHeight("50%");
 
-		this.userEditTypeLabel = new Label();
+		this.userEditTypeLabel = new Label("Arten von Änderungen");
+		this.userEditTypeLabel.setHeight("15px");
+		this.userEditTypeLabel.setAlign(Alignment.CENTER);
 		this.userEditTypeChartContainer = new HTMLPanel("");
 		this.createEditTypeChart();
 		this.editTypeEditTypeColumn = new ListGridField("typeColumn", "Art der Änderung");
 		this.editTypeCommitsColumn = new ListGridField("commitsColumn", "Commits");
 		this.editTypeQuantityColumn = new ListGridField("quantityColumn", "Quantität");
 		this.userEditTypeGrid = new ListGrid();
+		this.userEditTypeGrid.setWidth("50%");
 		this.userEditTypeGrid.setFields(this.editTypeEditTypeColumn, this.editTypeCommitsColumn, this.editTypeQuantityColumn);
 		this.userEditTypeContainer = new HLayout();
-		this.userEditTypeContainer.addMember(this.userEditTypeChartContainer);
+		// this.userEditTypeContainer.addMember(this.userEditTypeChartContainer);
 		this.userEditTypeContainer.addMember(this.userEditTypeGrid);
+		this.userEditTypeContainer.setHeight("50%");
 
 		this.userAnaContainer = new VLayout();
-		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer, this.userEditTypeContainer);
+		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer, this.userEditTypeLabel, this.userEditTypeContainer);
+		this.userAnaContainer.setMargin(10);
+		this.userAnaContainer.setHeight100();
+		this.userAnaContainer.setWidth100();
 		this.addChild(this.userAnaContainer);
 	}
 

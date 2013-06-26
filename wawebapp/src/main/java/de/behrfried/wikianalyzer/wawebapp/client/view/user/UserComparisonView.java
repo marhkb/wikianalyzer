@@ -14,23 +14,20 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.presenter;
+package de.behrfried.wikianalyzer.wawebapp.client.view.user;
 
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
-import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
+import de.behrfried.wikianalyzer.wawebapp.client.view.View;
 
-/**
- * Default implementation of {@link UserComparisonView.Presenter}
- * 
- * @author marcus
- * 
- */
-public class DefaultUserComparisonPresenter implements UserComparisonView.Presenter {
+public abstract class UserComparisonView extends View {
 
-	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Base interface for user comparison presenters.
+	 * 
+	 * @author marcus
+	 * 
+	 */
+	public interface Presenter extends PresenterBase {
+
 	}
-
 }

@@ -41,8 +41,8 @@ import com.smartgwt.client.widgets.tab.events.TabSelectedHandler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.ExpertSearchView;
+import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
-import de.behrfried.wikianalyzer.wawebapp.client.view.usercomparison.UserComparisonView;
 
 /**
  * Default implementation of {@link ShellView}
