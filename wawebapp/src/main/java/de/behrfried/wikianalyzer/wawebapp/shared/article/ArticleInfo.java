@@ -186,9 +186,6 @@ public class ArticleInfo implements Serializable {
 		this.authorsAndCommits = authorsAndCommits;
 		this.revisions = revisions;
 		this.similarArticles = similarArticles;
-
-
-
 	}
 
 	/**
