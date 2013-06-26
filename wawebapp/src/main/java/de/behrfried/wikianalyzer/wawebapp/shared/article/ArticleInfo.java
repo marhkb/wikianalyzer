@@ -49,6 +49,12 @@ public class ArticleInfo implements Serializable {
 	 */
 	private List<Revision> revisions;
 
+
+	/**
+	 *
+	 */
+	private List<RevsPerDate> revsPerDates;
+
 	/**
 	 *
 	 */
@@ -162,6 +168,14 @@ public class ArticleInfo implements Serializable {
 		this.similarArticles = similarArticles;
 	}
 
+	public List<RevsPerDate> getRevsPerDates() {
+		return revsPerDates;
+	}
+
+	public void setRevsPerDates(List<RevsPerDate> revsPerDates) {
+		this.revsPerDates = revsPerDates;
+	}
+
 	public ArticleInfo(int pageid,
 					   String title,
 					   String initialAuthor,
@@ -173,6 +187,7 @@ public class ArticleInfo implements Serializable {
 					   int bytes,
 					   List<AuthorAndCommits> authorsAndCommits,
 					   List<Revision> revisions,
+					   List<RevsPerDate> revsPerDates,
 					   List<SimilarArticle> similarArticles) {
 		this.pageid = pageid;
 		this.title = title;
@@ -185,6 +200,7 @@ public class ArticleInfo implements Serializable {
 		this.bytes = bytes;
 		this.authorsAndCommits = authorsAndCommits;
 		this.revisions = revisions;
+		this.revsPerDates = revsPerDates;
 		this.similarArticles = similarArticles;
 	}
 
@@ -324,6 +340,37 @@ public class ArticleInfo implements Serializable {
 
 		public void setPartOfEditWar(boolean partOfEditWar) {
 			isPartOfEditWar = partOfEditWar;
+		}
+	}
+
+
+	public final static class RevsPerDate implements Serializable {
+
+		private Date date;
+
+		private int numOfRevs;
+
+		public RevsPerDate() { }
+
+		public RevsPerDate(Date date, int numOfRevs) {
+			this.date = date;
+			this.numOfRevs = numOfRevs;
+		}
+
+		public Date getDate() {
+			return date;
+		}
+
+		public void setDate(Date date) {
+			this.date = date;
+		}
+
+		public int getNumOfRevs() {
+			return numOfRevs;
+		}
+
+		public void setNumOfRevs(int numOfRevs) {
+			this.numOfRevs = numOfRevs;
 		}
 	}
 

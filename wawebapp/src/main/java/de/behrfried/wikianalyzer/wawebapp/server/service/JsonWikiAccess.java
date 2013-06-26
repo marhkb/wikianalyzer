@@ -42,7 +42,7 @@ public class JsonWikiAccess implements WikiAccess {
 	private final Logger logger = LoggerFactory.getLogger(JsonWikiAccess.class);
 	private final WikiApi requester;
 	private final JsonParser parser = new JsonParser();
-	private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
 
 
 	@Inject
@@ -61,6 +61,7 @@ public class JsonWikiAccess implements WikiAccess {
 
 		final List<ArticleInfo.AuthorAndCommits> authorsAndCommits = new ArrayList<ArticleInfo.AuthorAndCommits>();
 		final List<ArticleInfo.Revision> revisions = new ArrayList<ArticleInfo.Revision>();
+		final List<ArticleInfo.RevsPerDate> revsPerDates = new ArrayList<ArticleInfo.RevsPerDate>();
 
 		int lastRev = 0;
 
@@ -69,7 +70,8 @@ public class JsonWikiAccess implements WikiAccess {
 
 		/* get revisions of an article (max 500 are allowed) */
 		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
-		final Map<String, Integer> tmp = new HashMap<String, Integer>();
+		final Map<String, Integer> authorsAndCommitsTmp = new HashMap<String, Integer>();
+		final Map<Long, Integer> revsPerDatesTmp = new HashMap<Long, Integer>();
 		while(lastRev != -1) {
 			final String response1 =
 					this.requester.getResult(
@@ -90,14 +92,18 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 
 			final JsonArray w = page.getAsJsonArray("revisions");
+
+			/*
+			 * iterate the revisions
+			 */
 			for(JsonElement obj : w) {
 
 				final JsonObject jsonObj = obj.getAsJsonObject();
 				final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
-				if(!tmp.containsKey(author)) {
-					tmp.put(author, 1);
+				if(!authorsAndCommitsTmp.containsKey(author)) {
+					authorsAndCommitsTmp.put(author, 1);
 				} else {
-					tmp.put(author, tmp.get(author) + 1);
+					authorsAndCommitsTmp.put(author, authorsAndCommitsTmp.get(author) + 1);
 				}
 
 				try {
@@ -107,6 +113,7 @@ public class JsonWikiAccess implements WikiAccess {
 									jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
 									this.formatter.parse(
 											jsonObj.getAsJsonPrimitive("timestamp").getAsString()
+												   .replace('T', '_')
 									),
 									author,
 									jsonObj.getAsJsonPrimitive("comment").getAsString(),
@@ -122,7 +129,7 @@ public class JsonWikiAccess implements WikiAccess {
 			if(lastRev == 0) {
 				try {
 					creationDate = this.formatter.parse(
-							w.get(0).getAsJsonObject().getAsJsonPrimitive("timestamp").getAsString()
+							w.get(0).getAsJsonObject().getAsJsonPrimitive("timestamp").getAsString().replace('T', '_')
 					);
 				} catch(ParseException e) {
 					this.logger.error(e.getMessage(), e);
@@ -141,15 +148,59 @@ public class JsonWikiAccess implements WikiAccess {
 		}
 
 
-		for(Map.Entry<String, Integer> entry : tmp.entrySet()) {
+		for(Map.Entry<String, Integer> entry : authorsAndCommitsTmp.entrySet()) {
 			authorsAndCommits.add(new ArticleInfo.AuthorAndCommits(entry.getKey(), entry.getValue()));
 		}
+		Collections.sort(
+				authorsAndCommits, new Comparator<ArticleInfo.AuthorAndCommits>() {
+			@Override
+			public int compare(ArticleInfo.AuthorAndCommits authorAndCommits,
+							   ArticleInfo.AuthorAndCommits authorAndCommits2) {
+				return authorAndCommits2.getNumOfCommits() - authorAndCommits.getNumOfCommits();
+			}
+		}
+		);
 
 		/* set diffs in revisions and look for edit wars */
 		for(int i = 1; i < revisions.size(); i++) {
 			revisions.get(i).setDiff(revisions.get(i).getBytes() - revisions.get(i - 1).getBytes());
 		}
-		Date lastRevert;
+
+		Date currentDate = new Date(creationDate.getYear(), creationDate.getMonth(), creationDate.getDate());
+		while(currentDate.before(revisions.get(revisions.size() - 1).getTimestamp())) {
+			revsPerDatesTmp.put(currentDate.getTime(), 0);
+			currentDate = new Date(currentDate.getTime() + 86400000);
+			this.logger.info(currentDate.toString());
+		}
+		for(final ArticleInfo.Revision revision : revisions) {
+			final Date key = new Date(
+					revision.getTimestamp().getYear(),
+					revision.getTimestamp().getMonth(),
+					revision.getTimestamp().getDate()
+			);
+			this.logger.info(key.toString());
+			long time = key.getTime();
+			try {
+				if(!revsPerDatesTmp.containsKey(time)) {
+					time -= 3600000;
+				}
+				revsPerDatesTmp.put(time, revsPerDatesTmp.get(time) + 1);
+			} catch(Exception e) {
+				this.logger.error(e.getMessage());
+			}
+
+		}
+		for(Map.Entry<Long, Integer> entry : revsPerDatesTmp.entrySet()) {
+			revsPerDates.add(new ArticleInfo.RevsPerDate(new Date(entry.getKey()), entry.getValue()));
+		}
+		Collections.sort(revsPerDates, new Comparator<ArticleInfo.RevsPerDate>() {
+			@Override
+			public int compare(ArticleInfo.RevsPerDate revsPerDate,
+							   ArticleInfo.RevsPerDate revsPerDate2) {
+				return revsPerDate.getDate().compareTo(revsPerDate2.getDate());
+			}
+		});
+
 		final List<ArticleInfo.Revision> revTmp = new ArrayList<ArticleInfo.Revision>();
 		for(int i = 0; i < revisions.size(); i++) {
 			final String comment = revisions.get(i).getComment();
@@ -244,6 +295,7 @@ public class JsonWikiAccess implements WikiAccess {
 				revisions.get(revisions.size() - 1).getBytes(),
 				authorsAndCommits,
 				revisions,
+				revsPerDates,
 				similarArticles
 		);
 	}
@@ -284,13 +336,13 @@ public class JsonWikiAccess implements WikiAccess {
 		final StringBuilder stringBuilder = new StringBuilder();
 		for(JsonElement inner : cats) {
 			stringBuilder.append(inner.getAsJsonObject().getAsJsonPrimitive("title").getAsString());
-			stringBuilder.append("; ");
+			stringBuilder.append("\n");
 		}
 		final String result = stringBuilder.toString().replaceAll("Kategorie:", "");
 		if(result.length() == 0) {
 			return result;
 		}
-		return result.substring(0, result.length() - 2);
+		return result.substring(0, result.length() - 1);
 	}
 	
 	@Override

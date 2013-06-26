@@ -6,7 +6,6 @@ import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.DataTable;
 import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.ColumnChart;
-import com.google.gwt.visualization.client.visualizations.ScatterChart;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Label;
@@ -22,8 +21,6 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView.Presenter;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class DefArticleAnaView extends ArticleAnaView {
@@ -163,20 +160,11 @@ public class DefArticleAnaView extends ArticleAnaView {
 							@Override
 							public void run() {
 								DataTable data = DataTable.create();
-								data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
-								data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Commits");
+								data.addColumn(AbstractDataTable.ColumnType.STRING, "User");
+								data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Commits insgesamt");
 
 								final List<ArticleInfo.AuthorAndCommits> authorAndCommits =
 										presenter.getArticleInfo().getAuthorsAndCommits();
-								Collections.sort(
-										authorAndCommits, new Comparator<ArticleInfo.AuthorAndCommits>() {
-									@Override
-									public int compare(ArticleInfo.AuthorAndCommits authorAndCommits,
-													   ArticleInfo.AuthorAndCommits authorAndCommits2) {
-										return authorAndCommits2.getNumOfCommits() - authorAndCommits.getNumOfCommits();
-									}
-								}
-								);
 
 								final int rows = Math.min(10, authorAndCommits.size());
 								data.addRows(rows);
@@ -186,6 +174,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 									data.setValue(i, 1, authorAndCommits.get(i).getNumOfCommits());
 								}
 								ColumnChart.Options options = ColumnChart.Options.create();
+								options.setShowCategories(false);
 								options.setWidth(500);
 								options.setHeight(250);
 								options.set3D(true);
@@ -237,22 +226,28 @@ public class DefArticleAnaView extends ArticleAnaView {
 							@Override
 							public void run() {
 								DataTable data = DataTable.create();
-								data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
-								data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
-								data.addRows(2);
-								data.setValue(0, 0, "Work");
-								data.setValue(0, 1, 14);
-								data.setValue(1, 0, "Sleep");
-								data.setValue(1, 1, 10);
-								ScatterChart.Options options = ScatterChart.Options.create();
+								data.addColumn(AbstractDataTable.ColumnType.DATE, "Datum");
+								data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Anzahl Commits");
+
+								final List<ArticleInfo.RevsPerDate> authorAndCommits =
+										presenter.getArticleInfo().getRevsPerDates();
+								final int rows = authorAndCommits.size();
+								data.addRows(rows);
+
+								for(int i = 0; i < rows; i++) {
+									data.setValue(i, 0, authorAndCommits.get(i).getDate());
+									data.setValue(i, 1, authorAndCommits.get(i).getNumOfRevs());
+								}
+								ColumnChart.Options options = ColumnChart.Options.create();
+								options.setShowCategories(false);
 								options.setWidth(500);
-								options.setHeight(250);
-								options.setTitle("My Daily Activities");
-								ScatterChart chart = new ScatterChart(data, options);
+								options.setHeight(200);
+								options.setTitle("Revisionsverlauf");
+								ColumnChart chart = new ColumnChart(data, options);
 								articleAnaChartContainer.add(chart);
 							}
 						};
-						VisualizationUtils.loadVisualizationApi(r, ScatterChart.PACKAGE);
+						VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
 					}
 				}
 		);
