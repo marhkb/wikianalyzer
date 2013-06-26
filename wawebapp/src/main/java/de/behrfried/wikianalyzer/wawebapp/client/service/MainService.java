@@ -19,7 +19,13 @@ package de.behrfried.wikianalyzer.wawebapp.client.service;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.CriterionNotFoundException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 /**
  * Test service
@@ -31,4 +37,7 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 public interface MainService extends RemoteService {
 
 	ArticleInfo sendArticleName(String articleName) throws ArticleNotExistException;
+	UserInfo sendUserName(String userName) throws UserNotExistException;
+	UserComparisonInfo sendUserForComparison(String userName) throws UserForComparisonNotExistException;
+	CriterionInfo sendCriterionInfo() throws CriterionNotFoundException;
 }

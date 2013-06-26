@@ -20,9 +20,15 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.CriterionNotFoundException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
 import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,4 +58,21 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
 	public ArticleInfo sendArticleName(final String articleName) throws ArticleNotExistException {
 		return this.wikiAccess.getArticleInfo(articleName);
 	}
+
+	@Override
+    public UserInfo sendUserName(final String userName) throws UserNotExistException {
+	    return this.wikiAccess.getUserInfo(userName);
+    }
+
+	@Override
+    public UserComparisonInfo sendUserForComparison(final String userName) throws UserForComparisonNotExistException {
+	    return this.wikiAccess.getUserComparisonInfo(userName);
+    }
+
+	@Override
+    public CriterionInfo sendCriterionInfo() throws CriterionNotFoundException {
+	    return this.wikiAccess.getCriterionInfo();
+    }
+	
+	
 }

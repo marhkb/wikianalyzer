@@ -145,10 +145,11 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 		return this.sendCommand;
 	}
 
+	@Override
 	public LinkedHashMap<String, String> getArticleSuggestions() {
 		return this.suggestions;
 	}
-
+	@Override
 	public Event<EventArgs> articleSuggestionsChanged() {
 		return this.suggestionsChanged;
 	}
