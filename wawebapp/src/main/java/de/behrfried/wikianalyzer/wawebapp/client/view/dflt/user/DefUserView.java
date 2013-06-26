@@ -16,35 +16,26 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import com.google.inject.Inject;
-import com.smartgwt.client.data.Record;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
-import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple2;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
-import de.behrfried.wikianalyzer.wawebapp.client.util.list.ListChangedEventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.util.list.ListChangedEventArgs.ListChangedAction;
-import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article.DefArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**
@@ -67,7 +58,7 @@ public class DefUserView extends UserView {
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalUsrInfoGrid;
 	private ListGridField usrAttributeColumn, usrValueColumn;
-	private HLayout searchLayout, usrInfoAnalyzationLayout, searchInfoLayout;
+	private HLayout searchLayout, usrInfoAnalyzationLayout;
 	private VLayout siteLayoutContainer, genUsrInfLayout, usrAnaLayout;
 	private Button searchButton;
 
@@ -250,13 +241,13 @@ public class DefUserView extends UserView {
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
 
 			public void invoke(final Object sender, final EventArgs e) {
-				DefUserView.this.searchButton.setDisabled(!DefUserView.this.presenter.getSendCommand().canExecute(null));
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
 			}
 		});
 		this.searchButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(final ClickEvent event) {
-				DefUserView.this.presenter.getSendCommand().execute(null);
+				presenter.getSendCommand().execute(null);
 			}
 		});
 	}

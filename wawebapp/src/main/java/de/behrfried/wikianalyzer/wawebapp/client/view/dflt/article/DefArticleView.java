@@ -299,8 +299,6 @@ public class DefArticleView extends ArticleView {
 
 			public void onClick(final ClickEvent event) {
 				presenter.getSendCommand().execute(null);
-				if(articleInfoAnalyzationLayout.getParent() == null) {
-				}
 			}
 		});
 	}
