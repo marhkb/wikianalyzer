@@ -38,15 +38,15 @@ public class DefArticleAnaView extends ArticleAnaView {
 	private final Presenter presenter;
 	private final Messages messages;
 	private HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
-	private Label authorAnaLabel, articleAnaLabel, categoryAnaLabel;
+	private Label authorAnaLabel, articleAnaLabel, categoryAnaLabel, editWarLabel;
 	private VLayout articleAnaContainer;
-	private HLayout authorAnaLayout, articleAnaLayout, categoryAnaLayout;
-	private ListGrid authorGrid, articleGrid, categoryGrid, similarCategoryGrid;
+	private HLayout authorAnaLayout, articleAnaLayout, categoryAnaLayout, editWarAnaLayout;
+	private ListGrid authorGrid, articleGrid, categoryGrid, similarCategoryGrid, editWarGrid;
 	private ListGridField authorGridAuthor, authorGridCommits, authorGridQuantity, articleGridRevision,
 			articleGridParent,
 			articleGridDate, articleGridAuthor,
 			articleGridBytes, articleGridDiff, articleGridComment, categoryGridFrom, categoryGridTill, categoryGridCategory,
-			simCatGridSimilarArticle, simCatGridCategory, simCatGridCreationDate;
+			simCatGridSimilarArticle, simCatGridCategory, simCatGridCreationDate, editWarFrom, editWarTill, editWarUser;
 	private HTMLPanel chartContainer;
 
 	@Inject
@@ -104,7 +104,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaLayout.addMember(this.articleAnaChartContainer);
 		this.articleAnaLayout.addMember(this.articleGrid);
 		this.articleAnaLayout.setMargin(5);
-		this.articleAnaLayout.setHeight(200);
+		this.articleAnaLayout.setHeight(230);
 
 		this.categoryAnaLabel = new Label("Analyse zur Artikelkategorie");
 		this.categoryAnaLabel.setAlign(Alignment.CENTER);
@@ -113,24 +113,38 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.categoryGridFrom = new ListGridField("categoryFrom", "Von");
 		this.categoryGridTill = new ListGridField("categoryTill", "Bis");
 		this.categoryGrid = new ListGrid();
+		this.categoryGrid.setHeight(230);
 		this.categoryGrid.setFields(this.categoryGridCategory, this.categoryGridFrom, this.categoryGridTill);
 		this.categoryGrid.setWidth("50%");
 		this.simCatGridSimilarArticle = new ListGridField("simCatArticleName", "Name des ähnlichen Artikels");
 		this.simCatGridCategory = new ListGridField("simCatCategory", "Ähnliche Kategorien zum Artikel");
 		this.simCatGridCreationDate = new ListGridField("simCatDate", "Erscheinungsdatum");
 		this.similarCategoryGrid = new ListGrid();
+		this.similarCategoryGrid.setHeight(230);
 		this.similarCategoryGrid
 				.setFields(this.simCatGridSimilarArticle, this.simCatGridCategory, this.simCatGridCreationDate);
 		this.similarCategoryGrid.setWidth("50%");
 		this.categoryAnaLayout = new HLayout();
 		this.categoryAnaLayout.addMembers(this.categoryGrid, this.similarCategoryGrid);
 		this.categoryAnaLayout.setMargin(5);
-		this.categoryAnaLayout.setHeight("30%");
+		this.categoryAnaLayout.setHeight(230);
+		
+		this.editWarLabel = new Label("Edit Wars dieses Artikels");
+		this.editWarLabel.setHeight(20);
+		this.editWarFrom = new ListGridField("warFrom","Von");
+		this.editWarTill = new ListGridField("warTill","Bis");
+		this.editWarUser = new ListGridField("warUser","Beteiligte Nutzer");
+		this.editWarGrid = new ListGrid();
+		this.editWarGrid.setHeight(230);
+		this.editWarGrid.setFields(this.editWarFrom, this.editWarTill,this.editWarUser);
+		this.editWarAnaLayout = new HLayout();
+		this.editWarAnaLayout.addMember(this.editWarGrid);
+		
 
 		this.articleAnaContainer = new VLayout();
 		this.articleAnaContainer.addMembers(
 				this.authorAnaLabel, this.authorAnaLayout, this.articleAnaLabel, this.articleAnaLayout,
-				this.categoryAnaLabel, this.categoryAnaLayout
+				this.categoryAnaLabel, this.categoryAnaLayout, this.editWarLabel, this.editWarAnaLayout
 		);
 		this.articleAnaContainer.setMargin(10);
 		this.articleAnaContainer.setHeight100();
