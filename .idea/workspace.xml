@@ -53,7 +53,7 @@
     <file path="/ArticleInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372348700847" ignored="false" />
     <file path="/ArticleInfoServiceImpl.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371811057016" ignored="false" />
     <file path="/WikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372094024732" ignored="false" />
-    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372357496628" ignored="false" />
+    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372357996441" ignored="false" />
     <file path="/XmlWikiAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371817492494" ignored="false" />
     <file path="/JsonAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371818356571" ignored="false" />
     <file path="/DefShellView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371915190292" ignored="false" />
@@ -242,9 +242,9 @@
       <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="341" column="33" selection-start="13909" selection-end="13909" vertical-scroll-proportion="0.33247423">
+            <state line="312" column="73" selection-start="12588" selection-end="12588" vertical-scroll-proportion="0.31314433">
               <folding>
-                <element signature="e#0#19674#0" expanded="true" />
+                <element signature="e#0#19666#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#2188#2196#0" expanded="true" />
                 <element signature="e#3338#3368#0" expanded="true" />
@@ -256,10 +256,10 @@
                 <element signature="e#8748#8765#0" expanded="true" />
                 <element signature="e#10175#10203#0" expanded="true" />
                 <element signature="e#12266#12288#0" expanded="true" />
-                <element signature="e#15092#15114#0" expanded="true" />
-                <element signature="e#15832#15856#0" expanded="true" />
-                <element signature="e#17597#17621#0" expanded="true" />
-                <element signature="e#18519#18534#0" expanded="true" />
+                <element signature="e#15084#15106#0" expanded="true" />
+                <element signature="e#15824#15848#0" expanded="true" />
+                <element signature="e#17589#17613#0" expanded="true" />
+                <element signature="e#18511#18526#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1537,9 +1537,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="341" column="33" selection-start="13909" selection-end="13909" vertical-scroll-proportion="0.33247423">
+        <state line="312" column="73" selection-start="12588" selection-end="12588" vertical-scroll-proportion="0.31314433">
           <folding>
-            <element signature="e#0#19674#0" expanded="true" />
+            <element signature="e#0#19666#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#2188#2196#0" expanded="true" />
             <element signature="e#3338#3368#0" expanded="true" />
@@ -1551,10 +1551,10 @@
             <element signature="e#8748#8765#0" expanded="true" />
             <element signature="e#10175#10203#0" expanded="true" />
             <element signature="e#12266#12288#0" expanded="true" />
-            <element signature="e#15092#15114#0" expanded="true" />
-            <element signature="e#15832#15856#0" expanded="true" />
-            <element signature="e#17597#17621#0" expanded="true" />
-            <element signature="e#18519#18534#0" expanded="true" />
+            <element signature="e#15084#15106#0" expanded="true" />
+            <element signature="e#15824#15848#0" expanded="true" />
+            <element signature="e#17589#17613#0" expanded="true" />
+            <element signature="e#18511#18526#0" expanded="true" />
           </folding>
         </state>
       </provider>

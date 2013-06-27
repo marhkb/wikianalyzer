@@ -311,8 +311,8 @@ public class JsonWikiAccess implements WikiAccess {
 
                 categoryList.add(new ArticleInfo.Category(
                         catJson.getAsJsonPrimitive("title").getAsString()
-                                .replaceFirst("Kategorie:", "")
-                                .replaceFirst("Wikipedia:", ""),
+                                .replaceAll("Kategorie:", "")
+                                .replaceAll("Wikipedia:", ""),
                         this.formatter.parse(
                             catJson.getAsJsonPrimitive("timestamp").getAsString().replace('T', '_'))
                         )
@@ -361,8 +361,8 @@ public class JsonWikiAccess implements WikiAccess {
 			stringBuilder.append(inner.getAsJsonObject().getAsJsonPrimitive("title").getAsString());
 			stringBuilder.append("; ");
 		}
-		return stringBuilder.toString().replaceFirst("Kategorie:", "")
-                .replaceFirst("Wikipedia:", "");
+		return stringBuilder.toString().replaceAll("Kategorie:", "")
+                .replaceAll("Wikipedia:", "");
 	}
 
 	private List<ArticleInfo.Revision> getRevertedRevisions(List<ArticleInfo.Revision> revisions) {
