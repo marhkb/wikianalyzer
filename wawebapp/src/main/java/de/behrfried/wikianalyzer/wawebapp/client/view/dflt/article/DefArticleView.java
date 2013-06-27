@@ -283,9 +283,7 @@ public class DefArticleView extends ArticleView {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				DefArticleView.this.searchBox.setValueMap(DefArticleView.this.presenter.getArticleSuggestions());
-                if(!presenter.getSearchStatus()) {
                     searchBox.showPicker();
-                }
 			}
 		});
 	}

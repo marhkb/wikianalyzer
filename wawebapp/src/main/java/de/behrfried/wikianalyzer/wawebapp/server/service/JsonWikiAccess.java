@@ -220,9 +220,10 @@ public class JsonWikiAccess implements WikiAccess {
 		final List<ArticleInfo.Revision> revertedRevs = this.getRevertedRevisions(revisions);
 		for(int i = 0; i < revertedRevs.size() - 4; i++) {
 			final ArticleInfo.Revision revision = revertedRevs.get(i);
-			int startI = i;
+			final int startI = i;
+            this.logger.info(revertedRevs.get(i + 4).getTimestamp().getTime() - revertedRevs.get(i).getTimestamp().getTime() + "");
 			while(i < revertedRevs.size() - 4 &&
-				  revertedRevs.get(i + 4).getTimestamp().getTime() - revertedRevs.get(i).getTimestamp().getTime() < 100000000) {
+                    (revertedRevs.get(i + 4).getTimestamp().getTime() - revertedRevs.get(i).getTimestamp().getTime()) < 100000000) {
 				i += 4;
 			}
 			if(i != startI) {

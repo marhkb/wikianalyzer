@@ -233,9 +233,8 @@ public class DefUserView extends UserView {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				DefUserView.this.searchBox.setValueMap(DefUserView.this.presenter.getUserSuggestions());
-				if(!presenter.getSearchStatus()) {
-                    DefUserView.this.searchBox.showPicker();
-                }
+                DefUserView.this.searchBox.showPicker();
+
 			}
 		});
 	}

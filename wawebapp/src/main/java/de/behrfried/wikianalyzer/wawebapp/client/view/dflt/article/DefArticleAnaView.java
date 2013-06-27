@@ -330,6 +330,8 @@ public class DefArticleAnaView extends ArticleAnaView {
                     lgr.setAttribute(editWarFrom.getName(), editWar.getFrom());
                     lgr.setAttribute(editWarTill.getName(), editWar.getTo());
                     lgr.setAttribute(editWarUser.getName(), "null");
+
+                    editWarGrid.addData(lgr);
                 }
             }
         });
