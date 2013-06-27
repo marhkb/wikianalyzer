@@ -3,7 +3,6 @@ package de.behrfried.wikianalyzer.wawebapp.shared.article;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class ArticleInfo implements Serializable {
 
@@ -69,7 +68,7 @@ public class ArticleInfo implements Serializable {
 	/**
 	 *
 	 */
-	//private List<Categories> categories;
+	private List<Category> categoryList;
 
 
 	public ArticleInfo() { }
@@ -190,7 +189,15 @@ public class ArticleInfo implements Serializable {
 		this.revsPerDates = revsPerDates;
 	}
 
-	public ArticleInfo(int pageid,
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public ArticleInfo(int pageid,
 					   String title,
 					   String initialAuthor,
 					   Date creationDate,
@@ -203,7 +210,8 @@ public class ArticleInfo implements Serializable {
 					   List<Revision> revisions,
 					   List<RevsPerDate> revsPerDates,
 					   List<EditWar> editWars,
-					   List<SimilarArticle> similarArticles) {
+					   List<SimilarArticle> similarArticles,
+                       List<Category> categoryList) {
 		this.pageid = pageid;
 		this.title = title;
 		this.initialAuthor = initialAuthor;
@@ -218,6 +226,7 @@ public class ArticleInfo implements Serializable {
 		this.revsPerDates = revsPerDates;
 		this.editWars = editWars;
 		this.similarArticles = similarArticles;
+        this.categoryList = categoryList;
 	}
 
 	/**
@@ -396,12 +405,12 @@ public class ArticleInfo implements Serializable {
 
 		private Date to;
 
-		private Map<String, String> users;
+		private String users;
 
 		public EditWar() {
 		}
 
-		public EditWar(Date from, Date to, Map<String, String> users) {
+		public EditWar(Date from, Date to, String users) {
 			this.from = from;
 			this.to = to;
 			this.users = users;
@@ -423,11 +432,11 @@ public class ArticleInfo implements Serializable {
 			this.to = to;
 		}
 
-		public Map<String, String> getUsers() {
+		public String getUsers() {
 			return users;
 		}
 
-		public void setUsers(Map<String, String> users) {
+		public void setUsers(String users) {
 			this.users = users;
 		}
 	}
@@ -479,8 +488,33 @@ public class ArticleInfo implements Serializable {
 	/**
 	 *
 	 */
-	public final static class Categories implements Serializable {
+	public final static class Category implements Serializable {
 
-		public  Categories() { }
-	}
+        private String name;
+
+        private Date timestamp;
+
+		public Category() { }
+
+        public Category(String name, Date timestamp) {
+            this.name = name;
+            this.timestamp = timestamp;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Date getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(Date timestamp) {
+            this.timestamp = timestamp;
+        }
+    }
 }

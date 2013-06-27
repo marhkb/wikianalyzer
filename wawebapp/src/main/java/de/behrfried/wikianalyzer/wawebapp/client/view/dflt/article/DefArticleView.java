@@ -82,7 +82,7 @@ public class DefArticleView extends ArticleView {
         }
     }; 
 	private ListGridField attributeColumn, valueColumn;
-	private ListGridRecord revisionRecord, authorsRecord, categoriesRecord, articleLengthRecord, pictureRecord, infoBoxRecord, needsEditRecord,
+	private ListGridRecord revisionRecord, authorsRecord, categoriesRecord, articleLengthRecord, pictureRecord,
 	        initialAuthorRecord, linkRecord, creationDateRecord;
 	private HLayout searchLayout, articleInfoAnalyzationLayout;
 	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
@@ -157,12 +157,8 @@ public class DefArticleView extends ArticleView {
 		this.creationDateRecord.setAttribute(this.attributeColumn.getName(), "Erstellungsdatum:");
 		this.initialAuthorRecord = new ListGridRecord();
 		this.initialAuthorRecord.setAttribute(this.attributeColumn.getName(), "Initialer Author:");
-		this.infoBoxRecord = new ListGridRecord();
-		this.infoBoxRecord.setAttribute(this.attributeColumn.getName(), "InfoBox:");
 		this.pictureRecord = new ListGridRecord();
 		this.pictureRecord.setAttribute(this.attributeColumn.getName(), "Bilder:");
-		this.needsEditRecord = new ListGridRecord();
-		this.needsEditRecord.setAttribute(this.attributeColumn.getName(), "Benötigt Quellen/Input:");
 		this.revisionRecord = new ListGridRecord();
 		this.revisionRecord.setAttribute(this.attributeColumn.getName(), "Bearbeitungen:");
 		this.authorsRecord = new ListGridRecord();
@@ -182,9 +178,7 @@ public class DefArticleView extends ArticleView {
 		this.generalInfoGrid.addData(this.linkRecord);
 		this.generalInfoGrid.addData(this.creationDateRecord);
 		this.generalInfoGrid.addData(this.initialAuthorRecord);
-		this.generalInfoGrid.addData(this.infoBoxRecord);
 		this.generalInfoGrid.addData(this.pictureRecord);
-		this.generalInfoGrid.addData(this.needsEditRecord);
 
 		this.generalInfoGrid.addData(this.revisionRecord);
 		this.generalInfoGrid.addData(this.authorsRecord);
@@ -228,8 +222,6 @@ public class DefArticleView extends ArticleView {
 		this.bindSearchBox();
 		this.bindSearchButton();
 		this.bindTimeSpanMenu();
-		this.bindNeedsEditRecord();
-		this.bindInfoBoxRecord();
 		this.bindPictureRecord();
 		this.bindArticleCreationDateRecord();
 		this.bindArticleRevisionsRecord();
@@ -449,26 +441,6 @@ public class DefArticleView extends ArticleView {
 		});
 	}
 
-	private void bindInfoBoxRecord() {
-//		if(this.presenter.getHasInfoBox()) {
-//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Ja");
-//		} else {
-//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
-//		}
-//		this.presenter.infoBoxChanged().addHandler(new Handler<EventArgs>() {
-//
-//			@Override
-//			public void invoke(Object sender, EventArgs e) {
-//				if(presenter.getHasInfoBox()) {
-//					infoBoxRecord.setAttribute(valueColumn.getName(), "Ja");
-//				} else {
-//					infoBoxRecord.setAttribute(valueColumn.getName(), "Nein");
-//				}
-//				generalInfoGrid.refreshFields();
-//			}
-//		});
-	}
-
 	private void bindPictureRecord() {
 		this.presenter.articleInfoChanged().addHandler(new Handler<EventArgs>() {
 
@@ -478,26 +450,6 @@ public class DefArticleView extends ArticleView {
 				generalInfoGrid.refreshFields();
 			}
 		});
-	}
-
-	private void bindNeedsEditRecord() {
-//		if(this.presenter.articleNeedsEdit()) {
-//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Ja");
-//		} else {
-//			this.infoBoxRecord.setAttribute(this.valueColumn.getName(), "Nein");
-//		}
-//		this.presenter.articleNeedsEditsChanged().addHandler(new Handler<EventArgs>() {
-//
-//			@Override
-//			public void invoke(Object sender, EventArgs e) {
-//				if(presenter.articleNeedsEdit()) {
-//					infoBoxRecord.setAttribute(valueColumn.getName(), "Ja");
-//				} else {
-//					infoBoxRecord.setAttribute(valueColumn.getName(), "Nein");
-//				}
-//				generalInfoGrid.refreshFields();
-//			}
-//		});
 	}
 
 	private void bindArticleLengthRecord() {
