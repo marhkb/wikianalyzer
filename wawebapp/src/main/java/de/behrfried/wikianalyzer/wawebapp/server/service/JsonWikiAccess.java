@@ -337,28 +337,31 @@ public class JsonWikiAccess implements WikiAccess {
 		final List<UserInfo.CategoryEdited> categoryEdited = new ArrayList<UserInfo.CategoryEdited>();
 		final List<UserInfo.EditType> editType = new ArrayList<UserInfo.EditType>();
 		final String restrictions = null;
-		final int totalUserCommits = 0;
+		int totalUserCommits = 0;
 		final String categoryCommits = null;
 		final String reputation = null;
 		Date signInDate = null;
 
 		final String response1 = this.requester.getResult(API + "action=query&format=json&list=users&ususers=" + convertRequest(userName)
-		        + "&usprop=editcount|gender|registration|blockinfo");
+		        + "&usprop=editcount|registration");
 		final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 		final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
+		
 
 		try {
 			signInDate = this.formatter.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
+			totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
 		} catch(ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-
+		//TODO für abuses
+		final String response2 = this.requester.getResult(API + "action=query&list=abuselog&afllimit=500&afluser=" + convertRequest(userName));
 		// public UserInfo(String userID, String username, String restrictions,
 		// String commits, String categoryCommits, Date signInDate, String
 		// reputation, List<CategoryEdited> editedCategories, List<EditType>
 		// editTypes) {
-		return new UserInfo(userid, "http://de.wikipedia.org/wiki/Benutzer:" + userName, restrictions, totalUserCommits, categoryCommits, signInDate,
+		return new UserInfo(userid, userName, restrictions, totalUserCommits, categoryCommits, signInDate,
 		        reputation, categoryEdited, editType);
 	}
 

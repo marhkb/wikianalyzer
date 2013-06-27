@@ -63,8 +63,8 @@ public class DefUserView extends UserView {
 
 		@Override
 		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {
-			final String tmpString = record.getAttribute("attributeField");
-			if(this.getFieldName(colNum).equals("valueField")) {
+			final String tmpString = record.getAttribute("attributes");
+			if(this.getFieldName(colNum).equals("value")) {
 				if(tmpString.equals("Nutzername:")) {
 					DefUserView.this.userLink = new HTMLFlow();
 					DefUserView.this.bindUserLinkRecord();
@@ -103,7 +103,7 @@ public class DefUserView extends UserView {
 		this.searchBox = new ComboBoxItem();
 		this.searchBox.setWidth(200);
 		this.searchBox.setShowTitle(false);
-        this.searchBox.setShowPickerIcon(false);
+		this.searchBox.setShowPickerIcon(false);
 		this.searchBoxContainer = new DynamicForm();
 		this.searchBoxContainer.setBackgroundColor("white");
 		this.searchBoxContainer.setItems(this.searchBox);
@@ -115,29 +115,28 @@ public class DefUserView extends UserView {
 		this.searchLayout.addMember(this.searchBoxContainer);
 		this.searchLayout.addMember(this.searchButton);
 
-		this.usrAttributeColumn = new ListGridField("Attribute");
+		this.usrAttributeColumn = new ListGridField("attributes", "Attribute");
 		this.usrAttributeColumn.setCanEdit(false);
-		this.usrValueColumn = new ListGridField("Value");
+		this.usrValueColumn = new ListGridField("value", "Value");
 		this.usrValueColumn.setCanEdit(false);
 		this.userLinkInfoRecord = new ListGridRecord();
-		this.userLinkInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Nutzername: ");
+		this.userLinkInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Nutzername:");
 		this.signUpInfoRecord = new ListGridRecord();
-		this.signUpInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Mitglied seit: ");
+		this.signUpInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Mitglied seit:");
 		this.commitsInfoRecord = new ListGridRecord();
-		this.commitsInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Commits: ");
+		this.commitsInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Commits:");
 		this.reputationInfoRecord = new ListGridRecord();
-		this.reputationInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Reputation: ");
+		this.reputationInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Reputation:");
 		this.categorysInfoRecord = new ListGridRecord();
-		this.categorysInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "An Kategorien mit gewirkt: ");
+		this.categorysInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "An Kategorien mit gewirkt:");
 		this.restrictionInfoRecord = new ListGridRecord();
-		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Sperren: ");
+		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Sperren:");
 		this.userInfoGrid.addData(this.userLinkInfoRecord);
-		this.userInfoGrid.addData(this.signUpInfoRecord);
 		this.userInfoGrid.addData(this.signUpInfoRecord);
 		this.userInfoGrid.addData(this.commitsInfoRecord);
 		this.userInfoGrid.addData(this.categorysInfoRecord);
 		this.userInfoGrid.addData(this.reputationInfoRecord);
-		this.userInfoGrid.addData(this.reputationInfoRecord);
+		this.userInfoGrid.addData(this.restrictionInfoRecord);
 		this.userInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
 
 		this.genUsrInfLabel = new Label("Allgemeine User Infos");
@@ -177,7 +176,6 @@ public class DefUserView extends UserView {
 		this.bindReputationInfoRecord();
 		this.bindRestrictionInfoRecord();
 		this.bindSignUpInfoRecord();
-		this.bindUserLinkRecord();
 
 		/*
 		 * final DataContainer<Boolean> textItemNameToServerSelfChanged = new
@@ -260,8 +258,8 @@ public class DefUserView extends UserView {
 
 			public void onKeyUp(final KeyUpEvent event) {
 				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
-                    Window.alert(event.getSource().toString());
-                    if(DefUserView.this.presenter.getSendCommand().canExecute(null)) {
+					Window.alert(event.getSource().toString());
+					if(DefUserView.this.presenter.getSendCommand().canExecute(null)) {
 						DefUserView.this.presenter.getSendCommand().execute(false);
 					}
 				}
@@ -273,7 +271,7 @@ public class DefUserView extends UserView {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				DefUserView.this.searchBox.setValueMap(DefUserView.this.presenter.getUserSuggestions());
-                DefUserView.this.searchBox.showPicker();
+				DefUserView.this.searchBox.showPicker();
 
 			}
 		});
@@ -298,10 +296,13 @@ public class DefUserView extends UserView {
 	private void bindUserLinkRecord() {
 		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
 
+
 			@Override
-			public void invoke(Object sender, EventArgs e) {
-				userLink.setContents("<a href=\"" + presenter.getUserInfo().getUserName() + "\" target=\"_blank\">"
-				        + presenter.getUserInfo().getUserName() + "</a>");
+			public void invoke(Object sender, EventArgs e) {	
+				userLink.setContents("<a href='http://de.wikipedia.org/wiki/Benutzer:" + 
+			presenter.getUserInfo().getUserName()
+						
+				        + "' target='_blank'>" + presenter.getUserInfo().getUserName() + "</a>");
 				userLink.setTitle(presenter.getUserInfo().getUserName());
 				userInfoGrid.refreshFields();
 			}
