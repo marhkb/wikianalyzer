@@ -433,7 +433,7 @@ public class JsonWikiAccess implements WikiAccess {
 //		final String articleCategory = this.requester.getResult(API + "action=query&prop=categories&cllimit=500&titles="+tmpArticle);
 		
 		String tmpDate = "";
-		Map<String, Map<String, String>> comparableRevisions = new HashMap();
+		Map<Integer, Map<Integer, Integer>> comparableRevisions = new HashMap();
 		final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
 		do {
 			String userArticles = this.requester.getResult(API + "action=query&format=json&list=usercontribs&ucdir=newer&ucuser=" + userName +"&uclimit=500&continue=" + tmpDate);
@@ -442,14 +442,14 @@ public class JsonWikiAccess implements WikiAccess {
 			final JsonArray articlesArticle = root.getAsJsonObject("query").getAsJsonArray("usercontribs");
 			for(JsonElement elm : articlesArticle) {
 				JsonObject tmpObj = elm.getAsJsonObject();
-				String pageId = tmpObj.getAsJsonPrimitive("pageid").getAsString();
-				String curRev = tmpObj.getAsJsonPrimitive("revid").getAsString();
-				String parRev = tmpObj.getAsJsonPrimitive("parentid").getAsString();
+				int pageId = tmpObj.getAsJsonPrimitive("pageid").getAsInt();
+				int curRev = tmpObj.getAsJsonPrimitive("revid").getAsInt();
+				int parRev = tmpObj.getAsJsonPrimitive("parentid").getAsInt();
 				
 				if(comparableRevisions.containsKey(pageId) && !comparableRevisions.get(pageId).containsKey(curRev)) {
 						comparableRevisions.get(pageId).put(curRev, parRev);
 				} else {
-					Map<String,String> tmpMap = new HashMap<String,String>();
+					Map<Integer,Integer> tmpMap = new HashMap<Integer,Integer>();
 					tmpMap.put(curRev, parRev);
 					comparableRevisions.put(pageId, tmpMap);
 				}
@@ -457,11 +457,20 @@ public class JsonWikiAccess implements WikiAccess {
 			tmpDate = root.getAsJsonObject("query").getAsJsonObject("continue").getAsJsonPrimitive("ucstart").getAsString();
 		}while(!tmpDate.isEmpty());
 		
-		for(String articleID : comparableRevisions.keySet()) {
+		for(int articleID : comparableRevisions.keySet()) {
 			int articleEdits = comparableRevisions.get(articleID).keySet().size();
-			for(String revisionID : comparableRevisions.get(articleID).keySet()) {
-				
+			int articleSizeQuantity = 0;
+			for(int revisionID : comparableRevisions.get(articleID).keySet()) {
+				final String revision1 = this.requester.getResult(this.convertRequest("action=query&prop=revisions&format=json&pageids="+articleID+"&rvlimit=1&rvstartid="+revisionID+"&rvprop=size"));
+				final String revision2 = this.requester.getResult(this.convertRequest("action=query&prop=revisions&format=json&pageids="+articleID+"&rvlimit=1&rvstartid="+comparableRevisions.get(articleID).get(revisionID)+"&rvprop=size"));
+				int sizeRev1 = this.parser.parse(revision1).getAsJsonObject().getAsJsonObject("query").getAsJsonObject("pages").getAsJsonObject(articleID+"").getAsJsonArray("revisions").get(0).getAsJsonObject().getAsJsonPrimitive("size").getAsInt();
+				int sizeRev2 = this.parser.parse(revision2).getAsJsonObject().getAsJsonObject("query").getAsJsonObject("pages").getAsJsonObject(articleID+"").getAsJsonArray("revisions").get(0).getAsJsonObject().getAsJsonPrimitive("size").getAsInt();
+				articleSizeQuantity += (sizeRev1-sizeRev2);
 			}
+			final String articleNameQuery = this.requester.getResult(this.convertRequest("action=query&prop=revisions&format=json&pageids="+articleID+"&rvlimit=1&rvdir=older&rvprop="));
+			String articleName = this.parser.parse(articleNameQuery).getAsJsonObject().getAsJsonObject("query").getAsJsonObject("pages").getAsJsonObject(articleID+"").getAsJsonPrimitive("title").getAsString();
+			double articleQuantity = (double) articleSizeQuantity / articleEdits;
+			categoryEdited.add(new ArticleEdited(articleName, articleEdits, articleQuantity, this.getCategories(articleID)));
 		}
 		
 		return new UserInfo(userid, userName, restrictions, totalUserCommits, articleCommits, signInDate,

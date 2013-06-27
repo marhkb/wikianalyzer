@@ -31,13 +31,12 @@ public class DefUserAnaView extends UserAnaView {
 	 */
 	private final Messages messages;
 
-	private Label userArticleLabel, userEditTypeLabel;
-	private HTMLPanel userArticleChartContainer, userEditTypeChartContainer;
+	private Label userArticleLabel;
+	private HTMLPanel userArticleChartContainer;
 	private VLayout userAnaContainer;
 	private HLayout userArticleAnaContainer, userEditTypeContainer;
-	private ListGrid userArticleGrid, userEditTypeGrid;
-	private ListGridField articleArticleColumn, articleCategoryColumn, articleCommitsColumn, articleQuantityColumn, editTypeEditTypeColumn,
-	        editTypeCommitsColumn, editTypeQuantityColumn;
+	private ListGrid userArticleGrid;
+	private ListGridField articleArticleColumn, articleCategoryColumn, articleCommitsColumn, articleQuantityColumn;
 
 	/**
 	 * Creates an instance of {@link DefUserView}. All arguments are injected by
@@ -53,6 +52,7 @@ public class DefUserAnaView extends UserAnaView {
 		this.presenter = presenter;
 		this.messages = messages;
 		this.init();
+		this.bind();
 	}
 
 	private void init() {
@@ -74,28 +74,16 @@ public class DefUserAnaView extends UserAnaView {
 		this.userArticleAnaContainer.addMember(this.userArticleGrid);
 		this.userArticleAnaContainer.setHeight("50%");
 
-		this.userEditTypeLabel = new Label("Arten von Änderungen");
-		this.userEditTypeLabel.setHeight("15px");
-		this.userEditTypeLabel.setAlign(Alignment.CENTER);
-		this.userEditTypeChartContainer = new HTMLPanel("");
-		this.createEditTypeChart();
-		this.editTypeEditTypeColumn = new ListGridField("typeColumn", "Art der Änderung");
-		this.editTypeCommitsColumn = new ListGridField("commitsColumn", "Commits");
-		this.editTypeQuantityColumn = new ListGridField("quantityColumn", "Quantität");
-		this.userEditTypeGrid = new ListGrid();
-		this.userEditTypeGrid.setWidth("50%");
-		this.userEditTypeGrid.setFields(this.editTypeEditTypeColumn, this.editTypeCommitsColumn, this.editTypeQuantityColumn);
-		this.userEditTypeContainer = new HLayout();
-		// this.userEditTypeContainer.addMember(this.userEditTypeChartContainer);
-		this.userEditTypeContainer.addMember(this.userEditTypeGrid);
-		this.userEditTypeContainer.setHeight("50%");
-
 		this.userAnaContainer = new VLayout();
-		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer, this.userEditTypeLabel, this.userEditTypeContainer);
+		this.userAnaContainer.addMembers(this.userArticleLabel, this.userArticleAnaContainer);
 		this.userAnaContainer.setMargin(10);
 		this.userAnaContainer.setHeight100();
 		this.userAnaContainer.setWidth100();
 		this.addChild(this.userAnaContainer);
+	}
+	
+	private void bind() {
+		this.bindUserArticleGrid();
 	}
 
 	private void createArticleChart() {
@@ -122,32 +110,7 @@ public class DefUserAnaView extends UserAnaView {
 		};
 		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
 	}
-
-	private void createEditTypeChart() {
-		Runnable r = new Runnable() {
-
-			@Override
-			public void run() {
-				DataTable data = DataTable.create();
-				data.addColumn(AbstractDataTable.ColumnType.STRING, "Task");
-				data.addColumn(AbstractDataTable.ColumnType.NUMBER, "Hours per Day");
-				data.addRows(2);
-				data.setValue(0, 0, "Work");
-				data.setValue(0, 1, 14);
-				data.setValue(1, 0, "Sleep");
-				data.setValue(1, 1, 10);
-				ColumnChart.Options options = ColumnChart.Options.create();
-				options.setWidth(500);
-				options.setHeight(150);
-				options.set3D(true);
-				options.setTitle("My Daily Activities");
-				ColumnChart chart = new ColumnChart(data, options);
-				userEditTypeChartContainer.add(chart);
-			}
-		};
-		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
-	}
-
+	
 	private void bindUserArticleGrid() {
 		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
 
@@ -170,5 +133,7 @@ public class DefUserAnaView extends UserAnaView {
 			}
 		});
 	}
+	
+	
 
 	}

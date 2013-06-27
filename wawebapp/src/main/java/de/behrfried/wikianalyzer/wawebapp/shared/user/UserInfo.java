@@ -108,17 +108,19 @@ public class UserInfo implements Serializable {
          */
 		private static final long serialVersionUID = 1L;
 
-		String article, category, quantity;
+		String article, category;
+		double quantity;
 		int numOfCommits;
 
 		public ArticleEdited() {}
 
-		public ArticleEdited(String article, int commits, String quantity) {
+		public ArticleEdited(String article, int commits, double quantity, String category) {
 			this.article = article;
 			this.numOfCommits = commits;
 			this.quantity = quantity;
+			this.category = category;
 		}
-
+		
 		public String getArticle() {
 			return article;
 		}
@@ -143,11 +145,11 @@ public class UserInfo implements Serializable {
 			this.numOfCommits = numOfCommits;
 		}
 
-		public String getQuantity() {
+		public double getQuantity() {
 			return quantity;
 		}
 
-		public void setQuantity(String quantity) {
+		public void setQuantity(double quantity) {
 			this.quantity = quantity;
 		}
 
