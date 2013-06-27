@@ -160,8 +160,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.bindAuthorGrid();
 		this.bindArticleChart();
 		this.bindArticleGrid();
-
 		this.bindSimilarCategoryGrid();
+        this.bindEditWarGrid();
 	}
 
 	private void bindAuthorChart() {
@@ -313,4 +313,24 @@ public class DefArticleAnaView extends ArticleAnaView {
 				}
 		);
 	}
+
+    /**
+     *
+     */
+    private void bindEditWarGrid() {
+        this.presenter.articleInfoChanged().addHandler(new Handler<EventArgs>() {
+            @Override
+            public void invoke(Object sender, EventArgs eventArgs) {
+                while(editWarGrid.getRecordList().getLength() > 0) {
+                    editWarGrid.removeData(editWarGrid.getRecord(0));
+                }
+
+                for(final ArticleInfo.EditWar editWar : presenter.getArticleInfo().getEditWars()) {
+                    final ListGridRecord lgr = new ListGridRecord();
+                    lgr.setAttribute(editWarFrom.getName(), editWar.getFrom());
+                    lgr.setAttribute(editWarTill.getName(), editWar.getTo());
+                }
+            }
+        });
+    }
 }
