@@ -37,11 +37,23 @@ public class JsonWikiAccess implements WikiAccess {
 	private final WikiApi requester;
 	private final JsonParser parser = new JsonParser();
 	private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
+	private List<String> patterns = new ArrayList<String>();
 
 
 	@Inject
 	public JsonWikiAccess(final WikiApi requester) {
 		this.requester = requester;
+
+
+		// 1. Änderung 114793679 von [[Special:Contributions/79.197.160.242|79.197.160.242]] rückgängig gemacht;
+		// 2. Revert: [[Wikipedia:Vandalismus|Vandalismus]]
+		// 3. Änderungen von [[Special:Beiträge/62.143.131.72|62.143.131.72]] ([[Benutzer Diskussion:62.143.131.72|Diskussion]]) wurden auf die letzte Version von [[Benutzer:CactusBot|CactusBot]]
+		// 4. Die letzte Textänderung von [[Spezial:Beiträge/87.179.226.206|87.179.226.206]] wurde verworfen und die Version 114742746 von Der.Traeumer wiederhergestellt
+
+		patterns.add("änderung");
+		patterns.add("revert");
+		patterns.add("zurückgesetzt");
+		patterns.add("rückgängig gemacht");
 	}
 
 	@Override
@@ -195,11 +207,23 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 		});
 
-		final List<ArticleInfo.Revision> revTmp = new ArrayList<ArticleInfo.Revision>();
-		for(int i = 0; i < revisions.size(); i++) {
-			final String comment = revisions.get(i).getComment();
-			if(comment.startsWith("Änderungen von ") && comment.contains(" auf die letzte Version von ")) {
-
+		/*
+		 * find edit wars
+		 */
+		final List<ArticleInfo.EditWar> editWars = new ArrayList<ArticleInfo.EditWar>();
+		final List<ArticleInfo.Revision> revertedRevs = this.getRevertedRevisions(revisions);
+		for(int i = 0; i < revertedRevs.size() - 4; i++) {
+			final ArticleInfo.Revision revision = revertedRevs.get(i);
+			int startI = i;
+			while(i < revertedRevs.size() - 4 &&
+				  revertedRevs.get(i + 4).getTimestamp().getTime() - revertedRevs.get(i).getTimestamp().getTime() < 100000000) {
+				i += 4;
+			}
+			if(i != startI) {
+				editWars.add(new ArticleInfo.EditWar(
+						revertedRevs.get(startI).getTimestamp(),
+						revertedRevs.get(i).getTimestamp(),
+						null));
 			}
 		}
 
@@ -290,6 +314,7 @@ public class JsonWikiAccess implements WikiAccess {
 				authorsAndCommits,
 				revisions,
 				revsPerDates,
+				editWars,
 				similarArticles
 		);
 	}
@@ -337,5 +362,23 @@ public class JsonWikiAccess implements WikiAccess {
 			return result;
 		}
 		return result.substring(0, result.length() - 1);
+	}
+
+	private List<ArticleInfo.Revision> getRevertedRevisions(List<ArticleInfo.Revision> revisions) {
+		List<ArticleInfo.Revision> result = new ArrayList<ArticleInfo.Revision>();
+
+		for(final ArticleInfo.Revision revision : revisions) {
+			boolean matches = false;
+			for(final String pattern : this.patterns) {
+				if(revision.getComment().contains(pattern)) {
+					matches = true;
+					break;
+				}
+			}
+			if(matches) {
+				result.add(revision);
+			}
+		}
+		return result;
 	}
 }
