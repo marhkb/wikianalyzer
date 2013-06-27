@@ -30,7 +30,6 @@ import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo.ArticleEdited;
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.text.ParseException;
@@ -376,7 +375,7 @@ public class JsonWikiAccess implements WikiAccess {
 //		final String articleCategory = this.requester.getResult(API + "action=query&prop=categories&cllimit=500&titles="+tmpArticle);
 		
 		String tmpDate = "";
-		Map<String, Map<String, String>> comparableRevisions = new HashedMap();
+		Map<String, Map<String, String>> comparableRevisions = new HashMap();
 		final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
 		do {
 			String userArticles = this.requester.getResult(API + "action=query&format=json&list=usercontribs&ucdir=newer&ucuser="+convertRequest(userName)+"&uclimit=500&continue=" + tmpDate);
@@ -399,6 +398,13 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 			tmpDate = root.getAsJsonObject("query").getAsJsonObject("continue").getAsJsonPrimitive("ucstart").getAsString();
 		}while(!tmpDate.isEmpty());
+		
+		for(String articleID : comparableRevisions.keySet()) {
+			int articleEdits = comparableRevisions.get(articleID).keySet().size();
+			for(String revisionID : comparableRevisions.get(articleID).keySet()) {
+				
+			}
+		}
 		
 		return new UserInfo(userid, userName, restrictions, totalUserCommits, articleCommits, signInDate,
 		        reputation, categoryEdited);
