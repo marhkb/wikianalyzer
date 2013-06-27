@@ -156,7 +156,7 @@ public class DefUserAnaView extends UserAnaView {
 				while(userArticleGrid.getRecordList().getLength() > 0) {
 					userArticleGrid.removeData(userArticleGrid.getRecord(0));
 				}
-				for(final UserInfo.CategoryEdited catEd : presenter.getUserInfo().getEditedCategories()) {
+				for(final UserInfo.ArticleEdited catEd : presenter.getUserInfo().getEditedCategories()) {
 					final ListGridRecord lgr = new ListGridRecord();
 					lgr.setAttribute(articleArticleColumn.getName(), catEd.getArticle());
 					lgr.setAttribute(articleCategoryColumn.getName(), catEd.getCategory());
@@ -171,24 +171,4 @@ public class DefUserAnaView extends UserAnaView {
 		});
 	}
 
-	private void bindUserEditTypeGrid() {
-		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
-
-			@Override
-			public void invoke(Object sender, EventArgs eventArgs) {
-				while(userEditTypeGrid.getRecordList().getLength() > 0) {
-					userEditTypeGrid.removeData(userEditTypeGrid.getRecord(0));
-				}
-
-				for(final UserInfo.EditType edt : presenter.getUserInfo().getEditTypes()) {
-					final ListGridRecord lgr = new ListGridRecord();
-					lgr.setAttribute(editTypeEditTypeColumn.getName(), edt.getEditType());
-					lgr.setAttribute(editTypeCommitsColumn.getName(), edt.getNumOfCommits());
-					lgr.setAttribute(editTypeQuantityColumn.getName(),
-					        NumberFormat.getPercentFormat().format(edt.getNumOfCommits() / (double)presenter.getUserInfo().getEditTypes().size()));
-					userEditTypeGrid.addData(lgr);
-				}
-			}
-		});
 	}
-}

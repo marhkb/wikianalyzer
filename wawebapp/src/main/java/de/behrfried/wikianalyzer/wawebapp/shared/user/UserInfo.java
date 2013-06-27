@@ -16,13 +16,11 @@ public class UserInfo implements Serializable {
 
 	private Date signInDate;
 	
-
-	private List<EditType> editTypes;
-	private List<CategoryEdited> editedCategories;
+	private List<ArticleEdited> editedCategories;
 
 	public UserInfo() {}
 
-	public UserInfo(String userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<CategoryEdited> editedCategories, List<EditType> editTypes) {
+	public UserInfo(String userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<ArticleEdited> editedCategories) {
 		this.userID = userID;
 		this.userName = username;
 		this.restrictions = restrictions;
@@ -30,7 +28,6 @@ public class UserInfo implements Serializable {
 		this.categoryCommits = categoryCommits;
 		this.signInDate = signInDate;
 		this.reputation = reputation;
-		this.editTypes = editTypes;
 		this.editedCategories = editedCategories;
 	}
 	
@@ -91,20 +88,12 @@ public class UserInfo implements Serializable {
 		this.signInDate = signInDate;
 	}
 
-	public List<CategoryEdited> getEditedCategories() {
+	public List<ArticleEdited> getEditedCategories() {
 		return editedCategories;
 	}
 
-	public void setEditedCategories(List<CategoryEdited> editedCategories) {
+	public void setEditedCategories(List<ArticleEdited> editedCategories) {
 		this.editedCategories = editedCategories;
-	}
-
-	public List<EditType> getEditTypes() {
-		return editTypes;
-	}
-
-	public void setEditTypes(List<EditType> editTypes) {
-		this.editTypes = editTypes;
 	}
 
 	public static long getSerialversionuid() {
@@ -112,7 +101,7 @@ public class UserInfo implements Serializable {
 	}
 
 
-	public final static class CategoryEdited implements Serializable {
+	public final static class ArticleEdited implements Serializable {
 
 		/**
          * 
@@ -122,11 +111,10 @@ public class UserInfo implements Serializable {
 		String article, category, quantity;
 		int numOfCommits;
 
-		public CategoryEdited() {}
+		public ArticleEdited() {}
 
-		public CategoryEdited(String article, String category, int commits, String quantity) {
+		public ArticleEdited(String article, int commits, String quantity) {
 			this.article = article;
-			this.category = category;
 			this.numOfCommits = commits;
 			this.quantity = quantity;
 		}
@@ -167,53 +155,5 @@ public class UserInfo implements Serializable {
 			return serialVersionUID;
 		}
 
-	}
-
-
-	public final static class EditType implements Serializable {
-
-		/**
-         * 
-         */
-		private static final long serialVersionUID = 1L;
-
-		String editType, quantity;
-		int numOfCommits;
-
-		public EditType() {}
-
-		public EditType(String editType, int numOfCommits, String quantity) {
-			this.editType = editType;
-			this.numOfCommits = numOfCommits;
-			this.quantity = quantity;
-		}
-
-		public String getEditType() {
-			return editType;
-		}
-
-		public void setEditType(String editType) {
-			this.editType = editType;
-		}
-
-		public int getNumOfCommits() {
-			return numOfCommits;
-		}
-
-		public void setNumOfCommits(int numOfCommits) {
-			this.numOfCommits = numOfCommits;
-		}
-
-		public String getQuantity() {
-			return quantity;
-		}
-
-		public void setQuantity(String quantity) {
-			this.quantity = quantity;
-		}
-
-		public static long getSerialversionuid() {
-			return serialVersionUID;
-		}
 	}
 }

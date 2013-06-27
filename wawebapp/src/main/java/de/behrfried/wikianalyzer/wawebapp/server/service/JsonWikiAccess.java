@@ -29,6 +29,8 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo.ArticleEdited;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -399,32 +401,72 @@ public class JsonWikiAccess implements WikiAccess {
 			throw new UserNotExistException("Nutzer \"" + userid + "\" existiert nicht!");
 		}
 
-		final List<UserInfo.CategoryEdited> categoryEdited = new ArrayList<UserInfo.CategoryEdited>();
-		final List<UserInfo.EditType> editType = new ArrayList<UserInfo.EditType>();
+		final List<UserInfo.ArticleEdited> categoryEdited = new ArrayList<UserInfo.ArticleEdited>();
 		final String restrictions = null;
-		final int totalUserCommits = 0;
-		final String categoryCommits = null;
+		int totalUserCommits = 0;
+		final String articleCommits = null;
 		final String reputation = null;
 		Date signInDate = null;
+		
+		String editTypeDesc, editTypeQuantity;
+		int editTypeNumOfCommits;
+		
+		String article, category, quantity;
+		int numOfCommits;
 
 		final String response1 = this.requester.getResult(API + "action=query&format=json&list=users&ususers=" + convertRequest(userName)
-		        + "&usprop=editcount|gender|registration|blockinfo");
+		        + "&usprop=editcount|registration");
 		final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 		final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
+		
 
 		try {
 			signInDate = this.formatter.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
+			totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
 		} catch(ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-
+		//TODO für abuses
+		final String response2 = this.requester.getResult(API + "action=query&format=json&list=abuselog&afllimit=500&afluser=" + convertRequest(userName));
 		// public UserInfo(String userID, String username, String restrictions,
 		// String commits, String categoryCommits, Date signInDate, String
 		// reputation, List<CategoryEdited> editedCategories, List<EditType>
 		// editTypes) {
-		return new UserInfo(userid, "http://de.wikipedia.org/wiki/Benutzer:" + userName, restrictions, totalUserCommits, categoryCommits, signInDate,
-		        reputation, categoryEdited, editType);
+		
+		//TODO anzahl der artikel ... man bekommt nur 500 deswegen wieder schleife
+		
+		
+//		String tmpArticle = "";
+//		final String articleCategory = this.requester.getResult(API + "action=query&prop=categories&cllimit=500&titles="+tmpArticle);
+		
+		String tmpDate = "";
+		Map<String, Map<String, String>> comparableRevisions = new HashedMap();
+		final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
+		do {
+			String userArticles = this.requester.getResult(API + "action=query&format=json&list=usercontribs&ucdir=newer&ucuser="+convertRequest(userName)+"&uclimit=500&continue=" + tmpDate);
+			final JsonObject articles = this.parser.parse(userArticles).getAsJsonObject();
+			
+			final JsonArray articlesArticle = root.getAsJsonObject("query").getAsJsonArray("usercontribs");
+			for(JsonElement elm : articlesArticle) {
+				JsonObject tmpObj = elm.getAsJsonObject();
+				String pageId = tmpObj.getAsJsonPrimitive("pageid").getAsString();
+				String curRev = tmpObj.getAsJsonPrimitive("revid").getAsString();
+				String parRev = tmpObj.getAsJsonPrimitive("parentid").getAsString();
+				
+				if(comparableRevisions.containsKey(pageId) && !comparableRevisions.get(pageId).containsKey(curRev)) {
+						comparableRevisions.get(pageId).put(curRev, parRev);
+				} else {
+					Map<String,String> tmpMap = new HashMap<String,String>();
+					tmpMap.put(curRev, parRev);
+					comparableRevisions.put(pageId, tmpMap);
+				}
+			}
+			tmpDate = root.getAsJsonObject("query").getAsJsonObject("continue").getAsJsonPrimitive("ucstart").getAsString();
+		}while(!tmpDate.isEmpty());
+		
+		return new UserInfo(userid, userName, restrictions, totalUserCommits, articleCommits, signInDate,
+		        reputation, categoryEdited);
 	}
 
 	@Override
