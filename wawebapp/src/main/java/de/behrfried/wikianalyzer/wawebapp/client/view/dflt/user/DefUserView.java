@@ -16,9 +16,10 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
-
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.HTMLFlow;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
@@ -30,9 +31,9 @@ import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
-
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
@@ -54,17 +55,33 @@ public class DefUserView extends UserView {
 	private final Messages messages;
 
 	private Label waLabel, genUsrInfLabel, usrAnaLabel;
+	private HTMLFlow userLink;
 	private ComboBoxItem searchBox;
 	private DynamicForm searchBoxContainer;
-	private ListGrid generalUsrInfoGrid;
+	private final ListGrid userInfoGrid = new ListGrid() {
+
+		@Override
+		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {
+			final String tmpString = record.getAttribute("attributeField");
+			if(this.getFieldName(colNum).equals("valueField")) {
+				if(tmpString.equals("Nutzername:")) {
+					DefUserView.this.userLink = new HTMLFlow();
+					DefUserView.this.bindUserLinkRecord();
+					return DefUserView.this.userLink;
+				}
+			}
+			return null;
+		}
+	};
 	private ListGridField usrAttributeColumn, usrValueColumn;
 	private HLayout searchLayout, usrInfoAnalyzationLayout;
 	private VLayout siteLayoutContainer, genUsrInfLayout, usrAnaLayout;
 	private Button searchButton;
+	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categorysInfoRecord, restrictionInfoRecord;
 
 	/**
-	 * Creates an instance of {@link DefUserView}. All arguments are
-	 * injected by Gin.
+	 * Creates an instance of {@link DefUserView}. All arguments are injected by
+	 * Gin.
 	 * 
 	 * @param parentView
 	 */
@@ -101,17 +118,34 @@ public class DefUserView extends UserView {
 		this.usrAttributeColumn.setCanEdit(false);
 		this.usrValueColumn = new ListGridField("Value");
 		this.usrValueColumn.setCanEdit(false);
-		this.generalUsrInfoGrid = new ListGrid();
-		this.generalUsrInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
+		this.userLinkInfoRecord = new ListGridRecord();
+		this.userLinkInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Nutzername: ");
+		this.signUpInfoRecord = new ListGridRecord();
+		this.signUpInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Mitglied seit: ");
+		this.commitsInfoRecord = new ListGridRecord();
+		this.commitsInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Commits: ");
+		this.reputationInfoRecord = new ListGridRecord();
+		this.reputationInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Reputation: ");
+		this.categorysInfoRecord = new ListGridRecord();
+		this.categorysInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "An Kategorien mit gewirkt: ");
+		this.restrictionInfoRecord = new ListGridRecord();
+		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Sperren: ");
+		this.userInfoGrid.addData(this.userLinkInfoRecord);
+		this.userInfoGrid.addData(this.signUpInfoRecord);
+		this.userInfoGrid.addData(this.signUpInfoRecord);
+		this.userInfoGrid.addData(this.commitsInfoRecord);
+		this.userInfoGrid.addData(this.categorysInfoRecord);
+		this.userInfoGrid.addData(this.reputationInfoRecord);
+		this.userInfoGrid.addData(this.reputationInfoRecord);
+		this.userInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
 
-		
 		this.genUsrInfLabel = new Label("Allgemeine User Infos");
 		this.genUsrInfLabel.setHeight(10);
 		this.genUsrInfLabel.setWidth100();
 		this.genUsrInfLayout = new VLayout();
 		this.genUsrInfLayout.setWidth("25%");
 		this.genUsrInfLayout.setHeight100();
-		this.genUsrInfLayout.addMembers(this.genUsrInfLabel, this.generalUsrInfoGrid);
+		this.genUsrInfLayout.addMembers(this.genUsrInfLabel, this.userInfoGrid);
 
 		this.usrAnaLabel = new Label("User Analysen");
 		this.usrAnaLabel.setHeight(10);
@@ -136,7 +170,13 @@ public class DefUserView extends UserView {
 	private void bind() {
 		// this.bindGeneralInfoGrid();
 		this.bindSearchBox();
-		// this.bindSearchButton();
+		this.bindSearchButton();
+		this.bindCategorysInfoRecord();
+		this.bindCommitsInfoRecord();
+		this.bindReputationInfoRecord();
+		this.bindRestrictionInfoRecord();
+		this.bindSignUpInfoRecord();
+		this.bindUserLinkRecord();
 
 		/*
 		 * final DataContainer<Boolean> textItemNameToServerSelfChanged = new
@@ -204,14 +244,14 @@ public class DefUserView extends UserView {
 		this.searchBox.addChangedHandler(new ChangedHandler() {
 
 			public void onChanged(final ChangedEvent event) {
-				DefUserView.this.presenter.setUserName(DefUserView.this.searchBox.getValueAsString());
+				presenter.setUserName(searchBox.getValueAsString());
 			}
 		});
 		this.presenter.userNameChanged().addHandler(new Handler<EventArgs>() {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				if(!DefUserView.this.searchBox.equals(DefUserView.this.presenter.getUserName())) {
-					DefUserView.this.searchBox.setValue(DefUserView.this.presenter.getUserName());
+					searchBox.setValue(presenter.getUserName());
 				}
 			}
 		});
@@ -219,18 +259,18 @@ public class DefUserView extends UserView {
 
 			public void onKeyUp(final KeyUpEvent event) {
 				if(event.getKeyName().equals("Enter")) {
-					if(DefUserView.this.presenter.getSendCommand().canExecute(null)) {
-						DefUserView.this.presenter.getSendCommand().execute(null);
+					if(presenter.getSendCommand().canExecute(null)) {
+						presenter.getSendCommand().execute(null);
 					}
 				}
 			}
 		});
-		
+
 		this.searchBox.setValueMap(this.presenter.getUserSuggestions());
 		this.presenter.userSuggestionsChanged().addHandler(new Handler<EventArgs>() {
 
 			public void invoke(final Object sender, final EventArgs e) {
-				DefUserView.this.searchBox.setValueMap(DefUserView.this.presenter.getUserSuggestions());
+				DefUserView.this.searchBox.setValueMap(presenter.getUserSuggestions());
 				DefUserView.this.searchBox.showPicker();
 			}
 		});
@@ -251,42 +291,114 @@ public class DefUserView extends UserView {
 			}
 		});
 	}
-//TODO
-//	private void bindGeneralInfoGrid() {
-//		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
-//		for(final Tuple2<String, String> t : this.presenter.getUserInfo()) {
-//			final ListGridRecord lsg = new ListGridRecord();
-//			lsg.setAttribute("Attribute", t.getItem1());
-//			lsg.setAttribute("Value", t.getItem2());
-//			this.generalUsrInfoGrid.addData(lsg);
-//			recordsO.put(t, lsg);
-//		}
-//		this.presenter.getUserInfo().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
-//
-//			public void invoke(final Object sender, final ListChangedEventArgs<Tuple2<String, String>> e) {
-//				if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
-//					if(e.getOldItems() != null) {
-//						for(final Tuple2<String, String> t : e.getOldItems()) {
-//							DefUserView.this.generalUsrInfoGrid.removeData(recordsO.remove(t));
-//						}
-//					}
-//
-//					if(e.getNewItems() != null) {
-//						for(final Tuple2<String, String> t : e.getNewItems()) {
-//							final ListGridRecord lsg = new ListGridRecord();
-//							lsg.setAttribute("Attribute", t.getItem1());
-//							lsg.setAttribute("Value", t.getItem2());
-//							DefUserView.this.generalUsrInfoGrid.addData(lsg);
-//							recordsO.put(t, lsg);
-//						}
-//					}
-//				} else {
-//					DefUserView.this.generalUsrInfoGrid.clear();
-//					recordsO.clear();
-//				}
-//			}
-//		});
-//	}
+
+	private void bindUserLinkRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userLink.setContents("<a href=\"" + presenter.getUserInfo().getUserName() + "\" target=\"_blank\">"
+				        + presenter.getUserInfo().getUserName() + "</a>");
+				userLink.setTitle(presenter.getUserInfo().getUserName());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindSignUpInfoRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				signUpInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getSignInDate());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindCommitsInfoRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				commitsInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getCommits());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindReputationInfoRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				reputationInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getReputation());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindCategorysInfoRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				categorysInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getCategoryCommits());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindRestrictionInfoRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				restrictionInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getRestrictions());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	// TODO
+	// private void bindGeneralInfoGrid() {
+	// final Map<Tuple2<String, String>, Record> recordsO = new
+	// HashMap<Tuple2<String, String>, Record>();
+	// for(final Tuple2<String, String> t : this.presenter.getUserInfo()) {
+	// final ListGridRecord lsg = new ListGridRecord();
+	// lsg.setAttribute("Attribute", t.getItem1());
+	// lsg.setAttribute("Value", t.getItem2());
+	// this.generalUsrInfoGrid.addData(lsg);
+	// recordsO.put(t, lsg);
+	// }
+	// this.presenter.getUserInfo().listChanged().addHandler(new
+	// Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
+	//
+	// public void invoke(final Object sender, final
+	// ListChangedEventArgs<Tuple2<String, String>> e) {
+	// if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
+	// if(e.getOldItems() != null) {
+	// for(final Tuple2<String, String> t : e.getOldItems()) {
+	// DefUserView.this.generalUsrInfoGrid.removeData(recordsO.remove(t));
+	// }
+	// }
+	//
+	// if(e.getNewItems() != null) {
+	// for(final Tuple2<String, String> t : e.getNewItems()) {
+	// final ListGridRecord lsg = new ListGridRecord();
+	// lsg.setAttribute("Attribute", t.getItem1());
+	// lsg.setAttribute("Value", t.getItem2());
+	// DefUserView.this.generalUsrInfoGrid.addData(lsg);
+	// recordsO.put(t, lsg);
+	// }
+	// }
+	// } else {
+	// DefUserView.this.generalUsrInfoGrid.clear();
+	// recordsO.clear();
+	// }
+	// }
+	// });
+	// }
 
 	@Override
 	public String getName() {

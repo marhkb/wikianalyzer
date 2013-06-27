@@ -24,17 +24,6 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import java.util.List;
 
 public class DefArticleAnaView extends ArticleAnaView {
-
-	private final static String AUTHOR_GRID_AUTHOR = "authorGridAuthor";
-	private final static String AUTHOR_GRID_COMMITS = "authorGridCommits";
-	private final static String AUTHOR_GRID_QUANTITY = "authorGridQuantity";
-	private final static String ARTICLE_GRID_REVISION = "articleGridRevision";
-	private final static String ARTICLE_GRID_PARENT = "articleGridParent";
-	private final static String ARTICLE_GRID_DATE = "articleGridDate";
-	private final static String ARTICLE_GRID_AUTHOR = "articleGridAuthor";
-	private final static String ARTICLE_GRID_BYTES = "articleGridBytes";
-	private final static String ARTICLE_GRID_DIFF = "articleGridDiff";
-	private final static String ARTICLE_GRID_COMMENT = "articleGridComment";
 	private final Presenter presenter;
 	private final Messages messages;
 	private HTMLPanel authorAnaChartContainer, articleAnaChartContainer;
@@ -68,9 +57,9 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.authorAnaChartContainer.setWidth("50%");
 		this.authorAnaChartContainer.setHeight("50%");
 
-		this.authorGridAuthor = new ListGridField(AUTHOR_GRID_AUTHOR, "Author");
-		this.authorGridCommits = new ListGridField(AUTHOR_GRID_COMMITS, "Einsendungen");
-		this.authorGridQuantity = new ListGridField(AUTHOR_GRID_QUANTITY, "Verhältnis Einsendungen/Text");
+		this.authorGridAuthor = new ListGridField("authorGridAuthor", "Author");
+		this.authorGridCommits = new ListGridField("authorGridCommits", "Einsendungen");
+		this.authorGridQuantity = new ListGridField("authorGridQuantity", "Verhältnis Einsendungen/Text");
 		this.authorGrid = new ListGrid();
 		this.authorGrid.setFields(this.authorGridAuthor, this.authorGridCommits, this.authorGridQuantity);
 		this.authorGrid.setWidth("50%");
@@ -87,13 +76,13 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaChartContainer.setWidth("50%");
 		this.articleAnaChartContainer.setHeight("50%");
 
-		this.articleGridRevision = new ListGridField(ARTICLE_GRID_REVISION, "Revision");
-		this.articleGridParent = new ListGridField(ARTICLE_GRID_PARENT, "Parent");
-		this.articleGridDate = new ListGridField(ARTICLE_GRID_DATE, "Änderungsdatum");
-		this.articleGridAuthor = new ListGridField(ARTICLE_GRID_AUTHOR, "Author");
-		this.articleGridBytes = new ListGridField(ARTICLE_GRID_BYTES, "Bytes");
-		this.articleGridDiff = new ListGridField(ARTICLE_GRID_DIFF, "Diff");
-		this.articleGridComment = new ListGridField(ARTICLE_GRID_COMMENT, "Comment");
+		this.articleGridRevision = new ListGridField("articleGridRevision", "Revision");
+		this.articleGridParent = new ListGridField("articleGridParent", "Parent");
+		this.articleGridDate = new ListGridField("articleGridDate", "Änderungsdatum");
+		this.articleGridAuthor = new ListGridField("articleGridAuthor", "Author");
+		this.articleGridBytes = new ListGridField("articleGridBytes", "Bytes");
+		this.articleGridDiff = new ListGridField("articleGridDiff", "Diff");
+		this.articleGridComment = new ListGridField("articleGridComment", "Comment");
 		this.articleGrid = new ListGrid();
 		this.articleGrid.setFields(
 				this.articleGridRevision, this.articleGridParent, this.articleGridDate, this.articleGridAuthor,

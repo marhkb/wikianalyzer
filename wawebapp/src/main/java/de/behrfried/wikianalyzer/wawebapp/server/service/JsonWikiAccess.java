@@ -347,159 +347,154 @@ public class JsonWikiAccess implements WikiAccess {
 	
 	@Override
     public UserInfo getUserInfo(String userName) throws UserNotExistException {
-	    // TODO Auto-generated method stub
-	    return null;
+		final int userid = this.getUserID(userName);
+
+		if(userid == -1) {
+			/* article does not exist */
+			throw new UserNotExistException("Nutzer \"" + userid + "\" existiert nicht!");
+		}
+
+		final List<UserInfo.CategoryEdited> categoryEdited = new ArrayList<UserInfo.CategoryEdited>();
+		final List<UserInfo.EditType> editType = new ArrayList<UserInfo.EditType>();
+
+		int lastRev = 0;
+
+		Date signInDate = null;
+		Date lastLogin = null;
+		String initialAuthor = null;
+
+		/* get revisions of an article (max 500 are allowed) */
+		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
+		final Map<String, Integer> tmp = new HashMap<String, Integer>();
+		while(lastRev != -1) {
+			final String response1 =
+					this.requester.getResult(
+							API + "action=query&format=json&prop=revisions&rvprop=user|ids" +
+							"|timestamp|comment|size&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" +
+							userid + "&rvstartid=" + lastRev + "&continue="
+					);
+
+			final JsonObject root = this.parser.parse(response1)
+											   .getAsJsonObject();
+			final JsonObject page = root
+					.getAsJsonObject("query")
+					.getAsJsonObject("pages")
+					.getAsJsonObject(userid + "");
+
+			if(!page.has("revisions")) {
+				break;
+			}
+
+			final JsonArray w = page.getAsJsonArray("revisions");
+			for(JsonElement obj : w) {
+
+				final JsonObject jsonObj = obj.getAsJsonObject();
+				final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
+				if(!tmp.containsKey(author)) {
+					tmp.put(author, 1);
+				} else {
+					tmp.put(author, tmp.get(author) + 1);
+				}
+
+				try {
+					revisions.add(
+							new ArticleInfo.Revision(
+									jsonObj.getAsJsonPrimitive("revid").getAsInt(),
+									jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
+									this.formatter.parse(
+											jsonObj.getAsJsonPrimitive("timestamp").getAsString()
+									),
+									author,
+									jsonObj.getAsJsonPrimitive("comment").getAsString(),
+									jsonObj.getAsJsonPrimitive("size").getAsInt(),
+									0,
+									false
+							)
+					);
+				} catch(ParseException e) {
+					this.logger.error(e.getMessage(), e);
+				}
+			}
+			if(lastRev == 0) {
+				try {
+					creationDate = this.formatter.parse(
+							w.get(0).getAsJsonObject().getAsJsonPrimitive("timestamp").getAsString()
+					);
+				} catch(ParseException e) {
+					this.logger.error(e.getMessage(), e);
+				}
+				initialAuthor = w.get(0).getAsJsonObject().getAsJsonPrimitive("user").getAsString();
+			}
+			//lastRev = w.get(w.size() - 1).getAsJsonObject().getAsJsonPrimitive("revid").getAsInt() + 1;
+			lastRev = root.has("continue") ? root
+					.getAsJsonObject("continue")
+					.getAsJsonPrimitive("rvcontinue")
+					.getAsInt()
+
+					:
+
+					-1;
+		}
+
+
+		for(Map.Entry<String, Integer> entry : tmp.entrySet()) {
+			authorsAndCommits.add(new ArticleInfo.AuthorAndCommits(entry.getKey(), entry.getValue()));
+		}
+
+		/* set diffs in revisions and look for edit wars */
+		for(int i = 1; i < revisions.size(); i++) {
+			revisions.get(i).setDiff(revisions.get(i).getBytes() - revisions.get(i - 1).getBytes());
+		}
+		Date lastRevert;
+		final List<ArticleInfo.Revision> revTmp = new ArrayList<ArticleInfo.Revision>();
+		for(int i = 0; i < revisions.size(); i++) {
+			final String comment = revisions.get(i).getComment();
+			if(comment.startsWith("Änderungen von ") && comment.contains(" auf die letzte Version von ")) {
+
+			}
+		}
+
+		/* get similiar articles */
+		// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
+		final String similar = this.requester.getResult(
+				API +
+				"action=query&format=json&list=search&srlimit=500&srsearch=" + this.convertRequest(userName)
+		);
+		final JsonArray search = this.parser.parse(similar)
+											.getAsJsonObject()
+											.getAsJsonObject("query")
+											.getAsJsonArray("search");
+
+		final List<ArticleInfo.SimilarArticle> similarArticles =
+				new ArrayList<ArticleInfo.SimilarArticle>(search.size());
+
+		/* get number of images */
+		final String imageStr = this.requester.getResult(
+				API + "action=query&format=json&prop=images&pageids=" + pageid
+		);
+		int numOfImages = this.parser.parse(imageStr)
+									 .getAsJsonObject()
+									 .getAsJsonObject("query")
+									 .getAsJsonObject("pages")
+									 .getAsJsonObject(pageid + "")
+									 .getAsJsonArray("images")
+									 .size();
+
+		return new UserInfo(
+				userid,
+				userName,
+				initialAuthor,
+				creationDate,
+				"http://de.wikipedia.org/wiki/" + title.replaceAll(" ", "_"),
+				"http://de.wikipedia.org/wiki/Benutzer:" + initialAuthor,
+				numOfImages,
+				this.getCategories(pageid),
+				revisions.get(revisions.size() - 1).getBytes(),
+				authorsAndCommits,
+				revisions,
+				similarArticles
+		);
     }
-	//TODO @Override
-//    public UserInfo getUserInfo(String userName) throws UserNotExistException {
-//		final int userid = this.getUserID(userName);
-//
-//		if(userid == -1) {
-//			/* article does not exist */
-//			throw new UserNotExistException("Nutzer \"" + userid + "\" existiert nicht!");
-//		}
-//
-//		final List<UserInfo.CategoryEdited> categoryEdited = new ArrayList<UserInfo.CategoryEdited>();
-//		final List<UserInfo.EditType> editType = new ArrayList<UserInfo.EditType>();
-//
-//		int lastRev = 0;
-//
-//		Date signInDate = null;
-//		Date lastLogin = null;
-//		String initialAuthor = null;
-//
-//		/* get revisions of an article (max 500 are allowed) */
-//		// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
-//		final Map<String, Integer> tmp = new HashMap<String, Integer>();
-//		while(lastRev != -1) {
-//			final String response1 =
-//					this.requester.getResult(
-//							API + "action=query&format=json&prop=revisions&rvprop=user|ids" +
-//							"|timestamp|comment|size&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" +
-//							userid + "&rvstartid=" + lastRev + "&continue="
-//					);
-//
-//			final JsonObject root = this.parser.parse(response1)
-//											   .getAsJsonObject();
-//			final JsonObject page = root
-//					.getAsJsonObject("query")
-//					.getAsJsonObject("pages")
-//					.getAsJsonObject(userid + "");
-//
-//			if(!page.has("revisions")) {
-//				break;
-//			}
-//
-//			final JsonArray w = page.getAsJsonArray("revisions");
-//			for(JsonElement obj : w) {
-//
-//				final JsonObject jsonObj = obj.getAsJsonObject();
-//				final String author = jsonObj.getAsJsonPrimitive("user").getAsString();
-//				if(!tmp.containsKey(author)) {
-//					tmp.put(author, 1);
-//				} else {
-//					tmp.put(author, tmp.get(author) + 1);
-//				}
-//
-//				try {
-//					revisions.add(
-//							new ArticleInfo.Revision(
-//									jsonObj.getAsJsonPrimitive("revid").getAsInt(),
-//									jsonObj.getAsJsonPrimitive("parentid").getAsInt(),
-//									this.formatter.parse(
-//											jsonObj.getAsJsonPrimitive("timestamp").getAsString()
-//									),
-//									author,
-//									jsonObj.getAsJsonPrimitive("comment").getAsString(),
-//									jsonObj.getAsJsonPrimitive("size").getAsInt(),
-//									0,
-//									false
-//							)
-//					);
-//				} catch(ParseException e) {
-//					this.logger.error(e.getMessage(), e);
-//				}
-//			}
-//			if(lastRev == 0) {
-//				try {
-//					creationDate = this.formatter.parse(
-//							w.get(0).getAsJsonObject().getAsJsonPrimitive("timestamp").getAsString()
-//					);
-//				} catch(ParseException e) {
-//					this.logger.error(e.getMessage(), e);
-//				}
-//				initialAuthor = w.get(0).getAsJsonObject().getAsJsonPrimitive("user").getAsString();
-//			}
-//			//lastRev = w.get(w.size() - 1).getAsJsonObject().getAsJsonPrimitive("revid").getAsInt() + 1;
-//			lastRev = root.has("continue") ? root
-//					.getAsJsonObject("continue")
-//					.getAsJsonPrimitive("rvcontinue")
-//					.getAsInt()
-//
-//					:
-//
-//					-1;
-//		}
-//
-//
-//		for(Map.Entry<String, Integer> entry : tmp.entrySet()) {
-//			authorsAndCommits.add(new ArticleInfo.AuthorAndCommits(entry.getKey(), entry.getValue()));
-//		}
-//
-//		/* set diffs in revisions and look for edit wars */
-//		for(int i = 1; i < revisions.size(); i++) {
-//			revisions.get(i).setDiff(revisions.get(i).getBytes() - revisions.get(i - 1).getBytes());
-//		}
-//		Date lastRevert;
-//		final List<ArticleInfo.Revision> revTmp = new ArrayList<ArticleInfo.Revision>();
-//		for(int i = 0; i < revisions.size(); i++) {
-//			final String comment = revisions.get(i).getComment();
-//			if(comment.startsWith("Änderungen von ") && comment.contains(" auf die letzte Version von ")) {
-//
-//			}
-//		}
-//
-//		/* get similiar articles */
-//		// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
-//		final String similar = this.requester.getResult(
-//				API +
-//				"action=query&format=json&list=search&srlimit=500&srsearch=" + this.convertRequest(userName)
-//		);
-//		final JsonArray search = this.parser.parse(similar)
-//											.getAsJsonObject()
-//											.getAsJsonObject("query")
-//											.getAsJsonArray("search");
-//
-//		final List<ArticleInfo.SimilarArticle> similarArticles =
-//				new ArrayList<ArticleInfo.SimilarArticle>(search.size());
-//
-//		/* get number of images */
-//		final String imageStr = this.requester.getResult(
-//				API + "action=query&format=json&prop=images&pageids=" + pageid
-//		);
-//		int numOfImages = this.parser.parse(imageStr)
-//									 .getAsJsonObject()
-//									 .getAsJsonObject("query")
-//									 .getAsJsonObject("pages")
-//									 .getAsJsonObject(pageid + "")
-//									 .getAsJsonArray("images")
-//									 .size();
-//
-//		return new UserInfo(
-//				userid,
-//				userName,
-//				initialAuthor,
-//				creationDate,
-//				"http://de.wikipedia.org/wiki/" + title.replaceAll(" ", "_"),
-//				"http://de.wikipedia.org/wiki/Benutzer:" + initialAuthor,
-//				numOfImages,
-//				this.getCategories(pageid),
-//				revisions.get(revisions.size() - 1).getBytes(),
-//				authorsAndCommits,
-//				revisions,
-//				similarArticles
-//		);
-//    }
 
 	@Override
     public UserComparisonInfo getUserComparisonInfo(String userName) throws UserForComparisonNotExistException {

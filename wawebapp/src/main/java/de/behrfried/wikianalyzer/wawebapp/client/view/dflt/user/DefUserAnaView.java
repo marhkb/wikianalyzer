@@ -1,5 +1,6 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.DataTable;
@@ -10,11 +11,16 @@ import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView.Presenter;
+import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 public class DefUserAnaView extends UserAnaView {
 
@@ -31,7 +37,7 @@ public class DefUserAnaView extends UserAnaView {
 	private HLayout userArticleAnaContainer, userEditTypeContainer;
 	private ListGrid userArticleGrid, userEditTypeGrid;
 	private ListGridField articleArticleColumn, articleCategoryColumn, articleCommitsColumn, articleQuantityColumn, editTypeEditTypeColumn,
-	        editTypeCommitsColumn, editTypeQuantityColumn;;
+	        editTypeCommitsColumn, editTypeQuantityColumn;
 
 	/**
 	 * Creates an instance of {@link DefUserView}. All arguments are injected by
@@ -140,5 +146,49 @@ public class DefUserAnaView extends UserAnaView {
 			}
 		};
 		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
+	}
+
+	private void bindUserArticleGrid() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				while(userArticleGrid.getRecordList().getLength() > 0) {
+					userArticleGrid.removeData(userArticleGrid.getRecord(0));
+				}
+				for(final UserInfo.CategoryEdited catEd : presenter.getUserInfo().getEditedCategories()) {
+					final ListGridRecord lgr = new ListGridRecord();
+					lgr.setAttribute(articleArticleColumn.getName(), catEd.getArticle());
+					lgr.setAttribute(articleCategoryColumn.getName(), catEd.getCategory());
+					lgr.setAttribute(articleCommitsColumn.getName(), catEd.getNumOfCommits());
+					lgr.setAttribute(
+					        articleQuantityColumn.getName(),
+					        NumberFormat.getPercentFormat().format(
+					                catEd.getNumOfCommits() / (double)presenter.getUserInfo().getEditedCategories().size()));
+					userArticleGrid.addData(lgr);
+				}
+			}
+		});
+	}
+
+	private void bindUserEditTypeGrid() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				while(userEditTypeGrid.getRecordList().getLength() > 0) {
+					userEditTypeGrid.removeData(userEditTypeGrid.getRecord(0));
+				}
+
+				for(final UserInfo.EditType edt : presenter.getUserInfo().getEditTypes()) {
+					final ListGridRecord lgr = new ListGridRecord();
+					lgr.setAttribute(editTypeEditTypeColumn.getName(), edt.getEditType());
+					lgr.setAttribute(editTypeCommitsColumn.getName(), edt.getNumOfCommits());
+					lgr.setAttribute(editTypeQuantityColumn.getName(),
+					        NumberFormat.getPercentFormat().format(edt.getNumOfCommits() / (double)presenter.getUserInfo().getEditTypes().size()));
+					userEditTypeGrid.addData(lgr);
+				}
+			}
+		});
 	}
 }

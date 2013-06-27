@@ -13,15 +13,17 @@ public class UserInfo implements Serializable {
 
 	private String title;
 
-	private String userID;
-
-	private String userName, restrictions, commits, categoryCommits;
+	private String userID, userName, restrictions, commits, categoryCommits, reputation;
 
 	private Date lastOnlineDate, signInDate;
+	
+
+	private List<EditType> editTypes;
+	private List<CategoryEdited> editedCategories;
 
 	public UserInfo() {}
 
-	public UserInfo(String userID, String username, String restrictions, String commits, String categoryCommits, Date lastOnlineDate, Date signInDate) {
+	public UserInfo(String userID, String username, String restrictions, String commits, String categoryCommits, Date lastOnlineDate, Date signInDate, String reputation, List<CategoryEdited> editedCategories, List<EditType> editTypes) {
 		this.userID = userID;
 		this.userName = username;
 		this.restrictions = restrictions;
@@ -29,7 +31,19 @@ public class UserInfo implements Serializable {
 		this.categoryCommits = categoryCommits;
 		this.lastOnlineDate = lastOnlineDate;
 		this.signInDate = signInDate;
+		this.reputation = reputation;
+		this.editTypes = editTypes;
+		this.editedCategories = editedCategories;
 	}
+	
+    public String getReputation() {
+    	return reputation;
+    }
+
+	
+    public void setReputation(String reputation) {
+    	this.reputation = reputation;
+    }
 
 	public String getUserID() {
 		return userID;
@@ -115,7 +129,6 @@ public class UserInfo implements Serializable {
 		return serialVersionUID;
 	}
 
-	private List<CategoryEdited> editedCategories;
 
 	public final static class CategoryEdited implements Serializable {
 
@@ -124,14 +137,15 @@ public class UserInfo implements Serializable {
          */
 		private static final long serialVersionUID = 1L;
 
-		String article, category, commits, quantity;
+		String article, category, quantity;
+		int numOfCommits;
 
 		public CategoryEdited() {}
 
-		public CategoryEdited(String article, String category, String commits, String quantity) {
+		public CategoryEdited(String article, String category, int commits, String quantity) {
 			this.article = article;
 			this.category = category;
-			this.commits = commits;
+			this.numOfCommits = commits;
 			this.quantity = quantity;
 		}
 
@@ -151,12 +165,12 @@ public class UserInfo implements Serializable {
 			this.category = category;
 		}
 
-		public String getCommits() {
-			return commits;
+		public int getNumOfCommits() {
+			return numOfCommits;
 		}
 
-		public void setCommits(String commits) {
-			this.commits = commits;
+		public void setNumOfCommits(int numOfCommits) {
+			this.numOfCommits = numOfCommits;
 		}
 
 		public String getQuantity() {
@@ -173,7 +187,6 @@ public class UserInfo implements Serializable {
 
 	}
 
-	private List<EditType> editTypes;
 
 	public final static class EditType implements Serializable {
 
@@ -182,13 +195,14 @@ public class UserInfo implements Serializable {
          */
 		private static final long serialVersionUID = 1L;
 
-		String editType, commits, quantity;
+		String editType, quantity;
+		int numOfCommits;
 
 		public EditType() {}
 
-		public EditType(String editType, String commits, String quantity) {
+		public EditType(String editType, int numOfCommits, String quantity) {
 			this.editType = editType;
-			this.commits = commits;
+			this.numOfCommits = numOfCommits;
 			this.quantity = quantity;
 		}
 
@@ -200,12 +214,12 @@ public class UserInfo implements Serializable {
 			this.editType = editType;
 		}
 
-		public String getCommits() {
-			return commits;
+		public int getNumOfCommits() {
+			return numOfCommits;
 		}
 
-		public void setCommits(String commits) {
-			this.commits = commits;
+		public void setNumOfCommits(int numOfCommits) {
+			this.numOfCommits = numOfCommits;
 		}
 
 		public String getQuantity() {
