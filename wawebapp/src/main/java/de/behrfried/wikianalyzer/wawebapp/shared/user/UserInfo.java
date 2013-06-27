@@ -11,11 +11,10 @@ public class UserInfo implements Serializable {
      */
 	private static final long serialVersionUID = 1L;
 
-	private String title;
+	private String userID, userName, restrictions, categoryCommits, reputation;
+	private int totalCommits;
 
-	private String userID, userName, restrictions, commits, categoryCommits, reputation;
-
-	private Date lastOnlineDate, signInDate;
+	private Date signInDate;
 	
 
 	private List<EditType> editTypes;
@@ -23,13 +22,12 @@ public class UserInfo implements Serializable {
 
 	public UserInfo() {}
 
-	public UserInfo(String userID, String username, String restrictions, String commits, String categoryCommits, Date lastOnlineDate, Date signInDate, String reputation, List<CategoryEdited> editedCategories, List<EditType> editTypes) {
+	public UserInfo(String userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<CategoryEdited> editedCategories, List<EditType> editTypes) {
 		this.userID = userID;
 		this.userName = username;
 		this.restrictions = restrictions;
-		this.commits = commits;
+		this.totalCommits = totalCommits;
 		this.categoryCommits = categoryCommits;
-		this.lastOnlineDate = lastOnlineDate;
 		this.signInDate = signInDate;
 		this.reputation = reputation;
 		this.editTypes = editTypes;
@@ -53,14 +51,6 @@ public class UserInfo implements Serializable {
 		this.userID = userID;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -77,12 +67,12 @@ public class UserInfo implements Serializable {
 		this.restrictions = restrictions;
 	}
 
-	public String getCommits() {
-		return commits;
+	public int getCommits() {
+		return totalCommits;
 	}
 
-	public void setCommits(String commits) {
-		this.commits = commits;
+	public void setCommits(int commits) {
+		this.totalCommits = commits;
 	}
 
 	public String getCategoryCommits() {
@@ -92,15 +82,7 @@ public class UserInfo implements Serializable {
 	public void setCategoryCommits(String categoryCommits) {
 		this.categoryCommits = categoryCommits;
 	}
-
-	public Date getLastOnlineDate() {
-		return lastOnlineDate;
-	}
-
-	public void setLastOnlineDate(Date lastOnlineDate) {
-		this.lastOnlineDate = lastOnlineDate;
-	}
-
+	
 	public Date getSignInDate() {
 		return signInDate;
 	}
