@@ -34,7 +34,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 	private ListGridField authorGridAuthor, authorGridCommits, authorGridQuantity, articleGridRevision,
 			articleGridParent,
 			articleGridDate, articleGridAuthor,
-			articleGridBytes, articleGridDiff, articleGridComment, categoryGridFrom, categoryGridTill, categoryGridCategory,
+			articleGridBytes, articleGridDiff, articleGridComment, categoryGridFrom, categoryGridCategory,
 			simCatGridSimilarArticle, simCatGridCategory, simCatGridCreationDate, editWarFrom, editWarTill, editWarUser;
 	private HTMLPanel chartContainer;
 
@@ -99,11 +99,10 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.categoryAnaLabel.setAlign(Alignment.CENTER);
 		this.categoryAnaLabel.setHeight(10);
 		this.categoryGridCategory = new ListGridField("categoryName", "Kategorien");
-		this.categoryGridFrom = new ListGridField("categoryFrom", "Von");
-		this.categoryGridTill = new ListGridField("categoryTill", "Bis");
+		this.categoryGridFrom = new ListGridField("categoryFrom", "Ab");
 		this.categoryGrid = new ListGrid();
 		this.categoryGrid.setHeight(230);
-		this.categoryGrid.setFields(this.categoryGridCategory, this.categoryGridFrom, this.categoryGridTill);
+		this.categoryGrid.setFields(this.categoryGridCategory, this.categoryGridFrom);
 		this.categoryGrid.setWidth("50%");
 		this.simCatGridSimilarArticle = new ListGridField("simCatArticleName", "Name des ähnlichen Artikels");
 		this.simCatGridCategory = new ListGridField("simCatCategory", "Ähnliche Kategorien zum Artikel");
@@ -151,6 +150,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.bindArticleGrid();
 		this.bindSimilarCategoryGrid();
         this.bindEditWarGrid();
+        this.bindCategoriesGrid();
 	}
 
 	private void bindAuthorChart() {
@@ -321,6 +321,24 @@ public class DefArticleAnaView extends ArticleAnaView {
                     lgr.setAttribute(editWarUser.getName(), editWar.getUsers());
 
                     editWarGrid.addData(lgr);
+                }
+            }
+        });
+    }
+
+    private void bindCategoriesGrid() {
+        this.presenter.articleInfoChanged().addHandler(new Handler<EventArgs>() {
+            @Override
+            public void invoke(Object sender, EventArgs eventArgs) {
+                while(categoryGrid.getRecordList().getLength() > 0) {
+                    categoryGrid.removeData(categoryGrid.getRecord(0));
+                }
+
+                for(final ArticleInfo.Category category : presenter.getArticleInfo().getCategoryList()) {
+                    final ListGridRecord lgr = new ListGridRecord();
+                    lgr.setAttribute(categoryGridCategory.getName(), category.getName());
+                    lgr.setAttribute(categoryGridFrom.getName(), category.getTimestamp());
+                    categoryGrid.addData(lgr);
                 }
             }
         });
