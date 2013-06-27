@@ -396,12 +396,12 @@ public class ArticleInfo implements Serializable {
 
 		private Date to;
 
-		private Map<String, String> users;
+		private String users;
 
 		public EditWar() {
 		}
 
-		public EditWar(Date from, Date to, Map<String, String> users) {
+		public EditWar(Date from, Date to, String users) {
 			this.from = from;
 			this.to = to;
 			this.users = users;
@@ -423,11 +423,11 @@ public class ArticleInfo implements Serializable {
 			this.to = to;
 		}
 
-		public Map<String, String> getUsers() {
+		public String getUsers() {
 			return users;
 		}
 
-		public void setUsers(Map<String, String> users) {
+		public void setUsers(String users) {
 			this.users = users;
 		}
 	}

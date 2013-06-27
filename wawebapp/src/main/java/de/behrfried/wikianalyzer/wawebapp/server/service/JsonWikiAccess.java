@@ -199,10 +199,26 @@ public class JsonWikiAccess implements WikiAccess {
 				i += 4;
 			}
 			if(i != startI) {
+                final StringBuilder usersStrBldr = new StringBuilder();
+                final Map<String, Integer> usersMap = new HashMap<String, Integer>();
+                for(int j = startI; j <= i; j++) {
+                    final String author = revertedRevs.get(j).getAuthor();
+                    if(!usersMap.containsKey(author)) {
+                        usersMap.put(author, 0);
+                    }
+                    usersMap.put(author, usersMap.get(author) + 1);
+
+                }
+                for(final Map.Entry<String, Integer> entry : usersMap.entrySet()) {
+                    usersStrBldr.append(entry.getKey());
+                    usersStrBldr.append(" (");
+                    usersStrBldr.append(entry.getValue());
+                    usersStrBldr.append("); ");
+                }
 				editWars.add(new ArticleInfo.EditWar(
                         revertedRevs.get(startI).getTimestamp(),
                         revertedRevs.get(i).getTimestamp(),
-                        null));
+                        usersStrBldr.toString().substring(0, usersStrBldr.length() - 2)));
 			}
 		}
 
@@ -298,11 +314,7 @@ public class JsonWikiAccess implements WikiAccess {
 			stringBuilder.append(inner.getAsJsonObject().getAsJsonPrimitive("title").getAsString());
 			stringBuilder.append("\n");
 		}
-		final String result = stringBuilder.toString().replaceAll("Kategorie:", "");
-		if(result.length() == 0) {
-			return result;
-		}
-		return result.substring(0, result.length() - 1);
+		return stringBuilder.toString().substring(0, stringBuilder.length() - 2);
 	}
 
 	private List<ArticleInfo.Revision> getRevertedRevisions(List<ArticleInfo.Revision> revisions) {

@@ -318,7 +318,7 @@ public class DefArticleAnaView extends ArticleAnaView {
                     final ListGridRecord lgr = new ListGridRecord();
                     lgr.setAttribute(editWarFrom.getName(), editWar.getFrom());
                     lgr.setAttribute(editWarTill.getName(), editWar.getTo());
-                    lgr.setAttribute(editWarUser.getName(), "null");
+                    lgr.setAttribute(editWarUser.getName(), editWar.getUsers());
 
                     editWarGrid.addData(lgr);
                 }
