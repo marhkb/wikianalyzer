@@ -30,7 +30,6 @@ import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo.ArticleEdited;
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,9 +93,9 @@ public class JsonWikiAccess implements WikiAccess {
 		final Map<String, Integer> authorsAndCommitsTmp = new HashMap<String, Integer>();
 		final Map<Long, Integer> revsPerDatesTmp = new HashMap<Long, Integer>();
 		while(lastRev != -1) {
-			final String response1 = this.requester.getResult(this.convertRequest1("action=query&format=json&prop=revisions&rvprop=user|ids"
-			        + "|timestamp|comment|size&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" + pageid + "&rvstartid=" + lastRev
-			        + "&continue="));
+			final String response1 = this.requester.getResult(this.convertRequest("action=query&format=json&prop=revisions&rvprop=user|ids"
+                    + "|timestamp|comment|size&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" + pageid + "&rvstartid=" + lastRev
+                    + "&continue="));
 
 			final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 			final JsonObject page = root.getAsJsonObject("query").getAsJsonObject("pages").getAsJsonObject(pageid + "");
@@ -231,7 +230,7 @@ public class JsonWikiAccess implements WikiAccess {
 
 		/* get similiar articles */
 		// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
-		final String similar = this.requester.getResult(this.convertRequest1("action=query&format=json&list=search&srlimit=500&srsearch="
+		final String similar = this.requester.getResult(this.convertRequest("action=query&format=json&list=search&srlimit=500&srsearch="
                 + title));
 		final JsonArray search = this.parser.parse(similar).getAsJsonObject().getAsJsonObject("query").getAsJsonArray("search");
 
@@ -335,13 +334,12 @@ public class JsonWikiAccess implements WikiAccess {
     }
 
 	public int getPageId(final String title) {
-		final String convertedTitle = this.convertRequest(title);
-		final String response = this.requester.getResult(API + "action=query&format=json&indexpageids&titles=" + convertedTitle);
+		final String response = this.requester.getResult(this.convertRequest("action=query&format=json&indexpageids&titles=" + title));
 		this.logger.debug("Response: " + response);
 		return this.parser.parse(response).getAsJsonObject().getAsJsonObject("query").getAsJsonArray("pageids").get(0).getAsInt();
 	}
 
-    private String convertRequest1(String request) {
+    private String convertRequest(String request) {
         try {
             return new URI("http",
                     "de.wikipedia.org",
@@ -352,12 +350,6 @@ public class JsonWikiAccess implements WikiAccess {
             throw new RuntimeException(e);
         }
     }
-
-	private String convertRequest(String title) {
-		final String convertedTitle = title.replaceAll(" ", "%20").replaceAll("&", "%26");
-		this.logger.debug("Request 'pageid' for title '" + title + "' (converted to '" + convertedTitle + "')");
-		return convertedTitle;
-	}
 
 	private String getCategories(int pageid) {
 		/* get categories */
@@ -414,8 +406,8 @@ public class JsonWikiAccess implements WikiAccess {
 		String article, category, quantity;
 		int numOfCommits;
 
-		final String response1 = this.requester.getResult(API + "action=query&format=json&list=users&ususers=" + convertRequest(userName)
-		        + "&usprop=editcount|registration");
+		final String response1 = this.requester.getResult(this.convertRequest("action=query&format=json&list=users&ususers=" + userName
+                + "&usprop=editcount|registration"));
 		final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 		final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
 		
@@ -428,7 +420,7 @@ public class JsonWikiAccess implements WikiAccess {
 			e.printStackTrace();
 		};
 		//TODO für abuses
-		final String response2 = this.requester.getResult(API + "action=query&format=json&list=abuselog&afllimit=500&afluser=" + convertRequest(userName));
+		final String response2 = this.requester.getResult(API + "action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName);
 		// public UserInfo(String userID, String username, String restrictions,
 		// String commits, String categoryCommits, Date signInDate, String
 		// reputation, List<CategoryEdited> editedCategories, List<EditType>
@@ -441,10 +433,10 @@ public class JsonWikiAccess implements WikiAccess {
 //		final String articleCategory = this.requester.getResult(API + "action=query&prop=categories&cllimit=500&titles="+tmpArticle);
 		
 		String tmpDate = "";
-		Map<String, Map<String, String>> comparableRevisions = new HashedMap();
+		Map<String, Map<String, String>> comparableRevisions = new HashMap();
 		final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
 		do {
-			String userArticles = this.requester.getResult(API + "action=query&format=json&list=usercontribs&ucdir=newer&ucuser="+convertRequest(userName)+"&uclimit=500&continue=" + tmpDate);
+			String userArticles = this.requester.getResult(API + "action=query&format=json&list=usercontribs&ucdir=newer&ucuser=" + userName +"&uclimit=500&continue=" + tmpDate);
 			final JsonObject articles = this.parser.parse(userArticles).getAsJsonObject();
 			
 			final JsonArray articlesArticle = root.getAsJsonObject("query").getAsJsonArray("usercontribs");
@@ -482,8 +474,8 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	private int getUserID(final String userName) {
-		final String convertedUserName = this.convertRequest(userName);
-		final String response = this.requester.getResult(API + "action=query&format=json&list=allusers&aufrom=" + convertedUserName);
+		final String response =
+                this.requester.getResult(this.convertRequest("action=query&format=json&list=allusers&aufrom=" + userName));
 		this.logger.debug("Response: " + response);
 		return this.parser.parse(response).getAsJsonObject().getAsJsonObject("query").getAsJsonArray("allusers").get(0).getAsJsonObject()
 		        .getAsJsonPrimitive("userid").getAsInt();
