@@ -308,21 +308,21 @@ public class DefArticleView extends ArticleView {
 		this.randomSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
 
 			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : DefArticleView.this.timeSpanMenu.getItems()) {
+				for(final MenuItem mi : timeSpanMenu.getItems()) {
 					mi.setChecked(false);
 				}
-				DefArticleView.this.randomSpan.setChecked(true);
-				DefArticleView.this.timeMenuButton.setTitle(DefArticleView.this.randomSpan.getTitle());
+				randomSpan.setChecked(true);
+				timeMenuButton.setTitle(randomSpan.getTitle());
 			}
 		});
 		this.hourSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
 
 			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : DefArticleView.this.timeSpanMenu.getItems()) {
+				for(final MenuItem mi : timeSpanMenu.getItems()) {
 					mi.setChecked(false);
 				}
 				DefArticleView.this.hourSpan.setChecked(true);
-				DefArticleView.this.timeMenuButton.setTitle(DefArticleView.this.hourSpan.getTitle());
+				DefArticleView.this.timeMenuButton.setTitle(hourSpan.getTitle());
 			}
 		});
 		this.daySpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
@@ -374,7 +374,6 @@ public class DefArticleView extends ArticleView {
 				DefArticleView.this.chooseSpan.setChecked(true);
 			}
 		});
-
 	}
 
 	private void bindArticleRevisionsRecord() {

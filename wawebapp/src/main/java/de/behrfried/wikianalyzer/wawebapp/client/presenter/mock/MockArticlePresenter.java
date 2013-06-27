@@ -32,7 +32,6 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import java.util.*;
 
 public class MockArticlePresenter implements ArticleView.Presenter {
-
 	private final static Object INIT_CONTEXT = new Object();
 	private final Event<EventArgs> articleInfoChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> articleChanged = new Event<EventArgs>(INIT_CONTEXT);
@@ -61,7 +60,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 	public void setArticleInfo(ArticleInfo articleInfo) {
 		this.articleInfo = articleInfo;
-		this.articleInfoChanged().fire(this.INIT_CONTEXT, this, EventArgs.EMPTY);
+		this.articleInfoChanged().fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 	}
 
 	@Override
@@ -155,7 +154,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	private void fireSuggestionsChanged() {
-		this.suggestionsChanged.fire(this.INIT_CONTEXT, this, EventArgs.EMPTY);
+		this.suggestionsChanged.fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 	}
 
 	private final void clearSuggestions() {

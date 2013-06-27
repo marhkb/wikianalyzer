@@ -11,25 +11,37 @@ public class UserInfo implements Serializable {
      */
 	private static final long serialVersionUID = 1L;
 
-	private String title;
+	private String userID, userName, restrictions, categoryCommits, reputation;
+	private int totalCommits;
 
-	private String userID;
+	private Date signInDate;
+	
 
-	private String userName, restrictions, commits, categoryCommits;
-
-	private Date lastOnlineDate, signInDate;
+	private List<EditType> editTypes;
+	private List<CategoryEdited> editedCategories;
 
 	public UserInfo() {}
 
-	public UserInfo(String userID, String username, String restrictions, String commits, String categoryCommits, Date lastOnlineDate, Date signInDate) {
+	public UserInfo(String userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<CategoryEdited> editedCategories, List<EditType> editTypes) {
 		this.userID = userID;
 		this.userName = username;
 		this.restrictions = restrictions;
-		this.commits = commits;
+		this.totalCommits = totalCommits;
 		this.categoryCommits = categoryCommits;
-		this.lastOnlineDate = lastOnlineDate;
 		this.signInDate = signInDate;
+		this.reputation = reputation;
+		this.editTypes = editTypes;
+		this.editedCategories = editedCategories;
 	}
+	
+    public String getReputation() {
+    	return reputation;
+    }
+
+	
+    public void setReputation(String reputation) {
+    	this.reputation = reputation;
+    }
 
 	public String getUserID() {
 		return userID;
@@ -37,14 +49,6 @@ public class UserInfo implements Serializable {
 
 	public void setUserID(String userID) {
 		this.userID = userID;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getUserName() {
@@ -63,12 +67,12 @@ public class UserInfo implements Serializable {
 		this.restrictions = restrictions;
 	}
 
-	public String getCommits() {
-		return commits;
+	public int getCommits() {
+		return totalCommits;
 	}
 
-	public void setCommits(String commits) {
-		this.commits = commits;
+	public void setCommits(int commits) {
+		this.totalCommits = commits;
 	}
 
 	public String getCategoryCommits() {
@@ -78,15 +82,7 @@ public class UserInfo implements Serializable {
 	public void setCategoryCommits(String categoryCommits) {
 		this.categoryCommits = categoryCommits;
 	}
-
-	public Date getLastOnlineDate() {
-		return lastOnlineDate;
-	}
-
-	public void setLastOnlineDate(Date lastOnlineDate) {
-		this.lastOnlineDate = lastOnlineDate;
-	}
-
+	
 	public Date getSignInDate() {
 		return signInDate;
 	}
@@ -115,7 +111,6 @@ public class UserInfo implements Serializable {
 		return serialVersionUID;
 	}
 
-	private List<CategoryEdited> editedCategories;
 
 	public final static class CategoryEdited implements Serializable {
 
@@ -124,14 +119,15 @@ public class UserInfo implements Serializable {
          */
 		private static final long serialVersionUID = 1L;
 
-		String article, category, commits, quantity;
+		String article, category, quantity;
+		int numOfCommits;
 
 		public CategoryEdited() {}
 
-		public CategoryEdited(String article, String category, String commits, String quantity) {
+		public CategoryEdited(String article, String category, int commits, String quantity) {
 			this.article = article;
 			this.category = category;
-			this.commits = commits;
+			this.numOfCommits = commits;
 			this.quantity = quantity;
 		}
 
@@ -151,12 +147,12 @@ public class UserInfo implements Serializable {
 			this.category = category;
 		}
 
-		public String getCommits() {
-			return commits;
+		public int getNumOfCommits() {
+			return numOfCommits;
 		}
 
-		public void setCommits(String commits) {
-			this.commits = commits;
+		public void setNumOfCommits(int numOfCommits) {
+			this.numOfCommits = numOfCommits;
 		}
 
 		public String getQuantity() {
@@ -173,7 +169,6 @@ public class UserInfo implements Serializable {
 
 	}
 
-	private List<EditType> editTypes;
 
 	public final static class EditType implements Serializable {
 
@@ -182,13 +177,14 @@ public class UserInfo implements Serializable {
          */
 		private static final long serialVersionUID = 1L;
 
-		String editType, commits, quantity;
+		String editType, quantity;
+		int numOfCommits;
 
 		public EditType() {}
 
-		public EditType(String editType, String commits, String quantity) {
+		public EditType(String editType, int numOfCommits, String quantity) {
 			this.editType = editType;
-			this.commits = commits;
+			this.numOfCommits = numOfCommits;
 			this.quantity = quantity;
 		}
 
@@ -200,12 +196,12 @@ public class UserInfo implements Serializable {
 			this.editType = editType;
 		}
 
-		public String getCommits() {
-			return commits;
+		public int getNumOfCommits() {
+			return numOfCommits;
 		}
 
-		public void setCommits(String commits) {
-			this.commits = commits;
+		public void setNumOfCommits(int numOfCommits) {
+			this.numOfCommits = numOfCommits;
 		}
 
 		public String getQuantity() {

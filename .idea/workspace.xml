@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" line="160" />
+    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" line="149" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserAnaView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -134,7 +137,7 @@
       <file leaf-file-name="DefArticleAnaView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="154" column="20" selection-start="7892" selection-end="7892" vertical-scroll-proportion="0.0">
+            <state line="143" column="20" selection-start="7175" selection-end="7175" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -143,12 +146,12 @@
       <file leaf-file-name="MockUserPresenter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="57" selection-start="2323" selection-end="2323" vertical-scroll-proportion="0.0">
+            <state line="62" column="57" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.0">
               <folding>
-                <marker date="1372334620140" expanded="true" signature="4642:5512" placeholder="{...}" />
-                <marker date="1372334620140" expanded="true" signature="5003:5033" placeholder="{...}" />
-                <marker date="1372334620140" expanded="true" signature="5056:5507" placeholder="{...}" />
-                <marker date="1372334620140" expanded="true" signature="5232:5380" placeholder="{...}" />
+                <marker date="1372342083403" expanded="true" signature="5000:5615" placeholder="{...}" />
+                <marker date="1372342083403" expanded="true" signature="5106:5241" placeholder="{...}" />
+                <marker date="1372342083403" expanded="true" signature="5275:5613" placeholder="{...}" />
+                <marker date="1372342083403" expanded="true" signature="5385:5487" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -173,58 +176,89 @@
                 <element signature="e#12420#12421#0" expanded="true" />
                 <element signature="e#12464#12589#0" expanded="true" />
                 <element signature="e#12584#12585#0" expanded="true" />
-                <element signature="e#12665#13045#0" expanded="true" />
-                <element signature="e#13040#13041#0" expanded="true" />
-                <element signature="e#13080#13456#0" expanded="true" />
-                <element signature="e#13451#13452#0" expanded="true" />
-                <element signature="e#13490#13864#0" expanded="true" />
-                <element signature="e#13859#13860#0" expanded="true" />
-                <element signature="e#13899#14275#0" expanded="true" />
-                <element signature="e#14270#14271#0" expanded="true" />
-                <element signature="e#14311#14609#0" expanded="true" />
-                <element signature="e#14604#14605#0" expanded="true" />
-                <element signature="e#14644#14940#0" expanded="true" />
-                <element signature="e#14935#14936#0" expanded="true" />
-                <element signature="e#14977#15265#0" expanded="true" />
-                <element signature="e#15260#15261#0" expanded="true" />
-                <element signature="e#15372#15651#0" expanded="true" />
-                <element signature="e#15644#15645#0" expanded="true" />
-                <element signature="e#15753#16010#0" expanded="true" />
-                <element signature="e#16005#16006#0" expanded="true" />
-                <element signature="e#16111#16351#0" expanded="true" />
-                <element signature="e#16346#16347#0" expanded="true" />
-                <element signature="e#16448#16753#0" expanded="true" />
-                <element signature="e#16748#16749#0" expanded="true" />
-                <element signature="e#16846#17251#0" expanded="true" />
-                <element signature="e#17246#17247#0" expanded="true" />
-                <element signature="e#17355#17599#0" expanded="true" />
-                <element signature="e#17594#17595#0" expanded="true" />
-                <element signature="e#18328#18561#0" expanded="true" />
-                <element signature="e#18556#18557#0" expanded="true" />
-                <element signature="e#19314#19552#0" expanded="true" />
-                <element signature="e#19547#19548#0" expanded="true" />
+                <element signature="e#12665#12965#0" expanded="true" />
+                <element signature="e#12960#12961#0" expanded="true" />
+                <element signature="e#13000#13336#0" expanded="true" />
+                <element signature="e#13331#13332#0" expanded="true" />
+                <element signature="e#13370#13744#0" expanded="true" />
+                <element signature="e#13739#13740#0" expanded="true" />
+                <element signature="e#13779#14155#0" expanded="true" />
+                <element signature="e#14150#14151#0" expanded="true" />
+                <element signature="e#14191#14489#0" expanded="true" />
+                <element signature="e#14484#14485#0" expanded="true" />
+                <element signature="e#14524#14820#0" expanded="true" />
+                <element signature="e#14815#14816#0" expanded="true" />
+                <element signature="e#14857#15145#0" expanded="true" />
+                <element signature="e#15140#15141#0" expanded="true" />
+                <element signature="e#15251#15530#0" expanded="true" />
+                <element signature="e#15523#15524#0" expanded="true" />
+                <element signature="e#15632#15889#0" expanded="true" />
+                <element signature="e#15884#15885#0" expanded="true" />
+                <element signature="e#15990#16230#0" expanded="true" />
+                <element signature="e#16225#16226#0" expanded="true" />
+                <element signature="e#16327#16632#0" expanded="true" />
+                <element signature="e#16627#16628#0" expanded="true" />
+                <element signature="e#16725#17130#0" expanded="true" />
+                <element signature="e#17125#17126#0" expanded="true" />
+                <element signature="e#17234#17478#0" expanded="true" />
+                <element signature="e#17473#17474#0" expanded="true" />
+                <element signature="e#18207#18440#0" expanded="true" />
+                <element signature="e#18435#18436#0" expanded="true" />
+                <element signature="e#19193#19431#0" expanded="true" />
+                <element signature="e#19426#19427#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefUserView.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DefUserView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="235" column="16" selection-start="8892" selection-end="8892" vertical-scroll-proportion="0.48402947">
+            <state line="272" column="0" selection-start="10793" selection-end="10793" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#8691#8942#0" expanded="true" />
-                <element signature="e#8937#8938#0" expanded="true" />
+                <element signature="e#11012#11013#0" expanded="true" />
+                <element signature="e#11208#11384#0" expanded="true" />
+                <element signature="e#11379#11380#0" expanded="true" />
+                <element signature="e#11423#11548#0" expanded="true" />
+                <element signature="e#11543#11544#0" expanded="true" />
+                <element signature="e#11638#12002#0" expanded="true" />
+                <element signature="e#11997#11998#0" expanded="true" />
+                <element signature="e#12094#12331#0" expanded="true" />
+                <element signature="e#12326#12327#0" expanded="true" />
+                <element signature="e#12424#12659#0" expanded="true" />
+                <element signature="e#12654#12655#0" expanded="true" />
+                <element signature="e#12755#12996#0" expanded="true" />
+                <element signature="e#12991#12992#0" expanded="true" />
+                <element signature="e#13091#13336#0" expanded="true" />
+                <element signature="e#13331#13332#0" expanded="true" />
+                <element signature="e#13433#13677#0" expanded="true" />
+                <element signature="e#13672#13673#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="227" column="0" selection-start="8720" selection-end="8720" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="204" column="24" selection-start="8589" selection-end="8589" vertical-scroll-proportion="0.54307115">
+              <folding>
+                <element signature="e#2052#2060#0" expanded="true" />
+                <element signature="e#3188#3218#0" expanded="true" />
+                <element signature="e#3282#3304#0" expanded="true" />
+                <element signature="e#3374#3399#0" expanded="true" />
+                <element signature="e#3768#3785#0" expanded="true" />
+                <element signature="e#3845#3860#0" expanded="true" />
+                <element signature="e#6124#6399#0" expanded="true" />
+                <element signature="e#6394#6395#0" expanded="true" />
+                <element signature="e#7625#7858#0" expanded="true" />
+                <element signature="e#7853#7854#0" expanded="true" />
+                <element signature="e#7951#7972#0" expanded="true" />
+                <element signature="e#9092#9120#0" expanded="true" />
+                <element signature="e#12717#12739#0" expanded="true" />
+                <element signature="e#13494#13519#0" expanded="true" />
+                <element signature="e#13579#13598#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -270,9 +304,9 @@
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
       </list>
     </option>
   </component>
@@ -1387,26 +1421,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="57" selection-start="2323" selection-end="2323" vertical-scroll-proportion="0.0">
+        <state line="62" column="57" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.0">
           <folding>
-            <marker date="1372334620140" expanded="true" signature="4642:5512" placeholder="{...}" />
-            <marker date="1372334620140" expanded="true" signature="5003:5033" placeholder="{...}" />
-            <marker date="1372334620140" expanded="true" signature="5056:5507" placeholder="{...}" />
-            <marker date="1372334620140" expanded="true" signature="5232:5380" placeholder="{...}" />
+            <marker date="1372342083403" expanded="true" signature="5000:5615" placeholder="{...}" />
+            <marker date="1372342083403" expanded="true" signature="5106:5241" placeholder="{...}" />
+            <marker date="1372342083403" expanded="true" signature="5275:5613" placeholder="{...}" />
+            <marker date="1372342083403" expanded="true" signature="5385:5487" placeholder="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="227" column="0" selection-start="8720" selection-end="8720" vertical-scroll-proportion="0.0">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="20" selection-start="7892" selection-end="7892" vertical-scroll-proportion="0.0">
+        <state line="143" column="20" selection-start="7175" selection-end="7175" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1429,46 +1456,84 @@
             <element signature="e#12420#12421#0" expanded="true" />
             <element signature="e#12464#12589#0" expanded="true" />
             <element signature="e#12584#12585#0" expanded="true" />
-            <element signature="e#12665#13045#0" expanded="true" />
-            <element signature="e#13040#13041#0" expanded="true" />
-            <element signature="e#13080#13456#0" expanded="true" />
-            <element signature="e#13451#13452#0" expanded="true" />
-            <element signature="e#13490#13864#0" expanded="true" />
-            <element signature="e#13859#13860#0" expanded="true" />
-            <element signature="e#13899#14275#0" expanded="true" />
-            <element signature="e#14270#14271#0" expanded="true" />
-            <element signature="e#14311#14609#0" expanded="true" />
-            <element signature="e#14604#14605#0" expanded="true" />
-            <element signature="e#14644#14940#0" expanded="true" />
-            <element signature="e#14935#14936#0" expanded="true" />
-            <element signature="e#14977#15265#0" expanded="true" />
-            <element signature="e#15260#15261#0" expanded="true" />
-            <element signature="e#15372#15651#0" expanded="true" />
-            <element signature="e#15644#15645#0" expanded="true" />
-            <element signature="e#15753#16010#0" expanded="true" />
-            <element signature="e#16005#16006#0" expanded="true" />
-            <element signature="e#16111#16351#0" expanded="true" />
-            <element signature="e#16346#16347#0" expanded="true" />
-            <element signature="e#16448#16753#0" expanded="true" />
-            <element signature="e#16748#16749#0" expanded="true" />
-            <element signature="e#16846#17251#0" expanded="true" />
-            <element signature="e#17246#17247#0" expanded="true" />
-            <element signature="e#17355#17599#0" expanded="true" />
-            <element signature="e#17594#17595#0" expanded="true" />
-            <element signature="e#18328#18561#0" expanded="true" />
-            <element signature="e#18556#18557#0" expanded="true" />
-            <element signature="e#19314#19552#0" expanded="true" />
-            <element signature="e#19547#19548#0" expanded="true" />
+            <element signature="e#12665#12965#0" expanded="true" />
+            <element signature="e#12960#12961#0" expanded="true" />
+            <element signature="e#13000#13336#0" expanded="true" />
+            <element signature="e#13331#13332#0" expanded="true" />
+            <element signature="e#13370#13744#0" expanded="true" />
+            <element signature="e#13739#13740#0" expanded="true" />
+            <element signature="e#13779#14155#0" expanded="true" />
+            <element signature="e#14150#14151#0" expanded="true" />
+            <element signature="e#14191#14489#0" expanded="true" />
+            <element signature="e#14484#14485#0" expanded="true" />
+            <element signature="e#14524#14820#0" expanded="true" />
+            <element signature="e#14815#14816#0" expanded="true" />
+            <element signature="e#14857#15145#0" expanded="true" />
+            <element signature="e#15140#15141#0" expanded="true" />
+            <element signature="e#15251#15530#0" expanded="true" />
+            <element signature="e#15523#15524#0" expanded="true" />
+            <element signature="e#15632#15889#0" expanded="true" />
+            <element signature="e#15884#15885#0" expanded="true" />
+            <element signature="e#15990#16230#0" expanded="true" />
+            <element signature="e#16225#16226#0" expanded="true" />
+            <element signature="e#16327#16632#0" expanded="true" />
+            <element signature="e#16627#16628#0" expanded="true" />
+            <element signature="e#16725#17130#0" expanded="true" />
+            <element signature="e#17125#17126#0" expanded="true" />
+            <element signature="e#17234#17478#0" expanded="true" />
+            <element signature="e#17473#17474#0" expanded="true" />
+            <element signature="e#18207#18440#0" expanded="true" />
+            <element signature="e#18435#18436#0" expanded="true" />
+            <element signature="e#19193#19431#0" expanded="true" />
+            <element signature="e#19426#19427#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="235" column="16" selection-start="8892" selection-end="8892" vertical-scroll-proportion="0.48402947">
+        <state line="272" column="0" selection-start="10793" selection-end="10793" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#8691#8942#0" expanded="true" />
-            <element signature="e#8937#8938#0" expanded="true" />
+            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11208#11384#0" expanded="true" />
+            <element signature="e#11379#11380#0" expanded="true" />
+            <element signature="e#11423#11548#0" expanded="true" />
+            <element signature="e#11543#11544#0" expanded="true" />
+            <element signature="e#11638#12002#0" expanded="true" />
+            <element signature="e#11997#11998#0" expanded="true" />
+            <element signature="e#12094#12331#0" expanded="true" />
+            <element signature="e#12326#12327#0" expanded="true" />
+            <element signature="e#12424#12659#0" expanded="true" />
+            <element signature="e#12654#12655#0" expanded="true" />
+            <element signature="e#12755#12996#0" expanded="true" />
+            <element signature="e#12991#12992#0" expanded="true" />
+            <element signature="e#13091#13336#0" expanded="true" />
+            <element signature="e#13331#13332#0" expanded="true" />
+            <element signature="e#13433#13677#0" expanded="true" />
+            <element signature="e#13672#13673#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="204" column="24" selection-start="8589" selection-end="8589" vertical-scroll-proportion="0.54307115">
+          <folding>
+            <element signature="e#2052#2060#0" expanded="true" />
+            <element signature="e#3188#3218#0" expanded="true" />
+            <element signature="e#3282#3304#0" expanded="true" />
+            <element signature="e#3374#3399#0" expanded="true" />
+            <element signature="e#3768#3785#0" expanded="true" />
+            <element signature="e#3845#3860#0" expanded="true" />
+            <element signature="e#6124#6399#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#7625#7858#0" expanded="true" />
+            <element signature="e#7853#7854#0" expanded="true" />
+            <element signature="e#7951#7972#0" expanded="true" />
+            <element signature="e#9092#9120#0" expanded="true" />
+            <element signature="e#12717#12739#0" expanded="true" />
+            <element signature="e#13494#13519#0" expanded="true" />
+            <element signature="e#13579#13598#0" expanded="true" />
           </folding>
         </state>
       </provider>

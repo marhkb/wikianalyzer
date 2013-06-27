@@ -15,7 +15,6 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 public class MockUserPresenter implements UserView.Presenter {
-
 	private final static Object INIT_CONTEXT = new Object();
 	private final Event<EventArgs> userNameChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> userChanged = new Event<EventArgs>(INIT_CONTEXT);
@@ -50,7 +49,6 @@ public class MockUserPresenter implements UserView.Presenter {
 	public String getUserName() {
 		return this.userName;
 	}
-
 
 	@Override
 	public Event<EventArgs> userNameChanged() {
@@ -98,6 +96,7 @@ public class MockUserPresenter implements UserView.Presenter {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+		this.userInfoChanged().fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 	}
 
 	public void setSearchStatus(boolean searched) {
@@ -135,11 +134,11 @@ public class MockUserPresenter implements UserView.Presenter {
 	private final void addToSuggestions(final String name) {
 		this.suggestions.put(name, name);
 	}
-	
+
 	void p(String s) {
 		System.out.println(s);
 	}
-	
+
 	@Override
 	public void setUserName(final String userName) {
 		if(!userName.equals(this.userName)) {
@@ -157,6 +156,7 @@ public class MockUserPresenter implements UserView.Presenter {
 		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::clearSuggestions()();
 		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::fireSuggestionsChanged()();
 		var inst = this;
+
 		$wnd.$
 				.getJSON(
 						"http://de.wikipedia.org/w/api.php?action=query&format=json&list=allusers&callback=?",
@@ -165,9 +165,11 @@ public class MockUserPresenter implements UserView.Presenter {
 						},
 						function(data) {
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::clearSuggestions()();
-							$wnd.$.each(data["query"]["allusers"], function(i, val) {
-								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::addToSuggestions(Ljava/lang/String;)(val.name);
-							});
+							$wnd.$.each(
+											data["query"]["allusers"],
+											function(i, val) {
+												inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::addToSuggestions(Ljava/lang/String;)(val.name);
+											});
 							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::fireSuggestionsChanged()();
 						});
 	}-*/;
