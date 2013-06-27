@@ -17,11 +17,23 @@
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.CriterionNotFoundException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 public interface WikiAccess {
 
 	ArticleInfo getArticleInfo(String title) throws ArticleNotExistException;
+	
+	UserInfo getUserInfo(String userName) throws UserNotExistException;
+	
+	UserComparisonInfo getUserComparisonInfo(String userName) throws UserForComparisonNotExistException;
+	
+	CriterionInfo getCriterionInfo() throws CriterionNotFoundException;
 	
 	int getPageId(String title);
 }

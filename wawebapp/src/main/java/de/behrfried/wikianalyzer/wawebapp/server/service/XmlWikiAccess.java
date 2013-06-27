@@ -17,7 +17,13 @@
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import com.google.inject.Inject;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.CriterionNotFoundException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -56,12 +62,6 @@ public class XmlWikiAccess implements WikiAccess {
 		this.builder = builder;
 		this.xPathfactory = XPathFactory.newInstance();
 	}
-	
-	@Override
-	public ArticleInfo getArticleInfo(String title) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public int getPageId(final String title) {
 		final String convertedTitle = title.replaceAll(" ", "%20");
@@ -85,5 +85,31 @@ public class XmlWikiAccess implements WikiAccess {
 		}
 		return -1;
 	}
+	
+	
+	@Override
+	public ArticleInfo getArticleInfo(String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+    public UserInfo getUserInfo(String userName) throws UserNotExistException {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public UserComparisonInfo getUserComparisonInfo(String userName) throws UserForComparisonNotExistException {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public CriterionInfo getCriterionInfo() throws CriterionNotFoundException {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	
 }

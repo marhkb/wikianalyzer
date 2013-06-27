@@ -17,6 +17,7 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.article;
 
 import com.google.inject.Inject;
+import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.HTMLFlow;
@@ -193,16 +194,17 @@ public class DefArticleView extends ArticleView {
 		this.artAnaLabel.setHeight(10);
 		this.artAnaLabel.setWidth100();
 		this.artAnaLayout = new VLayout();
-		this.artAnaLayout.setWidth("75%");
+		this.artAnaLayout.setOverflow(Overflow.AUTO);
+		this.artAnaLayout.setWidth("70%");
 		this.artAnaLayout.addMember(this.artAnaLabel);
 
 
-		defArticleAnaView = new DefArticleAnaView(presenter, messages);
-		artAnaLayout.addMember(defArticleAnaView);
+		this.defArticleAnaView = new DefArticleAnaView(presenter, messages);
+		this.artAnaLayout.addMember(defArticleAnaView);
 
 
 		this.genInfLayout = new VLayout();
-		this.genInfLayout.setWidth("25%");
+		this.genInfLayout.setWidth("30%");
 		this.genInfLayout.setHeight100();
 		this.genArtInfLabel = new Label("General Article Infos");
 		this.genArtInfLabel.setHeight(10);
@@ -210,14 +212,12 @@ public class DefArticleView extends ArticleView {
 		this.genInfLayout.addMembers(this.genArtInfLabel, this.generalInfoGrid);
 
 		this.articleInfoAnalyzationLayout = new HLayout();
-		this.articleInfoAnalyzationLayout.setHeight100();
 		this.articleInfoAnalyzationLayout.addMembers(this.genInfLayout, this.artAnaLayout);
 
 		this.siteLayoutContainer = new VLayout();
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
 		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.articleInfoAnalyzationLayout);
-
 		this.addChild(this.siteLayoutContainer);
 
 		this.bind();
@@ -299,8 +299,6 @@ public class DefArticleView extends ArticleView {
 
 			public void onClick(final ClickEvent event) {
 				presenter.getSendCommand().execute(null);
-				if(articleInfoAnalyzationLayout.getParent() == null) {
-				}
 			}
 		});
 	}

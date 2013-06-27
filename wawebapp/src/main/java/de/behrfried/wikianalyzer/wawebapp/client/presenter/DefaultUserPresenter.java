@@ -16,6 +16,7 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
+import java.util.LinkedHashMap;
 import com.google.inject.Inject;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
@@ -28,6 +29,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 /**
  * Default implementation of {@link UserView.Presenter}.
@@ -169,4 +171,53 @@ public class DefaultUserPresenter implements UserView.Presenter {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+    public UserInfo getUserInfo() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> userInfoChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public LinkedHashMap<String, String> getUserSuggestions() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> userSuggestionsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public String getUserName() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> userNameChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public boolean getSearchStatus() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public Event<EventArgs> searchStatusChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+	
 }

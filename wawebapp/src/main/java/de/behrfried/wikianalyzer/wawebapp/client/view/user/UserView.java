@@ -16,14 +16,13 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.user;
 
-import de.behrfried.wikianalyzer.wawebapp.client.event.GenericEventArgs;
+import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
 import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
-import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple2;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.util.list.ObservableList;
 import de.behrfried.wikianalyzer.wawebapp.client.view.View;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 /**
  * Base interfaces for the user view.
@@ -41,24 +40,51 @@ public abstract class UserView extends View {
 	 */
 	public interface Presenter extends PresenterBase {
 
-		public void setNameToServer(final String nameToServer);
+		UserInfo getUserInfo();
 
-		public String getNameToServer();
+		Event<EventArgs> userInfoChanged();
 
-		public Event<GenericEventArgs<String>> getNameToServerChanged();
 
-		public String getNameToServerErrorMessage();
+		/**
+		 * contains the search suggestions for articles
+		 * @return
+		 */
+		LinkedHashMap<String, String> getUserSuggestions();
 
-		public Event<GenericEventArgs<String>> getErrorNameToServerChanged();
+		/**
+		 * is to be fired when suggestion has changed
+		 * @return
+		 */
+		Event<EventArgs> userSuggestionsChanged();
 
-		public Command getSendCommand();
+		/**
+		 * returns the current article to be searched
+		 * @return
+		 */
+		String getUserName();
 
-		public void setUserName(String valueAsString);
+		/**
+		 * sets the current article to be searched
+		 * @param title
+		 */
+		void setUserName(String userName);
 
-		public Event<EventArgs> usrNameChanged();
+		/**
+		 * gets fired when article title has changed
+		 * @return
+		 */
+		Event<EventArgs> userNameChanged();
 
-		public String getUsrName();
+		/**
+		 * returns the search command
+		 */
+		Command getSendCommand();
 
-		public ObservableList<Tuple2<String, String>> getUsrInfos();
+		/**
+		 *
+		 */
+		boolean getSearchStatus();
+
+		Event<EventArgs> searchStatusChanged();
 	}
 }

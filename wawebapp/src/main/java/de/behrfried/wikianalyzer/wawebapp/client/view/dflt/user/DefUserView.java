@@ -16,34 +16,26 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import com.google.inject.Inject;
-import com.smartgwt.client.data.Record;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
-import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
 import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple2;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
-import de.behrfried.wikianalyzer.wawebapp.client.util.list.ListChangedEventArgs;
-import de.behrfried.wikianalyzer.wawebapp.client.util.list.ListChangedEventArgs.ListChangedAction;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 
 /**
@@ -66,7 +58,7 @@ public class DefUserView extends UserView {
 	private DynamicForm searchBoxContainer;
 	private ListGrid generalUsrInfoGrid;
 	private ListGridField usrAttributeColumn, usrValueColumn;
-	private HLayout searchLayout, usrInfoAnalyzationLayout, searchInfoLayout;
+	private HLayout searchLayout, usrInfoAnalyzationLayout;
 	private VLayout siteLayoutContainer, genUsrInfLayout, usrAnaLayout;
 	private Button searchButton;
 
@@ -143,7 +135,7 @@ public class DefUserView extends UserView {
 
 	private void bind() {
 		// this.bindGeneralInfoGrid();
-		// this.bindSearchBox();
+		this.bindSearchBox();
 		// this.bindSearchButton();
 
 		/*
@@ -208,18 +200,18 @@ public class DefUserView extends UserView {
 	}
 
 	private void bindSearchBox() {
-		this.searchBox.setValue(this.presenter.getUsrName());
+		this.searchBox.setValue(this.presenter.getUserName());
 		this.searchBox.addChangedHandler(new ChangedHandler() {
 
 			public void onChanged(final ChangedEvent event) {
 				DefUserView.this.presenter.setUserName(DefUserView.this.searchBox.getValueAsString());
 			}
 		});
-		this.presenter.usrNameChanged().addHandler(new Handler<EventArgs>() {
+		this.presenter.userNameChanged().addHandler(new Handler<EventArgs>() {
 
 			public void invoke(final Object sender, final EventArgs e) {
-				if(!DefUserView.this.searchBox.equals(DefUserView.this.presenter.getUsrName())) {
-					DefUserView.this.searchBox.setValue(DefUserView.this.presenter.getUsrName());
+				if(!DefUserView.this.searchBox.equals(DefUserView.this.presenter.getUserName())) {
+					DefUserView.this.searchBox.setValue(DefUserView.this.presenter.getUserName());
 				}
 			}
 		});
@@ -233,6 +225,15 @@ public class DefUserView extends UserView {
 				}
 			}
 		});
+		
+		this.searchBox.setValueMap(this.presenter.getUserSuggestions());
+		this.presenter.userSuggestionsChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				DefUserView.this.searchBox.setValueMap(DefUserView.this.presenter.getUserSuggestions());
+				DefUserView.this.searchBox.showPicker();
+			}
+		});
 	}
 
 	private void bindSearchButton() {
@@ -240,52 +241,52 @@ public class DefUserView extends UserView {
 		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
 
 			public void invoke(final Object sender, final EventArgs e) {
-				DefUserView.this.searchButton.setDisabled(!DefUserView.this.presenter.getSendCommand().canExecute(null));
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
 			}
 		});
 		this.searchButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(final ClickEvent event) {
-				DefUserView.this.presenter.getSendCommand().execute(null);
+				presenter.getSendCommand().execute(null);
 			}
 		});
 	}
-
-	private void bindGeneralInfoGrid() {
-		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
-		for(final Tuple2<String, String> t : this.presenter.getUsrInfos()) {
-			final ListGridRecord lsg = new ListGridRecord();
-			lsg.setAttribute("Attribute", t.getItem1());
-			lsg.setAttribute("Value", t.getItem2());
-			this.generalUsrInfoGrid.addData(lsg);
-			recordsO.put(t, lsg);
-		}
-		this.presenter.getUsrInfos().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
-
-			public void invoke(final Object sender, final ListChangedEventArgs<Tuple2<String, String>> e) {
-				if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
-					if(e.getOldItems() != null) {
-						for(final Tuple2<String, String> t : e.getOldItems()) {
-							DefUserView.this.generalUsrInfoGrid.removeData(recordsO.remove(t));
-						}
-					}
-
-					if(e.getNewItems() != null) {
-						for(final Tuple2<String, String> t : e.getNewItems()) {
-							final ListGridRecord lsg = new ListGridRecord();
-							lsg.setAttribute("Attribute", t.getItem1());
-							lsg.setAttribute("Value", t.getItem2());
-							DefUserView.this.generalUsrInfoGrid.addData(lsg);
-							recordsO.put(t, lsg);
-						}
-					}
-				} else {
-					DefUserView.this.generalUsrInfoGrid.clear();
-					recordsO.clear();
-				}
-			}
-		});
-	}
+//TODO
+//	private void bindGeneralInfoGrid() {
+//		final Map<Tuple2<String, String>, Record> recordsO = new HashMap<Tuple2<String, String>, Record>();
+//		for(final Tuple2<String, String> t : this.presenter.getUserInfo()) {
+//			final ListGridRecord lsg = new ListGridRecord();
+//			lsg.setAttribute("Attribute", t.getItem1());
+//			lsg.setAttribute("Value", t.getItem2());
+//			this.generalUsrInfoGrid.addData(lsg);
+//			recordsO.put(t, lsg);
+//		}
+//		this.presenter.getUserInfo().listChanged().addHandler(new Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
+//
+//			public void invoke(final Object sender, final ListChangedEventArgs<Tuple2<String, String>> e) {
+//				if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
+//					if(e.getOldItems() != null) {
+//						for(final Tuple2<String, String> t : e.getOldItems()) {
+//							DefUserView.this.generalUsrInfoGrid.removeData(recordsO.remove(t));
+//						}
+//					}
+//
+//					if(e.getNewItems() != null) {
+//						for(final Tuple2<String, String> t : e.getNewItems()) {
+//							final ListGridRecord lsg = new ListGridRecord();
+//							lsg.setAttribute("Attribute", t.getItem1());
+//							lsg.setAttribute("Value", t.getItem2());
+//							DefUserView.this.generalUsrInfoGrid.addData(lsg);
+//							recordsO.put(t, lsg);
+//						}
+//					}
+//				} else {
+//					DefUserView.this.generalUsrInfoGrid.clear();
+//					recordsO.clear();
+//				}
+//			}
+//		});
+//	}
 
 	@Override
 	public String getName() {
