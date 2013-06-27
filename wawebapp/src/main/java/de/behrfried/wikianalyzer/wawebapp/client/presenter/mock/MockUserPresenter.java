@@ -96,6 +96,7 @@ public class MockUserPresenter implements UserView.Presenter {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+		this.userInfoChanged().fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 	}
 
 	public void setSearchStatus(boolean searched) {
@@ -142,6 +143,9 @@ public class MockUserPresenter implements UserView.Presenter {
 	public void setUserName(final String userName) {
 		if(!userName.equals(this.userName)) {
 			this.userName = userName;
+            if(this.userName.length() > 0 && Character.isLetter(this.userName.charAt(0))) {
+                this.userName = Character.toUpperCase(this.userName.charAt(0)) + this.userName.substring(1);
+            }
 			this.userNameChanged().fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 			this.jGetUserName(this.userName);
 			CommandManager.get().invalidateRequerySuggested();

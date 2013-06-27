@@ -3,6 +3,7 @@ package de.behrfried.wikianalyzer.wawebapp.shared.article;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class ArticleInfo implements Serializable {
 
@@ -54,6 +55,11 @@ public class ArticleInfo implements Serializable {
 	 *
 	 */
 	private List<RevsPerDate> revsPerDates;
+
+	/**
+	 *
+	 */
+	private List<EditWar> editWars;
 
 	/**
 	 *
@@ -172,6 +178,14 @@ public class ArticleInfo implements Serializable {
 		return revsPerDates;
 	}
 
+	public List<EditWar> getEditWars() {
+		return editWars;
+	}
+
+	public void setEditWars(List<EditWar> editWars) {
+		this.editWars = editWars;
+	}
+
 	public void setRevsPerDates(List<RevsPerDate> revsPerDates) {
 		this.revsPerDates = revsPerDates;
 	}
@@ -188,6 +202,7 @@ public class ArticleInfo implements Serializable {
 					   List<AuthorAndCommits> authorsAndCommits,
 					   List<Revision> revisions,
 					   List<RevsPerDate> revsPerDates,
+					   List<EditWar> editWars,
 					   List<SimilarArticle> similarArticles) {
 		this.pageid = pageid;
 		this.title = title;
@@ -201,6 +216,7 @@ public class ArticleInfo implements Serializable {
 		this.authorsAndCommits = authorsAndCommits;
 		this.revisions = revisions;
 		this.revsPerDates = revsPerDates;
+		this.editWars = editWars;
 		this.similarArticles = similarArticles;
 	}
 
@@ -371,6 +387,48 @@ public class ArticleInfo implements Serializable {
 
 		public void setNumOfRevs(int numOfRevs) {
 			this.numOfRevs = numOfRevs;
+		}
+	}
+
+	public final static class EditWar implements Serializable {
+
+		private Date from;
+
+		private Date to;
+
+		private Map<String, String> users;
+
+		public EditWar() {
+		}
+
+		public EditWar(Date from, Date to, Map<String, String> users) {
+			this.from = from;
+			this.to = to;
+			this.users = users;
+		}
+
+		public Date getFrom() {
+			return from;
+		}
+
+		public void setFrom(Date from) {
+			this.from = from;
+		}
+
+		public Date getTo() {
+			return to;
+		}
+
+		public void setTo(Date to) {
+			this.to = to;
+		}
+
+		public Map<String, String> getUsers() {
+			return users;
+		}
+
+		public void setUsers(Map<String, String> users) {
+			this.users = users;
 		}
 	}
 

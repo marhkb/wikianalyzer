@@ -29,8 +29,6 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
-import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo.CategoryEdited;
-import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo.EditType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.text.ParseException;
@@ -44,10 +42,27 @@ public class JsonWikiAccess implements WikiAccess {
 	private final WikiApi requester;
 	private final JsonParser parser = new JsonParser();
 	private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss");
+	private List<String> patterns = new ArrayList<String>();
 
 	@Inject
 	public JsonWikiAccess(final WikiApi requester) {
 		this.requester = requester;
+
+		// 1. Änderung 114793679 von
+		// [[Special:Contributions/79.197.160.242|79.197.160.242]] rückgängig
+		// gemacht;
+		// 2. Revert: [[Wikipedia:Vandalismus|Vandalismus]]
+		// 3. Änderungen von [[Special:Beiträge/62.143.131.72|62.143.131.72]]
+		// ([[Benutzer Diskussion:62.143.131.72|Diskussion]]) wurden auf die
+		// letzte Version von [[Benutzer:CactusBot|CactusBot]]
+		// 4. Die letzte Textänderung von
+		// [[Spezial:Beiträge/87.179.226.206|87.179.226.206]] wurde verworfen
+		// und die Version 114742746 von Der.Traeumer wiederhergestellt
+
+		patterns.add("änderung");
+		patterns.add("revert");
+		patterns.add("zurückgesetzt");
+		patterns.add("rückgängig gemacht");
 	}
 
 	@Override
@@ -171,11 +186,20 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 		});
 
-		final List<ArticleInfo.Revision> revTmp = new ArrayList<ArticleInfo.Revision>();
-		for(int i = 0; i < revisions.size(); i++) {
-			final String comment = revisions.get(i).getComment();
-			if(comment.startsWith("Änderungen von ") && comment.contains(" auf die letzte Version von ")) {
-
+		/*
+		 * find edit wars
+		 */
+		final List<ArticleInfo.EditWar> editWars = new ArrayList<ArticleInfo.EditWar>();
+		final List<ArticleInfo.Revision> revertedRevs = this.getRevertedRevisions(revisions);
+		for(int i = 0; i < revertedRevs.size() - 4; i++) {
+			final ArticleInfo.Revision revision = revertedRevs.get(i);
+			int startI = i;
+			while(i < revertedRevs.size() - 4
+			        && revertedRevs.get(i + 4).getTimestamp().getTime() - revertedRevs.get(i).getTimestamp().getTime() < 100000000) {
+				i += 4;
+			}
+			if(i != startI) {
+				editWars.add(new ArticleInfo.EditWar(revertedRevs.get(startI).getTimestamp(), revertedRevs.get(i).getTimestamp(), null));
 			}
 		}
 
@@ -238,13 +262,14 @@ public class JsonWikiAccess implements WikiAccess {
 		// }
 
 		/* get number of images */
+
 		final String imageStr = this.requester.getResult(API + "action=query&format=json&prop=images&pageids=" + pageid);
 		int numOfImages = this.parser.parse(imageStr).getAsJsonObject().getAsJsonObject("query").getAsJsonObject("pages")
 		        .getAsJsonObject(pageid + "").getAsJsonArray("images").size();
 
 		return new ArticleInfo(pageid, title, initialAuthor, creationDate, "http://de.wikipedia.org/wiki/" + title.replaceAll(" ", "_"),
 		        "http://de.wikipedia.org/wiki/Benutzer:" + initialAuthor, numOfImages, this.getCategories(pageid), revisions
-		                .get(revisions.size() - 1).getBytes(), authorsAndCommits, revisions, revsPerDates, similarArticles);
+		                .get(revisions.size() - 1).getBytes(), authorsAndCommits, revisions, revsPerDates, editWars, similarArticles);
 	}
 
 	public int getPageId(final String title) {
@@ -277,9 +302,29 @@ public class JsonWikiAccess implements WikiAccess {
 		return result.substring(0, result.length() - 1);
 	}
 
+	private List<ArticleInfo.Revision> getRevertedRevisions(List<ArticleInfo.Revision> revisions) {
+		List<ArticleInfo.Revision> result = new ArrayList<ArticleInfo.Revision>();
+
+		for(final ArticleInfo.Revision revision : revisions) {
+			final String lowerComment = revision.getComment().toLowerCase();
+			boolean matches = false;
+			for(final String pattern : this.patterns) {
+				if(lowerComment.contains(pattern)) {
+					matches = true;
+					break;
+				}
+			}
+			if(matches) {
+				this.logger.info(lowerComment);
+				result.add(revision);
+			}
+		}
+		return result;
+	}
+
 	@Override
 	public UserInfo getUserInfo(String userName) throws UserNotExistException {
-		final String userid = this.getUserID(userName)+"";
+		final String userid = this.getUserID(userName) + "";
 
 		if(userid.isEmpty()) {
 			/* article does not exist */
@@ -289,36 +334,29 @@ public class JsonWikiAccess implements WikiAccess {
 		final List<UserInfo.CategoryEdited> categoryEdited = new ArrayList<UserInfo.CategoryEdited>();
 		final List<UserInfo.EditType> editType = new ArrayList<UserInfo.EditType>();
 		final String restrictions = null;
-		final int totalUserCommits = 0;;;;;;;;;;
+		final int totalUserCommits = 0;
 		final String categoryCommits = null;
 		final String reputation = null;
 		Date signInDate = null;
 
-		final String response1 = this.requester.getResult(API + "action=query&format=json&list=users&ususers="+userName+"&usprop=editcount|gender|registration|blockinfo");
-
+		final String response1 = this.requester.getResult(API + "action=query&format=json&list=users&ususers=" + convertRequest(userName)
+		        + "&usprop=editcount|gender|registration|blockinfo");
 		final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 		final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
 
 		try {
-	        signInDate = this.formatter.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
-        } catch(ParseException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        };
+			signInDate = this.formatter.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
+		} catch(ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 
 		// public UserInfo(String userID, String username, String restrictions,
 		// String commits, String categoryCommits, Date signInDate, String
 		// reputation, List<CategoryEdited> editedCategories, List<EditType>
 		// editTypes) {
-		return new UserInfo(userid, 
-				"http://de.wikipedia.org/wiki/Benutzer:"+userName, 
-				restrictions, 
-				totalUserCommits, 
-				categoryCommits, 
-				signInDate, 
-				reputation, 
-				categoryEdited, 
-				editType);
+		return new UserInfo(userid, "http://de.wikipedia.org/wiki/Benutzer:" + userName, restrictions, totalUserCommits, categoryCommits, signInDate,
+		        reputation, categoryEdited, editType);
 	}
 
 	@Override
@@ -333,10 +371,11 @@ public class JsonWikiAccess implements WikiAccess {
 		return null;
 	}
 
-	public int getUserID(final String userName) {
+	private int getUserID(final String userName) {
 		final String convertedUserName = this.convertRequest(userName);
 		final String response = this.requester.getResult(API + "action=query&format=json&list=allusers&aufrom=" + convertedUserName);
 		this.logger.debug("Response: " + response);
-		return this.parser.parse(response).getAsJsonObject().getAsJsonObject("query").getAsJsonArray("pageids").get(0).getAsInt();
+		return this.parser.parse(response).getAsJsonObject().getAsJsonObject("query").getAsJsonArray("allusers").get(0).getAsJsonObject()
+		        .getAsJsonPrimitive("userid").getAsInt();
 	}
 }
