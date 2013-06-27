@@ -374,14 +374,16 @@ public class JsonWikiAccess implements WikiAccess {
 		List<ArticleInfo.Revision> result = new ArrayList<ArticleInfo.Revision>();
 
 		for(final ArticleInfo.Revision revision : revisions) {
+            final String lowerComment = revision.getComment().toLowerCase();
 			boolean matches = false;
 			for(final String pattern : this.patterns) {
-				if(revision.getComment().contains(pattern)) {
+				if(lowerComment.contains(pattern)) {
 					matches = true;
 					break;
 				}
 			}
 			if(matches) {
+                this.logger.info(lowerComment);
 				result.add(revision);
 			}
 		}

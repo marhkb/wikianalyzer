@@ -17,6 +17,7 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
 
+import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Label;
@@ -66,7 +67,6 @@ public class DefUserView extends UserView {
 	 * Creates an instance of {@link DefUserView}. All arguments are
 	 * injected by Gin.
 	 * 
-	 * @param parentView
 	 */
 	@Inject
 	public DefUserView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
@@ -86,6 +86,7 @@ public class DefUserView extends UserView {
 		this.searchBox = new ComboBoxItem();
 		this.searchBox.setWidth(200);
 		this.searchBox.setShowTitle(false);
+        this.searchBox.setShowPickerIcon(false);
 		this.searchBoxContainer = new DynamicForm();
 		this.searchBoxContainer.setBackgroundColor("white");
 		this.searchBoxContainer.setItems(this.searchBox);
@@ -218,9 +219,10 @@ public class DefUserView extends UserView {
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
 
 			public void onKeyUp(final KeyUpEvent event) {
-				if(event.getKeyName().equals("Enter")) {
-					if(DefUserView.this.presenter.getSendCommand().canExecute(null)) {
-						DefUserView.this.presenter.getSendCommand().execute(null);
+				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
+                    Window.alert(event.getSource().toString());
+                    if(DefUserView.this.presenter.getSendCommand().canExecute(null)) {
+						DefUserView.this.presenter.getSendCommand().execute(false);
 					}
 				}
 			}
@@ -231,7 +233,9 @@ public class DefUserView extends UserView {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				DefUserView.this.searchBox.setValueMap(DefUserView.this.presenter.getUserSuggestions());
-				DefUserView.this.searchBox.showPicker();
+				if(!presenter.getSearchStatus()) {
+                    DefUserView.this.searchBox.showPicker();
+                }
 			}
 		});
 	}

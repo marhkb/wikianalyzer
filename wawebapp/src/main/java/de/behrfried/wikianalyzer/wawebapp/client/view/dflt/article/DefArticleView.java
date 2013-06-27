@@ -113,6 +113,7 @@ public class DefArticleView extends ArticleView {
 		this.searchBox = new ComboBoxItem();
 		this.searchBox.setWidth(200);
 		this.searchBox.setShowTitle(false);
+        this.searchBox.setShowPickerIcon(false);
 		this.searchBoxContainer = new DynamicForm();
 		this.searchBoxContainer.setBackgroundColor("white");
 		this.searchBoxContainer.setItems(this.searchBox);
@@ -269,7 +270,7 @@ public class DefArticleView extends ArticleView {
 		this.searchBox.addKeyUpHandler(new KeyUpHandler() {
 
 			public void onKeyUp(final KeyUpEvent event) {
-				if(event.getKeyName().equals("Enter")) {
+				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
 					if(DefArticleView.this.presenter.getSendCommand().canExecute(null)) {
 						DefArticleView.this.presenter.getSendCommand().execute(null);
 					}
@@ -282,7 +283,9 @@ public class DefArticleView extends ArticleView {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				DefArticleView.this.searchBox.setValueMap(DefArticleView.this.presenter.getArticleSuggestions());
-				DefArticleView.this.searchBox.showPicker();
+                if(!presenter.getSearchStatus()) {
+                    searchBox.showPicker();
+                }
 			}
 		});
 	}
