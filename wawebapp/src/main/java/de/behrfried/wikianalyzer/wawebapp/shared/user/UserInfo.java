@@ -10,8 +10,10 @@ public class UserInfo implements Serializable {
      * 
      */
 	private static final long serialVersionUID = 1L;
-
-	private String userID, userName, restrictions, categoryCommits, reputation;
+	
+	private int userID;
+	
+	private String userName, restrictions, categoryCommits, reputation;
 	private int totalCommits;
 
 	private Date signInDate;
@@ -20,7 +22,7 @@ public class UserInfo implements Serializable {
 
 	public UserInfo() {}
 
-	public UserInfo(String userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<ArticleEdited> editedCategories) {
+	public UserInfo(int userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<ArticleEdited> editedCategories) {
 		this.userID = userID;
 		this.userName = username;
 		this.restrictions = restrictions;
@@ -40,11 +42,11 @@ public class UserInfo implements Serializable {
     	this.reputation = reputation;
     }
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 

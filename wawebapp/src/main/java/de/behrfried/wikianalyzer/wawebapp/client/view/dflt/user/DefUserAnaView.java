@@ -34,7 +34,7 @@ public class DefUserAnaView extends UserAnaView {
 	private Label userArticleLabel;
 	private HTMLPanel userArticleChartContainer;
 	private VLayout userAnaContainer;
-	private HLayout userArticleAnaContainer, userEditTypeContainer;
+	private HLayout userArticleAnaContainer;
 	private ListGrid userArticleGrid;
 	private ListGridField articleArticleColumn, articleCategoryColumn, articleCommitsColumn, articleQuantityColumn;
 
