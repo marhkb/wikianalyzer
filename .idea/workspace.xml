@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" line="148" />
-    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" line="332" />
+    <bookmark url="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" line="137" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/wawebapp.iml" afterPath="$PROJECT_DIR$/wawebapp/wawebapp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372356738415" ignored="false" />
+    <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372414540049" ignored="false" />
     <file path="/fragment.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371586805468" ignored="false" />
     <file path="/pom.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370197226949" ignored="false" />
     <file path="/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374027797" ignored="false" />
@@ -44,7 +47,7 @@
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentWriterTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <file path="/MockArticlePresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372094195429" ignored="false" />
-    <file path="/DefArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372337949371" ignored="false" />
+    <file path="/DefArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372414801848" ignored="false" />
     <file path="/a.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371585971174" ignored="false" />
     <file path="/a.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371585984473" ignored="false" />
     <file path="/DefArticleAnaView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372350601555" ignored="false" />
@@ -53,7 +56,7 @@
     <file path="/ArticleInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372348700847" ignored="false" />
     <file path="/ArticleInfoServiceImpl.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371811057016" ignored="false" />
     <file path="/WikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372094024732" ignored="false" />
-    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372357996441" ignored="false" />
+    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372419224694" ignored="false" />
     <file path="/XmlWikiAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371817492494" ignored="false" />
     <file path="/JsonAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371818356571" ignored="false" />
     <file path="/DefShellView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371915190292" ignored="false" />
@@ -68,7 +71,7 @@
     <file path="/Dynamic Method Body.txt.ft" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372329765897" ignored="false" />
     <file path="/MockUserPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372334600246" ignored="false" />
     <file path="/DefUserView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372337582524" ignored="false" />
-    <file path="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372357322697" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372414559176" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +86,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -120,6 +122,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -132,13 +135,8 @@
       <file leaf-file-name="DefArticleAnaView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="84" selection-start="5274" selection-end="5274" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#12894#13666#0" expanded="true" />
-                <element signature="e#13655#13656#0" expanded="true" />
-                <element signature="e#13771#14494#0" expanded="true" />
-                <element signature="e#14483#14484#0" expanded="true" />
-              </folding>
+            <state line="92" column="58" selection-start="4670" selection-end="4670" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -146,13 +144,8 @@
       <file leaf-file-name="MockUserPresenter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="57" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1372342083403" expanded="true" signature="5000:5615" placeholder="{...}" />
-                <marker date="1372342083403" expanded="true" signature="5106:5241" placeholder="{...}" />
-                <marker date="1372342083403" expanded="true" signature="5275:5613" placeholder="{...}" />
-                <marker date="1372342083403" expanded="true" signature="5385:5487" placeholder="{...}" />
-              </folding>
+            <state line="60" column="48" selection-start="2274" selection-end="2274" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,53 +153,8 @@
       <file leaf-file-name="DefArticleView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="187" column="60" selection-start="8352" selection-end="8352" vertical-scroll-proportion="-64.2">
-              <folding>
-                <element signature="e#10018#10200#0" expanded="true" />
-                <element signature="e#10195#10196#0" expanded="true" />
-                <element signature="e#10336#10522#0" expanded="true" />
-                <element signature="e#10517#10518#0" expanded="true" />
-                <element signature="e#10575#10872#0" expanded="true" />
-                <element signature="e#10867#10868#0" expanded="true" />
-                <element signature="e#10909#11219#0" expanded="true" />
-                <element signature="e#11214#11215#0" expanded="true" />
-                <element signature="e#11349#11595#0" expanded="true" />
-                <element signature="e#11590#11591#0" expanded="true" />
-                <element signature="e#11786#11962#0" expanded="true" />
-                <element signature="e#11957#11958#0" expanded="true" />
-                <element signature="e#12001#12126#0" expanded="true" />
-                <element signature="e#12121#12122#0" expanded="true" />
-                <element signature="e#12202#12502#0" expanded="true" />
-                <element signature="e#12497#12498#0" expanded="true" />
-                <element signature="e#12537#12873#0" expanded="true" />
-                <element signature="e#12868#12869#0" expanded="true" />
-                <element signature="e#12907#13281#0" expanded="true" />
-                <element signature="e#13276#13277#0" expanded="true" />
-                <element signature="e#13316#13692#0" expanded="true" />
-                <element signature="e#13687#13688#0" expanded="true" />
-                <element signature="e#13728#14026#0" expanded="true" />
-                <element signature="e#14021#14022#0" expanded="true" />
-                <element signature="e#14061#14357#0" expanded="true" />
-                <element signature="e#14352#14353#0" expanded="true" />
-                <element signature="e#14394#14682#0" expanded="true" />
-                <element signature="e#14677#14678#0" expanded="true" />
-                <element signature="e#14788#15067#0" expanded="true" />
-                <element signature="e#15060#15061#0" expanded="true" />
-                <element signature="e#15169#15426#0" expanded="true" />
-                <element signature="e#15421#15422#0" expanded="true" />
-                <element signature="e#15527#15767#0" expanded="true" />
-                <element signature="e#15762#15763#0" expanded="true" />
-                <element signature="e#15864#16169#0" expanded="true" />
-                <element signature="e#16164#16165#0" expanded="true" />
-                <element signature="e#16262#16667#0" expanded="true" />
-                <element signature="e#16662#16663#0" expanded="true" />
-                <element signature="e#16771#17015#0" expanded="true" />
-                <element signature="e#17010#17011#0" expanded="true" />
-                <element signature="e#17107#17340#0" expanded="true" />
-                <element signature="e#17335#17336#0" expanded="true" />
-                <element signature="e#17438#17676#0" expanded="true" />
-                <element signature="e#17671#17672#0" expanded="true" />
-              </folding>
+            <state line="105" column="17" selection-start="4556" selection-end="4556" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -214,27 +162,8 @@
       <file leaf-file-name="DefUserView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="11" selection-start="10899" selection-end="10899" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#10658#10897#0" expanded="true" />
-                <element signature="e#10892#10893#0" expanded="true" />
-                <element signature="e#11088#11264#0" expanded="true" />
-                <element signature="e#11259#11260#0" expanded="true" />
-                <element signature="e#11303#11428#0" expanded="true" />
-                <element signature="e#11423#11424#0" expanded="true" />
-                <element signature="e#11518#11929#0" expanded="true" />
-                <element signature="e#11924#11925#0" expanded="true" />
-                <element signature="e#12021#12258#0" expanded="true" />
-                <element signature="e#12253#12254#0" expanded="true" />
-                <element signature="e#12351#12586#0" expanded="true" />
-                <element signature="e#12581#12582#0" expanded="true" />
-                <element signature="e#12682#12923#0" expanded="true" />
-                <element signature="e#12918#12919#0" expanded="true" />
-                <element signature="e#13018#13263#0" expanded="true" />
-                <element signature="e#13258#13259#0" expanded="true" />
-                <element signature="e#13360#13604#0" expanded="true" />
-                <element signature="e#13599#13600#0" expanded="true" />
-              </folding>
+            <state line="394" column="11" selection-start="14793" selection-end="14793" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -242,24 +171,28 @@
       <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="312" column="73" selection-start="12588" selection-end="12588" vertical-scroll-proportion="0.31314433">
+            <state line="553" column="17" selection-start="19281" selection-end="19281" vertical-scroll-proportion="1.0681199">
               <folding>
-                <element signature="e#0#19666#0" expanded="true" />
+                <element signature="e#0#20699#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#2188#2196#0" expanded="true" />
-                <element signature="e#3338#3368#0" expanded="true" />
-                <element signature="e#3432#3454#0" expanded="true" />
-                <element signature="e#3524#3549#0" expanded="true" />
-                <element signature="e#3918#3935#0" expanded="true" />
-                <element signature="e#3995#4010#0" expanded="true" />
-                <element signature="e#8164#8185#0" expanded="true" />
-                <element signature="e#8748#8765#0" expanded="true" />
-                <element signature="e#10175#10203#0" expanded="true" />
-                <element signature="e#12266#12288#0" expanded="true" />
-                <element signature="e#15084#15106#0" expanded="true" />
-                <element signature="e#15824#15848#0" expanded="true" />
-                <element signature="e#17589#17613#0" expanded="true" />
-                <element signature="e#18511#18526#0" expanded="true" />
+                <element signature="e#2248#2256#0" expanded="true" />
+                <element signature="e#3398#3428#0" expanded="true" />
+                <element signature="e#3493#3515#0" expanded="true" />
+                <element signature="e#3586#3611#0" expanded="true" />
+                <element signature="e#3986#4003#0" expanded="true" />
+                <element signature="e#4064#4079#0" expanded="true" />
+                <element signature="e#6693#6984#0" expanded="true" />
+                <element signature="e#6978#6979#0" expanded="true" />
+                <element signature="e#8263#8501#0" expanded="true" />
+                <element signature="e#8495#8496#0" expanded="true" />
+                <element signature="e#8602#8623#0" expanded="true" />
+                <element signature="e#9214#9231#0" expanded="true" />
+                <element signature="e#10479#10507#0" expanded="true" />
+                <element signature="e#12726#12748#0" expanded="true" />
+                <element signature="e#15576#15598#0" expanded="true" />
+                <element signature="e#16317#16341#0" expanded="true" />
+                <element signature="e#18026#18060#0" expanded="true" />
+                <element signature="e#18123#18147#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -277,7 +210,7 @@
       <file leaf-file-name="ArticleInfo.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="47" selection-start="2770" selection-end="2770" vertical-scroll-proportion="0.0">
+            <state line="171" column="47" selection-start="2701" selection-end="2701" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -322,12 +255,6 @@
     </option>
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="localRepository" value="$MAVEN_REPOSITORY$" />
-        <option name="mavenHome" value="$USER_HOME$/apache-maven-3.0.5" />
-      </MavenGeneralSettings>
-    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="createModuleGroups" value="true" />
@@ -349,10 +276,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-6" />
-    <option name="y" value="-6" />
-    <option name="width" value="1292" />
-    <option name="height" value="1011" />
+    <option name="x" value="-1" />
+    <option name="width" value="1602" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -402,327 +328,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.shared.article" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.server.servlets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.client.service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.client.presenter.mock" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wikianalyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="client">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="client">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="presenter">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -951,19 +556,340 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Tests">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="client">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/behrfried/wikianalyzer/wawebapp">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="client">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="presenter">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.shared.article" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.server.servlets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.client.service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.client.presenter.mock" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="de.behrfried.wikianalyzer.wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="183" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="184" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="184" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="183" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="183" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../transportsystems" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="188" />
@@ -979,17 +905,17 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="options.lastSelected" value="MavenSettings" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1057,19 +983,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1096,6 +1009,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1192,8 +1118,8 @@
     </configuration>
     <list size="3">
       <item index="0" class="java.lang.String" itemvalue="JUnit.AllTests" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.JsonAccessTest" />
-      <item index="2" class="java.lang.String" itemvalue="Maven.Wawebapp.html" />
+      <item index="1" class="java.lang.String" itemvalue="Maven.Wawebapp.html" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.JsonAccessTest" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -1269,36 +1195,36 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1292" height="1011" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1" y="0" width="1602" height="876" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32733408" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932507" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32768363" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24889217" sideWeight="0.5005624" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3242938" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.55504054" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20340356" sideWeight="0.55504054" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44495943" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="100" y="100" width="1400" height="675" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24857324" sideWeight="0.55540353" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20291694" sideWeight="0.55540353" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932507" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24889217" sideWeight="0.5005624" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3269494" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44459644" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3242938" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="100" y="100" width="1400" height="675" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32768363" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1407,110 +1333,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="29" selection-start="4258" selection-end="4292" vertical-scroll-proportion="0.13108614">
-          <folding />
-        </state>
+        <state line="123" column="29" selection-start="4258" selection-end="4292" vertical-scroll-proportion="0.13108614" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="11" selection-start="10899" selection-end="10899" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#10658#10897#0" expanded="true" />
-            <element signature="e#10892#10893#0" expanded="true" />
-            <element signature="e#11088#11264#0" expanded="true" />
-            <element signature="e#11259#11260#0" expanded="true" />
-            <element signature="e#11303#11428#0" expanded="true" />
-            <element signature="e#11423#11424#0" expanded="true" />
-            <element signature="e#11518#11929#0" expanded="true" />
-            <element signature="e#11924#11925#0" expanded="true" />
-            <element signature="e#12021#12258#0" expanded="true" />
-            <element signature="e#12253#12254#0" expanded="true" />
-            <element signature="e#12351#12586#0" expanded="true" />
-            <element signature="e#12581#12582#0" expanded="true" />
-            <element signature="e#12682#12923#0" expanded="true" />
-            <element signature="e#12918#12919#0" expanded="true" />
-            <element signature="e#13018#13263#0" expanded="true" />
-            <element signature="e#13258#13259#0" expanded="true" />
-            <element signature="e#13360#13604#0" expanded="true" />
-            <element signature="e#13599#13600#0" expanded="true" />
-          </folding>
+        <state line="394" column="11" selection-start="14793" selection-end="14793" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="84" selection-start="5274" selection-end="5274" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#12894#13666#0" expanded="true" />
-            <element signature="e#13655#13656#0" expanded="true" />
-            <element signature="e#13771#14494#0" expanded="true" />
-            <element signature="e#14483#14484#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="60" selection-start="8352" selection-end="8352" vertical-scroll-proportion="-64.2">
-          <folding>
-            <element signature="e#10018#10200#0" expanded="true" />
-            <element signature="e#10195#10196#0" expanded="true" />
-            <element signature="e#10336#10522#0" expanded="true" />
-            <element signature="e#10517#10518#0" expanded="true" />
-            <element signature="e#10575#10872#0" expanded="true" />
-            <element signature="e#10867#10868#0" expanded="true" />
-            <element signature="e#10909#11219#0" expanded="true" />
-            <element signature="e#11214#11215#0" expanded="true" />
-            <element signature="e#11349#11595#0" expanded="true" />
-            <element signature="e#11590#11591#0" expanded="true" />
-            <element signature="e#11786#11962#0" expanded="true" />
-            <element signature="e#11957#11958#0" expanded="true" />
-            <element signature="e#12001#12126#0" expanded="true" />
-            <element signature="e#12121#12122#0" expanded="true" />
-            <element signature="e#12202#12502#0" expanded="true" />
-            <element signature="e#12497#12498#0" expanded="true" />
-            <element signature="e#12537#12873#0" expanded="true" />
-            <element signature="e#12868#12869#0" expanded="true" />
-            <element signature="e#12907#13281#0" expanded="true" />
-            <element signature="e#13276#13277#0" expanded="true" />
-            <element signature="e#13316#13692#0" expanded="true" />
-            <element signature="e#13687#13688#0" expanded="true" />
-            <element signature="e#13728#14026#0" expanded="true" />
-            <element signature="e#14021#14022#0" expanded="true" />
-            <element signature="e#14061#14357#0" expanded="true" />
-            <element signature="e#14352#14353#0" expanded="true" />
-            <element signature="e#14394#14682#0" expanded="true" />
-            <element signature="e#14677#14678#0" expanded="true" />
-            <element signature="e#14788#15067#0" expanded="true" />
-            <element signature="e#15060#15061#0" expanded="true" />
-            <element signature="e#15169#15426#0" expanded="true" />
-            <element signature="e#15421#15422#0" expanded="true" />
-            <element signature="e#15527#15767#0" expanded="true" />
-            <element signature="e#15762#15763#0" expanded="true" />
-            <element signature="e#15864#16169#0" expanded="true" />
-            <element signature="e#16164#16165#0" expanded="true" />
-            <element signature="e#16262#16667#0" expanded="true" />
-            <element signature="e#16662#16663#0" expanded="true" />
-            <element signature="e#16771#17015#0" expanded="true" />
-            <element signature="e#17010#17011#0" expanded="true" />
-            <element signature="e#17107#17340#0" expanded="true" />
-            <element signature="e#17335#17336#0" expanded="true" />
-            <element signature="e#17438#17676#0" expanded="true" />
-            <element signature="e#17671#17672#0" expanded="true" />
-          </folding>
+        <state line="92" column="58" selection-start="4670" selection-end="4670" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="57" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1372342083403" expanded="true" signature="5000:5615" placeholder="{...}" />
-            <marker date="1372342083403" expanded="true" signature="5106:5241" placeholder="{...}" />
-            <marker date="1372342083403" expanded="true" signature="5275:5613" placeholder="{...}" />
-            <marker date="1372342083403" expanded="true" signature="5385:5487" placeholder="{...}" />
-          </folding>
+        <state line="60" column="48" selection-start="2274" selection-end="2274" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1523,7 +1366,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/article/ArticleInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="47" selection-start="2770" selection-end="2770" vertical-scroll-proportion="0.0">
+        <state line="171" column="47" selection-start="2701" selection-end="2701" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1535,26 +1378,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="17" selection-start="4556" selection-end="4556" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="73" selection-start="12588" selection-end="12588" vertical-scroll-proportion="0.31314433">
+        <state line="553" column="17" selection-start="19281" selection-end="19281" vertical-scroll-proportion="1.0681199">
           <folding>
-            <element signature="e#0#19666#0" expanded="true" />
+            <element signature="e#0#20699#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#2188#2196#0" expanded="true" />
-            <element signature="e#3338#3368#0" expanded="true" />
-            <element signature="e#3432#3454#0" expanded="true" />
-            <element signature="e#3524#3549#0" expanded="true" />
-            <element signature="e#3918#3935#0" expanded="true" />
-            <element signature="e#3995#4010#0" expanded="true" />
-            <element signature="e#8164#8185#0" expanded="true" />
-            <element signature="e#8748#8765#0" expanded="true" />
-            <element signature="e#10175#10203#0" expanded="true" />
-            <element signature="e#12266#12288#0" expanded="true" />
-            <element signature="e#15084#15106#0" expanded="true" />
-            <element signature="e#15824#15848#0" expanded="true" />
-            <element signature="e#17589#17613#0" expanded="true" />
-            <element signature="e#18511#18526#0" expanded="true" />
+            <element signature="e#2248#2256#0" expanded="true" />
+            <element signature="e#3398#3428#0" expanded="true" />
+            <element signature="e#3493#3515#0" expanded="true" />
+            <element signature="e#3586#3611#0" expanded="true" />
+            <element signature="e#3986#4003#0" expanded="true" />
+            <element signature="e#4064#4079#0" expanded="true" />
+            <element signature="e#6693#6984#0" expanded="true" />
+            <element signature="e#6978#6979#0" expanded="true" />
+            <element signature="e#8263#8501#0" expanded="true" />
+            <element signature="e#8495#8496#0" expanded="true" />
+            <element signature="e#8602#8623#0" expanded="true" />
+            <element signature="e#9214#9231#0" expanded="true" />
+            <element signature="e#10479#10507#0" expanded="true" />
+            <element signature="e#12726#12748#0" expanded="true" />
+            <element signature="e#15576#15598#0" expanded="true" />
+            <element signature="e#16317#16341#0" expanded="true" />
+            <element signature="e#18026#18060#0" expanded="true" />
+            <element signature="e#18123#18147#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1570,7 +1424,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1578,7 +1431,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>GWT</last-edited>
+          <last-edited>Invalid</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

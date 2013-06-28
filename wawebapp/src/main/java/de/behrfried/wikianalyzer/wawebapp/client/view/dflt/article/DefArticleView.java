@@ -113,7 +113,7 @@ public class DefArticleView extends ArticleView {
 		this.searchBox = new ComboBoxItem();
 		this.searchBox.setWidth(200);
 		this.searchBox.setShowTitle(false);
-        this.searchBox.setShowPickerIcon(false);
+        this.searchBox.setShowPickerIcon(true);
 		this.searchBoxContainer = new DynamicForm();
 		this.searchBoxContainer.setBackgroundColor("white");
 		this.searchBoxContainer.setItems(this.searchBox);
@@ -275,7 +275,7 @@ public class DefArticleView extends ArticleView {
 
 			public void invoke(final Object sender, final EventArgs e) {
 				DefArticleView.this.searchBox.setValueMap(DefArticleView.this.presenter.getArticleSuggestions());
-                    searchBox.showPicker();
+                searchBox.showPicker();
 			}
 		});
 	}
