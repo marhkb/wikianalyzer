@@ -327,17 +327,19 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 
 			/* get number of images */
-
 			final String imageStr = this.requester
 					.getResult(this.convertRequest("action=query&format=json&prop=images&pageids=" + pageid));
-			int numOfImages = this.parser
+			final JsonObject images = this.parser
 					.parse(imageStr)
 					.getAsJsonObject()
 					.getAsJsonObject("query")
 					.getAsJsonObject("pages")
-					.getAsJsonObject(pageid + "")
-					.getAsJsonArray("images")
-					.size();
+					.getAsJsonObject(pageid + "");
+			int numOfImages = 0;
+			if(images.has("images")) {
+				numOfImages = images.getAsJsonArray("images")
+										.size();
+			}
 
 			/*
 			 * get categories
