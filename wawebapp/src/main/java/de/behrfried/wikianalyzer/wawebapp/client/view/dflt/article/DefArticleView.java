@@ -35,10 +35,6 @@ import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.menu.IMenuButton;
-import com.smartgwt.client.widgets.menu.Menu;
-import com.smartgwt.client.widgets.menu.MenuItem;
-import com.smartgwt.client.widgets.menu.events.MenuItemClickEvent;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
@@ -87,9 +83,6 @@ public class DefArticleView extends ArticleView {
 	private HLayout searchLayout, articleInfoAnalyzationLayout;
 	private VLayout siteLayoutContainer, genInfLayout, artAnaLayout;
 	private Button searchButton;
-	private IMenuButton timeMenuButton;
-	private Menu timeSpanMenu;
-	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
 	private DefArticleAnaView defArticleAnaView;
 
 	@Inject
@@ -124,25 +117,7 @@ public class DefArticleView extends ArticleView {
 
 		this.searchLayout.addMember(this.waLabel);
 		this.searchLayout.addMember(this.searchBoxContainer);
-		this.searchLayout.addMember(this.searchButton);
-
-		this.timeSpanMenu = new Menu();
-		this.randomSpan = new MenuItem("random time");
-		this.randomSpan.setChecked(true);
-		this.timeSpanMenu.addItem(this.randomSpan);
-		this.hourSpan = new MenuItem("last hour");
-		this.timeSpanMenu.addItem(this.hourSpan);
-		this.daySpan = new MenuItem("last day");
-		this.timeSpanMenu.addItem(this.daySpan);
-		this.weekSpan = new MenuItem("last week");
-		this.timeSpanMenu.addItem(this.weekSpan);
-		this.monthSpan = new MenuItem("last month");
-		this.timeSpanMenu.addItem(this.monthSpan);
-		this.yearSpan = new MenuItem("last year");
-		this.timeSpanMenu.addItem(this.yearSpan);
-		this.chooseSpan = new MenuItem("choose timespan");
-		this.timeSpanMenu.addItem(this.chooseSpan);
-		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);
+		this.searchLayout.addMember(this.searchButton);;
 
 		this.attributeColumn = new ListGridField("attributeField", "Attribut");
 		this.attributeColumn.setCanEdit(false);
@@ -193,10 +168,8 @@ public class DefArticleView extends ArticleView {
 		this.artAnaLayout.setWidth("70%");
 		this.artAnaLayout.addMember(this.artAnaLabel);
 
-
 		this.defArticleAnaView = new DefArticleAnaView(presenter, messages);
 		this.artAnaLayout.addMember(defArticleAnaView);
-
 
 		this.genInfLayout = new VLayout();
 		this.genInfLayout.setWidth("30%");
@@ -212,7 +185,7 @@ public class DefArticleView extends ArticleView {
 		this.siteLayoutContainer = new VLayout();
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
-		this.siteLayoutContainer.addMembers(this.searchLayout, this.timeMenuButton, this.articleInfoAnalyzationLayout);
+		this.siteLayoutContainer.addMembers(this.searchLayout, this.articleInfoAnalyzationLayout);
 		this.addChild(this.siteLayoutContainer);
 
 		this.bind();
@@ -221,7 +194,6 @@ public class DefArticleView extends ArticleView {
 	private void bind() {
 		this.bindSearchBox();
 		this.bindSearchButton();
-		this.bindTimeSpanMenu();
 		this.bindPictureRecord();
 		this.bindArticleCreationDateRecord();
 		this.bindArticleRevisionsRecord();
@@ -292,78 +264,6 @@ public class DefArticleView extends ArticleView {
 
 			public void onClick(final ClickEvent event) {
 				presenter.getSendCommand().execute(null);
-			}
-		});
-	}
-
-	private void bindTimeSpanMenu() {
-		this.randomSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				randomSpan.setChecked(true);
-				timeMenuButton.setTitle(randomSpan.getTitle());
-			}
-		});
-		this.hourSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				DefArticleView.this.hourSpan.setChecked(true);
-				DefArticleView.this.timeMenuButton.setTitle(hourSpan.getTitle());
-			}
-		});
-		this.daySpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : DefArticleView.this.timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				DefArticleView.this.daySpan.setChecked(true);
-				DefArticleView.this.timeMenuButton.setTitle(DefArticleView.this.daySpan.getTitle());
-			}
-		});
-		this.weekSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : DefArticleView.this.timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				DefArticleView.this.weekSpan.setChecked(true);
-				DefArticleView.this.timeMenuButton.setTitle(DefArticleView.this.weekSpan.getTitle());
-			}
-		});
-		this.monthSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				monthSpan.setChecked(true);
-				timeMenuButton.setTitle(monthSpan.getTitle());
-			}
-		});
-		this.yearSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				yearSpan.setChecked(true);
-				timeMenuButton.setTitle(yearSpan.getTitle());
-			}
-		});
-		this.chooseSpan.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {
-
-			public void onClick(final MenuItemClickEvent event) {
-				for(final MenuItem mi : DefArticleView.this.timeSpanMenu.getItems()) {
-					mi.setChecked(false);
-				}
-				DefArticleView.this.chooseSpan.setChecked(true);
 			}
 		});
 	}
@@ -463,46 +363,6 @@ public class DefArticleView extends ArticleView {
 		});
 
 	}
-
-	// private void bindGeneralInfoGrid() {
-	// final Map<Tuple2<String, String>, Record> recordsO = new
-	// HashMap<Tuple2<String, String>, Record>();
-	// for(final Tuple2<String, String> t :
-	// this.presenter.getArticleInfos()) {
-	// final ListGridRecord lsg = new ListGridRecord();
-	// lsg.setAttribute("Attribute", t.getItem1());
-	// lsg.setAttribute("Value", t.getItem2());
-	// this.generalInfoGrid.addData(lsg);
-	// recordsO.put(t, lsg);
-	// }
-	// this.presenter.getArticleInfos().listChanged().addHandler(new
-	// Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
-	//
-	// public void invoke(final Object sender, final
-	// ListChangedEventArgs<Tuple2<String, String>> e) {
-	// if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
-	// if(e.getOldItems() != null) {
-	// for(final Tuple2<String, String> t : e.getOldItems()) {
-	// DefaultArticleView.this.generalInfoGrid.removeData(recordsO.remove(t));
-	// }
-	// }
-	//
-	// if(e.getNewItems() != null) {
-	// for(final Tuple2<String, String> t : e.getNewItems()) {
-	// final ListGridRecord lsg = new ListGridRecord();
-	// lsg.setAttribute("Attribute", t.getItem1());
-	// lsg.setAttribute("Value", t.getItem2());
-	// DefaultArticleView.this.generalInfoGrid.addData(lsg);
-	// recordsO.put(t, lsg);
-	// }
-	// }
-	// } else {
-	// DefaultArticleView.this.generalInfoGrid.clear();
-	// recordsO.clear();
-	// }
-	// }
-	// });
-	// }
 
 	@Override
 	public String getName() {

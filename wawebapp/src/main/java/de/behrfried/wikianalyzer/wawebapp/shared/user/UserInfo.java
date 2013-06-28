@@ -111,15 +111,15 @@ public class UserInfo implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		String article, category;
-		double quantity;
+		double sizediff;
 		int numOfCommits;
 
 		public ArticleEdited() {}
 
-		public ArticleEdited(String article, int commits, double quantity, String category) {
+		public ArticleEdited(String article, int commits, int sizediff, String category) {
 			this.article = article;
 			this.numOfCommits = commits;
-			this.quantity = quantity;
+			this.sizediff = sizediff;
 			this.category = category;
 		}
 		
@@ -147,12 +147,12 @@ public class UserInfo implements Serializable {
 			this.numOfCommits = numOfCommits;
 		}
 
-		public double getQuantity() {
-			return quantity;
+		public double getSizediff() {
+			return sizediff;
 		}
 
-		public void setQuantity(double quantity) {
-			this.quantity = quantity;
+		public void setSizediff(double sizediff) {
+			this.sizediff = sizediff;
 		}
 
 		public static long getSerialversionuid() {

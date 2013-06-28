@@ -1,6 +1,5 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
-import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.visualization.client.AbstractDataTable;
 import com.google.gwt.visualization.client.DataTable;
@@ -19,7 +18,6 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView.Presenter;
-import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 public class DefUserAnaView extends UserAnaView {
@@ -41,8 +39,6 @@ public class DefUserAnaView extends UserAnaView {
 	/**
 	 * Creates an instance of {@link DefUserView}. All arguments are injected by
 	 * Gin.
-	 * 
-	 * @param parentView
 	 */
 	@Inject
 	public DefUserAnaView(final Presenter presenter, final Messages messages) throws IllegalArgumentException {
@@ -65,7 +61,7 @@ public class DefUserAnaView extends UserAnaView {
 		this.articleArticleColumn = new ListGridField("articleColumn", "Artikel");
 		this.articleCategoryColumn = new ListGridField("categoryColumn", "Kategorie");
 		this.articleCommitsColumn = new ListGridField("commitsColumn", "Commits");
-		this.articleQuantityColumn = new ListGridField("quantityColumn", "Quantität");
+		this.articleQuantityColumn = new ListGridField("quantityColumn", "Differenz (Bytes)");
 		this.userArticleGrid = new ListGrid();
 		this.userArticleGrid.setWidth("50%");
 		this.userArticleGrid.setFields(this.articleArticleColumn, this.articleCategoryColumn, this.articleCommitsColumn, this.articleQuantityColumn);
@@ -124,10 +120,7 @@ public class DefUserAnaView extends UserAnaView {
 					lgr.setAttribute(articleArticleColumn.getName(), catEd.getArticle());
 					lgr.setAttribute(articleCategoryColumn.getName(), catEd.getCategory());
 					lgr.setAttribute(articleCommitsColumn.getName(), catEd.getNumOfCommits());
-					lgr.setAttribute(
-					        articleQuantityColumn.getName(),
-					        NumberFormat.getPercentFormat().format(
-					                catEd.getNumOfCommits() / (double)presenter.getUserInfo().getEditedCategories().size()));
+					lgr.setAttribute(articleQuantityColumn.getName(), catEd.getSizediff());
 					userArticleGrid.addData(lgr);
 				}
 			}
