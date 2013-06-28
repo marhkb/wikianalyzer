@@ -596,7 +596,7 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	@Override
-	public UserComparisonInfo getUserComparisonInfo(String userName) throws UserForComparisonNotExistException {
+	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException {
 		// TODO Auto-generated method stub
 		return null;
 	}

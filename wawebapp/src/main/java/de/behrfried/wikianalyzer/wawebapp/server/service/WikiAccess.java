@@ -31,7 +31,7 @@ public interface WikiAccess {
 	
 	UserInfo getUserInfo(String userName) throws UserNotExistException;
 	
-	UserComparisonInfo getUserComparisonInfo(String userName) throws UserForComparisonNotExistException;
+	UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException;
 	
 	CriterionInfo getCriterionInfo() throws CriterionNotFoundException;
 	

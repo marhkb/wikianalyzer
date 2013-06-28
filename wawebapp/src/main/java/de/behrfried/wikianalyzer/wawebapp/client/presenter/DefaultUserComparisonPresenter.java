@@ -16,9 +16,12 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
-import de.behrfried.wikianalyzer.wawebapp.client.event.FieldChangedEventArgs;
+import java.util.LinkedHashMap;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 
 /**
  * Default implementation of {@link UserComparisonView.Presenter}
@@ -28,9 +31,96 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
  */
 public class DefaultUserComparisonPresenter implements UserComparisonView.Presenter {
 
-	public Event<FieldChangedEventArgs> getFieldChangedEvent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@Override
+    public UserComparisonInfo getUserComparisonInfo() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> userComparisonInfoChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public String getUserName1() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public String getUserName2() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public void setUserName1(String userName) {
+	    // TODO Auto-generated method stub
+	    
+    }
+
+	@Override
+    public void setUserName2(String userName) {
+	    // TODO Auto-generated method stub
+	    
+    }
+
+	@Override
+    public Event<EventArgs> userName1Changed() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> userName2Changed() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Command getSendCommand() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public boolean getSearchStatus() {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
+
+	@Override
+    public Event<EventArgs> searchStatusChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public LinkedHashMap<String, String> getUser1Suggestions() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public LinkedHashMap<String, String> getUser2Suggestions() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> user1SuggestionsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+	@Override
+    public Event<EventArgs> user2SuggestionsChanged() {
+	    // TODO Auto-generated method stub
+	    return null;
+    }
+
+
 
 }
