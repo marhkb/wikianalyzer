@@ -136,12 +136,13 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.userComparisonAnaView.setAlign(Alignment.CENTER);
 		this.userComparisonAnaView.setWidth("80%");
 		this.siteLayoutContainer.addMember(this.searchLayout);
-		//this.siteLayoutContainer.addMember(this.timeMenuButton);
 		this.siteLayoutContainer.addMember(this.userComparisonAnaView);
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
 		this.addChild(this.siteLayoutContainer);
 	}
+	
+	
 
 	@Override
 	public String getName() {
