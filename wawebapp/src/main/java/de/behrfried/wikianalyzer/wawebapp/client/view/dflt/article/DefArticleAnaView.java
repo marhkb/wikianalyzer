@@ -59,7 +59,7 @@ public class DefArticleAnaView extends ArticleAnaView {
 
 		this.authorGridAuthor = new ListGridField("authorGridAuthor", "Author");
 		this.authorGridCommits = new ListGridField("authorGridCommits", "Einsendungen");
-		this.authorGridQuantity = new ListGridField("authorGridQuantity", "Verhältnis Einsendungen/Text");
+		this.authorGridQuantity = new ListGridField("authorGridQuantity", "Author Commits/Gesamt Commits");
 		this.authorGrid = new ListGrid();
 		this.authorGrid.setFields(this.authorGridAuthor, this.authorGridCommits, this.authorGridQuantity);
 		this.authorGrid.setWidth("50%");
@@ -80,8 +80,8 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleGridParent = new ListGridField("articleGridParent", "Parent");
 		this.articleGridDate = new ListGridField("articleGridDate", "Änderungsdatum");
 		this.articleGridAuthor = new ListGridField("articleGridAuthor", "Author");
-		this.articleGridBytes = new ListGridField("articleGridBytes", "Bytes");
-		this.articleGridDiff = new ListGridField("articleGridDiff", "Diff");
+		this.articleGridBytes = new ListGridField("articleGridBytes", "Größe (Bytes)");
+		this.articleGridDiff = new ListGridField("articleGridDiff", "Differenz (Bytes)");
 		this.articleGridComment = new ListGridField("articleGridComment", "Comment");
 		this.articleGrid = new ListGrid();
 		this.articleGrid.setFields(

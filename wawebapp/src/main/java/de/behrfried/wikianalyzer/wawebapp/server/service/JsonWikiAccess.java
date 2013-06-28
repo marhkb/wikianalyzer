@@ -338,7 +338,7 @@ public class JsonWikiAccess implements WikiAccess {
 			int numOfImages = 0;
 			if(images.has("images")) {
 				numOfImages = images.getAsJsonArray("images")
-										.size();
+									.size();
 			}
 
 			/*
@@ -350,29 +350,34 @@ public class JsonWikiAccess implements WikiAccess {
 									"action=query&format=json&prop=categories&clprop=timestamp&cllimit=500&pageids=" + pageid
 							)
 					);
-			final JsonArray categoriesJson = this.parser
+			final JsonObject categoriesJsonObj = this.parser
 					.parse(categoriesStr)
 					.getAsJsonObject()
 					.getAsJsonObject("query")
 					.getAsJsonObject("pages")
-					.getAsJsonObject(pageid + "")
-					.getAsJsonArray("categories");
-			final List<ArticleInfo.Category> categoryList = new ArrayList<ArticleInfo.Category>(categoriesJson.size());
-			for(final JsonElement catElem : categoriesJson) {
-				final JsonObject catJson = catElem.getAsJsonObject();
-				try {
+					.getAsJsonObject(pageid + "");
 
-					categoryList.add(
-							new ArticleInfo.Category(
-									catJson.getAsJsonPrimitive("title").getAsString().replaceAll("Kategorie:", "")
-										   .replaceAll("Wikipedia:", ""), this.formatter.parse(
-									catJson.getAsJsonPrimitive("timestamp").getAsString()
-										   .replace('T', '_')
-							)
-							)
-					);
-				} catch(ParseException e) {
-					e.printStackTrace();
+			final List<ArticleInfo.Category> categoryList = new ArrayList<ArticleInfo.Category>();
+			if(categoriesJsonObj.has("categories")) {
+				final JsonArray categoriesJsonArr = categoriesJsonObj
+						.getAsJsonArray("categories");
+
+				for(final JsonElement catElem : categoriesJsonArr) {
+					final JsonObject catJson = catElem.getAsJsonObject();
+					try {
+
+						categoryList.add(
+								new ArticleInfo.Category(
+										catJson.getAsJsonPrimitive("title").getAsString().replaceAll("Kategorie:", "")
+											   .replaceAll("Wikipedia:", ""), this.formatter.parse(
+										catJson.getAsJsonPrimitive("timestamp").getAsString()
+											   .replace('T', '_')
+								)
+								)
+						);
+					} catch(ParseException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
@@ -498,12 +503,14 @@ public class JsonWikiAccess implements WikiAccess {
 				signInDate = this.formatter
 						.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
 
-				totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
 			} catch(ParseException e) {
 				this.logger.error(e.getMessage(), e);
 			} catch(ClassCastException e) {
 				this.logger.error(e.getMessage(), e);
 			}
+
+			totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
+
 			// TODO für abuses
 			final String response2 = this.requester
 					.getResult(this.convertRequest("action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName));
@@ -520,11 +527,11 @@ public class JsonWikiAccess implements WikiAccess {
 			// "action=query&prop=categories&cllimit=500&titles="+tmpArticle);
 
 			String tmpDate = "";
-			Map<Tuple2<Integer, String>, Integer> comparableRevisions =
-					new HashMap<Tuple2<Integer, String>, Integer>();
+			Map<Tuple2<Integer, String>, Tuple2<Integer, Integer>> comparableRevisions =
+					new HashMap<Tuple2<Integer, String>, Tuple2<Integer, Integer>>();
 			final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
 			do {
-				String userArticles = this.requester.getResult(
+				final String userArticles = this.requester.getResult(
 						this.convertRequest(
 								"action=query&format=json&list=usercontribs&ucdir=newer&ucuser=" + userName
 								+ "&uclimit=500&ucprop=ids|sizediff|title|flags&continue=" + tmpDate
@@ -540,11 +547,14 @@ public class JsonWikiAccess implements WikiAccess {
 							tmpObj.getAsJsonPrimitive("pageid").getAsInt(),
 							tmpObj.getAsJsonPrimitive("title").getAsString()
 					);
+					final int sizediff = tmpObj.getAsJsonPrimitive("sizediff").getAsInt();
 
 					if(!comparableRevisions.containsKey(key)) {
-						comparableRevisions.put(key, 0);
+						comparableRevisions.put(key, Tuple.create(0, 0));
 					}
-					comparableRevisions.put(key, comparableRevisions.get(key) + 1);
+					comparableRevisions.put(key, Tuple.create(
+							comparableRevisions.get(key).getItem1() + 1,
+							comparableRevisions.get(key).getItem2() + sizediff));
 				}
 				final JsonObject cont = articles.getAsJsonObject("query");
 				tmpDate = "";
@@ -556,12 +566,14 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 			} while(!tmpDate.isEmpty());
 
-			for(final Map.Entry<Tuple2<Integer, String>, Integer> entry : comparableRevisions.entrySet()) {
+			for(final Map.Entry<Tuple2<Integer, String>, Tuple2<Integer, Integer>> entry : comparableRevisions
+					.entrySet()) {
+
 				categoryEdited.add(
 						new ArticleEdited(
 								entry.getKey().getItem2(),
-								entry.getValue(),
-								4,
+								entry.getValue().getItem1(),
+								entry.getValue().getItem2(),
 								this.getCategories(entry.getKey().getItem1())
 						)
 				);
