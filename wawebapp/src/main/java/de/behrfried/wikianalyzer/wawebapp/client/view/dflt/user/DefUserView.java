@@ -16,7 +16,6 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
-import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Canvas;
@@ -131,13 +130,19 @@ public class DefUserView extends UserView {
 		this.categorysInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "An Kategorien mit gewirkt:");
 		this.restrictionInfoRecord = new ListGridRecord();
 		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Sperren:");
+
+		this.userInfoGrid.setShowRecordComponents(true);
+		this.userInfoGrid.setShowRecordComponentsByCell(true);
+		this.userInfoGrid.setShowAllRecords(true);
+		this.userInfoGrid.setCanResizeFields(false);
+		this.userInfoGrid.setShowHeaderMenuButton(false);
+		this.userInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
 		this.userInfoGrid.addData(this.userLinkInfoRecord);
 		this.userInfoGrid.addData(this.signUpInfoRecord);
 		this.userInfoGrid.addData(this.commitsInfoRecord);
 		this.userInfoGrid.addData(this.categorysInfoRecord);
 		this.userInfoGrid.addData(this.reputationInfoRecord);
 		this.userInfoGrid.addData(this.restrictionInfoRecord);
-		this.userInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
 
 		this.genUsrInfLabel = new Label("Allgemeine User Infos");
 		this.genUsrInfLabel.setHeight(10);
@@ -168,7 +173,7 @@ public class DefUserView extends UserView {
 	}
 
 	private void bind() {
-		// this.bindGeneralInfoGrid();
+		//this.bindGeneralInfoGrid();
 		this.bindSearchBox();
 		this.bindSearchButton();
 		this.bindCategorysInfoRecord();
@@ -258,7 +263,6 @@ public class DefUserView extends UserView {
 
 			public void onKeyUp(final KeyUpEvent event) {
 				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
-					Window.alert(event.getSource().toString());
 					if(DefUserView.this.presenter.getSendCommand().canExecute(null)) {
 						DefUserView.this.presenter.getSendCommand().execute(false);
 					}
@@ -295,15 +299,11 @@ public class DefUserView extends UserView {
 
 	private void bindUserLinkRecord() {
 		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
-
-
 			@Override
-			public void invoke(Object sender, EventArgs e) {	
-				userLink.setContents("<a href='http://de.wikipedia.org/wiki/Benutzer:" + 
-			presenter.getUserInfo().getUserName()
-						
+			public void invoke(Object sender, EventArgs e) {
+				userLink.setContents("<a href='http://de.wikipedia.org/wiki/Benutzer:" + presenter.getUserInfo().getUserName()
 				        + "' target='_blank'>" + presenter.getUserInfo().getUserName() + "</a>");
-				userLink.setTitle(presenter.getUserInfo().getUserName());
+				userLink.setTitle("Wurst");
 				userInfoGrid.refreshFields();
 			}
 		});

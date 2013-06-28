@@ -503,12 +503,14 @@ public class JsonWikiAccess implements WikiAccess {
 				signInDate = this.formatter
 						.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
 
-				totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
 			} catch(ParseException e) {
 				this.logger.error(e.getMessage(), e);
 			} catch(ClassCastException e) {
 				this.logger.error(e.getMessage(), e);
 			}
+
+			totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
+
 			// TODO für abuses
 			final String response2 = this.requester
 					.getResult(this.convertRequest("action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName));
