@@ -450,7 +450,8 @@ public class JsonWikiAccess implements WikiAccess {
 			stringBuilder.append(inner.getAsJsonObject().getAsJsonPrimitive("title").getAsString());
 			stringBuilder.append("; ");
 		}
-		return stringBuilder.toString().replaceAll("Kategorie:", "").replaceAll("Wikipedia:", "");
+		return stringBuilder.toString().substring(0, stringBuilder.length() - 2).replaceAll("Kategorie:",
+																				"").replaceAll("Wikipedia:", "");
 	}
 
 	private List<ArticleInfo.Revision> getRevertedRevisions(List<ArticleInfo.Revision> revisions) {
@@ -485,7 +486,6 @@ public class JsonWikiAccess implements WikiAccess {
 			final List<UserInfo.ArticleEdited> categoryEdited = new ArrayList<UserInfo.ArticleEdited>();
 			final String restrictions = null;
 			int totalUserCommits = 0;
-			final String articleCommits = null;
 			final String reputation = null;
 			Date signInDate = null;
 
@@ -566,25 +566,46 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 			} while(!tmpDate.isEmpty());
 
+			final Set<String> categorySet = new HashSet<String>();
 			for(final Map.Entry<Tuple2<Integer, String>, Tuple2<Integer, Integer>> entry : comparableRevisions
 					.entrySet()) {
+
+				final String categories = this.getCategories(entry.getKey().getItem1());
 
 				categoryEdited.add(
 						new ArticleEdited(
 								entry.getKey().getItem2(),
 								entry.getValue().getItem1(),
 								entry.getValue().getItem2(),
-								this.getCategories(entry.getKey().getItem1())
+								categories
 						)
 				);
+
+				final String[] catArr = categories.split(";");
+				for(final String cat : catArr) {
+					categorySet.add(cat.trim());
+				}
 			}
+
+			final StringBuilder categoriesStrBuilder = new StringBuilder();
+			categoriesStrBuilder.append("(");
+			categoriesStrBuilder.append(categorySet.size());
+			categoriesStrBuilder.append(") = ");
+			for(final String cat : categorySet) {
+				categoriesStrBuilder.append(cat);
+				categoriesStrBuilder.append("; ");
+			}
+
+			final String categoryCommits = categoriesStrBuilder.toString().substring(0,
+																					 categoriesStrBuilder.length() -
+																					 2);
 
 			return new UserInfo(
 					userid,
 					userName,
 					restrictions,
 					totalUserCommits,
-					articleCommits,
+					categoryCommits,
 					signInDate,
 					reputation,
 					categoryEdited
