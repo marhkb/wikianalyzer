@@ -660,8 +660,8 @@ public class JsonWikiAccess implements WikiAccess {
 			this.logger.info("AbuseCntfactor: " + abuseCntFactor);
 			double reputation = 1.0d - (1.0d / (((1d + totalUserCommits) / (1.0d + abuseCnt))) / (abuseCntFactor *
 																								  1000));
-			if(reputation < 0) {
-				//reputation = 0;
+			if(blocked) {
+				reputation = 0;
 			}
 
 			return new UserInfo(

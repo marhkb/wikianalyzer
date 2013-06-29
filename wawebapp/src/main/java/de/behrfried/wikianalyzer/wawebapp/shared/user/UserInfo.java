@@ -40,7 +40,6 @@ public class UserInfo implements Serializable {
     	return reputation;
     }
 
-	
     public void setReputation(double reputation) {
     	this.reputation = reputation;
     }
