@@ -36,35 +36,10 @@ public class UserComparisonInfo implements Serializable {
 		this.congruentCategories = congruentCategories;
 		this.similarityRatio = similarityRatio;
 	}
-	
-    public double getSimilarityRatio() {
-    	return similarityRatio;
-    }
 
-	
-    public void setSimilarityRatio(double similarityRatio) {
-    	this.similarityRatio = similarityRatio;
-    }
-
-	
-    public String getCongruentArticles() {
-    	return congruentArticles;
-    }
-
-	
-    public void setCongruentArticles(String congruentArticles) {
-    	this.congruentArticles = congruentArticles;
-    }
-
-	
-    public String getCongruentCategories() {
-    	return congruentCategories;
-    }
-
-	
-    public void setCongruentCategories(String congruentCategories) {
-    	this.congruentCategories = congruentCategories;
-    }
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
 	public double getCooperationRatio() {
 		return cooperationRatio;
@@ -80,6 +55,14 @@ public class UserComparisonInfo implements Serializable {
 
 	public void setCategoryCongruency(double categoryCongruency) {
 		this.categoryCongruency = categoryCongruency;
+	}
+
+	public double getSimilarityRatio() {
+		return similarityRatio;
+	}
+
+	public void setSimilarityRatio(double similarityRatio) {
+		this.similarityRatio = similarityRatio;
 	}
 
 	public int getAmountAbusesUser1() {
@@ -98,6 +81,22 @@ public class UserComparisonInfo implements Serializable {
 		this.amountAbusesUser2 = amountAbusesUser2;
 	}
 
+	public String getCongruentArticles() {
+		return congruentArticles;
+	}
+
+	public void setCongruentArticles(String congruentArticles) {
+		this.congruentArticles = congruentArticles;
+	}
+
+	public String getCongruentCategories() {
+		return congruentCategories;
+	}
+
+	public void setCongruentCategories(String congruentCategories) {
+		this.congruentCategories = congruentCategories;
+	}
+
 	public UserInfo getUserInfo1() {
 		return userInfo1;
 	}
@@ -112,9 +111,5 @@ public class UserComparisonInfo implements Serializable {
 
 	public void setUserInfo2(UserInfo userInfo2) {
 		this.userInfo2 = userInfo2;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

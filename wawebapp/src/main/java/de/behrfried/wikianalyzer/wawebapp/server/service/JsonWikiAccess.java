@@ -830,7 +830,7 @@ public class JsonWikiAccess implements WikiAccess {
 					2
 			);
 
-		} catch(UserNotExistException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 

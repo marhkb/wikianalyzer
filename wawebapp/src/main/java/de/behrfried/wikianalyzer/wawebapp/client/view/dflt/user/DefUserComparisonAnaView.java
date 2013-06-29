@@ -33,14 +33,14 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 
 		@Override
 		protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {
-			final String tmpString = record.getAttribute("attributes");
-			if(this.getFieldName(colNum).equals("Wert Nutzer 1")) {
+			final String tmpString = record.getAttribute("copmAttr");
+			if(this.getFieldName(colNum).equals("userOneV")) {
 				if(tmpString.equals("Nutzername:")) {
 					DefUserComparisonAnaView.this.user1Link = new HTMLFlow();
 					// DefUserComparisonAnaView.this.bindUserLinkRecord();
 					return DefUserComparisonAnaView.this.user1Link;
 				}
-			} else if(this.getFieldName(colNum).equals("Wert Nutzer 2")) {
+			} else if(this.getFieldName(colNum).equals("userTwoV")) {
 				if(tmpString.equals("Nutzername:")) {
 					DefUserComparisonAnaView.this.user2Link = new HTMLFlow();
 					// DefUserComparisonAnaView.this.bindUserLinkRecord();

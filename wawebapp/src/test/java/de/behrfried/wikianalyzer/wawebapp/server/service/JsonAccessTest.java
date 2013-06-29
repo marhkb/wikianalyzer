@@ -17,8 +17,10 @@
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.junit.*;
 
@@ -61,6 +63,12 @@ public class JsonAccessTest {
 	public void testGetUserInfo() throws UserNotExistException {
 		final UserInfo ui = wikiAccess.getUserInfo("APPER");
 		System.out.println(ui);
+	}
+
+	@Test
+	public void testGetUserComparisonInfo() throws UserForComparisonNotExistException {
+		final UserComparisonInfo uci = this.wikiAccess.getUserComparisonInfo("Hans", "Wurst");
+
 	}
 
 }

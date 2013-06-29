@@ -211,66 +211,6 @@ public class DefUserView extends UserView {
 		this.bindUserclassCommentsPerCommitRecord();
 		this.bindUserclassUserDiscussionRecord();
 		this.bindUserclassSelfDiscussionRecord();
-
-		/*
-		 * final DataContainer<Boolean> textItemNameToServerSelfChanged = new
-		 * DataContainer<Boolean>(false);
-		 * this.textItem.setValue(this.presenter.getNameToServer());
-		 * this.textItem.addChangedHandler(new ChangedHandler() {
-		 * 
-		 * public void onChanged(final ChangedEvent event) {
-		 * textItemNameToServerSelfChanged.setValue(true);
-		 * DefaultUserView.this.presenter
-		 * .setNameToServer(DefaultUserView.this.textItem.getValueAsString());
-		 * textItemNameToServerSelfChanged.setValue(false); } });
-		 * 
-		 * this.presenter.getNameToServerChanged().addHandler(new
-		 * Handler<GenericEventArgs<String>>() {
-		 * 
-		 * public void invoke(final Object sender, final
-		 * GenericEventArgs<String> e) {
-		 * DefaultUserView.this.textItem.setValue(e.getValue()); } });
-		 * 
-		 * final DataContainer<Boolean> textItem2NameToServerSelfChanged = new
-		 * DataContainer<Boolean>(false);
-		 * this.textItem2.setValue(this.presenter.getNameToServer());
-		 * this.textItem2.addChangedHandler(new ChangedHandler() {
-		 * 
-		 * public void onChanged(final ChangedEvent event) {
-		 * textItem2NameToServerSelfChanged.setValue(true);
-		 * DefaultUserView.this.
-		 * presenter.setNameToServer(DefaultUserView.this.textItem2
-		 * .getValueAsString());
-		 * textItem2NameToServerSelfChanged.setValue(false); } });
-		 * 
-		 * this.presenter.getNameToServerChanged().addHandler(new
-		 * Handler<GenericEventArgs<String>>() {
-		 * 
-		 * public void invoke(final Object sender, final
-		 * GenericEventArgs<String> e) {
-		 * DefaultUserView.this.textItem2.setValue(e.getValue()); } });
-		 * 
-		 * this.presenter.getErrorNameToServerChanged().addHandler(new
-		 * Handler<GenericEventArgs<String>>() {
-		 * 
-		 * public void invoke(final Object sender, final
-		 * GenericEventArgs<String> e) { if(e.getValue().length() == 0) { //
-		 * textItem. } } });
-		 * 
-		 * this.button.setDisabled(!this.presenter.getSendCommand().canExecute(
-		 * null));
-		 * this.presenter.getSendCommand().canExecuteChanged().addHandler(new
-		 * Handler<EventArgs>() {
-		 * 
-		 * public void invoke(final Object sender, final EventArgs e) {
-		 * DefaultUserView
-		 * .this.button.setDisabled(!DefaultUserView.this.presenter
-		 * .getSendCommand().canExecute(null)); } });
-		 * this.button.addClickHandler(new ClickHandler() {
-		 * 
-		 * public void onClick(final ClickEvent event) {
-		 * DefaultUserView.this.presenter.getSendCommand().execute(null); } });
-		 */
 	}
 
 	private void bindSearchBox() {
