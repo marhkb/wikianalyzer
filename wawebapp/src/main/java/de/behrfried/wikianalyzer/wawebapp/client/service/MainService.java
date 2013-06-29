@@ -24,8 +24,11 @@ import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotE
 import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.TitleOrCategory;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
+
+import java.util.List;
 
 /**
  * Test service
@@ -39,5 +42,5 @@ public interface MainService extends RemoteService {
 	ArticleInfo sendArticleName(String articleName) throws ArticleNotExistException;
 	UserInfo sendUserName(String userName) throws UserNotExistException;
 	UserComparisonInfo sendUserForComparison(String userName1, String userName2) throws UserForComparisonNotExistException;
-	CriterionInfo sendCriterionInfo() throws CriterionNotFoundException;
+	CriterionInfo sendCriterionInfo(List<TitleOrCategory> titlesOrCategories) throws CriterionNotFoundException;
 }

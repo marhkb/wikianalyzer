@@ -22,8 +22,11 @@ import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotE
 import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.TitleOrCategory;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
+
+import java.util.List;
 
 public interface WikiAccess {
 
@@ -33,7 +36,7 @@ public interface WikiAccess {
 	
 	UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException;
 	
-	CriterionInfo getCriterionInfo() throws CriterionNotFoundException;
+	CriterionInfo getCriterionInfo(final List<TitleOrCategory> titlesOrCategories) throws CriterionNotFoundException;
 	
 	int getPageId(String title);
 }

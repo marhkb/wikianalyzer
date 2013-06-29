@@ -27,10 +27,13 @@ import de.behrfried.wikianalyzer.wawebapp.client.service.MainService;
 import de.behrfried.wikianalyzer.wawebapp.server.service.WikiAccess;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.TitleOrCategory;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /**
  * Server side implementation of {@link MainService}
@@ -70,8 +73,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
     }
 
 	@Override
-    public CriterionInfo sendCriterionInfo() throws CriterionNotFoundException {
-	    return this.wikiAccess.getCriterionInfo();
+    public CriterionInfo sendCriterionInfo(List<TitleOrCategory> titlesOrCategories) throws CriterionNotFoundException {
+	    return this.wikiAccess.getCriterionInfo(titlesOrCategories);
     }
 	
 	
