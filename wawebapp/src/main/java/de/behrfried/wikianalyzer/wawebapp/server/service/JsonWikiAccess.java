@@ -450,8 +450,10 @@ public class JsonWikiAccess implements WikiAccess {
 			stringBuilder.append(inner.getAsJsonObject().getAsJsonPrimitive("title").getAsString());
 			stringBuilder.append("; ");
 		}
-		return stringBuilder.toString().substring(0, stringBuilder.length() - 2).replaceAll("Kategorie:",
-																				"").replaceAll("Wikipedia:", "");
+		return stringBuilder.toString().substring(0, stringBuilder.length() - 2).replaceAll(
+				"Kategorie:",
+				""
+		).replaceAll("Wikipedia:", "");
 	}
 
 	private List<ArticleInfo.Revision> getRevertedRevisions(List<ArticleInfo.Revision> revisions) {
@@ -486,17 +488,18 @@ public class JsonWikiAccess implements WikiAccess {
 			final List<UserInfo.ArticleEdited> categoryEdited = new ArrayList<UserInfo.ArticleEdited>();
 			final String restrictions = null;
 			int totalUserCommits = 0;
-			final String reputation = null;
 			Date signInDate = null;
 
 			final String response1 = this.requester.getResult(
 					this.convertRequest(
 							"action=query&format=json&list=users&ususers=" + userName
-							+ "&usprop=editcount|registration"
+							+ "&usprop=editcount|registration|blockinfo"
 					)
 			);
 			final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 			final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
+
+			boolean blocked = user.has("blockedid");
 
 			try {
 
@@ -552,9 +555,12 @@ public class JsonWikiAccess implements WikiAccess {
 					if(!comparableRevisions.containsKey(key)) {
 						comparableRevisions.put(key, Tuple.create(0, 0));
 					}
-					comparableRevisions.put(key, Tuple.create(
+					comparableRevisions.put(
+							key, Tuple.create(
 							comparableRevisions.get(key).getItem1() + 1,
-							comparableRevisions.get(key).getItem2() + sizediff));
+							comparableRevisions.get(key).getItem2() + sizediff
+					)
+					);
 				}
 				final JsonObject cont = articles.getAsJsonObject("query");
 				tmpDate = "";
@@ -596,9 +602,67 @@ public class JsonWikiAccess implements WikiAccess {
 				categoriesStrBuilder.append("; ");
 			}
 
-			final String categoryCommits = categoriesStrBuilder.toString().substring(0,
-																					 categoriesStrBuilder.length() -
-																					 2);
+			/*
+			 * get categories
+			 */
+			final String categoryCommits = categoriesStrBuilder.toString().substring(
+					0,
+					categoriesStrBuilder.length() -
+					2
+			);
+
+			/*
+			 * get reputation
+			 */
+			int abuseCnt = 0;
+			double abuseCntFactor = 1.0d;
+			tmpDate = "";
+
+			do {
+				final String abuselogStr = this.requester.getResult(
+						this.convertRequest(
+								"action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName +
+								"&aflstart=" + tmpDate
+						)
+				);
+
+				final JsonObject abuseRoot = this.parser.parse(abuselogStr)
+								.getAsJsonObject();
+				final JsonArray abuseJsnonArr = abuseRoot
+						.getAsJsonObject("query")
+						.getAsJsonArray("abuselog");
+				for(final JsonElement jElem : abuseJsnonArr) {
+					final JsonObject jObj = jElem.getAsJsonObject();
+					final String abuseResult = jObj.getAsJsonPrimitive("result").getAsString();
+
+					abuseCnt += 1;
+					if(abuseResult.contains("warn")) {
+						abuseCntFactor = (abuseCntFactor + 5.0d) / abuseCnt;
+					}
+					if(abuseResult.contains("disallow")) {
+						abuseCntFactor = (abuseCntFactor + 10.0d) / abuseCnt;
+					}
+					if(abuseResult.contains("block")) {
+						abuseCntFactor = (abuseCntFactor + 15.0d) / abuseCnt;
+					}
+				}
+
+				tmpDate = "";
+				if(abuseRoot.has("query-continue")) {
+					tmpDate = abuseRoot.getAsJsonObject("query-continue")
+							.getAsJsonObject("abuselog")
+							.getAsJsonPrimitive("aflstart")
+							.getAsString();
+				}
+
+			} while(!tmpDate.isEmpty());
+			
+			this.logger.info("AbuseCntfactor: " + abuseCntFactor);
+			double reputation = 1.0d - (1.0d / (((1d + totalUserCommits) / (1.0d + abuseCnt))) / (abuseCntFactor *
+																								  1000));
+			if(reputation < 0) {
+				//reputation = 0;
+			}
 
 			return new UserInfo(
 					userid,
@@ -617,7 +681,8 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	@Override
-	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException {
+	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws
+			UserForComparisonNotExistException {
 		// TODO Auto-generated method stub
 		return null;
 	}
