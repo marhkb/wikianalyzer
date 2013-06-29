@@ -294,7 +294,7 @@ public class DefUserView extends UserView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				commitsInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getCommits()+" ("+presenter.getUserInfo().getCommitsPerDay()+")");
+				commitsInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getTotalCommits()+" ("+presenter.getUserInfo().getCommitsPerDay()+")");
 				userInfoGrid.refreshFields();
 			}
 		});

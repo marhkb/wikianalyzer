@@ -790,8 +790,7 @@ public class JsonWikiAccess implements WikiAccess {
 			UserForComparisonNotExistException {
 		UserInfo user1 = null;
 		UserInfo user2 = null;
-		double cooperationRatio, similarityRatio;
-		int amountAbusesUser1, amountAbusesUser2;
+		double articleCooperationRatio = 0;
 		String congruentArticles = "";
 		try {
 			user1 = this.getUserInfo(userName1);
@@ -836,12 +835,14 @@ public class JsonWikiAccess implements WikiAccess {
 					articlesStrBuilder.length() -
 					2
 			);
-
+			if(sameArt!=0) {
+					articleCooperationRatio = ((sameArt*user1SimArtCommits*user1.getReputation())/(user1TotalArt*user1.getTotalCommits()) +
+										(sameArt*user2SimArtCommits*user2.getReputation())/(user2TotalArt*user2.getTotalCommits()))/2;
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-
-		return new UserComparisonInfo(user1, user2, 0, 0, 0, 0, congruentArticles, "", 0);
+		return new UserComparisonInfo(user1, user2, articleCooperationRatio, 0, 0, 0, congruentArticles, "");
 	}
 
 	@Override

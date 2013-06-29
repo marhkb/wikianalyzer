@@ -167,14 +167,6 @@ public class UserInfo implements Serializable {
 		this.userName = userName;
 	}
 
-	public int getCommits() {
-		return totalCommits;
-	}
-
-	public void setCommits(int commits) {
-		this.totalCommits = commits;
-	}
-
 	public String getCategoryCommits() {
 		return categoryCommits;
 	}
@@ -265,8 +257,6 @@ public class UserInfo implements Serializable {
 		public void setSizediff(double sizediff) {
 			this.sizediff = sizediff;
 		}
-		
-		
 
 		public static long getSerialversionuid() {
 			return serialVersionUID;
