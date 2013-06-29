@@ -28,7 +28,7 @@ public class UserInfo implements Serializable {
 
 
 	public UserInfo(int userID, String username, String restrictions, int totalCommits, String categoryCommits,
-					Date signInDate, int reputation,
+					Date signInDate, double reputation,
 	        List<ArticleEdited> editedCategories) {
 		this.userID = userID;
 		this.userName = username;
@@ -59,7 +59,7 @@ public class UserInfo implements Serializable {
     public void setReputation(double reputation) {
     	this.reputation = reputation;
 	}
-	
+
     public int getTotalCommits() {
     	return totalCommits;
     }
