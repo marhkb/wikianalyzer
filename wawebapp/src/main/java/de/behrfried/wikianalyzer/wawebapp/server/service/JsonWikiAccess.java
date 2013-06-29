@@ -460,19 +460,21 @@ public class JsonWikiAccess implements WikiAccess {
 		List<ArticleInfo.Revision> result = new ArrayList<ArticleInfo.Revision>();
 
 		for(final ArticleInfo.Revision revision : revisions) {
-			final String lowerComment = revision.getComment().toLowerCase();
-			boolean matches = false;
-			for(final String pattern : this.patterns) {
-				if(lowerComment.contains(pattern)) {
-					matches = true;
-					break;
-				}
-			}
-			if(matches) {
+			if(isRevert(revision.getComment())) {
 				result.add(revision);
 			}
 		}
 		return result;
+	}
+
+	private boolean isRevert(String comment) {
+		final String lowerComment = comment.toLowerCase();
+		for(final String pattern : this.patterns) {
+			if(lowerComment.contains(pattern)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -499,51 +501,38 @@ public class JsonWikiAccess implements WikiAccess {
 			final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 			final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
 
-			boolean blocked = user.has("blockedid");
-
-			try {
-
-				signInDate = this.formatter
-						.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
-
-			} catch(ParseException e) {
-				this.logger.error(e.getMessage(), e);
-			} catch(ClassCastException e) {
-				this.logger.error(e.getMessage(), e);
-			}
+			final boolean blocked = user.has("blockid");
 
 			totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
-
-			// TODO für abuses
-			final String response2 = this.requester
-					.getResult(this.convertRequest("action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName));
-			// public UserInfo(String userID, String username, String restrictions,
-			// String commits, String categoryCommits, Date signInDate, String
-			// reputation, List<CategoryEdited> editedCategories, List<EditType>
-			// editTypes) {
-
-			// TODO anzahl der artikel ... man bekommt nur 500 deswegen wieder
-			// schleife
-
-			// String tmpArticle = "";
-			// final String articleCategory = this.requester.getResult(API +
-			// "action=query&prop=categories&cllimit=500&titles="+tmpArticle);
 
 			String tmpDate = "";
 			Map<Tuple2<Integer, String>, Tuple2<Integer, Integer>> comparableRevisions =
 					new HashMap<Tuple2<Integer, String>, Tuple2<Integer, Integer>>();
 			final Map<String, Integer> commitsPerCategory = new HashMap<String, Integer>();
 			final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
+			int numOfComments = 0;
+			int numOfReverts = 0;
+			int numOfUserDiscussion = 0;
+			int numofSelfDiscussion = 0;
 			do {
 				final String userArticles = this.requester.getResult(
 						this.convertRequest(
 								"action=query&format=json&list=usercontribs&ucdir=newer&ucuser=" + userName
-								+ "&uclimit=500&ucprop=ids|sizediff|title|flags&continue=" + tmpDate
+								+ "&uclimit=500&ucprop=ids|sizediff|title|flags|comment|timestamp&continue=" + tmpDate
 						)
 				);
 				final JsonObject articles = this.parser.parse(userArticles).getAsJsonObject();
 
 				final JsonArray articlesArticle = articles.getAsJsonObject("query").getAsJsonArray("usercontribs");
+
+				if(tmpDate.isEmpty() && articlesArticle.size() > 0) {
+					// get the date of the first user contrib
+					signInDate = this.formatter.parse(
+							articlesArticle.get(0).getAsJsonObject().getAsJsonPrimitive("timestamp").getAsString()
+										   .replace('T', '_')
+					);
+				}
+
 				for(JsonElement elm : articlesArticle) {
 					final JsonObject tmpObj = elm.getAsJsonObject();
 
@@ -551,7 +540,23 @@ public class JsonWikiAccess implements WikiAccess {
 							tmpObj.getAsJsonPrimitive("pageid").getAsInt(),
 							tmpObj.getAsJsonPrimitive("title").getAsString()
 					);
+
+					if(key.getItem2().startsWith("Benutzer Diskussion:")) {
+						if(key.getItem2().endsWith(userName)) {
+							numofSelfDiscussion++;
+						} else {
+							numOfUserDiscussion++;
+						}
+					}
+
 					final int sizediff = tmpObj.getAsJsonPrimitive("sizediff").getAsInt();
+					final String comment = tmpObj.getAsJsonPrimitive("comment").getAsString();
+					if(!comment.isEmpty()) {
+						numOfComments++;
+						if(this.isRevert(comment)) {
+							numOfReverts++;
+						}
+					}
 
 					if(!comparableRevisions.containsKey(key)) {
 						comparableRevisions.put(key, Tuple.create(0, 0));
@@ -584,7 +589,7 @@ public class JsonWikiAccess implements WikiAccess {
 								entry.getKey().getItem2(),
 								entry.getValue().getItem1(),
 								entry.getValue().getItem2(),
-								categories, 
+								categories,
 								commitsPerCategory
 						)
 				);
@@ -593,6 +598,16 @@ public class JsonWikiAccess implements WikiAccess {
 				for(final String cat : catArr) {
 					categorySet.add(cat.trim());
 				}
+			}
+
+			try {
+				signInDate = this.formatter
+						.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
+
+			} catch(ParseException e) {
+				this.logger.error(e.getMessage(), e);
+			} catch(ClassCastException e) {
+				this.logger.error(e.getMessage(), e);
 			}
 
 			final StringBuilder categoriesStrBuilder = new StringBuilder();
@@ -629,7 +644,7 @@ public class JsonWikiAccess implements WikiAccess {
 				);
 
 				final JsonObject abuseRoot = this.parser.parse(abuselogStr)
-								.getAsJsonObject();
+														.getAsJsonObject();
 				final JsonArray abuseJsnonArr = abuseRoot
 						.getAsJsonObject("query")
 						.getAsJsonArray("abuselog");
@@ -652,29 +667,110 @@ public class JsonWikiAccess implements WikiAccess {
 				tmpDate = "";
 				if(abuseRoot.has("query-continue")) {
 					tmpDate = abuseRoot.getAsJsonObject("query-continue")
-							.getAsJsonObject("abuselog")
-							.getAsJsonPrimitive("aflstart")
-							.getAsString();
+									   .getAsJsonObject("abuselog")
+									   .getAsJsonPrimitive("aflstart")
+									   .getAsString();
 				}
 
 			} while(!tmpDate.isEmpty());
-			
+
 			this.logger.info("AbuseCntfactor: " + abuseCntFactor);
-			double reputation = 1.0d - (1.0d / (((1d + totalUserCommits) / (1.0d + abuseCnt))) / (abuseCntFactor *
-																								  1000));
+			double reputation = 1.0d - (1.0d / ((1.0d + totalUserCommits) / (1.0d + abuseCnt))) / (1 / abuseCntFactor);
 			if(blocked) {
 				reputation = 0;
+			}
+
+			/*
+			 * user classes
+			 */
+			String userclassNumOfCommits = "Gott";
+			if(totalUserCommits < 100) {
+				userclassNumOfCommits = "Rookie";
+			} else if(totalUserCommits < 1000) {
+				userclassNumOfCommits = "Fortgeschrittener";
+			} else if(totalUserCommits < 10000) {
+				userclassNumOfCommits = "Profi";
+			} else if(totalUserCommits < 100000) {
+				userclassNumOfCommits = "Master";
+			}
+
+			String userclassAvgCommits = "kann nicht bewertet werden";
+			double avgCommits = 0;
+			if(signInDate != null) {
+				avgCommits = totalUserCommits / ((System.currentTimeMillis() - signInDate.getTime()) / 86400000);
+				if(avgCommits == 0.0) {
+					userclassAvgCommits = "Schlafmütze";
+				} else if(avgCommits < 1.0d) {
+					userclassAvgCommits = "Gelegenheitssurfer";
+				} else if(avgCommits < 5.0d) {
+					userclassAvgCommits = "Durchschnittsuser";
+				} else if(avgCommits < 15.0d) {
+					userclassAvgCommits = "Vielschreiber";
+				} else {
+					userclassAvgCommits = "Dauergast";
+				}
+			}
+
+			final double revertCommitRelation = (double)numOfReverts / totalUserCommits;
+			String userclassRevert = "Spielverderber";
+			if(revertCommitRelation < 0.01) {
+				userclassRevert = "Ein-Auge-Zudrücker";
+			} else if(revertCommitRelation < 0.1) {
+				userclassRevert = "Gelegenheitsspießer";
+			} else if(revertCommitRelation < 0.2) {
+				userclassRevert = "Sturrkopf";
+			} else if(revertCommitRelation < 0.5) {
+				userclassRevert = "Kontrolleur";
+			}
+
+			final double commentCommitRelation = (double)numOfComments / totalUserCommits;
+			String userclassComment = "Saubermann";
+			if(commentCommitRelation < 0.1) {
+				userclassComment = "Dokuhasser";
+			} else if(commentCommitRelation < 0.5) {
+				userclassComment = "Ab und zu vergesslich";
+			} else if(commentCommitRelation < 0.8) {
+				userclassComment = "Ordnungshüter";
+			}
+
+			String userDiscussion = "Sehr oft";
+			if(numOfUserDiscussion == 0) {
+				userDiscussion = "Nie";
+			} else if(numOfUserDiscussion < 3) {
+				userDiscussion = "Selten";
+			} else if(numOfUserDiscussion < 10) {
+				userDiscussion = "Gelegentlich";
+			} else if(numOfUserDiscussion < 20) {
+				userDiscussion = "Oft";
+			}
+
+			String selfDiscussion = "Sehr oft";
+			if(numofSelfDiscussion == 0) {
+				selfDiscussion = "Nie";
+			} else if(numofSelfDiscussion < 10) {
+				selfDiscussion = "Selten";
+			} else if(numofSelfDiscussion < 30) {
+				selfDiscussion = "Gelegentlich";
+			} else if(numofSelfDiscussion < 100) {
+				selfDiscussion = "Oft";
 			}
 
 			return new UserInfo(
 					userid,
 					userName,
-					restrictions,
 					totalUserCommits,
 					categoryCommits,
+					avgCommits,
 					signInDate,
 					reputation,
-					categoryEdited
+					categoryEdited,
+					blocked,
+					userclassNumOfCommits,
+					userclassAvgCommits,
+					userclassRevert,
+					userclassComment,
+					userDiscussion,
+					selfDiscussion
 			);
 		} catch(Exception e) {
 			this.logger.error(e.getMessage(), e);
@@ -683,42 +779,43 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	@Override
-	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException {
+	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws
+			UserForComparisonNotExistException {
 		UserInfo user1 = null;
 		UserInfo user2 = null;
-		    double cooperationRatio, categoryCongruency;
-		    int amountAbusesUser1, amountAbusesUser2;
+		double cooperationRatio, categoryCongruency;
+		int amountAbusesUser1, amountAbusesUser2;
 		try {
-	        user1 = this.getUserInfo(userName1);
-	        user2 = this.getUserInfo(userName2);
-	        int user1TotalArt = user1.getEditedCategories().size();
-	        int user2TotalArt = user2.getEditedCategories().size();
-	        int sameArt = 0;
-	        String congruentArticle = "";
-	        if(user1TotalArt<user2TotalArt) {
-	        	for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
-	        		for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
-	        			if(articleUser2.getArticle().equals(articleUser1)) {
-	        				sameArt++;
-	        				congruentArticle += "";
-	        			}
-	        		}
-	        	}
-	        } else {
-	        	for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
-	        		for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
-	        			if(articleUser1.getArticle().equals(articleUser2)) {
-	        				sameArt++;
-	        				congruentArticle += "";
-	        			}
-	        		}
-	        	}
-	        }
-        } catch(UserNotExistException e) {
-	        e.printStackTrace();
-        }
-		
-		return new UserComparisonInfo(user1, user2, 0,0,0,0);
+			user1 = this.getUserInfo(userName1);
+			user2 = this.getUserInfo(userName2);
+			int user1TotalArt = user1.getEditedCategories().size();
+			int user2TotalArt = user2.getEditedCategories().size();
+			int sameArt = 0;
+			String congruentArticle = "";
+			if(user1TotalArt < user2TotalArt) {
+				for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
+					for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
+						if(articleUser2.getArticle().equals(articleUser1)) {
+							sameArt++;
+							congruentArticle += "";
+						}
+					}
+				}
+			} else {
+				for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
+					for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
+						if(articleUser1.getArticle().equals(articleUser2)) {
+							sameArt++;
+							congruentArticle += "";
+						}
+					}
+				}
+			}
+		} catch(UserNotExistException e) {
+			e.printStackTrace();
+		}
+
+		return new UserComparisonInfo(user1, user2, 0, 0, 0, 0);
 	}
 
 	@Override

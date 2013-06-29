@@ -13,46 +13,121 @@ public class UserInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
-	private String userName, restrictions, categoryCommits;
-	private double reputation;
+	private String userName, categoryCommits, userclassNumOfCommits, userclassAvgCommits, userclassReverts,
+			userclassCleaness;
+	private double reputation, commitsPerDay;
 
+	private String userclassUserDiscussion;
+	private String userclassSelfDiscussion;
 
 	private int userID;
 	private int totalCommits;
-	private String commitsPerDay;
 	private Date signInDate;
 
 	private List<ArticleEdited> editedCategories;
 
+	private boolean blocked;
+
 	public UserInfo() {}
 
+	@Override
+	public String toString() {
+		return "UserInfo{" +
+			   "userName='" + userName + '\'' +
+			   ", userclassNumOfCommits='" + userclassNumOfCommits + '\'' +
+			   ", userclassAvgCommits='" + userclassAvgCommits + '\'' +
+			   ", userclassReverts='" + userclassReverts + '\'' +
+			   ", userclassCleaness='" + userclassCleaness + '\'' +
+			   ", reputation=" + reputation +
+			   ", commitsPerDay=" + commitsPerDay +
+			   ", userclassUserDiscussion='" + userclassUserDiscussion + '\'' +
+			   ", userclassSelfDiscussion='" + userclassSelfDiscussion + '\'' +
+			   ", userID=" + userID +
+			   ", totalCommits=" + totalCommits +
+			   ", signInDate=" + signInDate +
+			   ", blocked=" + blocked +
+			   '}';
+	}
 
-	public UserInfo(int userID, String username, String restrictions, int totalCommits, String categoryCommits,
+	public UserInfo(int userID, String username, int totalCommits, String categoryCommits, double commitsPerDay,
 					Date signInDate, double reputation,
-	        List<ArticleEdited> editedCategories) {
+	        List<ArticleEdited> editedCategories, boolean blocked, String userclassNumOfCommits,
+			String userclassAvgCommits, String userclassReverts, String userclassCleaness,
+			String userclassUserDiscussion, String userclassSelfDiscussion) {
 		this.userID = userID;
 		this.userName = username;
-		this.restrictions = restrictions;
 		this.totalCommits = totalCommits;
 		this.categoryCommits = categoryCommits;
 		this.signInDate = signInDate;
 		this.reputation = reputation;
 		this.editedCategories = editedCategories;
-		this.commitsPerDay = this.getCommitsPerDay(this.totalCommits, this.signInDate);
+		this.commitsPerDay = commitsPerDay;
+		this.blocked = blocked;
+		this.userclassNumOfCommits = userclassNumOfCommits;
+		this.userclassAvgCommits = userclassAvgCommits;
+		this.userclassReverts = userclassReverts;
+		this.userclassCleaness = userclassCleaness;
+		this.userclassUserDiscussion = userclassUserDiscussion;
+		this.userclassSelfDiscussion = userclassSelfDiscussion;
 	}
 
-	private String getCommitsPerDay(int commits, Date signInDate) {
-		long diffInMills;
-		if(signInDate != null) {
-			diffInMills = System.currentTimeMillis()-signInDate.getTime();
-			return ((commits/(diffInMills / (24 * 60 * 60 * 1000)))+"");
-		} else if(commits!=0) {
-			return "n.V.";
-		}
-		return "";
+	public String getUserclassUserDiscussion() {
+		return userclassUserDiscussion;
 	}
-	
-    public double getReputation() {
+
+	public void setUserclassUserDiscussion(String userclassUserDiscussion) {
+		this.userclassUserDiscussion = userclassUserDiscussion;
+	}
+
+	public String getUserclassSelfDiscussion() {
+		return userclassSelfDiscussion;
+	}
+
+	public void setUserclassSelfDiscussion(String userclassSelfDiscussion) {
+		this.userclassSelfDiscussion = userclassSelfDiscussion;
+	}
+
+	public String getUserclassAvgCommits() {
+		return userclassAvgCommits;
+	}
+
+	public void setUserclassAvgCommits(String userclassAvgCommits) {
+		this.userclassAvgCommits = userclassAvgCommits;
+	}
+
+	public String getUserclassReverts() {
+		return userclassReverts;
+	}
+
+	public void setUserclassReverts(String userclassReverts) {
+		this.userclassReverts = userclassReverts;
+	}
+
+	public String getUserclassCleaness() {
+		return userclassCleaness;
+	}
+
+	public void setUserclassCleaness(String userclassCleaness) {
+		this.userclassCleaness = userclassCleaness;
+	}
+
+	public String getUserclassNumOfCommits() {
+		return userclassNumOfCommits;
+	}
+
+	public void setUserclassNumOfCommits(String userclassNumOfCommits) {
+		this.userclassNumOfCommits = userclassNumOfCommits;
+	}
+
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
+	public double getReputation() {
     	return reputation;
     }
 
@@ -68,11 +143,11 @@ public class UserInfo implements Serializable {
     	this.totalCommits = totalCommits;
     }
 	
-    public String getCommitsPerDay() {
+    public double getCommitsPerDay() {
     	return commitsPerDay;
     }
 	
-    public void setCommitsPerDay(String commitsPerDay) {
+    public void setCommitsPerDay(double commitsPerDay) {
     	this.commitsPerDay = commitsPerDay;
     }
 
@@ -90,14 +165,6 @@ public class UserInfo implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getRestrictions() {
-		return restrictions;
-	}
-
-	public void setRestrictions(String restrictions) {
-		this.restrictions = restrictions;
 	}
 
 	public int getCommits() {

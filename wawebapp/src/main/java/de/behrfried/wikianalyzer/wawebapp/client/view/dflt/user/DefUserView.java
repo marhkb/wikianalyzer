@@ -77,7 +77,10 @@ public class DefUserView extends UserView {
 	private HLayout searchLayout, usrInfoAnalyzationLayout;
 	private VLayout siteLayoutContainer, genUsrInfLayout, usrAnaLayout;
 	private Button searchButton;
-	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categorysInfoRecord, restrictionInfoRecord;
+	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord,
+	categorysInfoRecord, restrictionInfoRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
+			userclassRevertRecord, userclassCommentsPerCommitRecord, userclassUserDiscussionRecord,
+			userclassSelfDiscussionRecord;
 
 	/**
 	 * Creates an instance of {@link DefUserView}. All arguments are injected by
@@ -129,7 +132,22 @@ public class DefUserView extends UserView {
 		this.categorysInfoRecord = new ListGridRecord();
 		this.categorysInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "An Kategorien mit gewirkt:");
 		this.restrictionInfoRecord = new ListGridRecord();
-		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Sperren:");
+		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Gesperrt:");
+		this.userclassCommitsRecord = new ListGridRecord();
+		this.userclassCommitsRecord.setAttribute(this.usrAttributeColumn.getName(), "Einordnung (Commits ingesamt):");
+		this.userclassCommitsPerDayRecord = new ListGridRecord();
+		this.userclassCommitsPerDayRecord.setAttribute(this.usrAttributeColumn.getName(), "Einordnung (Commits/Tag):");
+		this.userclassRevertRecord = new ListGridRecord();
+		this.userclassRevertRecord.setAttribute(this.usrAttributeColumn.getName(), "Einordnung (Reverts/Commits):");
+		this.userclassCommentsPerCommitRecord = new ListGridRecord();
+		this.userclassCommentsPerCommitRecord.setAttribute(this.usrAttributeColumn.getName(),
+														   "Einordnung (Kommentare/Commits):");
+		this.userclassUserDiscussionRecord = new ListGridRecord();
+		this.userclassUserDiscussionRecord.setAttribute(this.usrAttributeColumn.getName(),
+														"Diskussionen über andere Nutzer:");
+		this.userclassSelfDiscussionRecord = new ListGridRecord();
+		this.userclassSelfDiscussionRecord.setAttribute(this.usrAttributeColumn.getName(),
+														"Diskussionen über sich selbst:");
 
 		this.userInfoGrid.setShowRecordComponents(true);
 		this.userInfoGrid.setShowRecordComponentsByCell(true);
@@ -143,6 +161,12 @@ public class DefUserView extends UserView {
 		this.userInfoGrid.addData(this.categorysInfoRecord);
 		this.userInfoGrid.addData(this.reputationInfoRecord);
 		this.userInfoGrid.addData(this.restrictionInfoRecord);
+		this.userInfoGrid.addData(this.userclassCommitsRecord);
+		this.userInfoGrid.addData(this.userclassCommitsPerDayRecord);
+		this.userInfoGrid.addData(this.userclassRevertRecord);
+		this.userInfoGrid.addData(this.userclassCommentsPerCommitRecord);
+		this.userInfoGrid.addData(this.userclassUserDiscussionRecord);
+		this.userInfoGrid.addData(this.userclassSelfDiscussionRecord);
 
 		this.genUsrInfLabel = new Label("Allgemeine User Infos");
 		this.genUsrInfLabel.setHeight(10);
@@ -181,6 +205,12 @@ public class DefUserView extends UserView {
 		this.bindReputationInfoRecord();
 		this.bindRestrictionInfoRecord();
 		this.bindSignUpInfoRecord();
+		this.bindUserclassCommitsRecord();
+		this.bindUserclassCommitsPerDayRecord();
+		this.bindUserclassRevertsRecord();
+		this.bindUserclassCommentsPerCommitRecord();
+		this.bindUserclassUserDiscussionRecord();
+		this.bindUserclassSelfDiscussionRecord();
 
 		/*
 		 * final DataContainer<Boolean> textItemNameToServerSelfChanged = new
@@ -357,8 +387,80 @@ public class DefUserView extends UserView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				restrictionInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getRestrictions());
+				restrictionInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().isBlocked());
 				userInfoGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindUserclassCommitsRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				userclassCommitsRecord.setAttribute(
+						usrValueColumn.getName(),
+						presenter.getUserInfo().getUserclassNumOfCommits()
+				);
+			}
+		});
+	}
+
+	private void bindUserclassCommitsPerDayRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				userclassCommitsPerDayRecord.setAttribute(
+						usrValueColumn.getName(),
+						presenter.getUserInfo().getUserclassAvgCommits()
+				);
+			}
+		});
+	}
+
+	private void bindUserclassRevertsRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				userclassRevertRecord.setAttribute(
+						usrValueColumn.getName(),
+						presenter.getUserInfo().getUserclassReverts()
+				);
+			}
+		});
+	}
+
+	private void bindUserclassCommentsPerCommitRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				userclassCommentsPerCommitRecord.setAttribute(
+						usrValueColumn.getName(),
+						presenter.getUserInfo().getUserclassCleaness()
+				);
+			}
+		});
+	}
+
+	private void bindUserclassUserDiscussionRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				userclassUserDiscussionRecord.setAttribute(
+						usrValueColumn.getName(),
+						presenter.getUserInfo().getUserclassUserDiscussion()
+				);
+			}
+		});
+	}
+
+	private void bindUserclassSelfDiscussionRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				userclassSelfDiscussionRecord.setAttribute(
+						usrValueColumn.getName(),
+						presenter.getUserInfo().getUserclassSelfDiscussion()
+				);
 			}
 		});
 	}

@@ -17,7 +17,9 @@
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.junit.*;
 
 public class JsonAccessTest {
@@ -53,6 +55,12 @@ public class JsonAccessTest {
 		expected = 105066;
 		actual = this.wikiAccess.getPageId("Ratte");
 		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testGetUserInfo() throws UserNotExistException {
+		final UserInfo ui = wikiAccess.getUserInfo("APPER");
+		System.out.println(ui);
 	}
 
 }
