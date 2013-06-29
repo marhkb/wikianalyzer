@@ -694,7 +694,7 @@ public class JsonWikiAccess implements WikiAccess {
 				userclassNumOfCommits = "Master";
 			}
 
-			String userclassAvgCommits = "kann nicht bewertet werden";
+			String userclassAvgCommits = "\"nicht bewertbar\"";
 			double avgCommits = 0;
 			if(signInDate != null) {
 				avgCommits = totalUserCommits / ((System.currentTimeMillis() - signInDate.getTime()) / 86400000);
@@ -711,27 +711,34 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 			}
 
-			final double revertCommitRelation = (double)numOfReverts / totalUserCommits;
-			String userclassRevert = "Spielverderber";
-			if(revertCommitRelation < 0.01) {
-				userclassRevert = "Ein-Auge-Zudrücker";
-			} else if(revertCommitRelation < 0.1) {
-				userclassRevert = "Gelegenheitsspießer";
-			} else if(revertCommitRelation < 0.2) {
-				userclassRevert = "Sturrkopf";
-			} else if(revertCommitRelation < 0.5) {
-				userclassRevert = "Kontrolleur";
+			String userclassRevert = "\"nicht bewertbar\"";
+			String userclassComment = "\"nicht bewertbar\"";
+
+			if(totalUserCommits > 0) {
+				final double revertCommitRelation = (double)numOfReverts / totalUserCommits;
+				userclassRevert = "Spielverderber";
+				if(revertCommitRelation < 0.01) {
+					userclassRevert = "Ein-Auge-Zudrücker";
+				} else if(revertCommitRelation < 0.1) {
+					userclassRevert = "Gelegenheitsspießer";
+				} else if(revertCommitRelation < 0.2) {
+					userclassRevert = "Sturrkopf";
+				} else if(revertCommitRelation < 0.5) {
+					userclassRevert = "Kontrolleur";
+				}
+
+				final double commentCommitRelation = (double)numOfComments / totalUserCommits;
+				userclassComment = "Saubermann";
+				if(commentCommitRelation < 0.1) {
+					userclassComment = "Dokuhasser";
+				} else if(commentCommitRelation < 0.5) {
+					userclassComment = "Ab und zu vergesslich";
+				} else if(commentCommitRelation < 0.8) {
+					userclassComment = "Ordnungshüter";
+				}
 			}
 
-			final double commentCommitRelation = (double)numOfComments / totalUserCommits;
-			String userclassComment = "Saubermann";
-			if(commentCommitRelation < 0.1) {
-				userclassComment = "Dokuhasser";
-			} else if(commentCommitRelation < 0.5) {
-				userclassComment = "Ab und zu vergesslich";
-			} else if(commentCommitRelation < 0.8) {
-				userclassComment = "Ordnungshüter";
-			}
+
 
 			String userDiscussion = "Sehr oft";
 			if(numOfUserDiscussion == 0) {
