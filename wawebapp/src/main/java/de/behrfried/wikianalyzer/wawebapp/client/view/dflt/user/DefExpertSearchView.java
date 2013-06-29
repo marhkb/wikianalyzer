@@ -1,7 +1,6 @@
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
 import com.google.inject.Inject;
-import com.smartgwt.client.data.DataSource;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.Button;
@@ -9,15 +8,17 @@ import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.FilterBuilder;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.RadioGroupItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
-import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.ExpertSearchView;
 
@@ -43,7 +44,6 @@ public class DefExpertSearchView extends ExpertSearchView {
 	 * Creates an instance of {@link DefUserComparisonView}. All arguments are
 	 * injected by Gin
 	 * 
-	 * @param parentView
 	 * @throws IllegalArgumentException
 	 */
 	@Inject
@@ -60,7 +60,7 @@ public class DefExpertSearchView extends ExpertSearchView {
 		this.bind();
 	}
 
-	public void addNewSearchCriteriaRow() {
+	private void addNewSearchCriteriaRow() {
 		final ComboBoxItem searchBox;
 		final DynamicForm searchBoxContainer, searchCategoryContainer;
 		final Button deleteRowButton;
@@ -103,6 +103,48 @@ public class DefExpertSearchView extends ExpertSearchView {
 			});
 		}
 		this.expertSearchContainer.addMember(this.addRowButton);
+		this.bindCriterionField(searchBox, i++);
+	}
+
+	private int i = 0;
+
+	private void bindCriterionField(final ComboBoxItem searchBox, final int i) {
+		searchBox.setValue(this.presenter.getTitleOrCategories().get(i).getTitle());
+		searchBox.addChangedHandler(new ChangedHandler() {
+			public void onChanged(final ChangedEvent event) {
+				presenter.getTitleOrCategories().get(i).setName(searchBox.getValueAsString());
+			}
+		});
+		this.presenter.titleOrCategoriesChanged().addHandler(
+				new Handler<CriterionChangedEventArgs>() {
+
+					public void invoke(final Object sender, final CriterionChangedEventArgs e) {
+						if(!searchBox.equals(presenter.getTitleOrCategories().get(i).getTitle())) {
+							searchBox.setValue(presenter.getTitleOrCategories().get(i).getTitle());
+						}
+					}
+				}
+		);
+
+		searchBox.addKeyUpHandler(new KeyUpHandler() {
+
+			public void onKeyUp(final KeyUpEvent event) {
+				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
+					if(presenter.getSendCommand().canExecute(null)) {
+						presenter.getSendCommand().execute(null);
+					}
+				}
+			}
+		});
+
+//		searchBox.setValueMap(this.presenter.getArticleSuggestions());
+//		this.presenter.articleSuggestionsChanged().addHandler(new Handler<EventArgs>() {
+//
+//			public void invoke(final Object sender, final EventArgs e) {
+//				DefArticleView.searchBox.setValueMap(DefArticleView.this.presenter.getArticleSuggestions());
+//				searchBox.showPicker();
+//			}
+//		});
 	}
 
 	public void init() {
@@ -149,6 +191,7 @@ public class DefExpertSearchView extends ExpertSearchView {
 		addRowButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(final ClickEvent event) {
+				presenter.getAddCriterionCommand().execute(null);
 				addNewSearchCriteriaRow();
 			}
 		});
