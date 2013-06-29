@@ -24,6 +24,7 @@ public class UserInfo implements Serializable {
 	private int totalCommits;
 	private Date signInDate;
 
+	private Map<String, Integer> commitsPerCategory;
 	private List<ArticleEdited> editedCategories;
 
 	private boolean blocked;
@@ -53,7 +54,7 @@ public class UserInfo implements Serializable {
 					Date signInDate, double reputation,
 	        List<ArticleEdited> editedCategories, boolean blocked, String userclassNumOfCommits,
 			String userclassAvgCommits, String userclassReverts, String userclassCleaness,
-			String userclassUserDiscussion, String userclassSelfDiscussion) {
+			String userclassUserDiscussion, String userclassSelfDiscussion, Map<String, Integer> commitsPerCategory) {
 		this.userID = userID;
 		this.userName = username;
 		this.totalCommits = totalCommits;
@@ -69,6 +70,7 @@ public class UserInfo implements Serializable {
 		this.userclassCleaness = userclassCleaness;
 		this.userclassUserDiscussion = userclassUserDiscussion;
 		this.userclassSelfDiscussion = userclassSelfDiscussion;
+		this.commitsPerCategory = commitsPerCategory;
 	}
 
 	public String getUserclassUserDiscussion() {
@@ -167,14 +169,6 @@ public class UserInfo implements Serializable {
 		this.userName = userName;
 	}
 
-	public int getCommits() {
-		return totalCommits;
-	}
-
-	public void setCommits(int commits) {
-		this.totalCommits = commits;
-	}
-
 	public String getCategoryCommits() {
 		return categoryCommits;
 	}
@@ -211,28 +205,17 @@ public class UserInfo implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		String article, category;
-		Map<String, Integer> categoryCommits;
 		double sizediff;
 		int numOfCommits;
 
 		public ArticleEdited() {}
 
-		public ArticleEdited(String article, int commits, int sizediff, String category, Map<String, Integer> categoryCommits) {
+		public ArticleEdited(String article, int commits, int sizediff, String category) {
 			this.article = article;
 			this.numOfCommits = commits;
 			this.sizediff = sizediff;
-			this.categoryCommits = categoryCommits;
 			this.category = category;
 		}
-				
-        public Map<String, Integer> getCategoryCommits() {
-        	return categoryCommits;
-        }
-
-		
-        public void setCategoryCommits(Map<String, Integer> categoryCommits) {
-        	this.categoryCommits = categoryCommits;
-        }
 
 		public String getArticle() {
 			return article;
@@ -265,8 +248,6 @@ public class UserInfo implements Serializable {
 		public void setSizediff(double sizediff) {
 			this.sizediff = sizediff;
 		}
-		
-		
 
 		public static long getSerialversionuid() {
 			return serialVersionUID;

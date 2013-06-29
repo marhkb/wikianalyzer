@@ -28,9 +28,9 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 	private HTMLPanel userComparisonChart;
 	private HTMLFlow user1Link, user2Link;
 	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categoryAmountInfoRecord,
-	        categoryCoincidentRecord, restrictionInfoRecord, cooperationPossibilityRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
+	        categoryCooperationRecord, restrictionInfoRecord, articleCooperationRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
 			userclassRevertRecord, userclassCommentsPerCommitRecord, userclassUserDiscussionRecord,
-			userclassSelfDiscussionRecord, similarityRecord;
+			userclassSelfDiscussionRecord, similarityRecord, similarArticlesRecord, similarCategoryRecord;
 	private final ListGrid userComparisonGrid = new ListGrid() {
 
 		@Override
@@ -116,14 +116,16 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 														"Diskussionen über sich selbst:");
 		this.categoryAmountInfoRecord = new ListGridRecord();
 		this.categoryAmountInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "An Kategorien mit gewirkt:");
-		this.categoryCoincidentRecord = new ListGridRecord();
-		this.categoryCoincidentRecord.setAttribute(this.userComparisonAttribute.getName(), "Deckungsgleichheit d. Kategorien:");
-		this.restrictionInfoRecord = new ListGridRecord();
-		this.restrictionInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Strafen:");
-		this.cooperationPossibilityRecord = new ListGridRecord();
-		this.cooperationPossibilityRecord.setAttribute(this.userComparisonAttribute.getName(), "Kooperationsfähigkeit (bzgl. Kategorien):");
+		this.categoryCooperationRecord = new ListGridRecord();
+		this.categoryCooperationRecord.setAttribute(this.userComparisonAttribute.getName(), "Kooperationsfähigkeit (bzgl. Kategorie):");
+		this.articleCooperationRecord = new ListGridRecord();
+		this.articleCooperationRecord.setAttribute(this.userComparisonAttribute.getName(), "Kooperationsfähigkeit (bzgl. Artikel):");
 		this.similarityRecord = new ListGridRecord();
 		this.similarityRecord.setAttribute(this.userComparisonAttribute.getName(), "Ähnlichkeit:");
+		this.similarArticlesRecord = new ListGridRecord();
+		this.similarArticlesRecord.setAttribute(this.userComparisonAttribute.getName(), "Selbe Artikel:");
+		this.similarCategoryRecord = new ListGridRecord();
+		this.similarCategoryRecord.setAttribute(this.userComparisonAttribute.getName(), "Selbe Kategorien:");
 		
 		this.userComparisonGrid.setShowRecordComponents(true);
 		this.userComparisonGrid.setShowRecordComponentsByCell(true);
@@ -137,6 +139,10 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonGrid.addData(this.commitsInfoRecord);
 		this.userComparisonGrid.addData(this.reputationInfoRecord);
 		this.userComparisonGrid.addData(this.categoryAmountInfoRecord);
+		this.userComparisonGrid.addData(this.similarCategoryRecord);
+		this.userComparisonGrid.addData(this.categoryCooperationRecord);
+		this.userComparisonGrid.addData(this.similarArticlesRecord);
+		this.userComparisonGrid.addData(this.articleCooperationRecord);
 		this.userComparisonGrid.addData(this.restrictionInfoRecord);
 		this.userComparisonGrid.addData(this.userclassCommitsRecord);
 		this.userComparisonGrid.addData(this.userclassCommitsPerDayRecord);
@@ -144,7 +150,6 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonGrid.addData(this.userclassCommentsPerCommitRecord);
 		this.userComparisonGrid.addData(this.userclassUserDiscussionRecord);
 		this.userComparisonGrid.addData(this.userclassSelfDiscussionRecord);
-		this.userComparisonGrid.addData(this.cooperationPossibilityRecord);
 		this.userComparisonGrid.addData(this.similarityRecord);
 		this.userComparisonGridContainer = new VLayout();
 		this.userComparisonGridContainer.setWidth("50%");
@@ -175,13 +180,16 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.bindReputationInfoRecord();
 		this.bindCategoryAmountInfoRecord();
 		this.bindRestrictionInfoRecord();
-		//this.bindCooperationPossibility();
+		this.bindArticleCooperationRecord();
 		this.bindUserclassCommitsRecord();
 		this.bindUserclassSelfDiscussionRecord();
 		this.bindUserclassCommitsPerDayRecord();
 		this.bindUserclassRevertRecord();
 		this.bindUserclassCommentsPerCommitRecord();
 		this.bindUserclassUserDiscussionRecord();
+		this.bindCategoryCoincidentRecord();
+		this.bindSimilarCategoryRecord();
+		this.bindSimilarArticlesRecord();
 		//this.bindSimilarityRecordRecord();
 	}
 	
@@ -240,8 +248,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				commitsInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo1().getCommitsPerDay()+")");
-				commitsInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo2().getCommitsPerDay()+")");
+				commitsInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getTotalCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo1().getCommitsPerDay()+")");
+				commitsInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getTotalCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo2().getCommitsPerDay()+")");
 				userComparisonGrid.refreshFields();
 			}
 		});
@@ -252,8 +260,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				reputationInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
-				reputationInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				reputationInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getReputation());
+				reputationInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getReputation());
 				userComparisonGrid.refreshFields();
 			}
 		});
@@ -264,8 +272,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				categoryAmountInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
-				categoryAmountInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				categoryAmountInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getCategoryCommits());
+				categoryAmountInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getCategoryCommits());
 				userComparisonGrid.refreshFields();
 			}
 		});
@@ -276,20 +284,20 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				restrictionInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
-				restrictionInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				restrictionInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().isBlocked());
+				restrictionInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().isBlocked());
 				userComparisonGrid.refreshFields();
 			}
 		});
 	}
 	
-	private void bindCooperationPossibility() {
+	private void bindArticleCooperationRecord() {
 		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				cooperationPossibilityRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
-				cooperationPossibilityRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				articleCooperationRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getArticleCooperationRatio());
+				articleCooperationRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getArticleCooperationRatio());
 				userComparisonGrid.refreshFields();
 			}
 		});
@@ -374,6 +382,42 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			public void invoke(Object sender, EventArgs e) {
 				similarityRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassSelfDiscussion());
 				similarityRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassSelfDiscussion());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindCategoryCoincidentRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				categoryCooperationRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getCategoryCooperationRatio());
+				categoryCooperationRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getCategoryCooperationRatio());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindSimilarArticlesRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				similarArticlesRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getCongruentArticles());
+				similarArticlesRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getCongruentArticles());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindSimilarCategoryRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				similarCategoryRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getCongruentCategories());
+				similarCategoryRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getCongruentCategories());
 				userComparisonGrid.refreshFields();
 			}
 		});

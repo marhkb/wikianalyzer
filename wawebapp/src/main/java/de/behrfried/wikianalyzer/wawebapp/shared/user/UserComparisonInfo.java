@@ -8,7 +8,7 @@ public class UserComparisonInfo implements Serializable {
      * 
      */
 	private static final long serialVersionUID = 1L;
-	private double cooperationRatio, categoryCongruency, similarityRatio;
+	private double articleCooperationRatio, categoryCooperationRation, similarityRatio;
 	private int amountAbusesUser1, amountAbusesUser2;
 	private String congruentArticles, congruentCategories;
 	private UserInfo userInfo1, userInfo2;
@@ -24,12 +24,12 @@ public class UserComparisonInfo implements Serializable {
 
 	public UserComparisonInfo() {}
 
-	public UserComparisonInfo(UserInfo userInfo1, UserInfo userInfo2, double cooperationRatio, double categoryCongruency, int amountAbusesUser1,
-	        int amountAbusesUser2, String congruentArticles, String congruentCategories, double similarityRatio) {
+	public UserComparisonInfo(UserInfo userInfo1, UserInfo userInfo2, double articleCooperationRatio, double categoryCooperationRatio, int amountAbusesUser1,
+	        int amountAbusesUser2, String congruentArticles, String congruentCategories) {
 		this.userInfo1 = userInfo1;
 		this.userInfo2 = userInfo2;
-		this.cooperationRatio = cooperationRatio;
-		this.categoryCongruency = categoryCongruency;
+		this.articleCooperationRatio = articleCooperationRatio;
+		this.categoryCooperationRation = categoryCooperationRatio;
 		this.amountAbusesUser1 = amountAbusesUser1;
 		this.amountAbusesUser2 = amountAbusesUser2;
 		this.congruentArticles = congruentArticles;
@@ -41,20 +41,20 @@ public class UserComparisonInfo implements Serializable {
 		return serialVersionUID;
 	}
 
-	public double getCooperationRatio() {
-		return cooperationRatio;
+	public double getArticleCooperationRatio() {
+		return articleCooperationRatio;
 	}
 
 	public void setCooperationRatio(double cooperationRatio) {
-		this.cooperationRatio = cooperationRatio;
+		this.articleCooperationRatio = cooperationRatio;
 	}
 
-	public double getCategoryCongruency() {
-		return categoryCongruency;
+	public double getCategoryCooperationRatio() {
+		return categoryCooperationRation;
 	}
 
-	public void setCategoryCongruency(double categoryCongruency) {
-		this.categoryCongruency = categoryCongruency;
+	public void setCategoryCooperationRatioy(double categoryCongruency) {
+		this.categoryCooperationRation = categoryCongruency;
 	}
 
 	public double getSimilarityRatio() {
