@@ -504,8 +504,6 @@ public class JsonWikiAccess implements WikiAccess {
 
 			final boolean blocked = user.has("blockid");
 
-			totalUserCommits = user.getAsJsonPrimitive("editcount").getAsInt();
-
 			String tmpDate = "";
 			Map<Tuple2<Integer, String>, Tuple2<Integer, Integer>> comparableRevisions =
 					new HashMap<Tuple2<Integer, String>, Tuple2<Integer, Integer>>();
@@ -515,7 +513,7 @@ public class JsonWikiAccess implements WikiAccess {
 			int numOfReverts = 0;
 			int numOfUserDiscussion = 0;
 			int numofSelfDiscussion = 0;
-			int numOfCatCommits = 0;
+			
 			do {
 				final String userArticles = this.requester.getResult(
 						this.convertRequest(
@@ -526,7 +524,7 @@ public class JsonWikiAccess implements WikiAccess {
 				final JsonObject articles = this.parser.parse(userArticles).getAsJsonObject();
 
 				final JsonArray articlesArticle = articles.getAsJsonObject("query").getAsJsonArray("usercontribs");
-
+				totalUserCommits += articlesArticle.size();
 				if(tmpDate.isEmpty() && articlesArticle.size() > 0) {
 					// get the date of the first user contrib
 					signInDate = this.formatter.parse(
