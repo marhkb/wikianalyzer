@@ -16,21 +16,23 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.dflt.user;
 
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
-import com.smartgwt.client.widgets.grid.ListGrid;
-import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpEvent;
+import com.smartgwt.client.widgets.form.fields.events.KeyUpHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.menu.IMenuButton;
-import com.smartgwt.client.widgets.menu.Menu;
-import com.smartgwt.client.widgets.menu.MenuItem;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
 
 /**
@@ -40,30 +42,28 @@ import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
  * 
  */
 public class DefUserComparisonView extends UserComparisonView {
-	private Label waLabel, genUsrInfLabel, usrAnaLabel, userOneLabel, userTwoLabel;
+
+	private Label waLabel, userOneLabel, userTwoLabel;
 	private ComboBoxItem searchBox1, searchBox2;
+
 	private DynamicForm searchBoxOneContainer, searchBoxTwoContainer;
-	private ListGrid userComparisonGrid;
-	private ListGridField comparisonAttribute, userOneValue, userTwoValue;
-	private HTMLPanel userOneChart, userTwoChart;
-	private HLayout searchLayout, usrInfoAnalyzationLayout, searchInfoLayout;
-	private VLayout siteLayoutContainer, genUsrInfLayout, usrAnaLayout;
+
+	private HLayout searchLayout;
+	private VLayout siteLayoutContainer;
 	private Button searchButton;
-	private IMenuButton timeMenuButton;
-	private Menu timeSpanMenu;
-	private MenuItem randomSpan, hourSpan, daySpan, weekSpan, monthSpan, yearSpan, chooseSpan;
 	private DefUserComparisonAnaView userComparisonAnaView;
 	/**
 	 * parent view of this {@link DefUserComparisonView}
 	 */
-	private final Presenter presenter;/**
+	private final Presenter presenter;
+	/**
 	 * {@link DefUserView}'s parent element
 	 */
 	private final Messages messages;
 
 	/**
-	 * Creates an instance of {@link DefUserComparisonView}. All arguments
-	 * are injected by Gin
+	 * Creates an instance of {@link DefUserComparisonView}. All arguments are
+	 * injected by Gin
 	 * 
 	 * @param parentView
 	 * @throws IllegalArgumentException
@@ -79,13 +79,14 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.presenter = presenter;
 		this.messages = messages;
 		this.init();
+		this.bind();
 	}
-	
+
 	private void init() {
 		this.waLabel = new Label("WIKIAnalyzer");
 		this.waLabel.setHeight100();
 		this.waLabel.setMargin(10);
-		
+
 		this.userOneLabel = new Label("Nutzer 1:");
 		this.userOneLabel.setWidth(100);
 		this.userOneLabel.setAlign(Alignment.RIGHT);
@@ -104,43 +105,127 @@ public class DefUserComparisonView extends UserComparisonView {
 		this.searchBoxTwoContainer = new DynamicForm();
 		this.searchBoxTwoContainer.setBackgroundColor("white");
 		this.searchBoxTwoContainer.setItems(this.searchBox2);
-		
+
 		this.searchButton = new Button(this.messages.searchButton());
 		this.searchLayout = new HLayout();
 		this.searchLayout.setMembersMargin(3);
 		this.searchLayout.setHeight(30);
 
-		this.searchLayout.addMembers(this.waLabel, this.userOneLabel, this.searchBoxOneContainer, this.userTwoLabel, this.searchBoxTwoContainer, this.searchButton);
+		this.searchLayout.addMembers(this.waLabel, this.userOneLabel, this.searchBoxOneContainer, this.userTwoLabel, this.searchBoxTwoContainer,
+		        this.searchButton);
 		this.searchLayout.setMembersMargin(10);
 
-//		this.timeSpanMenu = new Menu();
-//		this.randomSpan = new MenuItem("random time");
-//		this.randomSpan.setChecked(true);
-//		this.timeSpanMenu.addItem(this.randomSpan);
-//		this.hourSpan = new MenuItem("last hour");
-//		this.timeSpanMenu.addItem(this.hourSpan);
-//		this.daySpan = new MenuItem("last day");
-//		this.timeSpanMenu.addItem(this.daySpan);
-//		this.weekSpan = new MenuItem("last week");
-//		this.timeSpanMenu.addItem(this.weekSpan);
-//		this.monthSpan = new MenuItem("last month");
-//		this.timeSpanMenu.addItem(this.monthSpan);
-//		this.yearSpan = new MenuItem("last year");
-//		this.timeSpanMenu.addItem(this.yearSpan);
-//		this.chooseSpan = new MenuItem("choose timespan");
-//		this.timeSpanMenu.addItem(this.chooseSpan);
-//		this.timeMenuButton = new IMenuButton(this.randomSpan.getTitle(), this.timeSpanMenu);		
-		
 		this.siteLayoutContainer = new VLayout();
 		this.userComparisonAnaView = new DefUserComparisonAnaView(this.presenter, this.messages);
 		this.userComparisonAnaView.setAlign(Alignment.CENTER);
 		this.userComparisonAnaView.setWidth("80%");
 		this.siteLayoutContainer.addMember(this.searchLayout);
-		//this.siteLayoutContainer.addMember(this.timeMenuButton);
 		this.siteLayoutContainer.addMember(this.userComparisonAnaView);
 		this.siteLayoutContainer.setWidth100();
 		this.siteLayoutContainer.setHeight100();
 		this.addChild(this.siteLayoutContainer);
+	}
+	
+	private void bind() {
+		this.bindSearchButton();
+		this.bindSearchBox1();
+		this.bindSearchBox2();
+	}
+
+	private void bindSearchBox1() {
+		this.searchBox1.setValue(this.presenter.getUserName1());
+		this.searchBox1.addChangedHandler(new ChangedHandler() {
+
+			public void onChanged(final ChangedEvent event) {
+				presenter.setUserName1(searchBox1.getValueAsString());
+			}
+		});
+		this.presenter.userName1Changed().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				if(!DefUserComparisonView.this.searchBox1.equals(DefUserComparisonView.this.presenter.getUserName1())) {
+					searchBox1.setValue(presenter.getUserName1());
+				}
+			}
+		});
+		this.searchBox1.addKeyUpHandler(new KeyUpHandler() {
+
+			public void onKeyUp(final KeyUpEvent event) {
+				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
+					if(DefUserComparisonView.this.presenter.getSendCommand().canExecute(null)) {
+						DefUserComparisonView.this.presenter.getSendCommand().execute(false);
+					}
+				}
+			}
+		});
+
+		this.searchBox1.setValueMap(this.presenter.getUser1Suggestions());
+		this.presenter.user1SuggestionsChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				DefUserComparisonView.this.searchBox1.setValueMap(DefUserComparisonView.this.presenter.getUser1Suggestions());
+				DefUserComparisonView.this.searchBox1.showPicker();
+
+			}
+		});
+	}
+	
+
+	
+	private void bindSearchBox2() {
+		this.searchBox2.setValue(this.presenter.getUserName2());
+		this.searchBox2.addChangedHandler(new ChangedHandler() {
+
+			public void onChanged(final ChangedEvent event) {
+				presenter.setUserName2(searchBox2.getValueAsString());
+			}
+		});
+		this.presenter.userName2Changed().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				if(!DefUserComparisonView.this.searchBox2.equals(DefUserComparisonView.this.presenter.getUserName2())) {
+					searchBox2.setValue(presenter.getUserName2());
+				}
+			}
+		});
+		this.searchBox2.addKeyUpHandler(new KeyUpHandler() {
+
+			public void onKeyUp(final KeyUpEvent event) {
+				if(event.getKeyName() != null && event.getKeyName().equals("Enter")) {
+					if(DefUserComparisonView.this.presenter.getSendCommand().canExecute(null)) {
+						DefUserComparisonView.this.presenter.getSendCommand().execute(false);
+					}
+				}
+			}
+		});
+
+		this.searchBox2.setValueMap(this.presenter.getUser2Suggestions());
+		this.presenter.user2SuggestionsChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				DefUserComparisonView.this.searchBox2.setValueMap(DefUserComparisonView.this.presenter.getUser2Suggestions());
+				DefUserComparisonView.this.searchBox2.showPicker();
+
+			}
+		});
+	}
+
+	private void bindSearchButton() {
+		this.searchButton.
+		setDisabled(!this.presenter.
+				getSendCommand().canExecute(null));
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+
+			public void invoke(final Object sender, final EventArgs e) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+			}
+		});
+		this.searchButton.addClickHandler(new ClickHandler() {
+
+			public void onClick(final ClickEvent event) {
+				presenter.getSendCommand().execute(null);
+			}
+		});
 	}
 
 	@Override

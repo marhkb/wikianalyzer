@@ -16,8 +16,14 @@
 
 package de.behrfried.wikianalyzer.wawebapp.client.view.user;
 
+import java.util.LinkedHashMap;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.PresenterBase;
+import de.behrfried.wikianalyzer.wawebapp.client.util.command.Command;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Event;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.view.View;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 public abstract class UserComparisonView extends View {
 
@@ -29,5 +35,80 @@ public abstract class UserComparisonView extends View {
 	 */
 	public interface Presenter extends PresenterBase {
 
+		UserComparisonInfo getUserComparisonInfo();
+
+		Event<EventArgs> userComparisonInfoChanged();
+
+
+		/**
+		 * contains the search suggestions for articles
+		 * @return
+		 */
+		LinkedHashMap<String, String> getUser1Suggestions();
+		
+		/**
+		 * contains the search suggestions for articles
+		 * @return
+		 */
+		LinkedHashMap<String, String> getUser2Suggestions();
+
+		/**
+		 * is to be fired when suggestion has changed
+		 * @return
+		 */
+		Event<EventArgs> user1SuggestionsChanged();
+
+		/**
+		 * is to be fired when suggestion has changed
+		 * @return
+		 */
+		Event<EventArgs> user2SuggestionsChanged();
+
+		/**
+		 * returns the current article to be searched
+		 * @return
+		 */
+		String getUserName1();
+		
+		/**
+		 * returns the current article to be searched
+		 * @return
+		 */
+		String getUserName2();
+
+		/**
+		 * sets the current article to be searched
+		 * @param title
+		 */
+		void setUserName1(String userName);
+		
+		/**
+		 * sets the current article to be searched
+		 * @param title
+		 */
+		void setUserName2(String userName);
+
+		/**
+		 * gets fired when article title has changed
+		 * @return
+		 */
+		Event<EventArgs> userName1Changed();
+		/**
+		 * gets fired when article title has changed
+		 * @return
+		 */
+		Event<EventArgs> userName2Changed();
+
+		/**
+		 * returns the search command
+		 */
+		Command getSendCommand();
+
+		/**
+		 *
+		 */
+		boolean getSearchStatus();
+
+		Event<EventArgs> searchStatusChanged();
 	}
 }

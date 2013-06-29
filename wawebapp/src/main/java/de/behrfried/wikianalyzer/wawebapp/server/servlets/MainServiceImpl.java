@@ -65,8 +65,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements MainService
     }
 
 	@Override
-    public UserComparisonInfo sendUserForComparison(final String userName) throws UserForComparisonNotExistException {
-	    return this.wikiAccess.getUserComparisonInfo(userName);
+    public UserComparisonInfo sendUserForComparison(final String userName1, final String userName2) throws UserForComparisonNotExistException {
+	    return this.wikiAccess.getUserComparisonInfo(userName1, userName2);
     }
 
 	@Override

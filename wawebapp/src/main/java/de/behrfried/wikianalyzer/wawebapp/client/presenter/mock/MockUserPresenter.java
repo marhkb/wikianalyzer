@@ -99,9 +99,7 @@ public class MockUserPresenter implements UserView.Presenter {
 		this.userInfoChanged().fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 	}
 
-	public void setSearchStatus(boolean searched) {
-		this.searched = searched;
-	}
+	
 
 	@Override
 	public boolean getSearchStatus() {
@@ -123,6 +121,10 @@ public class MockUserPresenter implements UserView.Presenter {
 		return this.suggestionsChanged;
 	}
 
+	public void setSearchStatus(boolean searched) {
+		this.searched = searched;
+	}
+	
 	private void fireSuggestionsChanged() {
 		this.suggestionsChanged.fire(INIT_CONTEXT, this, EventArgs.EMPTY);
 	}

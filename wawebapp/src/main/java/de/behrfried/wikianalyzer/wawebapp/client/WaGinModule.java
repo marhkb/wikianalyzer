@@ -23,6 +23,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPrese
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
@@ -55,7 +56,7 @@ public class WaGinModule extends AbstractGinModule {
 		this.bind(ShellView.Presenter.class).to(DefaultShellViewPresenter.class).in(Singleton.class);
 		this.bind(ArticleView.Presenter.class).to(MockArticlePresenter.class).in(Singleton.class);
 		this.bind(UserView.Presenter.class).to(MockUserPresenter.class).in(Singleton.class);
-		this.bind(UserComparisonView.Presenter.class).to(DefaultUserComparisonPresenter.class).in(Singleton.class);
+		this.bind(UserComparisonView.Presenter.class).to(MockUserComparisonPresenter.class).in(Singleton.class);
 		this.bind(ExpertSearchView.Presenter.class).to(DefaultExpertSearchPresenter.class).in(Singleton.class);
 
 		/*

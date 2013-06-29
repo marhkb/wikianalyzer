@@ -38,6 +38,6 @@ public interface MainService extends RemoteService {
 
 	ArticleInfo sendArticleName(String articleName) throws ArticleNotExistException;
 	UserInfo sendUserName(String userName) throws UserNotExistException;
-	UserComparisonInfo sendUserForComparison(String userName) throws UserForComparisonNotExistException;
+	UserComparisonInfo sendUserForComparison(String userName1, String userName2) throws UserForComparisonNotExistException;
 	CriterionInfo sendCriterionInfo() throws CriterionNotFoundException;
 }
