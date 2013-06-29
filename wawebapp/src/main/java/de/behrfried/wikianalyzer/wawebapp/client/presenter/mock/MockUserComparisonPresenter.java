@@ -1,6 +1,5 @@
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
-import java.util.LinkedHashMap;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -13,6 +12,8 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
+
+import java.util.LinkedHashMap;
 
 public class MockUserComparisonPresenter implements UserComparisonView.Presenter {
 
@@ -212,7 +213,7 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 
 	@Override
 	public Event<EventArgs> user2SuggestionsChanged() {
-		return this.user1SuggestionsChanged;
+		return this.user2SuggestionsChanged;
 	}
 	
 	public void setUserComparisonInfo(UserComparisonInfo userComparisonInfo) {
