@@ -585,9 +585,6 @@ public class JsonWikiAccess implements WikiAccess {
 					.entrySet()) {
 
 				final String categories = this.getCategories(entry.getKey().getItem1());
-				
-				
-
 				categoryEdited.add(
 						new ArticleEdited(
 								entry.getKey().getItem2(),
