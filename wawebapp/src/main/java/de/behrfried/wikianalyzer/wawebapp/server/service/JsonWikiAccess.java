@@ -515,6 +515,7 @@ public class JsonWikiAccess implements WikiAccess {
 			int numOfReverts = 0;
 			int numOfUserDiscussion = 0;
 			int numofSelfDiscussion = 0;
+			int numOfCatCommits = 0;
 			do {
 				final String userArticles = this.requester.getResult(
 						this.convertRequest(
@@ -584,20 +585,26 @@ public class JsonWikiAccess implements WikiAccess {
 					.entrySet()) {
 
 				final String categories = this.getCategories(entry.getKey().getItem1());
+				
+				
 
 				categoryEdited.add(
 						new ArticleEdited(
 								entry.getKey().getItem2(),
 								entry.getValue().getItem1(),
 								entry.getValue().getItem2(),
-								categories,
-								commitsPerCategory
+								categories
 						)
 				);
 
 				final String[] catArr = categories.split(";");
 				for(final String cat : catArr) {
 					categorySet.add(cat.trim());
+					if(!commitsPerCategory.containsKey(cat.trim())) {
+						commitsPerCategory.put(cat.trim(), entry.getValue().getItem1());
+					} else {
+						commitsPerCategory.put(cat.trim(), commitsPerCategory.get(cat.trim())+entry.getValue().getItem1());
+					}
 				}
 			}
 
@@ -777,7 +784,8 @@ public class JsonWikiAccess implements WikiAccess {
 					userclassRevert,
 					userclassComment,
 					userDiscussion,
-					selfDiscussion
+					selfDiscussion,
+					commitsPerCategory
 			);
 		} catch(Exception e) {
 			this.logger.error(e.getMessage(), e);
@@ -797,8 +805,13 @@ public class JsonWikiAccess implements WikiAccess {
 			user2 = this.getUserInfo(userName2);
 			int user1TotalArt = user1.getEditedCategories().size();
 			int user1SimArtCommits = 0;
+			int user1TotalCat = 0;
+			int user1SimCatCommits = 0;
 			int user2TotalArt = user2.getEditedCategories().size();
 			int user2SimArtCommits = 0;
+			int user2TotalCat = 0;
+			int user2SimCatCommits = 0;
+			int sameCat = 0;
 			int sameArt = 0;
 			final StringBuilder articlesStrBuilder = new StringBuilder();
 			if(user1TotalArt < user2TotalArt) {

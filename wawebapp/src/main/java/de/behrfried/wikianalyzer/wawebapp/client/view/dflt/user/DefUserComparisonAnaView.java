@@ -272,8 +272,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				categoryAmountInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
-				categoryAmountInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				categoryAmountInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getCategoryCommits());
+				categoryAmountInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getCategoryCommits());
 				userComparisonGrid.refreshFields();
 			}
 		});
