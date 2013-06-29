@@ -28,7 +28,9 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 	private HTMLPanel userComparisonChart;
 	private HTMLFlow user1Link, user2Link;
 	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categoryAmountInfoRecord,
-	        categoryCoincidentRecord, restrictionInfoRecord, commitSizeInfoRecord, cooperationPossibility;
+	        categoryCoincidentRecord, restrictionInfoRecord, cooperationPossibilityRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
+			userclassRevertRecord, userclassCommentsPerCommitRecord, userclassUserDiscussionRecord,
+			userclassSelfDiscussionRecord, similarityRecord;
 	private final ListGrid userComparisonGrid = new ListGrid() {
 
 		@Override
@@ -93,18 +95,35 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.signUpInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Mitglied seit:");
 		this.commitsInfoRecord = new ListGridRecord();
 		this.commitsInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commits (pro Tag):");
-		this.commitSizeInfoRecord = new ListGridRecord();
-		this.commitSizeInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commitgröße (in Bytes):");
 		this.reputationInfoRecord = new ListGridRecord();
 		this.reputationInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Reputation:");
+		this.restrictionInfoRecord = new ListGridRecord();
+		this.restrictionInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Gesperrt:");
+		this.userclassCommitsRecord = new ListGridRecord();
+		this.userclassCommitsRecord.setAttribute(this.userComparisonAttribute.getName(), "Einordnung (Commits ingesamt):");
+		this.userclassCommitsPerDayRecord = new ListGridRecord();
+		this.userclassCommitsPerDayRecord.setAttribute(this.userComparisonAttribute.getName(), "Einordnung (Commits/Tag):");
+		this.userclassRevertRecord = new ListGridRecord();
+		this.userclassRevertRecord.setAttribute(this.userComparisonAttribute.getName(), "Einordnung (Reverts/Commits):");
+		this.userclassCommentsPerCommitRecord = new ListGridRecord();
+		this.userclassCommentsPerCommitRecord.setAttribute(this.userComparisonAttribute.getName(),
+														   "Einordnung (Kommentare/Commits):");
+		this.userclassUserDiscussionRecord = new ListGridRecord();
+		this.userclassUserDiscussionRecord.setAttribute(this.userComparisonAttribute.getName(),
+														"Diskussionen über andere Nutzer:");
+		this.userclassSelfDiscussionRecord = new ListGridRecord();
+		this.userclassSelfDiscussionRecord.setAttribute(this.userComparisonAttribute.getName(),
+														"Diskussionen über sich selbst:");
 		this.categoryAmountInfoRecord = new ListGridRecord();
-		this.categoryAmountInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Kategorien:");
+		this.categoryAmountInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "An Kategorien mit gewirkt:");
 		this.categoryCoincidentRecord = new ListGridRecord();
 		this.categoryCoincidentRecord.setAttribute(this.userComparisonAttribute.getName(), "Deckungsgleichheit d. Kategorien:");
 		this.restrictionInfoRecord = new ListGridRecord();
 		this.restrictionInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Strafen:");
-		this.cooperationPossibility = new ListGridRecord();
-		this.cooperationPossibility.setAttribute(this.userComparisonAttribute.getName(), "Kooperationsfähigkeit:");
+		this.cooperationPossibilityRecord = new ListGridRecord();
+		this.cooperationPossibilityRecord.setAttribute(this.userComparisonAttribute.getName(), "Kooperationsfähigkeit (bzgl. Kategorien):");
+		this.similarityRecord = new ListGridRecord();
+		this.similarityRecord.setAttribute(this.userComparisonAttribute.getName(), "Ähnlichkeit:");
 		
 		this.userComparisonGrid.setShowRecordComponents(true);
 		this.userComparisonGrid.setShowRecordComponentsByCell(true);
@@ -116,12 +135,17 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonGrid.addData(this.userLinkInfoRecord);
 		this.userComparisonGrid.addData(this.signUpInfoRecord);
 		this.userComparisonGrid.addData(this.commitsInfoRecord);
-		this.userComparisonGrid.addData(this.commitSizeInfoRecord);
 		this.userComparisonGrid.addData(this.reputationInfoRecord);
 		this.userComparisonGrid.addData(this.categoryAmountInfoRecord);
-		this.userComparisonGrid.addData(this.categoryCoincidentRecord);
 		this.userComparisonGrid.addData(this.restrictionInfoRecord);
-		this.userComparisonGrid.addData(this.cooperationPossibility);
+		this.userComparisonGrid.addData(this.userclassCommitsRecord);
+		this.userComparisonGrid.addData(this.userclassCommitsPerDayRecord);
+		this.userComparisonGrid.addData(this.userclassRevertRecord);
+		this.userComparisonGrid.addData(this.userclassCommentsPerCommitRecord);
+		this.userComparisonGrid.addData(this.userclassUserDiscussionRecord);
+		this.userComparisonGrid.addData(this.userclassSelfDiscussionRecord);
+		this.userComparisonGrid.addData(this.cooperationPossibilityRecord);
+		this.userComparisonGrid.addData(this.similarityRecord);
 		this.userComparisonGridContainer = new VLayout();
 		this.userComparisonGridContainer.setWidth("50%");
 		this.userComparisonGridContainer.setHeight100();
@@ -148,6 +172,17 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.bindUserLinksRecord();
 		this.bindSignUpInfosRecord();
 		this.bindUsersCommitsRecord();
+		this.bindReputationInfoRecord();
+		this.bindCategoryAmountInfoRecord();
+		this.bindRestrictionInfoRecord();
+		//this.bindCooperationPossibility();
+		this.bindUserclassCommitsRecord();
+		this.bindUserclassSelfDiscussionRecord();
+		this.bindUserclassCommitsPerDayRecord();
+		this.bindUserclassRevertRecord();
+		this.bindUserclassCommentsPerCommitRecord();
+		this.bindUserclassUserDiscussionRecord();
+		//this.bindSimilarityRecordRecord();
 	}
 	
 	private void createUserComparisonChart() {
@@ -207,6 +242,138 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			public void invoke(Object sender, EventArgs e) {
 				commitsInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo1().getCommitsPerDay()+")");
 				commitsInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo2().getCommitsPerDay()+")");
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindReputationInfoRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				reputationInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
+				reputationInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindCategoryAmountInfoRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				categoryAmountInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
+				categoryAmountInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindRestrictionInfoRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				restrictionInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
+				restrictionInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindCooperationPossibility() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				cooperationPossibilityRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
+				cooperationPossibilityRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUserclassCommitsRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userclassCommitsRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassNumOfCommits());
+				userclassCommitsRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassNumOfCommits());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUserclassCommitsPerDayRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userclassCommitsPerDayRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassAvgCommits());
+				userclassCommitsPerDayRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassAvgCommits());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUserclassRevertRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userclassRevertRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassReverts());
+				userclassRevertRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassReverts());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUserclassCommentsPerCommitRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userclassCommentsPerCommitRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassCleaness());
+				userclassCommentsPerCommitRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassCleaness());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUserclassUserDiscussionRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userclassUserDiscussionRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassUserDiscussion());
+				userclassUserDiscussionRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassUserDiscussion());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUserclassSelfDiscussionRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				userclassSelfDiscussionRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassSelfDiscussion());
+				userclassSelfDiscussionRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassSelfDiscussion());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindSimilarityRecordRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				similarityRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getUserclassSelfDiscussion());
+				similarityRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getUserclassSelfDiscussion());
 				userComparisonGrid.refreshFields();
 			}
 		});
