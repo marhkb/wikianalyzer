@@ -80,7 +80,7 @@ public class DefUserView extends UserView {
 	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord,
 	categorysInfoRecord, restrictionInfoRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
 			userclassRevertRecord, userclassCommentsPerCommitRecord, userclassUserDiscussionRecord,
-			userclassSelfDiscussionRecord;
+			userclassSelfDiscussionRecord, abusesRecord;
 
 	/**
 	 * Creates an instance of {@link DefUserView}. All arguments are injected by
@@ -133,6 +133,8 @@ public class DefUserView extends UserView {
 		this.categorysInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "An Kategorien mit gewirkt:");
 		this.restrictionInfoRecord = new ListGridRecord();
 		this.restrictionInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Gesperrt:");
+		this.abusesRecord = new ListGridRecord();
+		this.abusesRecord.setAttribute(this.usrAttributeColumn.getName(), "Vergehen:");
 		this.userclassCommitsRecord = new ListGridRecord();
 		this.userclassCommitsRecord.setAttribute(this.usrAttributeColumn.getName(), "Einordnung (Commits ingesamt):");
 		this.userclassCommitsPerDayRecord = new ListGridRecord();
@@ -160,6 +162,7 @@ public class DefUserView extends UserView {
 		this.userInfoGrid.addData(this.commitsInfoRecord);
 		this.userInfoGrid.addData(this.categorysInfoRecord);
 		this.userInfoGrid.addData(this.reputationInfoRecord);
+		this.userInfoGrid.addData(this.abusesRecord);
 		this.userInfoGrid.addData(this.restrictionInfoRecord);
 		this.userInfoGrid.addData(this.userclassCommitsRecord);
 		this.userInfoGrid.addData(this.userclassCommitsPerDayRecord);
@@ -211,6 +214,8 @@ public class DefUserView extends UserView {
 		this.bindUserclassCommentsPerCommitRecord();
 		this.bindUserclassUserDiscussionRecord();
 		this.bindUserclassSelfDiscussionRecord();
+
+		this.bindAbusesRecord();
 	}
 
 	private void bindSearchBox() {
@@ -341,6 +346,7 @@ public class DefUserView extends UserView {
 						usrValueColumn.getName(),
 						presenter.getUserInfo().getUserclassNumOfCommits()
 				);
+				userInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -353,6 +359,7 @@ public class DefUserView extends UserView {
 						usrValueColumn.getName(),
 						presenter.getUserInfo().getUserclassAvgCommits()
 				);
+				userInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -365,6 +372,7 @@ public class DefUserView extends UserView {
 						usrValueColumn.getName(),
 						presenter.getUserInfo().getUserclassReverts()
 				);
+				userInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -377,6 +385,7 @@ public class DefUserView extends UserView {
 						usrValueColumn.getName(),
 						presenter.getUserInfo().getUserclassCleaness()
 				);
+				userInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -389,6 +398,7 @@ public class DefUserView extends UserView {
 						usrValueColumn.getName(),
 						presenter.getUserInfo().getUserclassUserDiscussion()
 				);
+				userInfoGrid.refreshFields();
 			}
 		});
 	}
@@ -401,10 +411,20 @@ public class DefUserView extends UserView {
 						usrValueColumn.getName(),
 						presenter.getUserInfo().getUserclassSelfDiscussion()
 				);
+				userInfoGrid.refreshFields();
 			}
 		});
 	}
+	private void bindAbusesRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
 
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				abusesRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getAbusesDescription());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
 	// TODO
 	// private void bindGeneralInfoGrid() {
 	// final Map<Tuple2<String, String>, Record> recordsO = new

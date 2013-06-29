@@ -52,7 +52,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			return null;
 		}
 	};
-	private ListGridField userComparisonAttribute, userOneValue, userTwoValue;
+	private ListGridField userComparisonAttribute, userOneValue, userTwoValue, congruarityValue;
 	/**
 	 * parent view of this {@link DefUserComparisonView}
 	 */
@@ -89,6 +89,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonAttribute = new ListGridField("copmAttr", "Vergleichskriterium");
 		this.userOneValue = new ListGridField("userOneV", "Wert Nutzer 1");
 		this.userTwoValue = new ListGridField("userTwoV", "Wert Nutzer 2");
+		this.congruarityValue = new ListGridField("congu","Übereinstimmung");
 		this.userLinkInfoRecord = new ListGridRecord();
 		this.userLinkInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Nutzername:");
 		this.signUpInfoRecord = new ListGridRecord();
@@ -123,7 +124,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.articleCooperationRecord = new ListGridRecord();
 		this.articleCooperationRecord.setAttribute(this.userComparisonAttribute.getName(), "Kooperationsfähigkeit (bzgl. Artikel):");
 		this.similarityRecord = new ListGridRecord();
-		this.similarityRecord.setAttribute(this.userComparisonAttribute.getName(), "Ähnlichkeit:");
+		this.similarityRecord.setAttribute(this.userComparisonAttribute.getName(), "Ähnlichkeit gesamt:");
 		this.similarArticlesRecord = new ListGridRecord();
 		this.similarArticlesRecord.setAttribute(this.userComparisonAttribute.getName(), "Selbe Artikel:");
 		this.similarCategoryRecord = new ListGridRecord();
@@ -135,7 +136,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonGrid.setCanResizeFields(false);
 		this.userComparisonGrid.setShowHeaderMenuButton(false);
 		
-		this.userComparisonGrid.setFields(this.userComparisonAttribute, this.userOneValue, this.userTwoValue);
+		this.userComparisonGrid.setFields(this.userComparisonAttribute, this.userOneValue, this.userTwoValue, this.congruarityValue);
 		this.userComparisonGrid.addData(this.userLinkInfoRecord);
 		this.userComparisonGrid.addData(this.signUpInfoRecord);
 		this.userComparisonGrid.addData(this.commitsInfoRecord);
