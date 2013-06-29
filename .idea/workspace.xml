@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonAnaView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonAnaView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserComparisonPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserComparisonPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserComparisonInfo.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserComparisonInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,7 +75,7 @@
     <file path="/MockUserPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372334600246" ignored="false" />
     <file path="/DefUserView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372426496358" ignored="false" />
     <file path="/DefUserAnaView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372423619818" ignored="false" />
-    <file path="/UserInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372495310741" ignored="false" />
+    <file path="/UserInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372503617886" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +136,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="663" column="31" selection-start="22442" selection-end="22442" vertical-scroll-proportion="0.34893617">
+            <state line="650" column="0" selection-start="22059" selection-end="22059" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#23561#0" expanded="true" />
+                <element signature="e#0#24904#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#2248#2256#0" expanded="true" />
                 <element signature="method#getArticleInfo#0;class#JsonWikiAccess#0" expanded="false" />
@@ -152,8 +158,9 @@
                 <element signature="e#15833#15855#0" expanded="true" />
                 <element signature="e#16574#16598#0" expanded="true" />
                 <element signature="e#18282#18333#0" expanded="true" />
-                <element signature="e#18396#18420#0" expanded="true" />
-                <element signature="e#19845#19853#0" expanded="true" />
+                <element signature="e#18399#18416#0" expanded="true" />
+                <element signature="e#18479#18503#0" expanded="true" />
+                <element signature="e#19928#19936#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,16 +189,16 @@
       <file leaf-file-name="DefUserComparisonView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="162" column="43" selection-start="5919" selection-end="5919" vertical-scroll-proportion="0.0">
+            <state line="160" column="0" selection-start="5812" selection-end="5812" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserInfo.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="UserInfo.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0">
+            <state line="61" column="4" selection-start="1564" selection-end="1564" vertical-scroll-proportion="-2.2765958">
               <folding />
             </state>
           </provider>
@@ -248,8 +255,8 @@
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserComparisonPresenter.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java" />
       </list>
     </option>
   </component>
@@ -1357,7 +1364,6 @@
         <state line="230" column="0" selection-start="8268" selection-end="8268" vertical-scroll-proportion="0.8017884">
           <folding>
             <element signature="e#1088#1099#0" expanded="true" />
-            <element signature="e#1175#1186#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1371,7 +1377,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="43" selection-start="5919" selection-end="5919" vertical-scroll-proportion="0.0">
+        <state line="160" column="0" selection-start="5812" selection-end="5812" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1383,18 +1389,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="663" column="31" selection-start="22442" selection-end="22442" vertical-scroll-proportion="0.34893617">
+        <state line="650" column="0" selection-start="22059" selection-end="22059" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#23561#0" expanded="true" />
+            <element signature="e#0#24904#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#2248#2256#0" expanded="true" />
             <element signature="method#getArticleInfo#0;class#JsonWikiAccess#0" expanded="false" />
@@ -1411,9 +1410,17 @@
             <element signature="e#15833#15855#0" expanded="true" />
             <element signature="e#16574#16598#0" expanded="true" />
             <element signature="e#18282#18333#0" expanded="true" />
-            <element signature="e#18396#18420#0" expanded="true" />
-            <element signature="e#19845#19853#0" expanded="true" />
+            <element signature="e#18399#18416#0" expanded="true" />
+            <element signature="e#18479#18503#0" expanded="true" />
+            <element signature="e#19928#19936#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/UserInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="4" selection-start="1564" selection-end="1564" vertical-scroll-proportion="-2.2765958">
+          <folding />
         </state>
       </provider>
     </entry>

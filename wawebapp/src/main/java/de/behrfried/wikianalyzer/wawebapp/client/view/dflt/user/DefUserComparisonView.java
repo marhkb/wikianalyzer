@@ -170,8 +170,6 @@ public class DefUserComparisonView extends UserComparisonView {
 		});
 	}
 	
-
-	
 	private void bindSearchBox2() {
 		this.searchBox2.setValue(this.presenter.getUserName2());
 		this.searchBox2.addChangedHandler(new ChangedHandler() {

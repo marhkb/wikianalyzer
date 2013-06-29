@@ -123,7 +123,7 @@ public class DefUserView extends UserView {
 		this.signUpInfoRecord = new ListGridRecord();
 		this.signUpInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Mitglied seit:");
 		this.commitsInfoRecord = new ListGridRecord();
-		this.commitsInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Commits:");
+		this.commitsInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Commits (pro Tag):");
 		this.reputationInfoRecord = new ListGridRecord();
 		this.reputationInfoRecord.setAttribute(this.usrAttributeColumn.getName(), "Reputation:");
 		this.categorysInfoRecord = new ListGridRecord();
@@ -303,7 +303,6 @@ public class DefUserView extends UserView {
 			public void invoke(Object sender, EventArgs e) {
 				userLink.setContents("<a href='http://de.wikipedia.org/wiki/Benutzer:" + presenter.getUserInfo().getUserName()
 				        + "' target='_blank'>" + presenter.getUserInfo().getUserName() + "</a>");
-				userLink.setTitle("Wurst");
 				userInfoGrid.refreshFields();
 			}
 		});
@@ -325,7 +324,7 @@ public class DefUserView extends UserView {
 
 			@Override
 			public void invoke(Object sender, EventArgs e) {
-				commitsInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getCommits());
+				commitsInfoRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().getCommits()+" ("+presenter.getUserInfo().getCommitsPerDay()+")");
 				userInfoGrid.refreshFields();
 			}
 		});

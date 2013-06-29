@@ -20,8 +20,7 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 	private final static Object INIT_CONTEXT = new Object();
 	private final Event<EventArgs> userName1Changed = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> userName2Changed = new Event<EventArgs>(INIT_CONTEXT);
-	private final Event<EventArgs> user1Changed = new Event<EventArgs>(INIT_CONTEXT);
-	private final Event<EventArgs> user2Changed = new Event<EventArgs>(INIT_CONTEXT);
+	private final Event<EventArgs> userComparisonInfoChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> user1SuggestionsChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> user2SuggestionsChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> searchStatusChanged = new Event<EventArgs>(INIT_CONTEXT);
@@ -163,7 +162,7 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 
 	@Override
 	public Event<EventArgs> userComparisonInfoChanged() {
-		return this.userComparisonInfoChanged();
+		return this.userComparisonInfoChanged;
 	}
 
 	@Override
@@ -235,7 +234,7 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 	
 	private final void clearSuggestions() {
 		this.user1Suggestions.clear();
-		//this.user2Suggestions.clear();
+		this.user2Suggestions.clear();
 	}
 
 	private final void addToUser1Suggestions(final String name) {
