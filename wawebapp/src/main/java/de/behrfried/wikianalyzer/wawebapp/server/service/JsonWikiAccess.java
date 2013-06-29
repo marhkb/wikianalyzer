@@ -740,7 +740,6 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 
 
-
 			String userDiscussion = "Sehr oft";
 			if(numOfUserDiscussion == 0) {
 				userDiscussion = "Nie";
@@ -848,6 +847,17 @@ public class JsonWikiAccess implements WikiAccess {
 	@Override
 	public CriterionInfo getCriterionInfo(List<TitleOrCategory> titlesOrCategories) throws
 			CriterionNotFoundException {
+		for(final TitleOrCategory toc : titlesOrCategories) {
+			if(toc.isCategory()) {
+				do {
+					String resp = this.requester.getResult(this.convertRequest(
+							"action=query&format=json&list=categorymembers&cmtitle=Kategorie" + toc.getName()
+					));
+				} while(true);
+			} else {
+
+			}
+		}
 		return null;
 	}
 
