@@ -15,6 +15,8 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import de.behrfried.wikianalyzer.wawebapp.client.Messages;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
+import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonAnaView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserComparisonView.Presenter;
 
@@ -24,7 +26,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 	private HLayout userComparisonAnaContainer;
 	private VLayout userComparisonChartContainer, userComparisonGridContainer;
 	private HTMLPanel userComparisonChart;
-	private HTMLFlow userOneLink, userTwoLink;
+	private HTMLFlow user1Link, user2Link;
 	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categoryAmountInfoRecord,
 	        categoryCoincidentRecord, restrictionInfoRecord, commitSizeInfoRecord, cooperationPossibility;
 	private final ListGrid userComparisonGrid = new ListGrid() {
@@ -34,15 +36,15 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			final String tmpString = record.getAttribute("attributes");
 			if(this.getFieldName(colNum).equals("Wert Nutzer 1")) {
 				if(tmpString.equals("Nutzername:")) {
-					DefUserComparisonAnaView.this.userOneLink = new HTMLFlow();
+					DefUserComparisonAnaView.this.user1Link = new HTMLFlow();
 					// DefUserComparisonAnaView.this.bindUserLinkRecord();
-					return DefUserComparisonAnaView.this.userOneLink;
+					return DefUserComparisonAnaView.this.user1Link;
 				}
 			} else if(this.getFieldName(colNum).equals("Wert Nutzer 2")) {
 				if(tmpString.equals("Nutzername:")) {
-					DefUserComparisonAnaView.this.userTwoLink = new HTMLFlow();
+					DefUserComparisonAnaView.this.user2Link = new HTMLFlow();
 					// DefUserComparisonAnaView.this.bindUserLinkRecord();
-					return DefUserComparisonAnaView.this.userTwoLink;
+					return DefUserComparisonAnaView.this.user2Link;
 				}
 			}
 			return null;
@@ -76,6 +78,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.presenter = presenter;
 		this.messages = messages;
 		this.init();
+		this.bind();
 	}
 
 	private void init() {
@@ -89,9 +92,9 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.signUpInfoRecord = new ListGridRecord();
 		this.signUpInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Mitglied seit:");
 		this.commitsInfoRecord = new ListGridRecord();
-		this.commitsInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commits:");
+		this.commitsInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commits (pro Tag):");
 		this.commitSizeInfoRecord = new ListGridRecord();
-		this.commitSizeInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commitgröße (Bytes):");
+		this.commitSizeInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commitgröße (in Bytes):");
 		this.reputationInfoRecord = new ListGridRecord();
 		this.reputationInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Reputation:");
 		this.categoryAmountInfoRecord = new ListGridRecord();
@@ -141,6 +144,12 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.addChild(this.userComparisonAnaContainer);
 	}
 
+	private void bind() {
+		this.bindUserLinksRecord();
+		this.bindSignUpInfosRecord();
+		this.bindUsersCommitsRecord();
+	}
+	
 	private void createUserComparisonChart() {
 		Runnable r = new Runnable() {
 
@@ -164,5 +173,42 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			}
 		};
 		VisualizationUtils.loadVisualizationApi(r, ColumnChart.PACKAGE);
+	}
+	
+	private void bindUserLinksRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				user1Link.setContents("<a href='http://de.wikipedia.org/wiki/Benutzer:" + presenter.getUserComparisonInfo().getUserInfo1().getUserName()
+				        + "' target='_blank'>" + presenter.getUserComparisonInfo().getUserInfo1().getUserName() + "</a>");
+				user2Link.setContents("<a href='http://de.wikipedia.org/wiki/Benutzer:" + presenter.getUserComparisonInfo().getUserInfo2().getUserName()
+				        + "' target='_blank'>" + presenter.getUserComparisonInfo().getUserInfo2().getUserName() + "</a>");
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+
+	private void bindSignUpInfosRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				signUpInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getSignInDate());
+				signUpInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getSignInDate());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindUsersCommitsRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				commitsInfoRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo1().getCommitsPerDay()+")");
+				commitsInfoRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getCommits()+" ("+presenter.getUserComparisonInfo().getUserInfo2().getCommitsPerDay()+")");
+				userComparisonGrid.refreshFields();
+			}
+		});
 	}
 }

@@ -529,6 +529,7 @@ public class JsonWikiAccess implements WikiAccess {
 			String tmpDate = "";
 			Map<Tuple2<Integer, String>, Tuple2<Integer, Integer>> comparableRevisions =
 					new HashMap<Tuple2<Integer, String>, Tuple2<Integer, Integer>>();
+			final Map<String, Integer> commitsPerCategory = new HashMap<String, Integer>();
 			final List<ArticleEdited> articleEditeds = new ArrayList<UserInfo.ArticleEdited>();
 			do {
 				final String userArticles = this.requester.getResult(
@@ -577,7 +578,8 @@ public class JsonWikiAccess implements WikiAccess {
 								entry.getKey().getItem2(),
 								entry.getValue().getItem1(),
 								entry.getValue().getItem2(),
-								categories
+								categories, 
+								commitsPerCategory
 						)
 				);
 
@@ -618,8 +620,41 @@ public class JsonWikiAccess implements WikiAccess {
 
 	@Override
 	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException {
-		// TODO Auto-generated method stub
-		return null;
+		UserInfo user1 = null;
+		UserInfo user2 = null;
+		    double cooperationRatio, categoryCongruency;
+		    int amountAbusesUser1, amountAbusesUser2;
+		try {
+	        user1 = this.getUserInfo(userName1);
+	        user2 = this.getUserInfo(userName2);
+	        int user1TotalArt = user1.getEditedCategories().size();
+	        int user2TotalArt = user2.getEditedCategories().size();
+	        int sameArt = 0;
+	        String congruentArticle = "";
+	        if(user1TotalArt<user2TotalArt) {
+	        	for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
+	        		for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
+	        			if(articleUser2.getArticle().equals(articleUser1)) {
+	        				sameArt++;
+	        				congruentArticle += "";
+	        			}
+	        		}
+	        	}
+	        } else {
+	        	for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
+	        		for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
+	        			if(articleUser1.getArticle().equals(articleUser2)) {
+	        				sameArt++;
+	        				congruentArticle += "";
+	        			}
+	        		}
+	        	}
+	        }
+        } catch(UserNotExistException e) {
+	        e.printStackTrace();
+        }
+		
+		return new UserComparisonInfo(user1, user2, 0,0,0,0);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package de.behrfried.wikianalyzer.wawebapp.shared.user;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class UserInfo implements Serializable {
 
@@ -10,19 +11,20 @@ public class UserInfo implements Serializable {
      * 
      */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int userID;
-	
+
 	private String userName, restrictions, categoryCommits, reputation;
 	private int totalCommits;
-
+	private String commitsPerDay;
 	private Date signInDate;
-	
+
 	private List<ArticleEdited> editedCategories;
 
 	public UserInfo() {}
 
-	public UserInfo(int userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation, List<ArticleEdited> editedCategories) {
+	public UserInfo(int userID, String username, String restrictions, int totalCommits, String categoryCommits, Date signInDate, String reputation,
+	        List<ArticleEdited> editedCategories) {
 		this.userID = userID;
 		this.userName = username;
 		this.restrictions = restrictions;
@@ -31,16 +33,43 @@ public class UserInfo implements Serializable {
 		this.signInDate = signInDate;
 		this.reputation = reputation;
 		this.editedCategories = editedCategories;
+		this.commitsPerDay = this.getCommitsPerDay(this.totalCommits, this.signInDate);
+	}
+
+	private String getCommitsPerDay(int commits, Date signInDate) {
+		long diffInMills;
+		if(signInDate != null) {
+			diffInMills = System.currentTimeMillis()-signInDate.getTime();
+			return ((commits/(diffInMills / (24 * 60 * 60 * 1000)))+"");
+		} else if(commits!=0) {
+			return "n.V.";
+		}
+		return "";
 	}
 	
-    public String getReputation() {
-    	return reputation;
+    public int getTotalCommits() {
+    	return totalCommits;
+    }
+	
+    public void setTotalCommits(int totalCommits) {
+    	this.totalCommits = totalCommits;
+    }
+	
+    public String getCommitsPerDay() {
+    	return commitsPerDay;
+    }
+	
+    public void setCommitsPerDay(String commitsPerDay) {
+    	this.commitsPerDay = commitsPerDay;
     }
 
-	
-    public void setReputation(String reputation) {
-    	this.reputation = reputation;
-    }
+	public String getReputation() {
+		return reputation;
+	}
+
+	public void setReputation(String reputation) {
+		this.reputation = reputation;
+	}
 
 	public int getUserID() {
 		return userID;
@@ -81,7 +110,7 @@ public class UserInfo implements Serializable {
 	public void setCategoryCommits(String categoryCommits) {
 		this.categoryCommits = categoryCommits;
 	}
-	
+
 	public Date getSignInDate() {
 		return signInDate;
 	}
@@ -102,7 +131,6 @@ public class UserInfo implements Serializable {
 		return serialVersionUID;
 	}
 
-
 	public final static class ArticleEdited implements Serializable {
 
 		/**
@@ -111,18 +139,29 @@ public class UserInfo implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		String article, category;
+		Map<String, Integer> categoryCommits;
 		double sizediff;
 		int numOfCommits;
 
 		public ArticleEdited() {}
 
-		public ArticleEdited(String article, int commits, int sizediff, String category) {
+		public ArticleEdited(String article, int commits, int sizediff, String category, Map<String, Integer> categoryCommits) {
 			this.article = article;
 			this.numOfCommits = commits;
 			this.sizediff = sizediff;
+			this.categoryCommits = categoryCommits;
 			this.category = category;
 		}
+				
+        public Map<String, Integer> getCategoryCommits() {
+        	return categoryCommits;
+        }
+
 		
+        public void setCategoryCommits(Map<String, Integer> categoryCommits) {
+        	this.categoryCommits = categoryCommits;
+        }
+
 		public String getArticle() {
 			return article;
 		}
@@ -154,6 +193,8 @@ public class UserInfo implements Serializable {
 		public void setSizediff(double sizediff) {
 			this.sizediff = sizediff;
 		}
+		
+		
 
 		public static long getSerialversionuid() {
 			return serialVersionUID;
