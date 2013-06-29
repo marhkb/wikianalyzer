@@ -686,39 +686,58 @@ public class JsonWikiAccess implements WikiAccess {
 	public UserComparisonInfo getUserComparisonInfo(String userName1, String userName2) throws UserForComparisonNotExistException {
 		UserInfo user1 = null;
 		UserInfo user2 = null;
-		    double cooperationRatio, categoryCongruency;
+		    double cooperationRatio, similarityRatio;
 		    int amountAbusesUser1, amountAbusesUser2;
+		    String congruentArticles = "";
 		try {
 	        user1 = this.getUserInfo(userName1);
 	        user2 = this.getUserInfo(userName2);
 	        int user1TotalArt = user1.getEditedCategories().size();
+	        int user1SimArtCommits = 0;
 	        int user2TotalArt = user2.getEditedCategories().size();
+	        int user2SimArtCommits = 0;
 	        int sameArt = 0;
-	        String congruentArticle = "";
+	        final StringBuilder articlesStrBuilder = new StringBuilder();
 	        if(user1TotalArt<user2TotalArt) {
 	        	for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
 	        		for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
 	        			if(articleUser2.getArticle().equals(articleUser1)) {
 	        				sameArt++;
-	        				congruentArticle += "";
+	        				user1SimArtCommits += articleUser1.getNumOfCommits();
+	        				user2SimArtCommits += articleUser2.getNumOfCommits();
+	        				articlesStrBuilder.append(articleUser2.getArticle());
+	        				articlesStrBuilder.append("; ");
 	        			}
 	        		}
 	        	}
+	        	
 	        } else {
 	        	for(ArticleEdited articleUser1 : user1.getEditedCategories()) {
 	        		for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
 	        			if(articleUser1.getArticle().equals(articleUser2)) {
 	        				sameArt++;
-	        				congruentArticle += "";
+	        				user1SimArtCommits += articleUser1.getNumOfCommits();
+	        				user2SimArtCommits += articleUser2.getNumOfCommits();
+	        				articlesStrBuilder.append(articleUser2.getArticle());
+	        				articlesStrBuilder.append("; ");
 	        			}
 	        		}
 	        	}
 	        }
+	        articlesStrBuilder.insert(0,") = ");
+	        articlesStrBuilder.insert(0,sameArt);
+	        articlesStrBuilder.insert(0, "(");
+	        congruentArticles = articlesStrBuilder.toString().substring(
+					0,
+					articlesStrBuilder.length() -
+					2
+			);
+	        
         } catch(UserNotExistException e) {
 	        e.printStackTrace();
         }
 		
-		return new UserComparisonInfo(user1, user2, 0,0,0,0);
+		return new UserComparisonInfo(user1, user2, 0,0,0,0, congruentArticles,"",0);
 	}
 
 	@Override
