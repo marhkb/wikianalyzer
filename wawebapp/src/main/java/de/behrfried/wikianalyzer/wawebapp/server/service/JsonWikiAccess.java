@@ -597,10 +597,11 @@ public class JsonWikiAccess implements WikiAccess {
 				final String[] catArr = categories.split(";");
 				for(final String cat : catArr) {
 					categorySet.add(cat.trim());
+					
 					if(!commitsPerCategory.containsKey(cat.trim())) {
 						commitsPerCategory.put(cat.trim(), entry.getValue().getItem1());
 					} else {
-						commitsPerCategory.put(cat.trim(), commitsPerCategory.get(cat.trim())+entry.getValue().getItem1());
+						commitsPerCategory.put(cat.trim(), (commitsPerCategory.get(cat.trim())+entry.getValue().getItem1()));
 					}
 				}
 			}
@@ -637,6 +638,8 @@ public class JsonWikiAccess implements WikiAccess {
 			 * get reputation
 			 */
 			int abuseCnt = 0;
+			String abuses = "";
+			int abuseCount = 0;
 			double abuseCntFactor = 1.0d;
 			tmpDate = "";
 
@@ -653,22 +656,27 @@ public class JsonWikiAccess implements WikiAccess {
 				final JsonArray abuseJsnonArr = abuseRoot
 						.getAsJsonObject("query")
 						.getAsJsonArray("abuselog");
+				int warnCount = 0, disallowCount = 0, blockCount = 0;
 				for(final JsonElement jElem : abuseJsnonArr) {
 					final JsonObject jObj = jElem.getAsJsonObject();
 					final String abuseResult = jObj.getAsJsonPrimitive("result").getAsString();
 
 					abuseCnt += 1;
 					if(abuseResult.contains("warn")) {
+						warnCount += 5;
 						abuseCntFactor = (abuseCntFactor + 5.0d) / abuseCnt;
 					}
 					if(abuseResult.contains("disallow")) {
+						disallowCount += 10;;
 						abuseCntFactor = (abuseCntFactor + 10.0d) / abuseCnt;
 					}
 					if(abuseResult.contains("block")) {
+						blockCount +=15;
 						abuseCntFactor = (abuseCntFactor + 15.0d) / abuseCnt;
 					}
 				}
-
+				abuseCount = warnCount+disallowCount+blockCount;
+				abuses = "("+abuseCount+") "+"warn ("+warnCount+"); disallow ("+disallowCount+"); block ("+blockCount+");"; 
 				tmpDate = "";
 				if(abuseRoot.has("query-continue")) {
 					tmpDate = abuseRoot.getAsJsonObject("query-continue")
@@ -782,7 +790,9 @@ public class JsonWikiAccess implements WikiAccess {
 					userclassComment,
 					userDiscussion,
 					selfDiscussion,
-					commitsPerCategory
+					commitsPerCategory,
+					abuses,
+					abuseCount
 			);
 		} catch(Exception e) {
 			this.logger.error(e.getMessage(), e);
@@ -795,21 +805,24 @@ public class JsonWikiAccess implements WikiAccess {
 			UserForComparisonNotExistException {
 		UserInfo user1 = null;
 		UserInfo user2 = null;
-		double articleCooperationRatio = 0;
-		String congruentArticles = "";
+		double articleCooperationRatio = 0, categoryCooperationRatio = 0;
+		String congruentArticles = "", congruentCategories = "";
 		try {
 			user1 = this.getUserInfo(userName1);
 			user2 = this.getUserInfo(userName2);
 			int user1TotalArt = user1.getEditedCategories().size();
 			int user1SimArtCommits = 0;
-			int user1TotalCat = 0;
+			int user1TotalCat = user1.getCommitsPerCategory().size();
 			int user1SimCatCommits = 0;
 			int user2TotalArt = user2.getEditedCategories().size();
 			int user2SimArtCommits = 0;
-			int user2TotalCat = 0;
+			int user2TotalCat = user2.getCommitsPerCategory().size();
 			int user2SimCatCommits = 0;
 			int sameCat = 0;
 			int sameArt = 0;
+			/**
+			 * Vergleich der Artikel
+			 */
 			final StringBuilder articlesStrBuilder = new StringBuilder();
 			if(user1TotalArt < user2TotalArt) {
 				for(ArticleEdited articleUser2 : user2.getEditedCategories()) {
@@ -849,10 +862,51 @@ public class JsonWikiAccess implements WikiAccess {
 					articleCooperationRatio = ((sameArt*user1SimArtCommits*user1.getReputation())/(user1TotalArt*user1.getTotalCommits()) +
 										(sameArt*user2SimArtCommits*user2.getReputation())/(user2TotalArt*user2.getTotalCommits()))/2;
 			}
+			/**
+			 * Vergleich der Kategorien
+			 */
+			final StringBuilder categoryStrBuilder = new StringBuilder();
+			if(user1TotalCat < user2TotalCat) {
+				for(String categoryUser2 : user2.getCommitsPerCategory().keySet()) {
+					for(String categoryUser1 : user1.getCommitsPerCategory().keySet()) {
+						if(categoryUser2.equals(categoryUser1)) {
+							sameCat++;
+							user1SimCatCommits += user1.getCommitsPerCategory().get(categoryUser1);
+							user2SimCatCommits += user2.getCommitsPerCategory().get(categoryUser2);
+							categoryStrBuilder.append(categoryUser1);
+							categoryStrBuilder.append("; ");
+						}
+					}
+				}
+			} else {
+				for(String categoryUser1 : user1.getCommitsPerCategory().keySet()) {
+					for(String categoryUser2 : user2.getCommitsPerCategory().keySet()) {
+						if(categoryUser1.equals(categoryUser2)) {
+							sameCat++;
+							user1SimCatCommits += user1.getCommitsPerCategory().get(categoryUser1);
+							user2SimCatCommits += user2.getCommitsPerCategory().get(categoryUser2);
+							categoryStrBuilder.append(categoryUser1);
+							categoryStrBuilder.append("; ");
+						}
+					}
+				}
+			}
+			categoryStrBuilder.insert(0, ") = ");
+			categoryStrBuilder.insert(0, sameCat);
+			categoryStrBuilder.insert(0, "(");
+			congruentCategories = categoryStrBuilder.toString().substring(
+					0,
+					categoryStrBuilder.length() -
+					2
+			);
+			if(sameCat!=0) {
+					categoryCooperationRatio = ((sameCat*user1SimCatCommits*user1.getReputation())/(user1TotalCat*user1.getTotalCommits()) +
+										(sameCat*user2SimCatCommits*user2.getReputation())/(user2TotalCat*user2.getTotalCommits()))/2;
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new UserComparisonInfo(user1, user2, articleCooperationRatio, 0, 0, 0, congruentArticles, "");
+		return new UserComparisonInfo(user1, user2, articleCooperationRatio, categoryCooperationRatio, congruentArticles, congruentCategories);
 	}
 
 	@Override

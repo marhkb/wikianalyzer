@@ -30,7 +30,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categoryAmountInfoRecord,
 	        categoryCooperationRecord, restrictionInfoRecord, articleCooperationRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
 			userclassRevertRecord, userclassCommentsPerCommitRecord, userclassUserDiscussionRecord,
-			userclassSelfDiscussionRecord, similarityRecord, similarArticlesRecord, similarCategoryRecord;
+			userclassSelfDiscussionRecord, similarityRecord, similarArticlesRecord, similarCategoryRecord, abusesRecord;
 	private final ListGrid userComparisonGrid = new ListGrid() {
 
 		@Override
@@ -99,6 +99,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.reputationInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Reputation:");
 		this.restrictionInfoRecord = new ListGridRecord();
 		this.restrictionInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Gesperrt:");
+		this.abusesRecord = new ListGridRecord();
+		this.abusesRecord.setAttribute(this.userComparisonAttribute.getName(), "Vergehen:");
 		this.userclassCommitsRecord = new ListGridRecord();
 		this.userclassCommitsRecord.setAttribute(this.userComparisonAttribute.getName(), "Einordnung (Commits ingesamt):");
 		this.userclassCommitsPerDayRecord = new ListGridRecord();
@@ -143,6 +145,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonGrid.addData(this.categoryCooperationRecord);
 		this.userComparisonGrid.addData(this.similarArticlesRecord);
 		this.userComparisonGrid.addData(this.articleCooperationRecord);
+		this.userComparisonGrid.addData(this.abusesRecord);
 		this.userComparisonGrid.addData(this.restrictionInfoRecord);
 		this.userComparisonGrid.addData(this.userclassCommitsRecord);
 		this.userComparisonGrid.addData(this.userclassCommitsPerDayRecord);
@@ -190,6 +193,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.bindCategoryCoincidentRecord();
 		this.bindSimilarCategoryRecord();
 		this.bindSimilarArticlesRecord();
+		this.bindAbusesRecord();
 		//this.bindSimilarityRecordRecord();
 	}
 	
@@ -418,6 +422,18 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			public void invoke(Object sender, EventArgs e) {
 				similarCategoryRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getCongruentCategories());
 				similarCategoryRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getCongruentCategories());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+	
+	private void bindAbusesRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				abusesRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().getAbusesDescription());
+				abusesRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().getAbusesDescription());
 				userComparisonGrid.refreshFields();
 			}
 		});

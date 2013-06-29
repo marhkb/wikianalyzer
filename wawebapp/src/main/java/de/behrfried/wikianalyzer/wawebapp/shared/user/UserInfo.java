@@ -14,14 +14,9 @@ public class UserInfo implements Serializable {
 
 	
 	private String userName, categoryCommits, userclassNumOfCommits, userclassAvgCommits, userclassReverts,
-			userclassCleaness;
+			userclassCleaness, userclassUserDiscussion, userclassSelfDiscussion, abusesDescription;
 	private double reputation, commitsPerDay;
-
-	private String userclassUserDiscussion;
-	private String userclassSelfDiscussion;
-
-	private int userID;
-	private int totalCommits;
+	private int userID, totalCommits, abusesRatio;
 	private Date signInDate;
 
 	private Map<String, Integer> commitsPerCategory;
@@ -54,7 +49,7 @@ public class UserInfo implements Serializable {
 					Date signInDate, double reputation,
 	        List<ArticleEdited> editedCategories, boolean blocked, String userclassNumOfCommits,
 			String userclassAvgCommits, String userclassReverts, String userclassCleaness,
-			String userclassUserDiscussion, String userclassSelfDiscussion, Map<String, Integer> commitsPerCategory) {
+			String userclassUserDiscussion, String userclassSelfDiscussion, Map<String, Integer> commitsPerCategory, String abusesDescription, int abusesRatio) {
 		this.userID = userID;
 		this.userName = username;
 		this.totalCommits = totalCommits;
@@ -71,7 +66,35 @@ public class UserInfo implements Serializable {
 		this.userclassUserDiscussion = userclassUserDiscussion;
 		this.userclassSelfDiscussion = userclassSelfDiscussion;
 		this.commitsPerCategory = commitsPerCategory;
-	}
+		this.abusesDescription = abusesDescription;
+		this.abusesRatio = abusesRatio;
+	}	
+    
+    public int getAbusesRatio() {
+    	return abusesRatio;
+    }
+	
+    public void setAbusesRatio(int abusesRatio) {
+    	this.abusesRatio = abusesRatio;
+    }
+
+	public String getAbusesDescription() {
+    	return abusesDescription;
+    }
+
+	
+    public void setAbusesDescription(String abusesDescription) {
+    	this.abusesDescription = abusesDescription;
+    }
+
+	public Map<String, Integer> getCommitsPerCategory() {
+    	return commitsPerCategory;
+    }
+
+	
+    public void setCommitsPerCategory(Map<String, Integer> commitsPerCategory) {
+    	this.commitsPerCategory = commitsPerCategory;
+    }
 
 	public String getUserclassUserDiscussion() {
 		return userclassUserDiscussion;
