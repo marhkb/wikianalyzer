@@ -141,7 +141,7 @@ public class DefArticleView extends ArticleView {
 		this.categoriesRecord = new ListGridRecord();
 		this.categoriesRecord.setAttribute(this.attributeColumn.getName(), "Kategorien:");
 		this.articleLengthRecord = new ListGridRecord();
-		this.articleLengthRecord.setAttribute(this.attributeColumn.getName(), "Länge des Artikels:");
+		this.articleLengthRecord.setAttribute(this.attributeColumn.getName(), "Größe des Artikels (Bytes):");
 
 		this.generalInfoGrid.setShowRecordComponents(true);
 		this.generalInfoGrid.setShowRecordComponentsByCell(true);
