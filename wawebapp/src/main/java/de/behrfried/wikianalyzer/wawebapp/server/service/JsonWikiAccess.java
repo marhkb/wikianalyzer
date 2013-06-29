@@ -29,6 +29,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple;
 import de.behrfried.wikianalyzer.wawebapp.client.util.data.Tuple2;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.TitleOrCategory;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo.ArticleEdited;
@@ -845,8 +846,8 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	@Override
-	public CriterionInfo getCriterionInfo() throws CriterionNotFoundException {
-		// TODO Auto-generated method stub
+	public CriterionInfo getCriterionInfo(List<TitleOrCategory> titlesOrCategories) throws
+			CriterionNotFoundException {
 		return null;
 	}
 

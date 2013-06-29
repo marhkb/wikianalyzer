@@ -22,6 +22,7 @@ import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotE
 import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.TitleOrCategory;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
+import java.util.List;
 
 public class XmlWikiAccess implements WikiAccess {
 
@@ -106,10 +108,8 @@ public class XmlWikiAccess implements WikiAccess {
     }
 
 	@Override
-    public CriterionInfo getCriterionInfo() throws CriterionNotFoundException {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
-
-	
+	public CriterionInfo getCriterionInfo(List<TitleOrCategory> titlesOrCategories) throws
+			CriterionNotFoundException {
+		return null;
+	}
 }

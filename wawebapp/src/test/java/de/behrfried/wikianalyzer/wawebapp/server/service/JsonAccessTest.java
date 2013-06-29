@@ -17,12 +17,18 @@
 package de.behrfried.wikianalyzer.wawebapp.server.service;
 
 import de.behrfried.wikianalyzer.wawebapp.client.exception.ArticleNotExistException;
+import de.behrfried.wikianalyzer.wawebapp.client.exception.CriterionNotFoundException;
 import de.behrfried.wikianalyzer.wawebapp.client.exception.UserForComparisonNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.client.exception.UserNotExistException;
 import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.CriterionInfo;
+import de.behrfried.wikianalyzer.wawebapp.shared.user.TitleOrCategory;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 import org.junit.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonAccessTest {
 
@@ -71,4 +77,12 @@ public class JsonAccessTest {
 
 	}
 
+
+	@Test
+	public void testGetCriterion() throws CriterionNotFoundException {
+		final List<TitleOrCategory> titleOrCategories1 = new ArrayList<TitleOrCategory>(2);
+		titleOrCategories1.add(new TitleOrCategory("Datenschutz", false));
+		titleOrCategories1.add(new TitleOrCategory("Deutschland", false));
+		final CriterionInfo ci1 = this.wikiAccess.getCriterionInfo(titleOrCategories1);
+	}
 }
