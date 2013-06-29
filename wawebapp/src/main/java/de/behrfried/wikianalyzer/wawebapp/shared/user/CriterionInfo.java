@@ -1,6 +1,7 @@
 package de.behrfried.wikianalyzer.wawebapp.shared.user;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class CriterionInfo implements Serializable {
@@ -10,9 +11,39 @@ public class CriterionInfo implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+	private List<User> users;
+
     public CriterionInfo() {}
 
+	public CriterionInfo(List<User> users) {
+		this.users = users;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	@Override
+	public String toString() {
+		return "CriterionInfo{" +
+			   "users=" + users +
+			   '}';
+	}
+
 	public final static class User implements Serializable {
+
+
+		@Override
+		public String toString() {
+			return "User{" +
+				   "userName='" + userName + '\'' +
+				   ", match=" + match +
+				   '}';
+		}
 
 		private String userName;
 
@@ -41,6 +72,10 @@ public class CriterionInfo implements Serializable {
 		public void setMatch(double match) {
 			this.match = match;
 		}
+
+
 	}
+
+
     
 }

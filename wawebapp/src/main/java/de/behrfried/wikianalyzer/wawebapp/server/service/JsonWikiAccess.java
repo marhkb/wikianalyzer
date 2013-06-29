@@ -847,18 +847,125 @@ public class JsonWikiAccess implements WikiAccess {
 	@Override
 	public CriterionInfo getCriterionInfo(List<TitleOrCategory> titlesOrCategories) throws
 			CriterionNotFoundException {
+
+		final Map<String, Map<String, Integer>> users = new HashMap<String, Map<String, Integer>>();
+		final Map<String, List<Integer>> pages = new HashMap<String, List<Integer>>();
 		for(final TitleOrCategory toc : titlesOrCategories) {
 			if(toc.isCategory()) {
+				String nextpage = "";
 				do {
 					String resp = this.requester.getResult(this.convertRequest(
-							"action=query&format=json&list=categorymembers&cmtitle=Kategorie" + toc.getName()
+							"action=query&format=json&list=categorymembers&cmlimit=12&cmtitle=Kategorie:"
+							+ toc.getTitle() + "&cmstartsortkey=" + nextpage
 					));
-				} while(true);
-			} else {
 
+					final JsonObject root = this.parser.parse(resp)
+							.getAsJsonObject();
+
+					final JsonArray jsonPagesArr = root
+							.getAsJsonObject("query")
+							.getAsJsonArray("categorymembers");
+
+					final List<Integer> pageids = new ArrayList<Integer>(jsonPagesArr.size());
+					for(final JsonElement jsonElem : jsonPagesArr) {
+						pageids.add(jsonElem.getAsJsonObject().getAsJsonPrimitive("pageid").getAsInt());
+					}
+					pages.put(toc.getTitle(), pageids);
+
+					nextpage = "";
+					if(root.has("query-continue")) {
+						String[] continues = root.getAsJsonObject("query-continue")
+								.getAsJsonPrimitive("cmcontinue").getAsString().split("|");
+						nextpage = continues[continues.length - 1];
+					}
+
+
+				} while(nextpage.isEmpty());
+			} else {
+				final List<Integer> pageids = new ArrayList<Integer>(1);
+				pageids.add(this.getPageId(toc.getTitle()));
+				pages.put(toc.getTitle(), pageids);
+				this.getPageId(toc.getTitle());
 			}
 		}
-		return null;
+
+		/*
+		 * iterate all criterions
+		 */
+		// User, Title, Commits
+		for(final Map.Entry<String, List<Integer>> entry : pages.entrySet()) {
+
+			for(final int pageid : entry.getValue()) {
+					/*
+				 * iterate all revisions
+				 */
+				int lastRev = 0;
+				while(lastRev != -1) {
+					final String response1 = this.requester.getResult(
+							this.convertRequest(
+									"action=query&format=json&prop=revisions&rvprop=user" +
+									"&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" + pageid +
+									"&rvstartid=" + lastRev+ "&continue="
+							)
+					);
+
+
+					final JsonObject root = this.parser.parse(response1).getAsJsonObject();
+					final JsonObject page = root.getAsJsonObject("query")
+												.getAsJsonObject("pages")
+												.getAsJsonObject(pageid + "");
+
+					if(!page.has("revisions")) {
+						break;
+					}
+
+					final JsonArray jsonRevArr = page.getAsJsonArray("revisions");
+					for(final JsonElement jsonElem : jsonRevArr) {
+						final String user = jsonElem.getAsJsonObject().getAsJsonPrimitive("user").getAsString();
+						if(!users.containsKey(user)) {
+							final Map<String, Integer> title = new HashMap<String, Integer>();
+							users.put(user, title);
+						}
+						final Map<String, Integer> title = users.get(user);
+						if(!title.containsKey(entry.getKey())) {
+							title.put(entry.getKey(), 0);
+						}
+						title.put(entry.getKey(), title.get(entry.getKey()) + 1);
+
+					}
+
+					lastRev = root.has("continue") ? root.getAsJsonObject("continue")
+														 .getAsJsonPrimitive("rvcontinue")
+														 .getAsInt()
+
+							:
+
+							-1;
+				}
+			}
+
+		}
+
+		final List<CriterionInfo.User> userList = new ArrayList<CriterionInfo.User>(users.size());
+		outer:
+		for(final Map.Entry<String, Map<String, Integer>> entry : users.entrySet()) {
+			final CriterionInfo.User user = new CriterionInfo.User(entry.getKey(), 1);
+			for(final TitleOrCategory toc : titlesOrCategories) {
+				if(!entry.getValue().containsKey(toc.getTitle())) {
+					continue outer;
+				}
+				user.setMatch(user.getMatch() * entry.getValue().get(toc.getTitle()));
+			}
+			userList.add(user);
+		}
+		Collections.sort(userList, new Comparator<CriterionInfo.User>() {
+			@Override
+			public int compare(CriterionInfo.User user, CriterionInfo.User user2) {
+				return (int)Math.signum(user2.getMatch() - user.getMatch());
+			}
+		});
+
+		return new CriterionInfo(userList);
 	}
 
 	private int getUserID(final String userName) {

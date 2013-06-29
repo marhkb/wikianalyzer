@@ -19,7 +19,7 @@ public class TitleOrCategory implements Serializable {
 		isCategory = category;
 	}
 
-	public String getName() {
+	public String getTitle() {
 		return name;
 	}
 

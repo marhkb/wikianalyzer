@@ -84,5 +84,6 @@ public class JsonAccessTest {
 		titleOrCategories1.add(new TitleOrCategory("Datenschutz", false));
 		titleOrCategories1.add(new TitleOrCategory("Deutschland", false));
 		final CriterionInfo ci1 = this.wikiAccess.getCriterionInfo(titleOrCategories1);
+		System.out.println(ci1);
 	}
 }
