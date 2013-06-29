@@ -113,12 +113,12 @@ public class DefExpertSearchView extends ExpertSearchView {
 		searchBox.addChangedHandler(new ChangedHandler() {
 			public void onChanged(final ChangedEvent event) {
 				presenter.getTitleOrCategories().get(i).setName(searchBox.getValueAsString());
+				presenter.raiseChanged(i);
 			}
 		});
 		this.presenter.titleOrCategoriesChanged().addHandler(
-				new Handler<CriterionChangedEventArgs>() {
-
-					public void invoke(final Object sender, final CriterionChangedEventArgs e) {
+				new Handler<IntegerChangedEventArgs>() {
+					public void invoke(final Object sender, final IntegerChangedEventArgs e) {
 						if(!searchBox.equals(presenter.getTitleOrCategories().get(i).getTitle())) {
 							searchBox.setValue(presenter.getTitleOrCategories().get(i).getTitle());
 						}
@@ -137,14 +137,13 @@ public class DefExpertSearchView extends ExpertSearchView {
 			}
 		});
 
-//		searchBox.setValueMap(this.presenter.getArticleSuggestions());
-//		this.presenter.articleSuggestionsChanged().addHandler(new Handler<EventArgs>() {
-//
-//			public void invoke(final Object sender, final EventArgs e) {
-//				DefArticleView.searchBox.setValueMap(DefArticleView.this.presenter.getArticleSuggestions());
-//				searchBox.showPicker();
-//			}
-//		});
+		searchBox.setValueMap(this.presenter.getArticleSuggestions().get(i));
+		this.presenter.articleSuggestionsChanged().addHandler(new Handler<IntegerChangedEventArgs>() {
+			public void invoke(final Object sender, final IntegerChangedEventArgs e) {
+				searchBox.setValueMap(presenter.getArticleSuggestions().get(i));
+				searchBox.showPicker();
+			}
+		});
 	}
 
 	public void init() {
@@ -191,7 +190,7 @@ public class DefExpertSearchView extends ExpertSearchView {
 		addRowButton.addClickHandler(new ClickHandler() {
 
 			public void onClick(final ClickEvent event) {
-				presenter.getAddCriterionCommand().execute(null);
+				presenter.getAddTitleOrCategoryCommand().execute(null);
 				addNewSearchCriteriaRow();
 			}
 		});
