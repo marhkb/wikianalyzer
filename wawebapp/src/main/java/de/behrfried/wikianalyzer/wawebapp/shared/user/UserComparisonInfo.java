@@ -9,7 +9,6 @@ public class UserComparisonInfo implements Serializable {
      */
 	private static final long serialVersionUID = 1L;
 	private double articleCooperationRatio, categoryCooperationRation, similarityRatio;
-	private int amountAbusesUser1, amountAbusesUser2;
 	private String congruentArticles, congruentCategories;
 	private UserInfo userInfo1, userInfo2;
 
@@ -24,14 +23,11 @@ public class UserComparisonInfo implements Serializable {
 
 	public UserComparisonInfo() {}
 
-	public UserComparisonInfo(UserInfo userInfo1, UserInfo userInfo2, double articleCooperationRatio, double categoryCooperationRatio, int amountAbusesUser1,
-	        int amountAbusesUser2, String congruentArticles, String congruentCategories) {
+	public UserComparisonInfo(UserInfo userInfo1, UserInfo userInfo2, double articleCooperationRatio, double categoryCooperationRatio, String congruentArticles, String congruentCategories) {
 		this.userInfo1 = userInfo1;
 		this.userInfo2 = userInfo2;
 		this.articleCooperationRatio = articleCooperationRatio;
 		this.categoryCooperationRation = categoryCooperationRatio;
-		this.amountAbusesUser1 = amountAbusesUser1;
-		this.amountAbusesUser2 = amountAbusesUser2;
 		this.congruentArticles = congruentArticles;
 		this.congruentCategories = congruentCategories;
 		this.similarityRatio = similarityRatio;
@@ -63,22 +59,6 @@ public class UserComparisonInfo implements Serializable {
 
 	public void setSimilarityRatio(double similarityRatio) {
 		this.similarityRatio = similarityRatio;
-	}
-
-	public int getAmountAbusesUser1() {
-		return amountAbusesUser1;
-	}
-
-	public void setAmountAbusesUser1(int amountAbusesUser1) {
-		this.amountAbusesUser1 = amountAbusesUser1;
-	}
-
-	public int getAmountAbusesUser2() {
-		return amountAbusesUser2;
-	}
-
-	public void setAmountAbusesUser2(int amountAbusesUser2) {
-		this.amountAbusesUser2 = amountAbusesUser2;
 	}
 
 	public String getCongruentArticles() {
