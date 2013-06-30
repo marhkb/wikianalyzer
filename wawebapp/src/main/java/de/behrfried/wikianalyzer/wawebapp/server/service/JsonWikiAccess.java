@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  */
 
 package de.behrfried.wikianalyzer.wawebapp.server.service;
@@ -77,7 +77,7 @@ public class JsonWikiAccess implements WikiAccess {
 			final int pageid = this.getPageId(title);
 
 			if(pageid == -1) {
-				/* article does not exist */
+                                /* article does not exist */
 				throw new ArticleNotExistException("Artikel \"" + title + "\" existiert nicht!");
 			}
 
@@ -89,8 +89,8 @@ public class JsonWikiAccess implements WikiAccess {
 
 			Date creationDate = null;
 			String initialAuthor = null;
-
-			/* get revisions of an article (max 500 are allowed) */
+ 
+                        /* get revisions of an article (max 500 are allowed) */
 			// http://de.wikipedia.org/w/api.php?action=query&format=xml&prop=revisions&pageids=88112&rvprop=user|ids|timestamp|sha1&rvlimit=10000&rvdiffto=next&rvdir=older
 			final Map<String, Integer> authorsAndCommitsTmp = new HashMap<String, Integer>();
 			final Map<Long, Integer> revsPerDatesTmp = new HashMap<Long, Integer>();
@@ -113,10 +113,10 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 
 				final JsonArray w = page.getAsJsonArray("revisions");
-
-				/*
-				 * iterate the revisions
-				 */
+ 
+                                /*
+                                 * iterate the revisions
+                                 */
 				for(JsonElement obj : w) {
 
 					final JsonObject jsonObj = obj.getAsJsonObject();
@@ -186,8 +186,8 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 			}
 			);
-
-			/* set diffs in revisions and look for edit wars */
+ 
+                        /* set diffs in revisions and look for edit wars */
 			for(int i = 1; i < revisions.size(); i++) {
 				revisions.get(i).setDiff(revisions.get(i).getBytes() - revisions.get(i - 1).getBytes());
 			}
@@ -229,10 +229,10 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 			}
 			);
-
-			/*
-			 * find edit wars
-			 */
+ 
+                        /*
+                         * find edit wars
+                         */
 			final List<ArticleInfo.EditWar> editWars = new ArrayList<ArticleInfo.EditWar>();
 			final List<ArticleInfo.Revision> revertedRevs = this.getRevertedRevisions(revisions);
 			for(int i = 0; i < revertedRevs.size() - 4; i++) {
@@ -271,8 +271,8 @@ public class JsonWikiAccess implements WikiAccess {
 					);
 				}
 			}
-
-			/* get similiar articles */
+ 
+                        /* get similiar articles */
 			// http://de.wikipedia.org/w/api.php?action=query&format=xml&list=search&srsearch=Maus&srlimit=500
 			final String similar = this.requester
 					.getResult(this.convertRequest("action=query&format=json&list=search&srlimit=500&srsearch=" + title));
@@ -292,11 +292,11 @@ public class JsonWikiAccess implements WikiAccess {
 				if(simPageid == pageid) {
 					continue;
 				}
-
-				/* get categories */
+ 
+                                /* get categories */
 				final String categories = this.getCategories(simPageid);
-
-				/* get creation date */
+ 
+                                /* get creation date */
 				Date simCreationDate = null;
 				final String creationDateStr = this.requester
 						.getResult(
@@ -326,8 +326,8 @@ public class JsonWikiAccess implements WikiAccess {
 				similarArticles.add(new ArticleInfo.SimilarArticle(simTitle, categories, simCreationDate));
 
 			}
-
-			/* get number of images */
+ 
+                        /* get number of images */
 			final String imageStr = this.requester
 					.getResult(this.convertRequest("action=query&format=json&prop=images&pageids=" + pageid));
 			final JsonObject images = this.parser
@@ -341,10 +341,10 @@ public class JsonWikiAccess implements WikiAccess {
 				numOfImages = images.getAsJsonArray("images")
 									.size();
 			}
-
-			/*
-			 * get categories
-			 */
+ 
+                        /*
+                         * get categories
+                         */
 			final String categoriesStr = this.requester
 					.getResult(
 							this.convertRequest(
@@ -432,7 +432,7 @@ public class JsonWikiAccess implements WikiAccess {
 	}
 
 	private String getCategories(int pageid) {
-		/* get categories */
+                /* get categories */
 		final String categories = this.requester
 				.getResult(this.convertRequest("action=query&format=json&prop=categories&pageids=" + pageid));
 		final JsonObject jsonObj = this.parser
@@ -484,7 +484,7 @@ public class JsonWikiAccess implements WikiAccess {
 			final int userid = this.getUserID(userName);
 
 			if(userid == -1) {
-			/* article does not exist */
+                        /* article does not exist */
 				throw new UserNotExistException("Nutzer \"" + userid + "\" existiert nicht!");
 			}
 
@@ -627,8 +627,8 @@ public class JsonWikiAccess implements WikiAccess {
 					signInDate = this.formatter.parse(
 							aaa.get(aaa.size() - 1).getAsJsonObject().getAsJsonPrimitive
 									("timestamp")
-										   .getAsString()
-										   .replace('T', '_')
+							   .getAsString()
+							   .replace('T', '_')
 					);
 				}
 			}
@@ -641,27 +641,27 @@ public class JsonWikiAccess implements WikiAccess {
 				categoriesStrBuilder.append(cat);
 				categoriesStrBuilder.append("; ");
 			}
-
-			/*
-			 * get categories
-			 */
+ 
+                        /*
+                         * get categories
+                         */
 			final String categoryCommits = categoriesStrBuilder.toString().substring(
 					0,
 					categoriesStrBuilder.length() -
 					2
 			);
-
-			/*
-			 * get reputation
-			 */
+ 
+                        /*
+                         * get reputation
+                         */
 			final Object[] reps = this.calcReputation(userName, lastUserCommits, blocked);
 			final double reputation = (Double)reps[0];
 			final String abuses = (String)reps[1];
 			final int abuseCount = (Integer)reps[2];
-
-			/*
-			 * user classes
-			 */
+ 
+                        /*
+                         * user classes
+                         */
 			String userclassNumOfCommits = "Gott";
 			if(lastUserCommits < 100) {
 				userclassNumOfCommits = "Rookie";
@@ -828,6 +828,11 @@ public class JsonWikiAccess implements WikiAccess {
 		if(blocked) {
 			reputation = 0;
 		}
+		if(reputation > 1) {
+			reputation = 1;
+		} else if(reputation < 0) {
+			reputation = 0;
+		}
 		return new Object[]{new Double(reputation), abuses, abuseCnt};
 	}
 
@@ -933,10 +938,13 @@ public class JsonWikiAccess implements WikiAccess {
 					2
 			);
 			if(sameCat != 0) {
-				categoryCooperationRatio = ((sameCat * user1SimCatCommits * user1.getReputation()) / (user1TotalCat * user1
-						.getTotalCommits()) +
-											(sameCat * user2SimCatCommits * user2.getReputation()) / (user2TotalCat * user2
-													.getTotalCommits())) / 2;
+				final int tc1 = user1.getTotalCommits() > 500 ? 500 : user1.getTotalCommits();
+				final int tc2 = user2.getTotalCommits() > 500 ? 500 : user2.getTotalCommits();
+				categoryCooperationRatio = ((sameCat * user1SimCatCommits * user1.getReputation()) / (user1TotalCat *
+																									  tc1) +
+											(sameCat * user2SimCatCommits * user2.getReputation()) / (user2TotalCat *
+																									  tc2)) / 2;
+				categoryCooperationRatio *= 100.0d;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -998,17 +1006,17 @@ public class JsonWikiAccess implements WikiAccess {
 				this.getPageId(toc.getTitle());
 			}
 		}
-
-		/*
-		 * iterate all criterions
-		 */
+ 
+                /*
+                 * iterate all criterions
+                 */
 		// User, Title, Commits
 		for(final Map.Entry<String, List<Integer>> entry : pages.entrySet()) {
 
 			for(final int pageid : entry.getValue()) {
-					/*
-				 * iterate all revisions
-				 */
+                                        /*
+                                 * iterate all revisions
+                                 */
 				int lastRev = 0;
 				while(lastRev != -1) {
 					final String response1 = this.requester.getResult(

@@ -94,11 +94,11 @@ public class UserInfo implements Serializable {
     }
 
 	private double calcRevertCommitsRatio() {
-		return ((double)this.numOfReverts / this.totalCommits);
+		return ((double)this.numOfReverts / this.totalCommits > 500 ? 500 : this.totalCommits);
 	}
 
 	private double calcCommentsPerCommitRatio() {
-		return ((double)this.numOfComments / this.totalCommits);
+		return ((double)this.numOfComments / this.totalCommits > 500 ? 500 : this.totalCommits);
 	}
 
 	public double getCommentsPerCommitRatio() {
