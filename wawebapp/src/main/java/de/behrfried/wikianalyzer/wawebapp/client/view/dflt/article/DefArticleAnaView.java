@@ -77,12 +77,19 @@ public class DefArticleAnaView extends ArticleAnaView {
 		this.articleAnaChartContainer.setHeight("50%");
 
 		this.articleGridRevision = new ListGridField("articleGridRevision", "Revision");
+		this.articleGridRevision.setCanEdit(true);
 		this.articleGridParent = new ListGridField("articleGridParent", "Parent");
+		this.articleGridParent.setCanEdit(true);
 		this.articleGridDate = new ListGridField("articleGridDate", "Änderungsdatum");
+		this.articleGridDate.setCanEdit(true);
 		this.articleGridAuthor = new ListGridField("articleGridAuthor", "Author");
+		this.articleGridAuthor.setCanEdit(true);
 		this.articleGridBytes = new ListGridField("articleGridBytes", "Größe (Bytes)");
+		this.articleGridBytes.setCanEdit(true);
 		this.articleGridDiff = new ListGridField("articleGridDiff", "Differenz (Bytes)");
+		this.articleGridDiff.setCanEdit(true);
 		this.articleGridComment = new ListGridField("articleGridComment", "Comment");
+		this.articleGridComment.setCanEdit(true);
 		this.articleGrid = new ListGrid();
 		this.articleGrid.setFields(
 				this.articleGridRevision, this.articleGridParent, this.articleGridDate, this.articleGridAuthor,
