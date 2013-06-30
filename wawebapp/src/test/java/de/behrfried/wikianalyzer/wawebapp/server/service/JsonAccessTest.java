@@ -82,7 +82,7 @@ public class JsonAccessTest {
 	public void testGetCriterion() throws CriterionNotFoundException {
 		final List<TitleOrCategory> titleOrCategories1 = new ArrayList<TitleOrCategory>(2);
 		titleOrCategories1.add(new TitleOrCategory("Datenschutz", false));
-		titleOrCategories1.add(new TitleOrCategory("Deutschland", false));
+		titleOrCategories1.add(new TitleOrCategory("Deutschland", true));
 		final CriterionInfo ci1 = this.wikiAccess.getCriterionInfo(titleOrCategories1);
 		System.out.println(ci1);
 	}

@@ -36,7 +36,9 @@ public abstract class ExpertSearchView extends View {
 
 		public List<TitleOrCategory> getTitleOrCategories();
 
-		public void raiseChanged(int i);
+		public void raiseSuggestionsChanged(int i);
+
+		public void raiseTitleOrCategoryChanged(int i);
 
 		/**
 		 * contains the search suggestions for articles
@@ -44,13 +46,19 @@ public abstract class ExpertSearchView extends View {
 		 */
 		List<LinkedHashMap<String, String>> getArticleSuggestions();
 
+		/**
+		 *
+		 */
+		boolean getSearchStatus();
+
+		Event<EventArgs> searchStatusChanged();
+
 		public Command getAddTitleOrCategoryCommand();
 		public Command getRemoveTitleOrCategoryCommand();
 		public Command getSendCommand();
 	}
 	@Override
     public String getName() {
-	    // TODO Auto-generated method stub
 	    return "Experten Suche";
     }
 

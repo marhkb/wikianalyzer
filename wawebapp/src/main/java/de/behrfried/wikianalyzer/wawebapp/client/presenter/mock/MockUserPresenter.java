@@ -1,6 +1,5 @@
 package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
 
-import java.util.LinkedHashMap;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
@@ -13,6 +12,8 @@ import de.behrfried.wikianalyzer.wawebapp.client.util.event.EventArgs;
 import de.behrfried.wikianalyzer.wawebapp.client.util.event.Handler;
 import de.behrfried.wikianalyzer.wawebapp.client.view.user.UserView;
 import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
+
+import java.util.LinkedHashMap;
 
 public class MockUserPresenter implements UserView.Presenter {
 	private final static Object INIT_CONTEXT = new Object();
@@ -135,10 +136,6 @@ public class MockUserPresenter implements UserView.Presenter {
 
 	private final void addToSuggestions(final String name) {
 		this.suggestions.put(name, name);
-	}
-
-	void p(String s) {
-		System.out.println(s);
 	}
 
 	@Override

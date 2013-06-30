@@ -918,7 +918,7 @@ public class JsonWikiAccess implements WikiAccess {
 				String nextpage = "";
 				do {
 					String resp = this.requester.getResult(this.convertRequest(
-							"action=query&format=json&list=categorymembers&cmlimit=12&cmtitle=Kategorie:"
+							"action=query&format=json&list=categorymembers&cmlimit=500&cmtitle=Kategorie:"
 							+ toc.getTitle() + "&cmstartsortkey=" + nextpage
 					));
 
@@ -937,13 +937,14 @@ public class JsonWikiAccess implements WikiAccess {
 
 					nextpage = "";
 					if(root.has("query-continue")) {
-						String[] continues = root.getAsJsonObject("query-continue")
-								.getAsJsonPrimitive("cmcontinue").getAsString().split("|");
-						nextpage = continues[continues.length - 1];
+						nextpage  = root.getAsJsonObject("query-continue")
+												   .getAsJsonObject("categorymembers")
+												   .getAsJsonPrimitive("cmcontinue")
+												   .getAsString();
 					}
 
 
-				} while(nextpage.isEmpty());
+				} while(!nextpage.isEmpty());
 			} else {
 				final List<Integer> pageids = new ArrayList<Integer>(1);
 				pageids.add(this.getPageId(toc.getTitle()));
@@ -1012,6 +1013,7 @@ public class JsonWikiAccess implements WikiAccess {
 		final List<CriterionInfo.User> userList = new ArrayList<CriterionInfo.User>(users.size());
 		outer:
 		for(final Map.Entry<String, Map<String, Integer>> entry : users.entrySet()) {
+
 			final CriterionInfo.User user = new CriterionInfo.User(entry.getKey(), 1);
 			for(final TitleOrCategory toc : titlesOrCategories) {
 				if(!entry.getValue().containsKey(toc.getTitle())) {
@@ -1020,6 +1022,28 @@ public class JsonWikiAccess implements WikiAccess {
 				user.setMatch(user.getMatch() * entry.getValue().get(toc.getTitle()));
 			}
 			userList.add(user);
+		}
+		outer:
+		for(int i = 0; i < userList.size(); i++) {
+			final String userBotRsp = this.requester.getResult(this.convertRequest(
+					"action=query&format=json&list=users&usprop=groups&ususers=" + userList.get(i).getUserName()
+			));
+			final JsonObject usersJsonObj = this.parser.parse(userBotRsp).getAsJsonObject()
+													   .getAsJsonObject("query")
+													   .getAsJsonArray("users")
+													   .get(0).getAsJsonObject();
+			if(!usersJsonObj.has("groups")) {
+				userList.remove(i);
+				continue;
+			}
+			final JsonArray groupsJsonArr = usersJsonObj
+					.getAsJsonArray("groups");
+			for(JsonElement jsonElement : groupsJsonArr) {
+				if("bot".equals(jsonElement.getAsJsonPrimitive().getAsString())) {
+					userList.remove(i);
+					continue outer;
+				}
+			}
 		}
 		Collections.sort(userList, new Comparator<CriterionInfo.User>() {
 			@Override
