@@ -23,9 +23,10 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 
 	private static final Object INIT_CONTEXT = new Object();
 
-	private final Event<ExpertSearchView.CriterionChangedEventArgs> titleOrcategoriesChanged =
-			new Event<ExpertSearchView.CriterionChangedEventArgs>(INIT_CONTEXT);
-	private final Event<EventArgs> suggestionsChanged = new Event<EventArgs>(INIT_CONTEXT);
+	private final Event<ExpertSearchView.IntegerChangedEventArgs> titleOrcategoriesChanged =
+			new Event<ExpertSearchView.IntegerChangedEventArgs>(INIT_CONTEXT);
+	private final Event<ExpertSearchView.IntegerChangedEventArgs> suggestionsChanged =
+			new Event<ExpertSearchView.IntegerChangedEventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> criterionInfoChanged = new Event<EventArgs>(INIT_CONTEXT);
 
 
@@ -33,19 +34,21 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 
 	private CriterionInfo criterionInfo;
 	private final List<TitleOrCategory> titleOrCategories = new ArrayList<TitleOrCategory>();
-	private final LinkedHashMap<String, String> suggestions = new LinkedHashMap<String, String>();
+	private final List<LinkedHashMap<String, String>> suggestions = new ArrayList<LinkedHashMap<String, String>>();
 
-	private Command addCriterionCommand;
+	private Command addTitleOrCategoryCommand;
 	private Command sendCommand;
-	private Command removeCriterionCommand;
+	private Command removeTitleOrCategorCommand;
 
 	@Inject
 	public DefaultExpertSearchPresenter(final MainServiceAsync mainService) {
 		this.mainService = mainService;
+		this.getTitleOrCategories().add(new TitleOrCategory("", false));
+		this.getArticleSuggestions().add(new LinkedHashMap<String, String>());
 	}
 
 	@Override
-	public Event<ExpertSearchView.CriterionChangedEventArgs> titleOrCategoriesChanged() {
+	public Event<ExpertSearchView.IntegerChangedEventArgs> titleOrCategoriesChanged() {
 		return this.titleOrcategoriesChanged;
 	}
 
@@ -69,18 +72,23 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 	}
 
 	@Override
-	public LinkedHashMap<String, String> getArticleSuggestions() {
+	public void raiseChanged(int i) {
+		this.jGetArticleTitles(this.getTitleOrCategories().get(i).getTitle(), 5, new Integer(i));
+	}
+
+	@Override
+	public List<LinkedHashMap<String, String>> getArticleSuggestions() {
 		return this.suggestions;
 	}
 	@Override
-	public Event<EventArgs> articleSuggestionsChanged() {
+	public Event<ExpertSearchView.IntegerChangedEventArgs> articleSuggestionsChanged() {
 		return this.suggestionsChanged;
 	}
 
 	@Override
-	public Command getAddCriterionCommand() {
-		if(this.addCriterionCommand == null) {
-			this.addCriterionCommand = new UICommand() {
+	public Command getAddTitleOrCategoryCommand() {
+		if(this.addTitleOrCategoryCommand == null) {
+			this.addTitleOrCategoryCommand = new UICommand() {
 				@Override
 				protected EventArgs getEventArgs() {
 					return null;
@@ -88,21 +96,23 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 
 				@Override
 				public void execute(Object param) {
+					getTitleOrCategories().add(new TitleOrCategory("", false));
+					getArticleSuggestions().add(new LinkedHashMap<String, String>());
 				}
 
 				@Override
 				public boolean canExecute(Object param) {
-					return false;
+					return true;
 				}
 			};
 		}
-		return this.addCriterionCommand;
+		return this.addTitleOrCategoryCommand;
 	}
 
 	@Override
-	public Command getRemoveCriterionCommand() {
-		if(this.removeCriterionCommand == null) {
-			this.removeCriterionCommand = new UICommand() {
+	public Command getRemoveTitleOrCategoryCommand() {
+		if(this.removeTitleOrCategorCommand == null) {
+			this.removeTitleOrCategorCommand = new UICommand() {
 				@Override
 				protected EventArgs getEventArgs() {
 					return null;
@@ -118,9 +128,8 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 				}
 			};
 		}
-		return this.removeCriterionCommand;
+		return this.removeTitleOrCategorCommand;
 	}
-
 
 	@Override
 	public Command getSendCommand() {
@@ -162,9 +171,25 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 		return this.sendCommand;
 	}
 
-	public final native void jGetArticleTitles(String word, int maxResults) /*-{
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+	private void fireSuggestionsChanged(Integer i) {
+		this.suggestionsChanged.fire(INIT_CONTEXT, this, new ExpertSearchView.IntegerChangedEventArgs(i));
+	}
+
+	private final void clearSuggestions(Integer i) {
+		this.suggestions.get(i).clear();
+	}
+
+	private final void addToSuggestions(final String name, Integer i) {
+		this.suggestions.get(i).put(name, name);
+	}
+
+//	public final native void jTest(String word, int maxResults, Integer i) /*-{
+//		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter::clearSuggestions(Ljava/lang/Integer;)(i);
+//	}-*/;
+
+	public final native void jGetArticleTitles(String word, int maxResults, Integer i) /*-{
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter::clearSuggestions(Ljava/lang/Integer;)(i);
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter::fireSuggestionsChanged(Ljava/lang/Integer;)(i);
 		var inst = this;
 		$wnd.$
 				.getJSON(
@@ -174,13 +199,13 @@ public class DefaultExpertSearchPresenter implements ExpertSearchView.Presenter 
 							gapfrom : word
 						},
 						function(data) {
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter::clearSuggestions(Ljava/lang/Integer;)(i);
 							for ( var d in data["query"]["pages"]) {
 								var title = data["query"]["pages"][d].title;
-								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
+								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter::addToSuggestions(Ljava/lang/String;Ljava/lang/Integer;)(title, i);
 
 							}
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter::fireSuggestionsChanged(Ljava/lang/Integer;)(i);
 						});
 	}-*/;
 

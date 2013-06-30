@@ -21,28 +21,31 @@ public abstract class ExpertSearchView extends View {
 	 */
 	public interface Presenter extends PresenterBase {
 
-		public Event<CriterionChangedEventArgs> titleOrCategoriesChanged();
+		public Event<IntegerChangedEventArgs> titleOrCategoriesChanged();
 
 		public Event<EventArgs> criterionInfoChanged();
-
-		public CriterionInfo getCriterionInfo();
-
-		public List<TitleOrCategory> getTitleOrCategories();
-
-		/**
-		 * contains the search suggestions for articles
-		 * @return
-		 */
-		LinkedHashMap<String, String> getArticleSuggestions();
 
 		/**
 		 * is to be fired when suggestion has changed
 		 * @return
 		 */
-		Event<EventArgs> articleSuggestionsChanged();
+		Event<IntegerChangedEventArgs> articleSuggestionsChanged();
 
-		public Command getAddCriterionCommand();
-		public Command getRemoveCriterionCommand();
+
+		public CriterionInfo getCriterionInfo();
+
+		public List<TitleOrCategory> getTitleOrCategories();
+
+		public void raiseChanged(int i);
+
+		/**
+		 * contains the search suggestions for articles
+		 * @return
+		 */
+		List<LinkedHashMap<String, String>> getArticleSuggestions();
+
+		public Command getAddTitleOrCategoryCommand();
+		public Command getRemoveTitleOrCategoryCommand();
 		public Command getSendCommand();
 	}
 	@Override
@@ -51,11 +54,11 @@ public abstract class ExpertSearchView extends View {
 	    return "Experten Suche";
     }
 
-	public final static class CriterionChangedEventArgs extends EventArgs {
+	public final static class IntegerChangedEventArgs extends EventArgs {
 
 		private final int index;
 
-		public CriterionChangedEventArgs(int index) {
+		public IntegerChangedEventArgs(int index) {
 			this.index = index;
 		}
 
