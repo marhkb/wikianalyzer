@@ -154,9 +154,10 @@ public class DefUserView extends UserView {
 		this.userInfoGrid.setShowRecordComponents(true);
 		this.userInfoGrid.setShowRecordComponentsByCell(true);
 		this.userInfoGrid.setShowAllRecords(true);
-		this.userInfoGrid.setCanResizeFields(false);
+		this.userInfoGrid.setCanResizeFields(true);
 		this.userInfoGrid.setShowHeaderMenuButton(false);
 		this.userInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
+		this.usrValueColumn.setCanEdit(true);
 		this.userInfoGrid.addData(this.userLinkInfoRecord);
 		this.userInfoGrid.addData(this.signUpInfoRecord);
 		this.userInfoGrid.addData(this.commitsInfoRecord);

@@ -82,7 +82,9 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.comparisonGridLabel.setHeight(20);
 		this.userComparisonAttribute = new ListGridField("copmAttr", "Vergleichskriterium");
 		this.userOneValue = new ListGridField("userOneV", "Wert Nutzer 1");
+		this.userOneValue.setCanEdit(true);
 		this.userTwoValue = new ListGridField("userTwoV", "Wert Nutzer 2");
+		this.userTwoValue.setCanEdit(true);
 		this.congruarityValue = new ListGridField("congu","Übereinstimmung");
 		this.userLinkInfoRecord = new ListGridRecord();
 		this.userLinkInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Nutzername:");
