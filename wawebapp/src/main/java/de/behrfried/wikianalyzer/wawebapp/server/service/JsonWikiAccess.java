@@ -489,9 +489,9 @@ public class JsonWikiAccess implements WikiAccess {
 			}
 
 			final List<UserInfo.ArticleEdited> categoryEdited = new ArrayList<UserInfo.ArticleEdited>();
-			final String restrictions = null;
-			int totalUserCommits = 0;
+
 			Date signInDate = null;
+			int lastUserCommits = 0;
 
 			final String response1 = this.requester.getResult(
 					this.convertRequest(
@@ -499,12 +499,14 @@ public class JsonWikiAccess implements WikiAccess {
 							+ "&usprop=editcount|registration|blockinfo"
 					)
 			);
+
 			final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 			final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
 
+			final int editcount = user.getAsJsonPrimitive("editcount").getAsInt();
+
 			final boolean blocked = user.has("blockid");
 
-			String tmpDate = "";
 			Map<Tuple2<Integer, String>, Tuple2<Integer, Integer>> comparableRevisions =
 					new HashMap<Tuple2<Integer, String>, Tuple2<Integer, Integer>>();
 			final Map<String, Integer> commitsPerCategory = new HashMap<String, Integer>();
@@ -513,70 +515,63 @@ public class JsonWikiAccess implements WikiAccess {
 			int numOfReverts = 0;
 			int numOfUserDiscussion = 0;
 			int numofSelfDiscussion = 0;
-			
-			do {
-				final String userArticles = this.requester.getResult(
-						this.convertRequest(
-								"action=query&format=json&list=usercontribs&ucdir=newer&ucuser=" + userName
-								+ "&uclimit=500&ucprop=ids|sizediff|title|flags|comment|timestamp&continue=" + tmpDate
-						)
-				);
-				final JsonObject articles = this.parser.parse(userArticles).getAsJsonObject();
 
-				final JsonArray articlesArticle = articles.getAsJsonObject("query").getAsJsonArray("usercontribs");
-				totalUserCommits += articlesArticle.size();
-				if(tmpDate.isEmpty() && articlesArticle.size() > 0) {
-					// get the date of the first user contrib
-					signInDate = this.formatter.parse(
-							articlesArticle.get(0).getAsJsonObject().getAsJsonPrimitive("timestamp").getAsString()
-										   .replace('T', '_')
-					);
-				}
-
-				for(JsonElement elm : articlesArticle) {
-					final JsonObject tmpObj = elm.getAsJsonObject();
-
-					final Tuple2<Integer, String> key = Tuple.create(
-							tmpObj.getAsJsonPrimitive("pageid").getAsInt(),
-							tmpObj.getAsJsonPrimitive("title").getAsString()
-					);
-
-					if(key.getItem2().startsWith("Benutzer Diskussion:")) {
-						if(key.getItem2().endsWith(userName)) {
-							numofSelfDiscussion++;
-						} else {
-							numOfUserDiscussion++;
-						}
-					}
-
-					final int sizediff = tmpObj.getAsJsonPrimitive("sizediff").getAsInt();
-					final String comment = tmpObj.getAsJsonPrimitive("comment").getAsString();
-					if(!comment.isEmpty()) {
-						numOfComments++;
-						if(this.isRevert(comment)) {
-							numOfReverts++;
-						}
-					}
-
-					if(!comparableRevisions.containsKey(key)) {
-						comparableRevisions.put(key, Tuple.create(0, 0));
-					}
-					comparableRevisions.put(
-							key, Tuple.create(
-							comparableRevisions.get(key).getItem1() + 1,
-							comparableRevisions.get(key).getItem2() + sizediff
+			final String userArticles = this.requester.getResult(
+					this.convertRequest(
+							"action=query&format=json&list=usercontribs&ucdir=older&ucuser=" + userName
+							+ "&uclimit=500&ucprop=ids|sizediff|title|flags|comment|timestamp"
 					)
-					);
+			);
+			final JsonObject rootObj = this.parser.parse(userArticles).getAsJsonObject();
+
+			final JsonArray articlesArticle = rootObj.getAsJsonObject("query").getAsJsonArray("usercontribs");
+			lastUserCommits += articlesArticle.size();
+			if(articlesArticle.size() > 0) {
+				// get the date of the first user contrib
+				signInDate = this.formatter.parse(
+						articlesArticle.get(articlesArticle.size() - 1).getAsJsonObject().getAsJsonPrimitive
+								("timestamp")
+									   .getAsString()
+									   .replace('T', '_')
+				);
+			}
+
+			for(JsonElement elm : articlesArticle) {
+				final JsonObject tmpObj = elm.getAsJsonObject();
+
+				final Tuple2<Integer, String> key = Tuple.create(
+						tmpObj.getAsJsonPrimitive("pageid").getAsInt(),
+						tmpObj.getAsJsonPrimitive("title").getAsString()
+				);
+
+				if(key.getItem2().startsWith("Benutzer Diskussion:")) {
+					if(key.getItem2().endsWith(userName)) {
+						numofSelfDiscussion++;
+					} else {
+						numOfUserDiscussion++;
+					}
 				}
-				final JsonObject cont = articles.getAsJsonObject("query");
-				tmpDate = "";
-				if(cont.has("continue")) {
-					tmpDate = cont
-							.getAsJsonObject("continue")
-							.getAsJsonPrimitive("ucstart")
-							.getAsString();
+
+				final int sizediff = tmpObj.has("sizediff") ? tmpObj.getAsJsonPrimitive("sizediff").getAsInt() : 0;
+				final String comment = tmpObj.has("comment") ? tmpObj.getAsJsonPrimitive("comment").getAsString()
+						: "";
+				if(!comment.isEmpty()) {
+					numOfComments++;
+					if(this.isRevert(comment)) {
+						numOfReverts++;
+					}
 				}
-			} while(!tmpDate.isEmpty());
+
+				if(!comparableRevisions.containsKey(key)) {
+					comparableRevisions.put(key, Tuple.create(0, 0));
+				}
+				comparableRevisions.put(
+						key, Tuple.create(
+						comparableRevisions.get(key).getItem1() + 1,
+						comparableRevisions.get(key).getItem2() + sizediff
+				)
+				);
+			}
 
 			final Set<String> categorySet = new HashSet<String>();
 			for(final Map.Entry<Tuple2<Integer, String>, Tuple2<Integer, Integer>> entry : comparableRevisions
@@ -595,11 +590,14 @@ public class JsonWikiAccess implements WikiAccess {
 				final String[] catArr = categories.split(";");
 				for(final String cat : catArr) {
 					categorySet.add(cat.trim());
-					
+
 					if(!commitsPerCategory.containsKey(cat.trim())) {
 						commitsPerCategory.put(cat.trim(), entry.getValue().getItem1());
 					} else {
-						commitsPerCategory.put(cat.trim(), (commitsPerCategory.get(cat.trim())+entry.getValue().getItem1()));
+						commitsPerCategory.put(
+								cat.trim(),
+								(commitsPerCategory.get(cat.trim()) + entry.getValue().getItem1())
+						);
 					}
 				}
 			}
@@ -639,7 +637,7 @@ public class JsonWikiAccess implements WikiAccess {
 			String abuses = "";
 			int abuseCount = 0;
 			double abuseCntFactor = 1.0d;
-			tmpDate = "";
+			String tmpDate = "";
 
 			do {
 				final String abuselogStr = this.requester.getResult(
@@ -665,16 +663,17 @@ public class JsonWikiAccess implements WikiAccess {
 						abuseCntFactor = (abuseCntFactor + 5.0d) / abuseCnt;
 					}
 					if(abuseResult.contains("disallow")) {
-						disallowCount += 10;;
+						disallowCount += 10;
+						;
 						abuseCntFactor = (abuseCntFactor + 10.0d) / abuseCnt;
 					}
 					if(abuseResult.contains("block")) {
-						blockCount +=15;
+						blockCount += 15;
 						abuseCntFactor = (abuseCntFactor + 15.0d) / abuseCnt;
 					}
 				}
-				abuseCount = warnCount+disallowCount+blockCount;
-				abuses = "("+abuseCount+"): "+"warn("+warnCount+"); disallow("+disallowCount+"); block("+blockCount+");"; 
+				abuseCount = warnCount + disallowCount + blockCount;
+				abuses = "(" + abuseCount + "): " + "warn(" + warnCount + "); disallow(" + disallowCount + "); block(" + blockCount + ");";
 				tmpDate = "";
 				if(abuseRoot.has("query-continue")) {
 					tmpDate = abuseRoot.getAsJsonObject("query-continue")
@@ -686,7 +685,7 @@ public class JsonWikiAccess implements WikiAccess {
 			} while(!tmpDate.isEmpty());
 
 			this.logger.info("AbuseCntfactor: " + abuseCntFactor);
-			double reputation = 1.0d - (1.0d / ((1.0d + totalUserCommits) / (1.0d + abuseCnt))) / (1 / abuseCntFactor);
+			double reputation = 1.0d - (1.0d / ((1.0d + lastUserCommits) / (1.0d + abuseCnt))) / (1 / abuseCntFactor);
 			if(blocked) {
 				reputation = 0;
 			}
@@ -695,20 +694,20 @@ public class JsonWikiAccess implements WikiAccess {
 			 * user classes
 			 */
 			String userclassNumOfCommits = "Gott";
-			if(totalUserCommits < 100) {
+			if(lastUserCommits < 100) {
 				userclassNumOfCommits = "Rookie";
-			} else if(totalUserCommits < 1000) {
+			} else if(lastUserCommits < 1000) {
 				userclassNumOfCommits = "Fortgeschrittener";
-			} else if(totalUserCommits < 10000) {
+			} else if(lastUserCommits < 10000) {
 				userclassNumOfCommits = "Profi";
-			} else if(totalUserCommits < 100000) {
+			} else if(lastUserCommits < 100000) {
 				userclassNumOfCommits = "Master";
 			}
 
 			String userclassAvgCommits = "\"nicht bewertbar\"";
 			double avgCommits = 0;
 			if(signInDate != null) {
-				avgCommits = totalUserCommits / ((System.currentTimeMillis() - signInDate.getTime()) / 86400000);
+				avgCommits = editcount / ((System.currentTimeMillis() - signInDate.getTime()) / 86400000);
 				if(avgCommits == 0.0) {
 					userclassAvgCommits = "Schlafmütze";
 				} else if(avgCommits < 1.0d) {
@@ -725,8 +724,8 @@ public class JsonWikiAccess implements WikiAccess {
 			String userclassRevert = "\"nicht bewertbar\"";
 			String userclassComment = "\"nicht bewertbar\"";
 
-			if(totalUserCommits > 0) {
-				final double revertCommitRelation = (double)numOfReverts / totalUserCommits;
+			if(lastUserCommits > 0) {
+				final double revertCommitRelation = (double)numOfReverts / lastUserCommits;
 				userclassRevert = "Spielverderber";
 				if(revertCommitRelation < 0.01) {
 					userclassRevert = "Ein-Auge-Zudrücker";
@@ -738,7 +737,7 @@ public class JsonWikiAccess implements WikiAccess {
 					userclassRevert = "Kontrolleur";
 				}
 
-				final double commentCommitRelation = (double)numOfComments / totalUserCommits;
+				final double commentCommitRelation = (double)numOfComments / lastUserCommits;
 				userclassComment = "Saubermann";
 				if(commentCommitRelation < 0.1) {
 					userclassComment = "Dokuhasser";
@@ -775,7 +774,7 @@ public class JsonWikiAccess implements WikiAccess {
 			return new UserInfo(
 					userid,
 					userName,
-					totalUserCommits,
+					editcount,
 					categoryCommits,
 					avgCommits,
 					signInDate,
@@ -791,7 +790,7 @@ public class JsonWikiAccess implements WikiAccess {
 					commitsPerCategory,
 					abuses,
 					abuseCount,
-					numOfReverts, 
+					numOfReverts,
 					numOfComments,
 					numOfUserDiscussion,
 					numofSelfDiscussion
@@ -860,9 +859,11 @@ public class JsonWikiAccess implements WikiAccess {
 					articlesStrBuilder.length() -
 					2
 			);
-			if(sameArt!=0) {
-					articleCooperationRatio = ((sameArt*user1SimArtCommits*user1.getReputation())/(user1TotalArt*user1.getTotalCommits()) +
-										(sameArt*user2SimArtCommits*user2.getReputation())/(user2TotalArt*user2.getTotalCommits()))/2;
+			if(sameArt != 0) {
+				articleCooperationRatio = ((sameArt * user1SimArtCommits * user1.getReputation()) / (user1TotalArt * user1
+						.getTotalCommits()) +
+										   (sameArt * user2SimArtCommits * user2.getReputation()) / (user2TotalArt * user2
+												   .getTotalCommits())) / 2;
 			}
 			/**
 			 * Vergleich der Kategorien
@@ -901,14 +902,23 @@ public class JsonWikiAccess implements WikiAccess {
 					categoryStrBuilder.length() -
 					2
 			);
-			if(sameCat!=0) {
-					categoryCooperationRatio = ((sameCat*user1SimCatCommits*user1.getReputation())/(user1TotalCat*user1.getTotalCommits()) +
-										(sameCat*user2SimCatCommits*user2.getReputation())/(user2TotalCat*user2.getTotalCommits()))/2;
+			if(sameCat != 0) {
+				categoryCooperationRatio = ((sameCat * user1SimCatCommits * user1.getReputation()) / (user1TotalCat * user1
+						.getTotalCommits()) +
+											(sameCat * user2SimCatCommits * user2.getReputation()) / (user2TotalCat * user2
+													.getTotalCommits())) / 2;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new UserComparisonInfo(user1, user2, articleCooperationRatio, categoryCooperationRatio, congruentArticles, congruentCategories);
+		return new UserComparisonInfo(
+				user1,
+				user2,
+				articleCooperationRatio,
+				categoryCooperationRatio,
+				congruentArticles,
+				congruentCategories
+		);
 	}
 
 	@Override
@@ -921,13 +931,15 @@ public class JsonWikiAccess implements WikiAccess {
 			if(toc.isCategory()) {
 				String nextpage = "";
 				do {
-					String resp = this.requester.getResult(this.convertRequest(
-							"action=query&format=json&list=categorymembers&cmlimit=500&cmtitle=Kategorie:"
-							+ toc.getTitle() + "&cmstartsortkey=" + nextpage
-					));
+					String resp = this.requester.getResult(
+							this.convertRequest(
+									"action=query&format=json&list=categorymembers&cmlimit=500&cmtitle=Kategorie:"
+									+ toc.getTitle() + "&cmstartsortkey=" + nextpage
+							)
+					);
 
 					final JsonObject root = this.parser.parse(resp)
-							.getAsJsonObject();
+													   .getAsJsonObject();
 
 					final JsonArray jsonPagesArr = root
 							.getAsJsonObject("query")
@@ -941,10 +953,10 @@ public class JsonWikiAccess implements WikiAccess {
 
 					nextpage = "";
 					if(root.has("query-continue")) {
-						nextpage  = root.getAsJsonObject("query-continue")
-												   .getAsJsonObject("categorymembers")
-												   .getAsJsonPrimitive("cmcontinue")
-												   .getAsString();
+						nextpage = root.getAsJsonObject("query-continue")
+									   .getAsJsonObject("categorymembers")
+									   .getAsJsonPrimitive("cmcontinue")
+									   .getAsString();
 					}
 
 
@@ -973,7 +985,7 @@ public class JsonWikiAccess implements WikiAccess {
 							this.convertRequest(
 									"action=query&format=json&prop=revisions&rvprop=user" +
 									"&rvlimit=500&rvdir=newer&rvexcludeuser=127.0.0.1&pageids=" + pageid +
-									"&rvstartid=" + lastRev+ "&continue="
+									"&rvstartid=" + lastRev + "&continue="
 							)
 					);
 
@@ -1029,9 +1041,11 @@ public class JsonWikiAccess implements WikiAccess {
 		}
 		outer:
 		for(int i = 0; i < userList.size(); i++) {
-			final String userBotRsp = this.requester.getResult(this.convertRequest(
-					"action=query&format=json&list=users&usprop=groups&ususers=" + userList.get(i).getUserName()
-			));
+			final String userBotRsp = this.requester.getResult(
+					this.convertRequest(
+							"action=query&format=json&list=users&usprop=groups&ususers=" + userList.get(i).getUserName()
+					)
+			);
 			final JsonObject usersJsonObj = this.parser.parse(userBotRsp).getAsJsonObject()
 													   .getAsJsonObject("query")
 													   .getAsJsonArray("users")
@@ -1049,12 +1063,14 @@ public class JsonWikiAccess implements WikiAccess {
 				}
 			}
 		}
-		Collections.sort(userList, new Comparator<CriterionInfo.User>() {
+		Collections.sort(
+				userList, new Comparator<CriterionInfo.User>() {
 			@Override
 			public int compare(CriterionInfo.User user, CriterionInfo.User user2) {
 				return (int)Math.signum(user2.getMatch() - user.getMatch());
 			}
-		});
+		}
+		);
 
 		return new CriterionInfo(userList);
 	}

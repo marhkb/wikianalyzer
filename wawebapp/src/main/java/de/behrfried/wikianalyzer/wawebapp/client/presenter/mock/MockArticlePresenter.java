@@ -42,7 +42,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	private ArticleInfo articleInfo;
 	private String articleTitle = "";
 	private Command sendCommand;
-	private boolean searched = false;
+	private boolean searched = true;
 
 
 	@Inject
