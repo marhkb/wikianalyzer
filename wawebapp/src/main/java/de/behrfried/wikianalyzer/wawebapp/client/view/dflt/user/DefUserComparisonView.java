@@ -65,7 +65,6 @@ public class DefUserComparisonView extends UserComparisonView {
 	 * Creates an instance of {@link DefUserComparisonView}. All arguments are
 	 * injected by Gin
 	 * 
-	 * @param parentView
 	 * @throws IllegalArgumentException
 	 */
 	@Inject

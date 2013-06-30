@@ -490,18 +490,32 @@ public class JsonWikiAccess implements WikiAccess {
 
 			final List<UserInfo.ArticleEdited> categoryEdited = new ArrayList<UserInfo.ArticleEdited>();
 
+			boolean isBot = false;
 			Date signInDate = null;
 			int lastUserCommits = 0;
 
 			final String response1 = this.requester.getResult(
 					this.convertRequest(
 							"action=query&format=json&list=users&ususers=" + userName
-							+ "&usprop=editcount|registration|blockinfo"
+							+ "&usprop=editcount|registration|blockinfo|groups"
 					)
 			);
 
+
 			final JsonObject root = this.parser.parse(response1).getAsJsonObject();
 			final JsonObject user = root.getAsJsonObject("query").getAsJsonArray("users").get(0).getAsJsonObject();
+
+
+			if(user.has("groups")) {
+				final JsonArray groupsJsonArr = user
+						.getAsJsonArray("groups");
+				for(JsonElement jsonElement : groupsJsonArr) {
+					if("bot".equals(jsonElement.getAsJsonPrimitive().getAsString())) {
+						isBot = true;
+						break;
+					}
+				}
+			}
 
 			final int editcount = user.getAsJsonPrimitive("editcount").getAsInt();
 
@@ -526,15 +540,7 @@ public class JsonWikiAccess implements WikiAccess {
 
 			final JsonArray articlesArticle = rootObj.getAsJsonObject("query").getAsJsonArray("usercontribs");
 			lastUserCommits += articlesArticle.size();
-			if(articlesArticle.size() > 0) {
-				// get the date of the first user contrib
-				signInDate = this.formatter.parse(
-						articlesArticle.get(articlesArticle.size() - 1).getAsJsonObject().getAsJsonPrimitive
-								("timestamp")
-									   .getAsString()
-									   .replace('T', '_')
-				);
-			}
+
 
 			for(JsonElement elm : articlesArticle) {
 				final JsonObject tmpObj = elm.getAsJsonObject();
@@ -606,10 +612,25 @@ public class JsonWikiAccess implements WikiAccess {
 				signInDate = this.formatter
 						.parse(user.getAsJsonPrimitive("registration").getAsString().replace('T', '_'));
 
-			} catch(ParseException e) {
-				this.logger.error(e.getMessage(), e);
-			} catch(ClassCastException e) {
-				this.logger.error(e.getMessage(), e);
+			} catch(Exception e) {
+				this.logger.warn(userName + " has no sign in date!");
+				final String signInRsp = this.requester.getResult(
+						this.convertRequest(
+								"action=query&format=json&list=usercontribs&ucdir=newer&ucuser=" + userName
+								+ "&uclimit=1&ucprop=timestamp"
+						)
+				);
+				final JsonObject aa = this.parser.parse(userArticles).getAsJsonObject();
+				final JsonArray aaa = aa.getAsJsonObject("query").getAsJsonArray("usercontribs");
+				if(aaa.size() > 0) {
+					// get the date of the first user contrib
+					signInDate = this.formatter.parse(
+							aaa.get(aaa.size() - 1).getAsJsonObject().getAsJsonPrimitive
+									("timestamp")
+										   .getAsString()
+										   .replace('T', '_')
+					);
+				}
 			}
 
 			final StringBuilder categoriesStrBuilder = new StringBuilder();
@@ -741,7 +762,8 @@ public class JsonWikiAccess implements WikiAccess {
 					numOfReverts,
 					numOfComments,
 					numOfUserDiscussion,
-					numofSelfDiscussion
+					numofSelfDiscussion,
+					isBot
 			);
 		} catch(Exception e) {
 			this.logger.error(e.getMessage(), e);
@@ -806,7 +828,7 @@ public class JsonWikiAccess implements WikiAccess {
 		if(blocked) {
 			reputation = 0;
 		}
-		return new Object[] { new Double(reputation), abuses, abuseCnt };
+		return new Object[]{new Double(reputation), abuses, abuseCnt};
 	}
 
 	@Override
@@ -1075,8 +1097,12 @@ public class JsonWikiAccess implements WikiAccess {
 					continue outer;
 				}
 			}
-			us.setMatch(us.getMatch() * (Double)this.calcReputation(us.getUserName(), users.get(us.getUserName()).size(),
-																	false)[0]);
+			us.setMatch(
+					us.getMatch() * (Double)this.calcReputation(
+							us.getUserName(), users.get(us.getUserName()).size(),
+							false
+					)[0]
+			);
 		}
 		Collections.sort(
 				userList, new Comparator<CriterionInfo.User>() {

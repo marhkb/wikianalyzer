@@ -21,7 +21,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 	private HLayout userComparisonAnaContainer;
 	private VLayout userComparisonGridContainer;
 	private HTMLFlow user1Link, user2Link;
-	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, categoryAmountInfoRecord,
+	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord, isBotRecord,
+			categoryAmountInfoRecord,
 	        restrictionInfoRecord, commitsPerDayRecord, articleAmountInfoRecord, 
 			revertCommitsRecord, commentsPerCommitRecord, userDiscussionRecord,
 			selfDiscussionRecord, similarityRecord, similarArticlesRecord, similarCategoryRecord, abusesRecord;
@@ -60,7 +61,6 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 	 * Creates an instance of {@link DefUserComparisonView}. All arguments are
 	 * injected by Gin
 	 * 
-	 * @param parentView
 	 * @throws IllegalArgumentException
 	 */
 	@Inject
@@ -82,9 +82,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.comparisonGridLabel.setHeight(20);
 		this.userComparisonAttribute = new ListGridField("copmAttr", "Vergleichskriterium");
 		this.userOneValue = new ListGridField("userOneV", "Wert Nutzer 1");
-		this.userOneValue.setCanEdit(true);
 		this.userTwoValue = new ListGridField("userTwoV", "Wert Nutzer 2");
-		this.userTwoValue.setCanEdit(true);
 		this.congruarityValue = new ListGridField("congu","Übereinstimmung");
 		this.userLinkInfoRecord = new ListGridRecord();
 		this.userLinkInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Nutzername:");
@@ -94,6 +92,8 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.commitsInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Commits:");
 		this.reputationInfoRecord = new ListGridRecord();
 		this.reputationInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Reputation:");
+		this.isBotRecord = new ListGridRecord();
+		this.isBotRecord.setAttribute(this.userComparisonAttribute.getName(), "Bot:");
 		this.restrictionInfoRecord = new ListGridRecord();
 		this.restrictionInfoRecord.setAttribute(this.userComparisonAttribute.getName(), "Gesperrt:");
 		this.abusesRecord = new ListGridRecord();
@@ -134,6 +134,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.userComparisonGrid.addData(this.commitsInfoRecord);
 		this.userComparisonGrid.addData(this.commitsPerDayRecord);
 		this.userComparisonGrid.addData(this.reputationInfoRecord);
+		this.userComparisonGrid.addData(this.isBotRecord);
 		this.userComparisonGrid.addData(this.categoryAmountInfoRecord);
 		this.userComparisonGrid.addData(this.similarCategoryRecord);
 		this.userComparisonGrid.addData(this.articleAmountInfoRecord);
@@ -174,6 +175,7 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 		this.bindAbusesRecord();
 		this.bindSimilarityRecordRecord();
 		this.bindArticleAmountInfoRecord();
+		this.bindIsBotRecorRecord();
 	}
 		
 	private void bindUserLinksRecord() {
@@ -254,7 +256,21 @@ public class DefUserComparisonAnaView extends UserComparisonAnaView {
 			}
 		});
 	}
-	
+
+	private void bindIsBotRecorRecord() {
+		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				isBotRecord.setAttribute(userOneValue.getName(), presenter.getUserComparisonInfo().getUserInfo1().isBot());
+				isBotRecord.setAttribute(userTwoValue.getName(), presenter.getUserComparisonInfo().getUserInfo2().isBot());
+				isBotRecord.setAttribute(congruarityValue.getName(), presenter.getUserComparisonInfo().getUserInfo1()
+																			  .isBot() == presenter.getUserComparisonInfo().getUserInfo2().isBot());
+				userComparisonGrid.refreshFields();
+			}
+		});
+	}
+
 	private void bindArticleAmountInfoRecord() {
 		this.presenter.userComparisonInfoChanged().addHandler(new Handler<EventArgs>() {
 

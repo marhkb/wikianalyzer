@@ -80,7 +80,7 @@ public class DefUserView extends UserView {
 	private ListGridRecord userLinkInfoRecord, signUpInfoRecord, commitsInfoRecord, reputationInfoRecord,
 	categorysInfoRecord, restrictionInfoRecord, userclassCommitsRecord, userclassCommitsPerDayRecord,
 			userclassRevertRecord, userclassCommentsPerCommitRecord, userclassUserDiscussionRecord,
-			userclassSelfDiscussionRecord, abusesRecord;
+			userclassSelfDiscussionRecord, abusesRecord, isBotRecord;
 
 	/**
 	 * Creates an instance of {@link DefUserView}. All arguments are injected by
@@ -150,14 +150,15 @@ public class DefUserView extends UserView {
 		this.userclassSelfDiscussionRecord = new ListGridRecord();
 		this.userclassSelfDiscussionRecord.setAttribute(this.usrAttributeColumn.getName(),
 														"Diskussionen über sich selbst:");
+		this.isBotRecord = new ListGridRecord();
+		this.isBotRecord.setAttribute(this.usrAttributeColumn.getName(), "Bot:");
 
 		this.userInfoGrid.setShowRecordComponents(true);
 		this.userInfoGrid.setShowRecordComponentsByCell(true);
 		this.userInfoGrid.setShowAllRecords(true);
-		this.userInfoGrid.setCanResizeFields(true);
+		this.userInfoGrid.setCanResizeFields(false);
 		this.userInfoGrid.setShowHeaderMenuButton(false);
 		this.userInfoGrid.setFields(this.usrAttributeColumn, this.usrValueColumn);
-		this.usrValueColumn.setCanEdit(true);
 		this.userInfoGrid.addData(this.userLinkInfoRecord);
 		this.userInfoGrid.addData(this.signUpInfoRecord);
 		this.userInfoGrid.addData(this.commitsInfoRecord);
@@ -171,6 +172,7 @@ public class DefUserView extends UserView {
 		this.userInfoGrid.addData(this.userclassCommentsPerCommitRecord);
 		this.userInfoGrid.addData(this.userclassUserDiscussionRecord);
 		this.userInfoGrid.addData(this.userclassSelfDiscussionRecord);
+		this.userInfoGrid.addData(this.isBotRecord);
 
 		this.genUsrInfLabel = new Label("Allgemeine User Infos");
 		this.genUsrInfLabel.setHeight(10);
@@ -215,8 +217,8 @@ public class DefUserView extends UserView {
 		this.bindUserclassCommentsPerCommitRecord();
 		this.bindUserclassUserDiscussionRecord();
 		this.bindUserclassSelfDiscussionRecord();
-
 		this.bindAbusesRecord();
+		this.bindIsBotRecord();
 	}
 
 	private void bindSearchBox() {
@@ -436,47 +438,16 @@ public class DefUserView extends UserView {
 			}
 		});
 	}
-	// TODO
-	// private void bindGeneralInfoGrid() {
-	// final Map<Tuple2<String, String>, Record> recordsO = new
-	// HashMap<Tuple2<String, String>, Record>();
-	// for(final Tuple2<String, String> t : this.presenter.getUserInfo()) {
-	// final ListGridRecord lsg = new ListGridRecord();
-	// lsg.setAttribute("Attribute", t.getItem1());
-	// lsg.setAttribute("Value", t.getItem2());
-	// this.generalUsrInfoGrid.addData(lsg);
-	// recordsO.put(t, lsg);
-	// }
-	// this.presenter.getUserInfo().listChanged().addHandler(new
-	// Handler<ListChangedEventArgs<Tuple2<String, String>>>() {
-	//
-	// public void invoke(final Object sender, final
-	// ListChangedEventArgs<Tuple2<String, String>> e) {
-	// if(e.getListChangedAction() == ListChangedAction.ADD_REMOVE) {
-	// if(e.getOldItems() != null) {
-	// for(final Tuple2<String, String> t : e.getOldItems()) {
-	// DefUserView.this.generalUsrInfoGrid.removeData(recordsO.remove(t));
-	// }
-	// }
-	//
-	// if(e.getNewItems() != null) {
-	// for(final Tuple2<String, String> t : e.getNewItems()) {
-	// final ListGridRecord lsg = new ListGridRecord();
-	// lsg.setAttribute("Attribute", t.getItem1());
-	// lsg.setAttribute("Value", t.getItem2());
-	// DefUserView.this.generalUsrInfoGrid.addData(lsg);
-	// recordsO.put(t, lsg);
-	// }
-	// }
-	// } else {
-	// DefUserView.this.generalUsrInfoGrid.clear();
-	// recordsO.clear();
-	// }
-	// }
-	// });
-	// }
-	
-	
+	private void bindIsBotRecord() {
+		this.presenter.userInfoChanged().addHandler(new Handler<EventArgs>() {
+
+			@Override
+			public void invoke(Object sender, EventArgs e) {
+				isBotRecord.setAttribute(usrValueColumn.getName(), presenter.getUserInfo().isBot());
+				userInfoGrid.refreshFields();
+			}
+		});
+	}
 
 	@Override
 	public String getName() {
