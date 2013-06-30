@@ -26,7 +26,7 @@ public class MockUserPresenter implements UserView.Presenter {
 	private UserInfo userInfo;
 	private String userName = "";
 	private Command sendCommand;
-	private boolean searched = false;
+	private boolean searched = true;
 
 	@Inject
 	public MockUserPresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
@@ -122,8 +122,11 @@ public class MockUserPresenter implements UserView.Presenter {
 		return this.suggestionsChanged;
 	}
 
-	public void setSearchStatus(boolean searched) {
-		this.searched = searched;
+	private void setSearchStatus(boolean searched) {
+		if(this.searched != searched) {
+			this.searched = searched;
+			this.searchStatusChanged().fire(INIT_CONTEXT, this, EventArgs.EMPTY);
+		}
 	}
 	
 	private void fireSuggestionsChanged() {

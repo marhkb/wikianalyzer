@@ -258,10 +258,20 @@ public class DefUserView extends UserView {
 
 	private void bindSearchButton() {
 		this.searchButton.setDisabled(!this.presenter.getSendCommand().canExecute(null));
-		this.presenter.getSendCommand().canExecuteChanged().addHandler(new Handler<EventArgs>() {
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(
+				new Handler<EventArgs>() {
 
-			public void invoke(final Object sender, final EventArgs e) {
-				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null));
+					public void invoke(final Object sender, final EventArgs e) {
+						searchButton.setDisabled(!presenter.getSendCommand().canExecute(null)
+												 || !presenter.getSearchStatus());
+					}
+				}
+		);
+		this.presenter.searchStatusChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null)
+										 || !presenter.getSearchStatus());
 			}
 		});
 		this.searchButton.addClickHandler(new ClickHandler() {

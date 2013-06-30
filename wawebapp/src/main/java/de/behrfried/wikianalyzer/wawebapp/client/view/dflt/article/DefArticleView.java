@@ -222,12 +222,20 @@ public class DefArticleView extends ArticleView {
 				DefArticleView.this.presenter.setArticleTitle(DefArticleView.this.searchBox.getValueAsString());
 			}
 		});
-		this.presenter.articleTitleChanged().addHandler(new Handler<EventArgs>() {
+		this.presenter.getSendCommand().canExecuteChanged().addHandler(
+				new Handler<EventArgs>() {
 
-			public void invoke(final Object sender, final EventArgs e) {
-				if(!DefArticleView.this.searchBox.equals(DefArticleView.this.presenter.getArticleTitle())) {
-					DefArticleView.this.searchBox.setValue(DefArticleView.this.presenter.getArticleTitle());
+					public void invoke(final Object sender, final EventArgs e) {
+						searchButton.setDisabled(!presenter.getSendCommand().canExecute(null)
+												 || !presenter.getSearchStatus());
+					}
 				}
+		);
+		this.presenter.searchStatusChanged().addHandler(new Handler<EventArgs>() {
+			@Override
+			public void invoke(Object sender, EventArgs eventArgs) {
+				searchButton.setDisabled(!presenter.getSendCommand().canExecute(null)
+										 || !presenter.getSearchStatus());
 			}
 		});
 

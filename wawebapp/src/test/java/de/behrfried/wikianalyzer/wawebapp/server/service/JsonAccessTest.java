@@ -67,7 +67,7 @@ public class JsonAccessTest {
 
 	@Test
 	public void testGetUserInfo() throws UserNotExistException {
-		final UserInfo ui = wikiAccess.getUserInfo("APPER");
+		final UserInfo ui = wikiAccess.getUserInfo("Weissbier");
 		System.out.println(ui);
 	}
 
