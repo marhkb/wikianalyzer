@@ -674,7 +674,7 @@ public class JsonWikiAccess implements WikiAccess {
 					}
 				}
 				abuseCount = warnCount+disallowCount+blockCount;
-				abuses = "("+abuseCount+") "+"warn ("+warnCount+"); disallow ("+disallowCount+"); block ("+blockCount+");"; 
+				abuses = "("+abuseCount+"): "+"warn("+warnCount+"); disallow("+disallowCount+"); block("+blockCount+");"; 
 				tmpDate = "";
 				if(abuseRoot.has("query-continue")) {
 					tmpDate = abuseRoot.getAsJsonObject("query-continue")
@@ -790,7 +790,11 @@ public class JsonWikiAccess implements WikiAccess {
 					selfDiscussion,
 					commitsPerCategory,
 					abuses,
-					abuseCount
+					abuseCount,
+					numOfReverts, 
+					numOfComments,
+					numOfUserDiscussion,
+					numofSelfDiscussion
 			);
 		} catch(Exception e) {
 			this.logger.error(e.getMessage(), e);

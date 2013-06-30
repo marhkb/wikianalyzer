@@ -12,11 +12,10 @@ public class UserInfo implements Serializable {
      */
 	private static final long serialVersionUID = 1L;
 
-	
-	private String userName, categoryCommits, userclassNumOfCommits, userclassAvgCommits, userclassReverts,
-			userclassCleaness, userclassUserDiscussion, userclassSelfDiscussion, abusesDescription;
-	private double reputation, commitsPerDay;
-	private int userID, totalCommits, abusesRatio;
+	private String userName, categoryCommits, userclassNumOfCommits, userclassAvgCommits, userclassReverts, userclassCleaness,
+	        userclassUserDiscussion, userclassSelfDiscussion, abusesDescription;
+	private double reputation, commitsPerDay, revertCommitsRatio, abusesRatio, commentsPerCommitRatio;
+	private int userID, totalCommits, numOfReverts, numOfComments, numOfUserDiscussion, numOfSelfDiscussion;
 	private Date signInDate;
 
 	private Map<String, Integer> commitsPerCategory;
@@ -28,28 +27,17 @@ public class UserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserInfo{" +
-			   "userName='" + userName + '\'' +
-			   ", userclassNumOfCommits='" + userclassNumOfCommits + '\'' +
-			   ", userclassAvgCommits='" + userclassAvgCommits + '\'' +
-			   ", userclassReverts='" + userclassReverts + '\'' +
-			   ", userclassCleaness='" + userclassCleaness + '\'' +
-			   ", reputation=" + reputation +
-			   ", commitsPerDay=" + commitsPerDay +
-			   ", userclassUserDiscussion='" + userclassUserDiscussion + '\'' +
-			   ", userclassSelfDiscussion='" + userclassSelfDiscussion + '\'' +
-			   ", userID=" + userID +
-			   ", totalCommits=" + totalCommits +
-			   ", signInDate=" + signInDate +
-			   ", blocked=" + blocked +
-			   '}';
+		return "UserInfo{" + "userName='" + userName + '\'' + ", userclassNumOfCommits='" + userclassNumOfCommits + '\'' + ", userclassAvgCommits='"
+		        + userclassAvgCommits + '\'' + ", userclassReverts='" + userclassReverts + '\'' + ", userclassCleaness='" + userclassCleaness + '\''
+		        + ", reputation=" + reputation + ", commitsPerDay=" + commitsPerDay + ", userclassUserDiscussion='" + userclassUserDiscussion + '\''
+		        + ", userclassSelfDiscussion='" + userclassSelfDiscussion + '\'' + ", userID=" + userID + ", totalCommits=" + totalCommits
+		        + ", signInDate=" + signInDate + ", blocked=" + blocked + '}';
 	}
 
-	public UserInfo(int userID, String username, int totalCommits, String categoryCommits, double commitsPerDay,
-					Date signInDate, double reputation,
-	        List<ArticleEdited> editedCategories, boolean blocked, String userclassNumOfCommits,
-			String userclassAvgCommits, String userclassReverts, String userclassCleaness,
-			String userclassUserDiscussion, String userclassSelfDiscussion, Map<String, Integer> commitsPerCategory, String abusesDescription, int abusesRatio) {
+	public UserInfo(int userID, String username, int totalCommits, String categoryCommits, double commitsPerDay, Date signInDate, double reputation,
+	        List<ArticleEdited> editedCategories, boolean blocked, String userclassNumOfCommits, String userclassAvgCommits, String userclassReverts,
+	        String userclassCleaness, String userclassUserDiscussion, String userclassSelfDiscussion, Map<String, Integer> commitsPerCategory,
+	        String abusesDescription, int abusesRatio, int numOfReverts, int numOfComments, int numOfUserDiscussion, int numOfSelfDiscussion) {
 		this.userID = userID;
 		this.userName = username;
 		this.totalCommits = totalCommits;
@@ -68,33 +56,96 @@ public class UserInfo implements Serializable {
 		this.commitsPerCategory = commitsPerCategory;
 		this.abusesDescription = abusesDescription;
 		this.abusesRatio = abusesRatio;
-	}	
-    
-    public int getAbusesRatio() {
-    	return abusesRatio;
-    }
+		this.numOfReverts = numOfReverts;
+		this.revertCommitsRatio = calcRevertCommitsRatio();
+		this.numOfComments = numOfComments;
+		this.commentsPerCommitRatio = calcCommentsPerCommitRatio();
+		this.numOfSelfDiscussion = numOfSelfDiscussion;
+		this.numOfUserDiscussion = numOfUserDiscussion;
+	}
 	
-    public void setAbusesRatio(int abusesRatio) {
-    	this.abusesRatio = abusesRatio;
+    public int getNumOfUserDiscussion() {
+    	return numOfUserDiscussion;
     }
+
+	
+    public void setNumOfUserDiscussion(int numOfUserDiscussion) {
+    	this.numOfUserDiscussion = numOfUserDiscussion;
+    }
+
+	
+    public int getNumOfSelfDiscussion() {
+    	return numOfSelfDiscussion;
+    }
+
+	
+    public void setNumOfSelfDiscussion(int numOfSelfDiscussion) {
+    	this.numOfSelfDiscussion = numOfSelfDiscussion;
+    }
+
+	private double calcRevertCommitsRatio() {
+		return ((double)this.numOfReverts / this.totalCommits);
+	}
+
+	private double calcCommentsPerCommitRatio() {
+		return ((double)this.numOfComments / this.totalCommits);
+	}
+
+	public double getCommentsPerCommitRatio() {
+		return commentsPerCommitRatio;
+	}
+
+	public void setCommentsPerCommitRatio(double commentsPerCommitRatio) {
+		this.commentsPerCommitRatio = commentsPerCommitRatio;
+	}
+
+	public int getNumOfComments() {
+		return numOfComments;
+	}
+
+	public void setNumOfComments(int numOfComments) {
+		this.numOfComments = numOfComments;
+	}
+
+	public double getRevertCommitsRatio() {
+		return revertCommitsRatio;
+	}
+
+	public void setRevertCommitsRatio(double revertCommitsRatio) {
+		this.revertCommitsRatio = revertCommitsRatio;
+	}
+
+	public int getNumOfReverts() {
+		return numOfReverts;
+	}
+
+	public void setNumOfReverts(int numOfReverts) {
+		this.numOfReverts = numOfReverts;
+	}
+
+	public double getAbusesRatio() {
+		return abusesRatio;
+	}
+
+	public void setAbusesRatio(double abusesRatio) {
+		this.abusesRatio = abusesRatio;
+	}
 
 	public String getAbusesDescription() {
-    	return abusesDescription;
-    }
+		return abusesDescription;
+	}
 
-	
-    public void setAbusesDescription(String abusesDescription) {
-    	this.abusesDescription = abusesDescription;
-    }
+	public void setAbusesDescription(String abusesDescription) {
+		this.abusesDescription = abusesDescription;
+	}
 
 	public Map<String, Integer> getCommitsPerCategory() {
-    	return commitsPerCategory;
-    }
+		return commitsPerCategory;
+	}
 
-	
-    public void setCommitsPerCategory(Map<String, Integer> commitsPerCategory) {
-    	this.commitsPerCategory = commitsPerCategory;
-    }
+	public void setCommitsPerCategory(Map<String, Integer> commitsPerCategory) {
+		this.commitsPerCategory = commitsPerCategory;
+	}
 
 	public String getUserclassUserDiscussion() {
 		return userclassUserDiscussion;
@@ -153,28 +204,28 @@ public class UserInfo implements Serializable {
 	}
 
 	public double getReputation() {
-    	return reputation;
-    }
-
-    public void setReputation(double reputation) {
-    	this.reputation = reputation;
+		return reputation;
 	}
 
-    public int getTotalCommits() {
-    	return totalCommits;
-    }
+	public void setReputation(double reputation) {
+		this.reputation = reputation;
+	}
 
-    public void setTotalCommits(int totalCommits) {
-    	this.totalCommits = totalCommits;
-    }
-	
-    public double getCommitsPerDay() {
-    	return commitsPerDay;
-    }
-	
-    public void setCommitsPerDay(double commitsPerDay) {
-    	this.commitsPerDay = commitsPerDay;
-    }
+	public int getTotalCommits() {
+		return totalCommits;
+	}
+
+	public void setTotalCommits(int totalCommits) {
+		this.totalCommits = totalCommits;
+	}
+
+	public double getCommitsPerDay() {
+		return commitsPerDay;
+	}
+
+	public void setCommitsPerDay(double commitsPerDay) {
+		this.commitsPerDay = commitsPerDay;
+	}
 
 	public int getUserID() {
 		return userID;
