@@ -790,7 +790,11 @@ public class JsonWikiAccess implements WikiAccess {
 					selfDiscussion,
 					commitsPerCategory,
 					abuses,
-					abuseCount
+					abuseCount,
+					numOfReverts, 
+					numOfComments,
+					numOfUserDiscussion,
+					numofSelfDiscussion
 			);
 		} catch(Exception e) {
 			this.logger.error(e.getMessage(), e);

@@ -11,8 +11,7 @@ public class UserComparisonInfo implements Serializable {
 	private double articleCooperationRatio, categoryCooperationRation, similarityRatio;
 	private String congruentArticles, congruentCategories;
 	private UserInfo userInfo1, userInfo2;
-	private double simUserName, simRegDate, simCommits, simRep, simBlock, simAbuse, simClaComTot, simClaComDa, simClaRev, simClaCommeCom,
-	        simClaDisOth, simClaDisSelf, simComPDay;
+	private double simUserName, simRegDate, simCommits, simRep, simBlock, simAbuse, simRevCom, simCommeCom, simDisOth, simDisSelf, simComPDay, simCatRatio, simArtRatio;
 
 	public UserComparisonInfo() {}
 
@@ -31,12 +30,12 @@ public class UserComparisonInfo implements Serializable {
 		this.simComPDay = calcSimComPDay();
 		this.simAbuse = calcSimAbuse();
 		this.simBlock = calcSimBlock();
-		this.simClaComTot = calcSimClaComTot();
-		this.simClaComDa = calcSimClaComDa();
-		this.simClaRev = calcSimClaRev();
-		this.simClaCommeCom = calcSimClaCommeCom();
-		this.simClaDisOth = calcSimClaDisOth();
-		this.simClaDisSelf = calcSimClaDisSelf();
+		this.simRevCom = calcSimRevCom();
+		this.simCommeCom = calcSimCommeCom();
+		this.simDisOth = calcSimDisOth();
+		this.simDisSelf = calcSimDisSelf();
+		this.simCatRatio = calcSimCat();
+		this.simArtRatio = calcSimArt();
 		this.similarityRatio = calcSimilarityRatio();
 	}
 
@@ -46,15 +45,19 @@ public class UserComparisonInfo implements Serializable {
 	}
 
 	private double calcSimRegDate() {
-		long signInU1 = userInfo1.getSignInDate().getTime();
-		long signInU2 = userInfo2.getSignInDate().getTime();
+		long signInU1 = 0;
+		long signInU2 = 0;
+		if(userInfo1.getSignInDate() != null && userInfo2.getSignInDate() != null) {
+			signInU1 = userInfo1.getSignInDate().getTime();
+			signInU2 = userInfo2.getSignInDate().getTime();
+		}
 		if(signInU1 != 0 && signInU2 != 0) {
 			long dayDifU1 = (System.currentTimeMillis() - userInfo1.getSignInDate().getTime()) / 86400000;
 			long dayDifU2 = (System.currentTimeMillis() - userInfo2.getSignInDate().getTime()) / 86400000;
 			if(dayDifU1 < dayDifU2) {
-				return ((double)dayDifU1 / dayDifU2);
+				return (((double)dayDifU1 / dayDifU2) * 100);
 			} else if(dayDifU1 > dayDifU2) {
-				return ((double)dayDifU2 / dayDifU1);
+				return (((double)dayDifU2 / dayDifU1) * 100);
 			}
 			return 100;
 		}
@@ -69,9 +72,9 @@ public class UserComparisonInfo implements Serializable {
 		final double simCU2 = userInfo2.getTotalCommits();
 		if(simCU1 != 0 && simCU2 != 0) {
 			if(simCU1 < simCU2) {
-				return ((double)simCU1 / simCU2);
+				return (((double)simCU1 / simCU2) * 100);
 			} else if(simCU1 > simCU2) {
-				return ((double)simCU2 / simCU1);
+				return (((double)simCU2 / simCU1) * 100);
 			}
 			return 100;
 		}
@@ -80,15 +83,15 @@ public class UserComparisonInfo implements Serializable {
 		}
 		return 0;
 	}
-	
+
 	private double calcSimComPDay() {
 		final double simComPerDayCU1 = userInfo1.getCommitsPerDay();
 		final double simComPerDayCU2 = userInfo2.getCommitsPerDay();
 		if(simComPerDayCU1 != 0 && simComPerDayCU2 != 0) {
 			if(simComPerDayCU1 < simComPerDayCU2) {
-				return ((double)simComPerDayCU1 / simComPerDayCU2);
+				return ((double)simComPerDayCU1 / simComPerDayCU2) * 100;
 			} else if(simComPerDayCU1 > simComPerDayCU2) {
-				return ((double)simComPerDayCU2 / simComPerDayCU1);
+				return ((double)simComPerDayCU2 / simComPerDayCU1) * 100;
 			}
 			return 100;
 		}
@@ -99,13 +102,13 @@ public class UserComparisonInfo implements Serializable {
 	}
 
 	private double calcSimRep() {
-		final double simRepU1 = userInfo1.getReputation()*100;
-		final double simRepU2 = userInfo2.getReputation()*100;
+		final double simRepU1 = userInfo1.getReputation() * 100;
+		final double simRepU2 = userInfo2.getReputation() * 100;
 		if(simRepU1 != 0 && simRepU2 != 0) {
 			if(simRepU1 < simRepU2) {
-				return ((double)simRepU1 / simRepU2);
+				return ((double)simRepU1 / simRepU2) * 100;
 			} else if(simRepU1 > simRepU2) {
-				return ((double)simRepU2 / simRepU1);
+				return ((double)simRepU2 / simRepU1) * 100;
 			}
 			return 100;
 		}
@@ -141,173 +144,248 @@ public class UserComparisonInfo implements Serializable {
 		return 0;
 	}
 
-	private double calcSimClaComTot() {
-		double simCCT = 0;
-		return simCCT;
+	private double calcSimCommeCom() {
+		final double simComComU1 = userInfo1.getCommentsPerCommitRatio() * 100;
+		final double simComComU2 = userInfo2.getCommentsPerCommitRatio() * 100;
+		if(simComComU1 != 0 && simComComU2 != 0) {
+			if(simComComU1 < simComComU2) {
+				return (((double)simComComU1 / simComComU2) * 100);
+			} else if(simComComU1 > simComComU2) {
+				return (((double)simComComU2 / simComComU1) * 100);
+			}
+			return 100;
+		}
+		if(simComComU1 == 0 && simComComU2 == 0) {
+			return 100;
+		}
+		return 0;
 	}
 
-	private double calcSimClaComDa() {
-		double simCCD = 0;
-		return simCCD;
+	private double calcSimDisOth() {
+		final double simDisOthU1 = userInfo1.getNumOfUserDiscussion();
+		final double simDisOthU2 = userInfo2.getNumOfUserDiscussion();
+		if(simDisOthU1 != 0 && simDisOthU2 != 0) {
+			if(simDisOthU1 < simDisOthU2) {
+				return (((double)simDisOthU1 / simDisOthU2) * 100);
+			} else if(simDisOthU1 > simDisOthU2) {
+				return (((double)simDisOthU2 / simDisOthU1) * 100);
+			}
+			return 100;
+		}
+		if(simDisOthU1 == 0 && simDisOthU2 == 0) {
+			return 100;
+		}
+		return 0;
 	}
 
-	private double calcSimClaRev() {
-		double simCR = 0;
-		return simCR;
+	private double calcSimDisSelf() {
+		final double simDisSelfU1 = userInfo1.getNumOfSelfDiscussion();
+		final double simDisSelfU2 = userInfo2.getNumOfSelfDiscussion();
+		if(simDisSelfU1 != 0 && simDisSelfU2 != 0) {
+			if(simDisSelfU1 < simDisSelfU2) {
+				return (((double)simDisSelfU1 / simDisSelfU2) * 100);
+			} else if(simDisSelfU1 > simDisSelfU2) {
+				return (((double)simDisSelfU2 / simDisSelfU1) * 100);
+			}
+			return 100;
+		}
+		if(simDisSelfU1 == 0 && simDisSelfU2 == 0) {
+			return 100;
+		}
+		return 0;
+	}
+	
+	private double calcSimRevCom() {
+		final double simRevComU1 = userInfo1.getRevertCommitsRatio();
+		final double simRevComU2 = userInfo2.getRevertCommitsRatio();
+		if(simRevComU1 != 0 && simRevComU2 != 0) {
+			if(simRevComU1 < simRevComU2) {
+				return (((double)simRevComU1 / simRevComU2) * 100);
+			} else if(simRevComU1 > simRevComU2) {
+				return (((double)simRevComU2 / simRevComU1) * 100);
+			}
+			return 100;
+		}
+		if(simRevComU1 == 0 && simRevComU2 == 0) {
+			return 100;
+		}
+		return 0;
+	}
+	
+	public double calcSimCat() {
+		final double simCatSizeU1 = userInfo1.getCommitsPerCategory().size();
+		final double simCatSizeU2 = userInfo2.getCommitsPerCategory().size();
+		if(simCatSizeU1 != 0 && simCatSizeU2 != 0) {
+			if(simCatSizeU1 < simCatSizeU2) {
+				return (((double)simCatSizeU1 / simCatSizeU2) * 100);
+			} else if(simCatSizeU1 > simCatSizeU2) {
+				return (((double)simCatSizeU2 / simCatSizeU1) * 100);
+			}
+			return 100;
+		}
+		if(simCatSizeU1 == 0 && simCatSizeU2 == 0) {
+			return 100;
+		}
+		return 0;
 	}
 
-	private double calcSimClaCommeCom() {
-		double simCCC = 0;
-		return simCCC;
-	}
 
-	private double calcSimClaDisOth() {
-		double simCDO = 0;
-		return simCDO;
+	public double calcSimArt() {
+		final double simCatSizeU1 = userInfo1.getEditedCategories().size();
+		final double simCatSizeU2 = userInfo2.getEditedCategories().size();
+		if(simCatSizeU1 != 0 && simCatSizeU2 != 0) {
+			if(simCatSizeU1 < simCatSizeU2) {
+				return (((double)simCatSizeU1 / simCatSizeU2) * 100);
+			} else if(simCatSizeU1 > simCatSizeU2) {
+				return (((double)simCatSizeU2 / simCatSizeU1) * 100);
+			}
+			return 100;
+		}
+		if(simCatSizeU1 == 0 && simCatSizeU2 == 0) {
+			return 100;
+		}
+		return 0;
 	}
-
-	private double calcSimClaDisSelf() {
-		double simCCS = 0;
-		return simCCS;
-	}
-
+	
 	private double calcSimilarityRatio() {
-		return ((this.simUserName + this.simRegDate + this.simCommits + this.simRep + this.simAbuse + this.simBlock + this.simClaComTot
-		        + this.simClaComDa + this.simClaRev + this.simComPDay+ this.simClaCommeCom + this.simClaDisOth + this.simClaDisSelf) / 13);
+		return ((this.simUserName + this.simRegDate + this.simCommits + this.simRep + this.simAbuse + this.simBlock + this.simRevCom
+		        + this.simComPDay + this.simCommeCom + this.simDisOth + this.simDisSelf) / 11);
+	}
+	
+	
+
+	
+    public double getSimCatRatio() {
+    	return simCatRatio;
+    }
+
+	
+    public void setSimCatRatio(double simCatRatio) {
+    	this.simCatRatio = simCatRatio;
+    }
+
+	
+    public double getSimArtRatio() {
+    	return simArtRatio;
+    }
+
+	
+    public void setSimArtRatio(double simArtRatio) {
+    	this.simArtRatio = simArtRatio;
+    }
+
+	
+    public void setSimRevCom(double simRevCom) {
+    	this.simRevCom = simRevCom;
+    }
+
+	public double getSimComPDay() {
+		return simComPDay;
 	}
 
-    public double getCategoryCooperationRation() {
-    	return categoryCooperationRation;
-    }
+	public void setSimComPDay(double simComPDay) {
+		this.simComPDay = simComPDay;
+	}
 
-	
-    public void setCategoryCooperationRation(double categoryCooperationRation) {
-    	this.categoryCooperationRation = categoryCooperationRation;
-    }
+	public double getCategoryCooperationRation() {
+		return categoryCooperationRation;
+	}
 
-	
-    public double getSimUserName() {
-    	return simUserName;
-    }
+	public void setCategoryCooperationRation(double categoryCooperationRation) {
+		this.categoryCooperationRation = categoryCooperationRation;
+	}
 
-	
-    public void setSimUserName(double simUserName) {
-    	this.simUserName = simUserName;
-    }
+	public double getSimUserName() {
+		return simUserName;
+	}
 
-	
-    public double getSimRegDate() {
-    	return simRegDate;
-    }
+	public void setSimUserName(double simUserName) {
+		this.simUserName = simUserName;
+	}
 
-	
-    public void setSimRegDate(double simRegDate) {
-    	this.simRegDate = simRegDate;
-    }
+	public double getSimRegDate() {
+		return simRegDate;
+	}
 
-	
-    public double getSimCommits() {
-    	return simCommits;
-    }
+	public void setSimRegDate(double simRegDate) {
+		this.simRegDate = simRegDate;
+	}
 
-	
-    public void setSimCommits(double simCommits) {
-    	this.simCommits = simCommits;
-    }
+	public double getSimCommits() {
+		return simCommits;
+	}
 
-	
-    public double getSimRep() {
-    	return simRep;
-    }
+	public void setSimCommits(double simCommits) {
+		this.simCommits = simCommits;
+	}
 
-	
-    public void setSimRep(double simRep) {
-    	this.simRep = simRep;
-    }
+	public double getSimRep() {
+		return simRep;
+	}
 
-	
-    public double getSimAbuse() {
-    	return simAbuse;
-    }
+	public void setSimRep(double simRep) {
+		this.simRep = simRep;
+	}
 
-	
-    public void setSimAbuse(double simAbuse) {
-    	this.simAbuse = simAbuse;
-    }
+	public double getSimAbuse() {
+		return simAbuse;
+	}
 
-	
-    public double getSimBlock() {
-    	return simBlock;
-    }
+	public void setSimAbuse(double simAbuse) {
+		this.simAbuse = simAbuse;
+	}
 
-	
-    public void setSimBlock(double simBlock) {
-    	this.simBlock = simBlock;
-    }
+	public double getSimBlock() {
+		return simBlock;
+	}
 
-	
-    public double getSimClaComTot() {
-    	return simClaComTot;
-    }
+	public void setSimBlock(double simBlock) {
+		this.simBlock = simBlock;
+	}
 
-	
-    public void setSimClaComTot(double simClaComTot) {
-    	this.simClaComTot = simClaComTot;
-    }
+	public double getSimRevCom() {
+		return simRevCom;
+	}
 
-	
-    public double getSimClaComDa() {
-    	return simClaComDa;
-    }
+	public void setSimClaRev(double simClaRev) {
+		this.simRevCom = simClaRev;
+	}
 
-	
-    public void setSimClaComDa(double simClaComDa) {
-    	this.simClaComDa = simClaComDa;
-    }
+	public double getSimCommeCom() {
+		return simCommeCom;
+	}
 
-	
-    public double getSimClaRev() {
-    	return simClaRev;
-    }
+	public void setSimCommeCom(double simClaCommeCom) {
+		this.simCommeCom = simClaCommeCom;
+	}
 
-	
-    public void setSimClaRev(double simClaRev) {
-    	this.simClaRev = simClaRev;
-    }
+	public double getSimDisOth() {
+		return simDisOth;
+	}
 
-	
-    public double getSimClaCommeCom() {
-    	return simClaCommeCom;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-	
-    public void setSimClaCommeCom(double simClaCommeCom) {
-    	this.simClaCommeCom = simClaCommeCom;
-    }
+	public double getSimRev() {
+		return simRevCom;
+	}
 
-	
-    public double getSimClaDisOth() {
-    	return simClaDisOth;
-    }
+	public void setSimDisOth(double simClaDisOth) {
+		this.simDisOth = simClaDisOth;
+	}
 
-	
-    public void setSimClaDisOth(double simClaDisOth) {
-    	this.simClaDisOth = simClaDisOth;
-    }
+	public double getSimDisSelf() {
+		return simDisSelf;
+	}
 
-	
-    public double getSimClaDisSelf() {
-    	return simClaDisSelf;
-    }
+	public void setSimDisSelf(double simClaDisSelf) {
+		this.simDisSelf = simClaDisSelf;
+	}
 
-	
-    public void setSimClaDisSelf(double simClaDisSelf) {
-    	this.simClaDisSelf = simClaDisSelf;
-    }
-	
-    public void setArticleCooperationRatio(double articleCooperationRatio) {
-    	this.articleCooperationRatio = articleCooperationRatio;
-    }
+	public void setArticleCooperationRatio(double articleCooperationRatio) {
+		this.articleCooperationRatio = articleCooperationRatio;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
