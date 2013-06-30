@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefArticlePresenter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserComparisonPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefUserComparisonPresenter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefUserPresenter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java" afterPath="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/WaGinModule.java" afterPath="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/WaGinModule.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="parent-pom.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372580460126" ignored="false" />
-    <file path="/fragment.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371586805468" ignored="false" />
+    <file path="/fragment.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602299927" ignored="false" />
     <file path="/pom.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370197226949" ignored="false" />
     <file path="/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374027797" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/vrp/src/main/java/de/transportsystems/vrp/Application.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374363163" ignored="false" />
@@ -48,7 +50,7 @@
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefResourceReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentReaderTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/shared/src/test/java/de/transportsystems/shared/service/common/def/DefFileContentWriterTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1370374618260" ignored="false" />
-    <file path="/MockArticlePresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372599089338" ignored="false" />
+    <file path="/MockArticlePresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602185705" ignored="false" />
     <file path="/DefArticleView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372414801848" ignored="false" />
     <file path="/a.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371585971174" ignored="false" />
     <file path="/a.xml" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371585984473" ignored="false" />
@@ -58,7 +60,7 @@
     <file path="/ArticleInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372348700847" ignored="false" />
     <file path="/ArticleInfoServiceImpl.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371811057016" ignored="false" />
     <file path="/WikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372522901199" ignored="false" />
-    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372599579784" ignored="false" />
+    <file path="/JsonWikiAccess.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372601890790" ignored="false" />
     <file path="/XmlWikiAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371817492494" ignored="false" />
     <file path="/JsonAccessTest.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372589124900" ignored="false" />
     <file path="/DefShellView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1371915190292" ignored="false" />
@@ -71,17 +73,28 @@
     <file path="/JavaScript File.txt.ft" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372329723139" ignored="false" />
     <file path="/Catch Statement Body.txt.ft" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372329755122" ignored="false" />
     <file path="/Dynamic Method Body.txt.ft" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372329765897" ignored="false" />
-    <file path="/MockUserPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372598829020" ignored="false" />
+    <file path="/MockUserPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602234906" ignored="false" />
     <file path="/DefUserView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372516754932" ignored="false" />
     <file path="/DefUserAnaView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372423619818" ignored="false" />
     <file path="/UserInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372512519667" ignored="false" />
-    <file path="/MockUserComparisonPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372517717385" ignored="false" />
+    <file path="/MockUserComparisonPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602213703" ignored="false" />
     <file path="/TitleOrCategory.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372522854580" ignored="false" />
     <file path="$PROJECT_DIR$/../transportsystems/GraphSpielereien/src/main/java/graphen/AdvancedGraph.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372523710802" ignored="false" />
     <file path="/CriterionInfo.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372530474895" ignored="false" />
     <file path="/ExpertSearchView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372582293698" ignored="false" />
     <file path="/DefaultExpertSearchPresenter.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372593937283" ignored="false" />
     <file path="/DefExpertSearchView.java" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372594406282" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/B444846E2142D500FE0475CCE57A4DF3.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284486" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/2771EDFC67C5D8ED7D2803ABDB5501BA.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284487" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/F9623625FAAC6C97683DB9DBC3405499.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284488" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/3E35131AC21867E94D2BC8BCDE6E81B6.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284488" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/C79A495E71DCCBDE8DD5947BBEAAABEB.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284489" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/14B6352AB22A57941D76C09E777D97AC.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284489" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/C92946955C2C76D56219D09A2CA4FA56.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284486" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/1C95453DD42BF8049DF3CE7A7A02F085.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284488" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/FCB335315800930E20D6748AB17CAA8F.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284489" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/5B5559C9522CA9D62004B0A81C553F8F.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284487" ignored="false" />
+    <file path="$PROJECT_DIR$/wawebapp/target/wawebapp-0.0.1-SNAPSHOT/Wawebapp/F966F4E9149C4562CCC951ADFE38D6C2.cache.html" changelist="b8241f4a-b7e6-44f6-8bfb-a7ef3ebe9ea5" time="1372602284489" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,94 +155,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JsonWikiAccess.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="717" column="58" selection-start="24080" selection-end="24080" vertical-scroll-proportion="0.48916408">
-              <folding>
-                <element signature="e#0#36004#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#2319#2327#0" expanded="true" />
-                <element signature="e#3469#3499#0" expanded="true" />
-                <element signature="e#3564#3586#0" expanded="true" />
-                <element signature="e#3657#3682#0" expanded="true" />
-                <element signature="e#4057#4074#0" expanded="true" />
-                <element signature="e#4135#4150#0" expanded="true" />
-                <element signature="e#6764#7055#0" expanded="true" />
-                <element signature="e#7049#7050#0" expanded="true" />
-                <element signature="e#8334#8572#0" expanded="true" />
-                <element signature="e#8566#8567#0" expanded="true" />
-                <element signature="e#8673#8694#0" expanded="true" />
-                <element signature="e#9285#9302#0" expanded="true" />
-                <element signature="e#10550#10578#0" expanded="true" />
-                <element signature="e#12857#12879#0" expanded="true" />
-                <element signature="e#15904#15926#0" expanded="true" />
-                <element signature="e#16670#16694#0" expanded="true" />
-                <element signature="e#17369#17420#0" expanded="true" />
-                <element signature="e#17486#17503#0" expanded="true" />
-                <element signature="e#17566#17590#0" expanded="true" />
-                <element signature="e#19633#19641#0" expanded="true" />
-                <element signature="e#30855#30885#0" expanded="true" />
-                <element signature="e#30943#30966#0" expanded="true" />
-                <element signature="e#31580#31589#0" expanded="true" />
-                <element signature="e#32140#32149#0" expanded="true" />
-                <element signature="e#33441#33458#0" expanded="true" />
-                <element signature="e#33967#33987#0" expanded="true" />
-                <element signature="e#35251#35451#0" expanded="true" />
-                <element signature="e#35446#35447#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefUserView.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="260" column="0" selection-start="10886" selection-end="11470" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#10956#11185#0" expanded="true" />
-                <element signature="e#11178#11179#0" expanded="true" />
-                <element signature="e#11241#11468#0" expanded="true" />
-                <element signature="e#11463#11464#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DefArticleView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="252" column="31" selection-start="10270" selection-end="10270" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#9123#9309#0" expanded="true" />
-                <element signature="e#9304#9305#0" expanded="true" />
-                <element signature="e#9382#9611#0" expanded="true" />
-                <element signature="e#9604#9605#0" expanded="true" />
-                <element signature="e#9667#9894#0" expanded="true" />
-                <element signature="e#9889#9890#0" expanded="true" />
-                <element signature="e#10804#10980#0" expanded="true" />
-                <element signature="e#10975#10976#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MockUserPresenter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="49" selection-start="1201" selection-end="1201" vertical-scroll-proportion="0.0">
+            <state line="376" column="23" selection-start="14208" selection-end="14208" vertical-scroll-proportion="-21.8">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JsonAccessTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="9" selection-start="2300" selection-end="2300" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#2778#2795#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -237,31 +167,20 @@
       <file leaf-file-name="DefExpertSearchView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefExpertSearchView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="235" column="4" selection-start="8914" selection-end="9575" vertical-scroll-proportion="0.0">
+            <state line="30" column="55" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1785#1794#0" expanded="true" />
-                <element signature="e#4975#5397#0" expanded="true" />
-                <element signature="e#5390#5391#0" expanded="true" />
-                <element signature="e#9067#9290#0" expanded="true" />
-                <element signature="e#9283#9284#0" expanded="true" />
-                <element signature="e#9346#9573#0" expanded="true" />
-                <element signature="e#9568#9569#0" expanded="true" />
-                <element signature="e#9617#9750#0" expanded="true" />
-                <element signature="e#9743#9744#0" expanded="true" />
-                <element signature="e#9831#10011#0" expanded="true" />
-                <element signature="e#10004#10005#0" expanded="true" />
-                <element signature="e#10106#10653#0" expanded="true" />
-                <element signature="e#10646#10647#0" expanded="true" />
-                <element signature="e#10855#11074#0" expanded="true" />
-                <element signature="e#11067#11068#0" expanded="true" />
-                <element signature="e#11140#11480#0" expanded="true" />
-                <element signature="e#11473#11474#0" expanded="true" />
-                <element signature="e#11620#11894#0" expanded="true" />
-                <element signature="e#11887#11888#0" expanded="true" />
-                <element signature="e#12141#12495#0" expanded="true" />
-                <element signature="e#12488#12489#0" expanded="true" />
+                <element signature="e#1784#1793#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExpertSearchView.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/ExpertSearchView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="22" selection-start="625" selection-end="625" vertical-scroll-proportion="-0.9375">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -269,33 +188,34 @@
       <file leaf-file-name="DefArticleAnaView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="302" column="8" selection-start="12794" selection-end="12794" vertical-scroll-proportion="0.0">
+            <state line="336" column="35" selection-start="14107" selection-end="14107" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultExpertSearchPresenter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultExpertSearchPresenter.java">
+      <file leaf-file-name="DefUserView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="70" selection-start="5200" selection-end="5200" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1240#1282#0" expanded="true" />
-                <element signature="e#1394#1436#0" expanded="true" />
-                <element signature="e#1516#1527#0" expanded="true" />
-                <element signature="e#1658#1675#0" expanded="true" />
-                <element signature="e#1757#1788#0" expanded="true" />
-                <element signature="e#3877#3888#0" expanded="true" />
-              </folding>
+            <state line="481" column="24" selection-start="17867" selection-end="17867" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MockArticlePresenter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java">
+      <file leaf-file-name="DefUserComparisonView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="0" selection-start="2727" selection-end="2727" vertical-scroll-proportion="0.0">
+            <state line="230" column="22" selection-start="8166" selection-end="8166" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefUserComparisonAnaView.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonAnaView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="13" selection-start="877" selection-end="877" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -320,22 +240,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/TitleOrCategory.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/WikiAccess.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/XmlWikiAccess.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/service/MainService.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/servlets/MainServiceImpl.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/CriterionInfo.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/ExpertSearchView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultExpertSearchPresenter.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefExpertSearchView.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
-        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
         <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/DefArticlePresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserComparisonPresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/DefUserComparisonPresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/DefUserPresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/def/DefUserPresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefUserPresenter.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java" />
+        <option value="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java" />
       </list>
     </option>
   </component>
@@ -399,7 +319,7 @@
       <showMembers />
       <showModules />
       <showLibraryContents />
-      <hideEmptyPackages />
+      <hideEmptyPackages ProjectPane="true" />
       <abbreviatePackageNames />
       <autoscrollToSource />
       <autoscrollFromSource />
@@ -688,7 +608,67 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="article" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wikianalyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wawebapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1060,6 +1040,9 @@
       <recent name="$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/util" />
       <recent name="$PROJECT_DIR$/wawebapp/src/main/resources/de/behrfried/wikianalyzer/util" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="de.behrfried.wikianalyzer.wawebapp.client.presenter" />
+    </key>
   </component>
   <component name="RunManager" selected="Maven.Wawebapp.html">
     <configuration default="false" name="JsonAccessTest" type="JUnit" factoryName="JUnit" temporary="true">
@@ -1421,10 +1404,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3242938" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3269494" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22511096" sideWeight="0.5458276" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22511096" sideWeight="0.5458276" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34812936" sideWeight="0.67168266" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45417237" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="11" y="275" width="1577" height="325" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34812936" sideWeight="0.5458276" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45417237" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="11" y="275" width="1577" height="325" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="100" y="100" width="1400" height="675" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1507,27 +1490,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/com/smartgwt/smartgwt/3.1/smartgwt-3.1.jar!/com/smartgwt/client/data/Criterion.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="167" selection-end="167" vertical-scroll-proportion="0.116099074" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/shared/user/CriterionInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="653" selection-end="653" vertical-scroll-proportion="0.34356725">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/service/MainService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="18" selection-start="1948" selection-end="1948" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/article/ArticleView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="84" column="0" selection-start="2134" selection-end="2222" vertical-scroll-proportion="0.7659575">
@@ -1535,16 +1497,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/ExpertSearchView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="47" selection-start="1482" selection-end="1482" vertical-scroll-proportion="0.68085104">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefaultExpertSearchPresenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="70" selection-start="5200" selection-end="5200" vertical-scroll-proportion="0.0">
+        <state line="152" column="70" selection-start="5200" selection-end="5200" vertical-scroll-proportion="0.17630059">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1240#1282#0" expanded="true" />
@@ -1566,7 +1521,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/test/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonAccessTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="9" selection-start="2300" selection-end="2300" vertical-scroll-proportion="0.0">
+        <state line="67" column="9" selection-start="2300" selection-end="2300" vertical-scroll-proportion="0.41666666">
           <folding>
             <element signature="e#2778#2795#0" expanded="true" />
           </folding>
@@ -1580,90 +1535,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="8" selection-start="12794" selection-end="12794" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefExpertSearchView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="235" column="4" selection-start="8914" selection-end="9575" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1785#1794#0" expanded="true" />
-            <element signature="e#4975#5397#0" expanded="true" />
-            <element signature="e#5390#5391#0" expanded="true" />
-            <element signature="e#9067#9290#0" expanded="true" />
-            <element signature="e#9283#9284#0" expanded="true" />
-            <element signature="e#9346#9573#0" expanded="true" />
-            <element signature="e#9568#9569#0" expanded="true" />
-            <element signature="e#9617#9750#0" expanded="true" />
-            <element signature="e#9743#9744#0" expanded="true" />
-            <element signature="e#9831#10011#0" expanded="true" />
-            <element signature="e#10004#10005#0" expanded="true" />
-            <element signature="e#10106#10653#0" expanded="true" />
-            <element signature="e#10646#10647#0" expanded="true" />
-            <element signature="e#10855#11074#0" expanded="true" />
-            <element signature="e#11067#11068#0" expanded="true" />
-            <element signature="e#11140#11480#0" expanded="true" />
-            <element signature="e#11473#11474#0" expanded="true" />
-            <element signature="e#11620#11894#0" expanded="true" />
-            <element signature="e#11887#11888#0" expanded="true" />
-            <element signature="e#12141#12495#0" expanded="true" />
-            <element signature="e#12488#12489#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockUserPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="49" selection-start="1201" selection-end="1201" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="260" column="0" selection-start="10886" selection-end="11470" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#10956#11185#0" expanded="true" />
-            <element signature="e#11178#11179#0" expanded="true" />
-            <element signature="e#11241#11468#0" expanded="true" />
-            <element signature="e#11463#11464#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="252" column="31" selection-start="10270" selection-end="10270" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#9123#9309#0" expanded="true" />
-            <element signature="e#9304#9305#0" expanded="true" />
-            <element signature="e#9382#9611#0" expanded="true" />
-            <element signature="e#9604#9605#0" expanded="true" />
-            <element signature="e#9667#9894#0" expanded="true" />
-            <element signature="e#9889#9890#0" expanded="true" />
-            <element signature="e#10804#10980#0" expanded="true" />
-            <element signature="e#10975#10976#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/mock/MockArticlePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="2727" selection-end="2727" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/server/service/JsonWikiAccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="717" column="58" selection-start="24080" selection-end="24080" vertical-scroll-proportion="0.48916408">
+        <state line="1097" column="12" selection-start="36359" selection-end="36359" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#36004#0" expanded="true" />
+            <element signature="e#0#36598#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#2319#2327#0" expanded="true" />
             <element signature="e#3469#3499#0" expanded="true" />
@@ -1685,15 +1561,101 @@
             <element signature="e#17486#17503#0" expanded="true" />
             <element signature="e#17566#17590#0" expanded="true" />
             <element signature="e#19633#19641#0" expanded="true" />
-            <element signature="e#30855#30885#0" expanded="true" />
-            <element signature="e#30943#30966#0" expanded="true" />
-            <element signature="e#31580#31589#0" expanded="true" />
-            <element signature="e#32140#32149#0" expanded="true" />
-            <element signature="e#33441#33458#0" expanded="true" />
-            <element signature="e#33967#33987#0" expanded="true" />
-            <element signature="e#35251#35451#0" expanded="true" />
-            <element signature="e#35446#35447#0" expanded="true" />
+            <element signature="e#31180#31210#0" expanded="true" />
+            <element signature="e#31268#31291#0" expanded="true" />
+            <element signature="e#31905#31914#0" expanded="true" />
+            <element signature="e#32465#32474#0" expanded="true" />
+            <element signature="e#33766#33783#0" expanded="true" />
+            <element signature="e#34292#34312#0" expanded="true" />
+            <element signature="e#35845#36045#0" expanded="true" />
+            <element signature="e#36040#36041#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefArticlePresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="17" selection-start="2260" selection-end="2260" vertical-scroll-proportion="0.4552023">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefUserComparisonPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="11" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.4552023">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1082#1093#0" expanded="false" />
+            <element signature="e#1169#1180#0" expanded="false" />
+            <element signature="e#1265#1276#0" expanded="false" />
+            <element signature="e#1359#1370#0" expanded="false" />
+            <element signature="e#1453#1464#0" expanded="false" />
+            <element signature="e#1543#1554#0" expanded="false" />
+            <element signature="e#1651#1667#0" expanded="false" />
+            <element signature="e#1752#1768#0" expanded="false" />
+            <element signature="e#3354#3537#0" expanded="false" />
+            <element signature="e#3531#3532#0" expanded="false" />
+            <marker date="1372602307139" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/presenter/DefUserPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.3546945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="481" column="24" selection-start="17867" selection-end="17867" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="230" column="22" selection-start="8166" selection-end="8166" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefUserComparisonAnaView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="877" selection-end="877" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="23" selection-start="14208" selection-end="14208" vertical-scroll-proportion="-21.8">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/article/DefArticleAnaView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="336" column="35" selection-start="14107" selection-end="14107" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/dflt/user/DefExpertSearchView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="55" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1784#1793#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wawebapp/src/main/java/de/behrfried/wikianalyzer/wawebapp/client/view/user/ExpertSearchView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="22" selection-start="625" selection-end="625" vertical-scroll-proportion="-0.9375">
+          <folding />
         </state>
       </provider>
     </entry>

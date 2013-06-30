@@ -633,62 +633,10 @@ public class JsonWikiAccess implements WikiAccess {
 			/*
 			 * get reputation
 			 */
-			int abuseCnt = 0;
-			String abuses = "";
-			int abuseCount = 0;
-			double abuseCntFactor = 1.0d;
-			String tmpDate = "";
-
-			do {
-				final String abuselogStr = this.requester.getResult(
-						this.convertRequest(
-								"action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName +
-								"&aflstart=" + tmpDate
-						)
-				);
-
-				final JsonObject abuseRoot = this.parser.parse(abuselogStr)
-														.getAsJsonObject();
-				final JsonArray abuseJsnonArr = abuseRoot
-						.getAsJsonObject("query")
-						.getAsJsonArray("abuselog");
-				int warnCount = 0, disallowCount = 0, blockCount = 0;
-				for(final JsonElement jElem : abuseJsnonArr) {
-					final JsonObject jObj = jElem.getAsJsonObject();
-					final String abuseResult = jObj.getAsJsonPrimitive("result").getAsString();
-
-					abuseCnt += 1;
-					if(abuseResult.contains("warn")) {
-						warnCount += 5;
-						abuseCntFactor = (abuseCntFactor + 5.0d) / abuseCnt;
-					}
-					if(abuseResult.contains("disallow")) {
-						disallowCount += 10;
-						;
-						abuseCntFactor = (abuseCntFactor + 10.0d) / abuseCnt;
-					}
-					if(abuseResult.contains("block")) {
-						blockCount += 15;
-						abuseCntFactor = (abuseCntFactor + 15.0d) / abuseCnt;
-					}
-				}
-				abuseCount = warnCount + disallowCount + blockCount;
-				abuses = "(" + abuseCount + "): " + "warn(" + warnCount + "); disallow(" + disallowCount + "); block(" + blockCount + ");";
-				tmpDate = "";
-				if(abuseRoot.has("query-continue")) {
-					tmpDate = abuseRoot.getAsJsonObject("query-continue")
-									   .getAsJsonObject("abuselog")
-									   .getAsJsonPrimitive("aflstart")
-									   .getAsString();
-				}
-
-			} while(!tmpDate.isEmpty());
-
-			this.logger.info("AbuseCntfactor: " + abuseCntFactor);
-			double reputation = 1.0d - (1.0d / ((1.0d + lastUserCommits) / (1.0d + abuseCnt))) / (1 / abuseCntFactor);
-			if(blocked) {
-				reputation = 0;
-			}
+			final Object[] reps = this.calcReputation(userName, lastUserCommits, blocked);
+			final double reputation = (Double)reps[0];
+			final String abuses = (String)reps[1];
+			final int abuseCount = (Integer)reps[2];
 
 			/*
 			 * user classes
@@ -799,6 +747,66 @@ public class JsonWikiAccess implements WikiAccess {
 			this.logger.error(e.getMessage(), e);
 		}
 		return null;
+	}
+
+	private Object[] calcReputation(String userName, int lastUserCommits, boolean blocked) {
+		int abuseCnt = 0;
+		String abuses = "";
+		int abuseCount = 0;
+		double abuseCntFactor = 1.0d;
+		String tmpDate = "";
+
+		do {
+			final String abuselogStr = this.requester.getResult(
+					this.convertRequest(
+							"action=query&format=json&list=abuselog&afllimit=500&afluser=" + userName +
+							"&aflstart=" + tmpDate
+					)
+			);
+
+			final JsonObject abuseRoot = this.parser.parse(abuselogStr)
+													.getAsJsonObject();
+			final JsonArray abuseJsnonArr = abuseRoot
+					.getAsJsonObject("query")
+					.getAsJsonArray("abuselog");
+			int warnCount = 0, disallowCount = 0, blockCount = 0;
+			for(final JsonElement jElem : abuseJsnonArr) {
+				final JsonObject jObj = jElem.getAsJsonObject();
+				final String abuseResult = jObj.getAsJsonPrimitive("result").getAsString();
+
+				abuseCnt += 1;
+				if(abuseResult.contains("warn")) {
+					warnCount += 5;
+					abuseCntFactor = (abuseCntFactor + 5.0d) / abuseCnt;
+				}
+				if(abuseResult.contains("disallow")) {
+					disallowCount += 10;
+					;
+					abuseCntFactor = (abuseCntFactor + 10.0d) / abuseCnt;
+				}
+				if(abuseResult.contains("block")) {
+					blockCount += 15;
+					abuseCntFactor = (abuseCntFactor + 15.0d) / abuseCnt;
+				}
+			}
+			abuseCount = warnCount + disallowCount + blockCount;
+			abuses = "(" + abuseCount + "): " + "warn(" + warnCount + "); disallow(" + disallowCount + "); block(" + blockCount + ");";
+			tmpDate = "";
+			if(abuseRoot.has("query-continue")) {
+				tmpDate = abuseRoot.getAsJsonObject("query-continue")
+								   .getAsJsonObject("abuselog")
+								   .getAsJsonPrimitive("aflstart")
+								   .getAsString();
+			}
+
+		} while(!tmpDate.isEmpty());
+
+		this.logger.info("AbuseCntfactor: " + abuseCntFactor);
+		double reputation = 1.0d - (1.0d / ((1.0d + lastUserCommits) / (1.0d + abuseCnt))) / (1 / abuseCntFactor);
+		if(blocked) {
+			reputation = 0;
+		}
+		return new Object[] { new Double(reputation), abuses, abuseCnt };
 	}
 
 	@Override
@@ -1041,15 +1049,20 @@ public class JsonWikiAccess implements WikiAccess {
 		}
 		outer:
 		for(int i = 0; i < userList.size(); i++) {
+			final CriterionInfo.User us = userList.get(i);
 			final String userBotRsp = this.requester.getResult(
 					this.convertRequest(
-							"action=query&format=json&list=users&usprop=groups&ususers=" + userList.get(i).getUserName()
+							"action=query&format=json&list=users&usprop=groups|blockinfo&ususers=" + us.getUserName()
 					)
 			);
 			final JsonObject usersJsonObj = this.parser.parse(userBotRsp).getAsJsonObject()
 													   .getAsJsonObject("query")
 													   .getAsJsonArray("users")
 													   .get(0).getAsJsonObject();
+			if(usersJsonObj.has("blockid")) {
+				userList.remove(i);
+				continue;
+			}
 			if(!usersJsonObj.has("groups")) {
 				userList.remove(i);
 				continue;
@@ -1062,6 +1075,8 @@ public class JsonWikiAccess implements WikiAccess {
 					continue outer;
 				}
 			}
+			us.setMatch(us.getMatch() * (Double)this.calcReputation(us.getUserName(), users.get(us.getUserName()).size(),
+																	false)[0]);
 		}
 		Collections.sort(
 				userList, new Comparator<CriterionInfo.User>() {

@@ -479,6 +479,6 @@ public class DefUserView extends UserView {
 
 	@Override
 	public String getName() {
-		return "User";
+		return "Benutzer";
 	}
 }

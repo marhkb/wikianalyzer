@@ -1,4 +1,4 @@
-package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
+package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -15,7 +15,7 @@ import de.behrfried.wikianalyzer.wawebapp.shared.user.UserComparisonInfo;
 
 import java.util.LinkedHashMap;
 
-public class MockUserComparisonPresenter implements UserComparisonView.Presenter {
+public class DefUserComparisonPresenter implements UserComparisonView.Presenter {
 
 	private final static Object INIT_CONTEXT = new Object();
 	private final Event<EventArgs> userName1Changed = new Event<EventArgs>(INIT_CONTEXT);
@@ -33,7 +33,7 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 	private boolean searched = false;
 
 	@Inject
-	public MockUserComparisonPresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
+	public DefUserComparisonPresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
 		if(mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
 		}
@@ -47,8 +47,8 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 
 				public void execute(final Object param) {
 					setSearchStatus(false);
-					MockUserComparisonPresenter.this.mainService.sendUserForComparison(MockUserComparisonPresenter.this.getUserName1(),
-					        MockUserComparisonPresenter.this.getUserName2(), new AsyncCallback<UserComparisonInfo>() {
+					DefUserComparisonPresenter.this.mainService.sendUserForComparison(DefUserComparisonPresenter.this.getUserName1(),
+					        DefUserComparisonPresenter.this.getUserName2(), new AsyncCallback<UserComparisonInfo>() {
 
 						        @Override
 						        public void onSuccess(final UserComparisonInfo result) {
@@ -64,8 +64,8 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 				}
 
 				public boolean canExecute(final Object param) {
-					return (MockUserComparisonPresenter.this.getUserName1().length() > 0)
-					        && (MockUserComparisonPresenter.this.getUserName2().length() > 0);
+					return (DefUserComparisonPresenter.this.getUserName1().length() > 0)
+					        && (DefUserComparisonPresenter.this.getUserName2().length() > 0);
 				}
 
 				@Override
@@ -76,7 +76,7 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
 
 				public void invoke(final Object sender, final EventArgs e) {
-					MockUserComparisonPresenter.this.getSendCommand().raiseCanExecuteChanged();
+					DefUserComparisonPresenter.this.getSendCommand().raiseCanExecuteChanged();
 				}
 			});
 		}
@@ -110,8 +110,8 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 	}
 
 	public final native void jGetUserName1(String word) /*-{
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::clearSuggestions()();
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::fireUser1SuggestionsChanged()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::clearSuggestions()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::fireUser1SuggestionsChanged()();
 		var inst = this;
 
 		$wnd.$
@@ -121,20 +121,20 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 							aufrom : word
 						},
 						function(data) {
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::clearSuggestions()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::clearSuggestions()();
 							$wnd.$
 									.each(
 											data["query"]["allusers"],
 											function(i, val) {
-												inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::addToUser1Suggestions(Ljava/lang/String;)(val.name);
+												inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::addToUser1Suggestions(Ljava/lang/String;)(val.name);
 											});
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::fireUser1SuggestionsChanged()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::fireUser1SuggestionsChanged()();
 						});
 	}-*/;
 	
 	public final native void jGetUserName2(String word) /*-{
-	this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::clearSuggestions()();
-	this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::fireUser2SuggestionsChanged()();
+	this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::clearSuggestions()();
+	this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::fireUser2SuggestionsChanged()();
 	var inst = this;
 
 	$wnd.$
@@ -144,14 +144,14 @@ public class MockUserComparisonPresenter implements UserComparisonView.Presenter
 						aufrom : word
 					},
 					function(data) {
-						inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::clearSuggestions()();
+						inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::clearSuggestions()();
 						$wnd.$
 								.each(
 										data["query"]["allusers"],
 										function(i, val) {
-											inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::addToUser2Suggestions(Ljava/lang/String;)(val.name);
+											inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::addToUser2Suggestions(Ljava/lang/String;)(val.name);
 										});
-						inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter::fireUser2SuggestionsChanged()();
+						inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter::fireUser2SuggestionsChanged()();
 					});
 }-*/;
 

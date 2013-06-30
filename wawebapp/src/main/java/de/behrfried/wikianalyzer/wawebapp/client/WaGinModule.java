@@ -20,11 +20,9 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultExpertSearchPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultShellViewPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserComparisonPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefaultUserPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserComparisonPresenter;
-import de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefArticlePresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserComparisonPresenter;
+import de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserPresenter;
 import de.behrfried.wikianalyzer.wawebapp.client.view.ShellView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.article.ArticleView;
 import de.behrfried.wikianalyzer.wawebapp.client.view.dflt.DefShellView;
@@ -54,9 +52,9 @@ public class WaGinModule extends AbstractGinModule {
 		 * bind presenters
 		 */
 		this.bind(ShellView.Presenter.class).to(DefaultShellViewPresenter.class).in(Singleton.class);
-		this.bind(ArticleView.Presenter.class).to(MockArticlePresenter.class).in(Singleton.class);
-		this.bind(UserView.Presenter.class).to(MockUserPresenter.class).in(Singleton.class);
-		this.bind(UserComparisonView.Presenter.class).to(MockUserComparisonPresenter.class).in(Singleton.class);
+		this.bind(ArticleView.Presenter.class).to(DefArticlePresenter.class).in(Singleton.class);
+		this.bind(UserView.Presenter.class).to(DefUserPresenter.class).in(Singleton.class);
+		this.bind(UserComparisonView.Presenter.class).to(DefUserComparisonPresenter.class).in(Singleton.class);
 		this.bind(ExpertSearchView.Presenter.class).to(DefaultExpertSearchPresenter.class).in(Singleton.class);
 
 		/*

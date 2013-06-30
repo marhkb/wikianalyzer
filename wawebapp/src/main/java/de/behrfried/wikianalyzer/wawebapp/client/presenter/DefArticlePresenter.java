@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
+package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -31,7 +31,7 @@ import de.behrfried.wikianalyzer.wawebapp.shared.article.ArticleInfo;
 
 import java.util.*;
 
-public class MockArticlePresenter implements ArticleView.Presenter {
+public class DefArticlePresenter implements ArticleView.Presenter {
 	private final static Object INIT_CONTEXT = new Object();
 	private final Event<EventArgs> articleInfoChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> articleChanged = new Event<EventArgs>(INIT_CONTEXT);
@@ -46,7 +46,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 
 	@Inject
-	public MockArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
+	public DefArticlePresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
 		if(mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
 		}
@@ -108,8 +108,8 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 
 				public void execute(final Object param) {
 					setSearchStatus(false);
-					MockArticlePresenter.this.mainService.sendArticleName(
-							MockArticlePresenter.this.getArticleTitle(),
+					DefArticlePresenter.this.mainService.sendArticleName(
+							DefArticlePresenter.this.getArticleTitle(),
 							new AsyncCallback<ArticleInfo>() {
 
 								public void onSuccess(final ArticleInfo result) {
@@ -125,7 +125,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return MockArticlePresenter.this.getArticleTitle().length() > 0;
+					return DefArticlePresenter.this.getArticleTitle().length() > 0;
 				}
 
 				@Override
@@ -136,7 +136,7 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 			CommandManager.get().requerySuggested().addHandler(
 					new Handler<EventArgs>() {
 						public void invoke(final Object sender, final EventArgs e) {
-							MockArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
+							DefArticlePresenter.this.getSendCommand().raiseCanExecuteChanged();
 						}
 					}
 			);
@@ -166,8 +166,8 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 	}
 
 	public final native void jGetArticleTitles(String word, int maxResults) /*-{
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefArticlePresenter::clearSuggestions()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefArticlePresenter::fireSuggestionsChanged()();
 		var inst = this;
 		$wnd.$
 				.getJSON(
@@ -177,13 +177,13 @@ public class MockArticlePresenter implements ArticleView.Presenter {
 							gapfrom : word
 						},
 						function(data) {
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::clearSuggestions()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefArticlePresenter::clearSuggestions()();
 							for ( var d in data["query"]["pages"]) {
 								var title = data["query"]["pages"][d].title;
-								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
+								inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefArticlePresenter::addToSuggestions(Ljava/lang/String;)(title);
 
 							}
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockArticlePresenter::fireSuggestionsChanged()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefArticlePresenter::fireSuggestionsChanged()();
 						});
 	}-*/;
 }

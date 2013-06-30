@@ -1,4 +1,4 @@
-package de.behrfried.wikianalyzer.wawebapp.client.presenter.mock;
+package de.behrfried.wikianalyzer.wawebapp.client.presenter;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -15,7 +15,7 @@ import de.behrfried.wikianalyzer.wawebapp.shared.user.UserInfo;
 
 import java.util.LinkedHashMap;
 
-public class MockUserPresenter implements UserView.Presenter {
+public class DefUserPresenter implements UserView.Presenter {
 	private final static Object INIT_CONTEXT = new Object();
 	private final Event<EventArgs> userNameChanged = new Event<EventArgs>(INIT_CONTEXT);
 	private final Event<EventArgs> userChanged = new Event<EventArgs>(INIT_CONTEXT);
@@ -29,7 +29,7 @@ public class MockUserPresenter implements UserView.Presenter {
 	private boolean searched = true;
 
 	@Inject
-	public MockUserPresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
+	public DefUserPresenter(final MainServiceAsync mainService) throws IllegalArgumentException {
 		if(mainService == null) {
 			throw new IllegalArgumentException("mainService == null");
 		}
@@ -63,7 +63,7 @@ public class MockUserPresenter implements UserView.Presenter {
 
 				public void execute(final Object param) {
 					setSearchStatus(false);
-					MockUserPresenter.this.mainService.sendUserName(MockUserPresenter.this.getUserName(), new AsyncCallback<UserInfo>() {
+					DefUserPresenter.this.mainService.sendUserName(DefUserPresenter.this.getUserName(), new AsyncCallback<UserInfo>() {
 
 						public void onSuccess(final UserInfo result) {
 							setSearchStatus(true);
@@ -77,7 +77,7 @@ public class MockUserPresenter implements UserView.Presenter {
 				}
 
 				public boolean canExecute(final Object param) {
-					return MockUserPresenter.this.getUserName().length() > 0;
+					return DefUserPresenter.this.getUserName().length() > 0;
 				}
 
 				@Override
@@ -88,7 +88,7 @@ public class MockUserPresenter implements UserView.Presenter {
 			CommandManager.get().requerySuggested().addHandler(new Handler<EventArgs>() {
 
 				public void invoke(final Object sender, final EventArgs e) {
-					MockUserPresenter.this.getSendCommand().raiseCanExecuteChanged();
+					DefUserPresenter.this.getSendCommand().raiseCanExecuteChanged();
 				}
 			});
 		}
@@ -155,8 +155,8 @@ public class MockUserPresenter implements UserView.Presenter {
 	}
 
 	public final native void jGetUserName(String word) /*-{
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::clearSuggestions()();
-		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::fireSuggestionsChanged()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserPresenter::clearSuggestions()();
+		this.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserPresenter::fireSuggestionsChanged()();
 		var inst = this;
 
 		$wnd.$
@@ -166,13 +166,13 @@ public class MockUserPresenter implements UserView.Presenter {
 							aufrom : word
 						},
 						function(data) {
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::clearSuggestions()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserPresenter::clearSuggestions()();
 							$wnd.$.each(
 											data["query"]["allusers"],
 											function(i, val) {
-												inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::addToSuggestions(Ljava/lang/String;)(val.name);
+												inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserPresenter::addToSuggestions(Ljava/lang/String;)(val.name);
 											});
-							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.mock.MockUserPresenter::fireSuggestionsChanged()();
+							inst.@de.behrfried.wikianalyzer.wawebapp.client.presenter.DefUserPresenter::fireSuggestionsChanged()();
 						});
 	}-*/;
 }

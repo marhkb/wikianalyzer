@@ -228,6 +228,6 @@ public class DefUserComparisonView extends UserComparisonView {
 
 	@Override
 	public String getName() {
-		return "User Comparison";
+		return "Nutzer Vergleich";
 	}
 }

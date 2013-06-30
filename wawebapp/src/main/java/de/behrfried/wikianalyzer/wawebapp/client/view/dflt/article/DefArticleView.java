@@ -160,7 +160,7 @@ public class DefArticleView extends ArticleView {
 		this.generalInfoGrid.addData(this.categoriesRecord);
 		this.generalInfoGrid.addData(this.articleLengthRecord);
 
-		this.artAnaLabel = new Label("Article Analyzation");
+		this.artAnaLabel = new Label("Artikel Analyse");
 		this.artAnaLabel.setHeight(10);
 		this.artAnaLabel.setWidth100();
 		this.artAnaLayout = new VLayout();
@@ -174,7 +174,7 @@ public class DefArticleView extends ArticleView {
 		this.genInfLayout = new VLayout();
 		this.genInfLayout.setWidth("30%");
 		this.genInfLayout.setHeight100();
-		this.genArtInfLabel = new Label("General Article Infos");
+		this.genArtInfLabel = new Label("Allgemeine Artikel Informationen");
 		this.genArtInfLabel.setHeight(10);
 		this.genArtInfLabel.setWidth100();
 		this.genInfLayout.addMembers(this.genArtInfLabel, this.generalInfoGrid);
@@ -374,6 +374,6 @@ public class DefArticleView extends ArticleView {
 
 	@Override
 	public String getName() {
-		return "Article";
+		return "Artikel";
 	}
 }
