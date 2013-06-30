@@ -674,7 +674,7 @@ public class JsonWikiAccess implements WikiAccess {
 					}
 				}
 				abuseCount = warnCount+disallowCount+blockCount;
-				abuses = "("+abuseCount+") "+"warn ("+warnCount+"); disallow ("+disallowCount+"); block ("+blockCount+");"; 
+				abuses = "("+abuseCount+"): "+"warn("+warnCount+"); disallow("+disallowCount+"); block("+blockCount+");"; 
 				tmpDate = "";
 				if(abuseRoot.has("query-continue")) {
 					tmpDate = abuseRoot.getAsJsonObject("query-continue")
